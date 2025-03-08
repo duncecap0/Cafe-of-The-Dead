@@ -3,30 +3,34 @@
 While running game code:
   File "game/script.rpy", line 36, in script call
     call cafeintro from _call_cafeintro
-  File "game/da_game.rpy", line 82, in script
-    if pov == "Sage":
-  File "game/da_game.rpy", line 85, in <module>
-    elif povname == "sage":
-NameError: name 'povname' is not defined
+  File "game/da_game.rpy", line 387, in script
+    show rocky at farright with move
+  File "game/da_game.rpy", line 387, in <module>
+    show rocky at farright with move
+NameError: name 'farright' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/script.rpy", line 36, in script call
     call cafeintro from _call_cafeintro
-  File "game/da_game.rpy", line 82, in script
-    if pov == "Sage":
-  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1849, in execute
-    if renpy.python.py_eval(condition):
+  File "game/da_game.rpy", line 387, in script
+    show rocky at farright with move
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1117, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1076, in show_imspec
+    at_list = [ renpy.python.py_eval(i) for i in at_list ]
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1076, in <listcomp>
+    at_list = [ renpy.python.py_eval(i) for i in at_list ]
   File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1209, in py_eval
     return py_eval_bytecode(code, globals, locals)
   File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1202, in py_eval_bytecode
     return eval(bytecode, globals, locals)
-  File "game/da_game.rpy", line 85, in <module>
-    elif povname == "sage":
-NameError: name 'povname' is not defined
+  File "game/da_game.rpy", line 387, in <module>
+    show rocky at farright with move
+NameError: name 'farright' is not defined
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.4.24120703
 Cafe of The Dead 1.0
-Mon Mar  3 23:50:37 2025
+Thu Mar  6 01:12:40 2025

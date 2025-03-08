@@ -2,9 +2,9 @@
    play sound "audio/sfx/start.ogg"
 
    $ rand_splash_text = renpy.random.choice(['Baby you light up my world like nobody else!~', 'Just Monika.', 'This game is not suitable for those who are easily dismembered', 'NEWGROUNDS IS G'
-   , 'Omae wa mou shindeiru!', 'WE LIFE FORTNITE WE LIKE FORTNITE', 'Aisheteru~', 'meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow!'
-   , 'Jenna and TJ best boy/girl', 'TOKO FUKAWA STAN', 'Stess', 'JACORB', 'Hey you, Youre finally awake', 'AAAAAND THIS IS GAME GRUMPS', 'At age 6 I was born without a face...', 'Jennifer Dumped me...', 'S-enpai!'
-   , 'sub 2 Jay from Kubs Scouts', 'BRAT', 'FRIDAY NIGHT FUNKIN BABY', ' houtouts to tom fulp lmao', 'HATSUNE MIKU AND TETO KASANE BEST GRILLS!!!!', 'IM NOT A FURRY', 'PLEASE DO NOT KILL ME JACOB I HAVE A FAMILY', 'God is dead, we killed him'
+   , 'Omae wa mou shindeiru!', 'WE LIKE FORTNITE WE LIKE FORTNITE', 'Aisheteru~', 'meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow!'
+   , 'Jenna and TJ best boy/girl', 'TOKO FUKAWA STAN', 'Stess', 'JACORB', 'Hey you, Youre finally awake', 'At age 6 I was born without a face...', 'S-enpai!'
+   , 'sub 2 Jay from Kubs Scouts', 'BRAT', 'FRIDAY NIGHT FUNKIN BABY', 'shoutouts to tom fulp lmao', 'HATSUNE MIKU AND TETO KASANE BEST GRILLS!!!!', 'IM NOT A FURRY', 'PLEASE DO NOT KILL ME JACOB I HAVE A FAMILY', 'God is dead, we killed him'
    , 'Meow!', 'Hello, its me I was wondering if after all these years youd like to meet', 'ITS ME', 'MAURADER SHIELDS', 'Garrus best boi', 'BAzinga!!', 'Stop! You have violated the law!', 'Garrus my beloved'
    ,'shoot the zambies!!', 'VINNIE WUZ HERE'])
 

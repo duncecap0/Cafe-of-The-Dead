@@ -1,16 +1,16 @@
-2025-03-05 07:09:01 UTC
+2025-03-06 08:58:25 UTC
 Windows-10-10.0.26100
 Ren'Py 8.3.4.24120703
 
-Early init took 0.04s
+Early init took 0.06s
 Loading error handling took 0.02s
-Loading script took 0.16s
-Loading save slot metadata took 0.02s
+Loading script took 0.15s
+Loading save slot metadata took 0.04s
 Loading persistent took 0.00s
 Running init code took 0.03s
 Loading analysis data took 0.01s
 Analyze and compile ATL took 0.00s
-Reloading save slot metadata took 0.01s
+Reloading save slot metadata took 0.10s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\frain\\AppData\\Roaming/RenPy/backups\\Cafe of The Dead':
 Dump and make backups took 0.03s
@@ -20,7 +20,7 @@ Initial gc took 0.02s
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.15s
+Creating interface object took 0.16s
 Cleaning stores took 0.00s
 Init translation took 0.02s
 Build styles took 0.00s
@@ -43,3 +43,240 @@ Version: b'4.6.0 NVIDIA 560.94'
 Display Info: None
 Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
 Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 562.00s
+Loading error handling took 0.02s
+Loading script took 0.10s
+Loading save slot metadata took 0.01s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.01s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\frain\\AppData\\Roaming/RenPy/backups\\Cafe of The Dead':
+Dump and make backups took 0.03s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.02s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.13s
+Cleaning stores took 0.00s
+Init translation took 0.02s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.00s
+Save screen analysis took 0.01s
+Prepare screens took 0.03s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 2560, 1440)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4070/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 560.94'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 621.12s
+Loading error handling took 0.01s
+Loading script took 0.10s
+Loading save slot metadata took 0.01s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.01s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\frain\\AppData\\Roaming/RenPy/backups\\Cafe of The Dead':
+Dump and make backups took 0.04s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.15s
+Cleaning stores took 0.00s
+Init translation took 0.02s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.04s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 2560, 1440)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4070/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 560.94'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 678.76s
+Loading error handling took 0.01s
+Loading script took 0.11s
+Loading save slot metadata took 0.02s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.01s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\frain\\AppData\\Roaming/RenPy/backups\\Cafe of The Dead':
+Dump and make backups took 0.03s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.02s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.14s
+Cleaning stores took 0.00s
+Init translation took 0.02s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.03s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 2560, 1440)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4070/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 560.94'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 695.57s
+Loading error handling took 0.01s
+Loading script took 0.07s
+Loading save slot metadata took 0.01s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.02s
+Index archives took 0.00s
+Dump and make backups took 0.03s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.03s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.15s
+Cleaning stores took 0.00s
+Init translation took 0.02s
+Build styles took 0.00s
+Load screen analysis took 0.01s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.03s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 2560, 1440)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4070/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 560.94'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
+Maximum texture size: 4096x4096
+Resetting cache.
+Early init took 739.54s
+Loading error handling took 0.01s
+Loading script took 0.10s
+Loading save slot metadata took 0.02s
+Loading persistent took 0.00s
+Running init code took 0.02s
+Loading analysis data took 0.01s
+Analyze and compile ATL took 0.00s
+Reloading save slot metadata took 0.02s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\frain\\AppData\\Roaming/RenPy/backups\\Cafe of The Dead':
+Dump and make backups took 0.03s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.02s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.14s
+Cleaning stores took 0.00s
+Init translation took 0.02s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.01s
+Prepare screens took 0.03s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.01s
+Running _start took 0.00s
+Interface start took 0.03s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 2560, 1440)
+swap interval: 1 frames
+Windowed mode.
+Vendor: "b'NVIDIA Corporation'"
+Renderer: b'NVIDIA GeForce RTX 4070/PCIe/SSE2'
+Version: b'4.6.0 NVIDIA 560.94'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "game/script.rpy", line 36, in script call
+    call cafeintro from _call_cafeintro
+  File "game/da_game.rpy", line 387, in script
+    show rocky at farright with move
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1117, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1076, in show_imspec
+    at_list = [ renpy.python.py_eval(i) for i in at_list ]
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1076, in <listcomp>
+    at_list = [ renpy.python.py_eval(i) for i in at_list ]
+  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1209, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1202, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/da_game.rpy", line 387, in <module>
+    show rocky at farright with move
+NameError: name 'farright' is not defined
+
+While running game code:
+  File "game/script.rpy", line 36, in script call
+    call cafeintro from _call_cafeintro
+  File "game/da_game.rpy", line 387, in script
+    show rocky at farright with move
+  File "game/da_game.rpy", line 387, in <module>
+    show rocky at farright with move
+NameError: name 'farright' is not defined

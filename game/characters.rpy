@@ -1,7 +1,16 @@
+
+#main charas
 define p = DynamicCharacter("[pov]", color= "#684d70",image="sage", ctc="click_to_continue")
 define r = Character("Rocky", color= "#812c2c", ctc="click_to_continue")
 define v = Character("Vinnie", color= "#57ff7bf3", ctc="click_to_continue")
 define n = Character("Norman", color= "#ffb554", ctc="click_to_continue")
+define all = Character("All", color= "#8b8b8b", ctc="click_to_continue")
+define allnosage = Character("Rocky & Vinnie", color= "#8b8b8b", ctc="click_to_continue")
+
+#npcs
+define npc = Character("Stranger")
+define tv = Character("TV")
+
 
 label sprites:
 

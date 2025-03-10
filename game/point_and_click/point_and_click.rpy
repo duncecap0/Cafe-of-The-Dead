@@ -33,8 +33,6 @@ screen pnc_screen(room="left"):
         if (i[3] is None) or (eval(i[3])):
             imagebutton auto "point_and_click/image/" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2])
 
-
-
 style pnc_image_button:
     anchor (0.5, 0.5)
 
@@ -289,6 +287,13 @@ define lab_boss_room_buttons = [
 ### POINT'n'CLICK LABELS ###
 # Labels within a point'n'click segment almost always end in a jump statement.
 
+### POINT'n'CLICK LABELS ###
+# Labels within a point'n'click segment almost always end in a jump statement.
+
+label left_frame:
+    "An empty frame."
+    "Nothing special."
+    jump pnc_loop
 
 label right_frame:
     "An empty frame."

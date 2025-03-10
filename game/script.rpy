@@ -15,10 +15,6 @@
    with Pause(1)
    hide text with dissolve
 
-   show text  "Dunce Cap Industries Presents... {w=.9}LOLL LIKE IM THAT OFFICIAL" with dissolve
-   with Pause(1)
-   hide text with dissolve
-
    show text "Cafe of The Dead" with dissolve
    with Pause(1)
    hide text with dissolve
@@ -33,7 +29,15 @@
 
 label start:
    
-   call cafeintro from _call_cafeintro
+   call cafe_floor_0 from _call_cafe_floor_0
+   
+   call mechanical_floor_1 from _call_mechanical_floor_1
+
+   call office_floor_2 from _call_office_floor_2
+
+   call lab_floor_3 from _call_lab_floor_3
+
+   call rooftop from _call_rooftop
 
 
 return

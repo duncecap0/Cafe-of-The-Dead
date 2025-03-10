@@ -229,31 +229,6 @@ style choice_button is default:
 style choice_button_text is default:
     properties gui.text_properties("choice_button")
 
-#PENIS
-#screen shooting():
-
-screen health_bar:
-    frame align (0.5, 0.0) xsize 500:
-        bar value AnimatedValue(hp, max_hp, 0.5)
-
-#screen inventory():
-
-
-screen death_nav():
-    
-        vbox:
-            xalign 0.5
-            yalign 0.7
-            textbutton _("Load") action ShowMenu("load")
-            textbutton _("Main Menu") action MainMenu()
-
-#screen party():
-
-    #imagebutton
-
-
-
-
 
 ## Quick Menu screen ###########################################################
 ##
@@ -328,7 +303,6 @@ screen navigation():
             textbutton _("Start") action Start()
 
         else:
-
             textbutton _("History") action ShowMenu("history")
 
             textbutton _("Save") action ShowMenu("save")

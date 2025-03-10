@@ -2,35 +2,75 @@
 
 While running game code:
   File "game/script.rpy", line 36, in script call
-    call cafeintro from _call_cafeintro
-  File "game/da_game.rpy", line 387, in script
-    show rocky at farright with move
-  File "game/da_game.rpy", line 387, in <module>
-    show rocky at farright with move
-NameError: name 'farright' is not defined
+    call office_floor_2 from _call_office_floor_2
+  File "game/point_and_click/point_and_click.rpy", line 48, in script
+    call screen pnc_screen(current_room)
+  File "renpy/common/000statements.rpy", line 671, in execute_call_screen
+    store._return = renpy.call_screen(name, *args, **kwargs)
+  File "game/point_and_click/point_and_click.rpy", line 28, in execute
+    screen pnc_screen(room="left"):
+  File "game/point_and_click/point_and_click.rpy", line 28, in execute
+    screen pnc_screen(room="left"):
+  File "game/point_and_click/point_and_click.rpy", line 32, in execute
+    for i in eval(f"{room}_buttons"):
+  File "game/point_and_click/point_and_click.rpy", line 32, in <module>
+    for i in eval(f"{room}_buttons"):
+NameError: name 'lab_upstairs_test_room_buttons' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/script.rpy", line 36, in script call
-    call cafeintro from _call_cafeintro
-  File "game/da_game.rpy", line 387, in script
-    show rocky at farright with move
-  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1117, in execute
-    show_imspec(self.imspec, atl=getattr(self, "atl", None))
-  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1076, in show_imspec
-    at_list = [ renpy.python.py_eval(i) for i in at_list ]
-  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1076, in <listcomp>
-    at_list = [ renpy.python.py_eval(i) for i in at_list ]
+    call office_floor_2 from _call_office_floor_2
+  File "game/point_and_click/point_and_click.rpy", line 48, in script
+    call screen pnc_screen(current_room)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1980, in execute
+    self.call("execute")
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1959, in call
+    return renpy.statements.call(method, parsed, *args, **kwargs)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\statements.py", line 374, in call
+    return method(parsed, *args, **kwargs)
+  File "renpy/common/000statements.rpy", line 671, in execute_call_screen
+    store._return = renpy.call_screen(name, *args, **kwargs)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\exports\statementexports.py", line 345, in call_screen
+    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ui.py", line 301, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\core.py", line 2215, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\core.py", line 2745, in interact_core
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\displayable.py", line 434, in visit_all
+    d.visit_all(callback, seen)
+  [Previous line repeated 1 more time]
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\screen.py", line 480, in visit_all
+    callback(self)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\core.py", line 2745, in <lambda>
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\screen.py", line 491, in per_interact
+    self.update()
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\screen.py", line 697, in update
+    self.screen.function(**self.scope)
+  File "game/point_and_click/point_and_click.rpy", line 28, in execute
+    screen pnc_screen(room="left"):
+  File "game/point_and_click/point_and_click.rpy", line 28, in execute
+    screen pnc_screen(room="left"):
+  File "game/point_and_click/point_and_click.rpy", line 32, in execute
+    for i in eval(f"{room}_buttons"):
+  File "game/point_and_click/point_and_click.rpy", line 32, in <module>
+    for i in eval(f"{room}_buttons"):
   File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1209, in py_eval
     return py_eval_bytecode(code, globals, locals)
   File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1202, in py_eval_bytecode
     return eval(bytecode, globals, locals)
-  File "game/da_game.rpy", line 387, in <module>
-    show rocky at farright with move
-NameError: name 'farright' is not defined
+  File "<none>", line 1, in <module>
+NameError: name 'lab_upstairs_test_room_buttons' is not defined
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.4.24120703
 Cafe of The Dead 1.0
-Thu Mar  6 01:12:40 2025
+Mon Mar 10 02:09:01 2025

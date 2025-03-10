@@ -2,9 +2,7 @@
 errors listed below, and try again.
 
 
-File "game/da_game.rpy", line 324: expected statement.
-    v 
-      ^
+File "game/mechanical_floor_1.rpy", line 236: Indentation mismatch.
 
 Ren'Py Version: Ren'Py 8.3.4.24120703
-Tue Mar  4 22:27:00 2025
+Mon Mar 10 01:27:39 2025

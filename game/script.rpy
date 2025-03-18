@@ -37,8 +37,7 @@ label start:
 
    call lab_floor_3 from _call_lab_floor_3
 
-   call rooftop from _call_rooftop
-
+   call endings from _call_endings
 
 return
 

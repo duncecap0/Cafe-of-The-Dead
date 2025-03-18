@@ -1,4 +1,3 @@
-#EFFECTS
 
 define flash =Fade(2.0, 1.0, 2.0, color="#fff")
 

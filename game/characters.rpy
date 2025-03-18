@@ -1,19 +1,37 @@
+#VOICES 
+init python:
+    renpy.music.register_channel("beepy_voice", "voice")
 
-#main charas
-define p = DynamicCharacter("[pov]", color= "#684d70",image="sage", ctc="click_to_continue")
-define r = Character("Rocky", color= "#812c2c",image="rocky", ctc="click_to_continue")
-define v = Character("Vinnie", color= "#57ff7bf3",image="vinnie", ctc="click_to_continue")
-define n = Character("Norman", color= "#ffb554",image="norman", ctc="click_to_continue")
+init python:
+    def beepy_voice(event, interact=True, **kwargs):
+        if not interact:
+            return 
 
-#npcs
-define npc = Character("Business Man")
-define tv = Character("TV")
+        if event == "show":
+            renpy.music.play("audio/sfx/voice beep.ogg",loop=True, channel="beepy_voice")
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="beepy_voice")
 
-define s = Character("The Stranger", color= "#000000",image="s", ctc="click_to_continue")
+#main charas            
 
-define w = DynamicCharacter("[w_name]", color= "#5457ff",image="tara", ctc="click_to_continue")
+define p = DynamicCharacter("[pov]", color= "#684d70",image="sage", ctc="click_to_continue", callback=beepy_voice)
+define r = Character("Rocky", color= "#812c2c",image="rocky", ctc="click_to_continue", callback=beepy_voice)
+define v = Character("Vinnie", color= "#57ff7bf3",image="vinnie", ctc="click_to_continue", callback=beepy_voice)
+define n = Character("Norman", color= "#ffb554",image="norman", ctc="click_to_continue", callback=beepy_voice)
 
-label sprites:
+#side charas            
+
+define s = Character("The Stranger", color= "#ffffff",image="s", ctc="click_to_continue", callback=beepy_voice)
+define w = DynamicCharacter("[w_name]", color= "#5457ff",image="tara", ctc="click_to_continue", callback=beepy_voice)
+
+#npcs           
+define omg = Character("???", callback=beepy_voice)
+
+define npc = Character("Business Man", callback=beepy_voice)
+define tv = Character("TV", callback=beepy_voice)
+
+
+#SPRITES 
 
 #sage
 
@@ -53,7 +71,7 @@ image norman excited = "images/sprites/maizie/maizie excited.png"
 image norman serious = "images/sprites/maizie/maizie serious.png"
 
 
-#Strangee
+#Stranger / Taran
 
 image stranger norm = "images/sprites/stranger/stranger.png"
 image norman chill = "images/sprites/maizie/maizie chill.png"

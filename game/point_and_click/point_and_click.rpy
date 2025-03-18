@@ -114,6 +114,7 @@ define mech_hallway_right_buttons= [
 ###OFFICE FLOOR BUTTONS
 define office_start_buttons = [
     (("look"),(650, 440), "office_window", None),
+    (("look"),(800, 500), "office_corpse", None),
 
     (("move"),(1140, 430),"office_desks", None),
     (("move"),(60, 430),"office_hall", None), 
@@ -140,7 +141,6 @@ define office_closet_buttons = [
 
 define office_desks_buttons= [
     (("look"),(900, 500),"worker_diary", None),
-    (("look"),(650, 700),"office_corpse", None),
 
     (("move"),(60, 440),"office_breakroom", None), 
     (("move"),(1140, 430),"office_boardroom", None),
@@ -174,7 +174,6 @@ define office_computerdesk_buttons= [
 
 ### LAB FLOOR BUTTONS
 define lab_start_buttons = [
-    (("look"),(650, 440), "dead_soldiers", None),
 
     (("move"),(1140, 430),"lab_upstairs", None),
     (("move"),(60, 430),"lab_radio", None), 

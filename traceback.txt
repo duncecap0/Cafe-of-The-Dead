@@ -1,9 +1,9 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 36, in script call
-    call office_floor_2 from _call_office_floor_2
-  File "game/point_and_click/point_and_click.rpy", line 48, in script
+  File "game/script.rpy", line 34, in script call
+    call mechanical_floor_1 from _call_mechanical_floor_1
+  File "game/point_and_click/point_and_click.rpy", line 46, in script
     call screen pnc_screen(current_room)
   File "renpy/common/000statements.rpy", line 671, in execute_call_screen
     store._return = renpy.call_screen(name, *args, **kwargs)
@@ -20,9 +20,9 @@ NameError: name 'lab_upstairs_test_room_buttons' is not defined
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 36, in script call
-    call office_floor_2 from _call_office_floor_2
-  File "game/point_and_click/point_and_click.rpy", line 48, in script
+  File "game/script.rpy", line 34, in script call
+    call mechanical_floor_1 from _call_mechanical_floor_1
+  File "game/point_and_click/point_and_click.rpy", line 46, in script
     call screen pnc_screen(current_room)
   File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1980, in execute
     self.call("execute")
@@ -73,4 +73,4 @@ NameError: name 'lab_upstairs_test_room_buttons' is not defined
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.4.24120703
 Cafe of The Dead 1.0
-Mon Mar 10 02:09:01 2025
+Sun Mar 16 23:51:50 2025

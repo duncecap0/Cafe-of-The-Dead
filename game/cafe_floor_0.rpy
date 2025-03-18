@@ -58,14 +58,14 @@ label cafe_floor_0:
     show norman at right with dissolve
     n "OK OK RELAX WE'RE ALMOST THERE!"
     n "You're really excited for this aren't you?"
-    "Here's Norman,{w=.3} my compassionate Golden Retriever buddy, as caring as ever trying to humor Vinnie"
+    "Here's Norman,{w=.3} my compassionate Golden Retriever friend, as caring as ever trying to humor Vinnie"
     "They were seen as the \"mom\" friend in the group,{w=.3} always responsible with keeping us from killing ourselves with our antics {w=.5}{i}well mainly just Vinnie to be honest...{/i}"
     show vinnie at hop
     npc "Hey watch it buddy!"
     n "Ough!" with hpunch
     "A stranger in a business suit and briefcase bumped into Norman on his way to the upper floor elevator"
     v "Hey! {w=.3}Not cool man!{w=.3} That was totally on purpose!"
-    n "Just drop it,{w=.3} I'm not hurt; {w=.3}let's not start anything unneccessary alright?{w=.3} It's all about Rocky's new job today!"
+    n "Just drop it,{w=.3} I'm not hurt; {w=.3}let's not start anything unnecessary alright?{w=.3} It's all about Rocky's new job today!"
     v "...{w=.3}Ok if you say so..."
     v "If you change your mind... I'll use this epic butterfly knife I got from the gas station! Ha!"
     "Vinnie twists the knife around on his fingers..."
@@ -105,7 +105,7 @@ label cafe_floor_0:
     r "Ugh,{w=.3} speaking of... {w=.3}You guys aren't gonna make this weird or anything? Remember I have to keep this job so don't scre-"
     hide norman with dissolve
     show vinnie with dissolve
-    v "Oh!{w=.3} We're definently making things weird!"
+    v "Oh!{w=.3} We're definitely making things weird!"
     v "Hello sir!{size=*0.5} {w=.3}write this down because it's gonna be a long one{/size}{w=.3} I would like to order:"
     v "A half caffeine quad venti at 200 degrees with half soy, no foam with foam steamed with cinnamon, crosshatched caramel hazelnut swirl drizzling, pulled ristretto, sugar-free sugar, and a cherry on top please!"
     v "And my friends here would like an eggnog flat white and a unicorn frappe with a whole unpeeled banana in it, also make sure to use sugar-free replacements!"
@@ -218,9 +218,6 @@ label cafe_floor_0:
     elif pov == "Shit":
         "Very mature but I'll let it slide..."
 
-    elif pov == "Faggot":
-        "Very mature but I'll let it slide..."
-
     elif pov == "Penis":
         "Very mature but I'll let it slide..."
 
@@ -228,9 +225,6 @@ label cafe_floor_0:
         "Very mature but I'll let it slide..."
 
     elif pov == "Titty":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Fag":
         "Very mature but I'll let it slide..."
 
     elif pov == "Penis":
@@ -376,7 +370,7 @@ label cafe_floor_0:
     r "Real smart of him considering half the class wasn't even done with last one yet..."
     p "Does he really have to give us another one?{w=.3} I felt the slides presentation was enough about this..."
     v "Meh, {w=.3}you guys are just coping with the fact I'm actually the smartest,{w=.3} prettiest, {w=.3}AND most talented of the class!{w=.3} I have NO problems with submitting any assignments or tests~"
-    r "Gee I'm gonna have to deflate your head with a coffee straw just so it's able to get out the front door"
+    r "Gee I'm gonna have to deflate your head with a coffee straw just so it's able to get out the front door, med student!"
     v "Awwww don't be jealous I have perfect straight A's!"
     r "I have nothing to worry about considering the fact you're absent half the time and most likely gonna get dropped if you don't shape up"
     n "Hmmm it is sort of true though!{w=.3} You have to admit Vinnie is pretty smart with math!"
@@ -499,7 +493,7 @@ label cafe_floor_0:
     "Rocky throws him down to the ground and pins him face down with foot"
     show zombie at sink with moveinright
     show rocky at center 
-    "The attacker protests intensely, {w=.3}he's shifting around like a dead cockroach and is trying to get back up"
+    "The attacker protests intensely, {w=.3}he's flailing around like a dead cockroach and is trying to get back up"
     play sound "audio/sfx/zombie moan.ogg"
     "There's that god awful noise again... {w=.3}I didn't even know anyone was capable of evoking anything like it"
     "Now that I'm closer I'm able to see just how disgusting looking he is..."
@@ -737,25 +731,30 @@ label cafe_floor_0:
     else:
         v "Rocky got his neck ripped out and you expect us to have a chance?"
         "Vinnie speaks in a somber tone from the corner of the room for the first time in a while"
+
+        label vinnie_reaction_rocky_death:
+       
         v "If someone as capable of Rocky didn't make it then we're gonna die here just like him..."
         v "It doesn't matter if you wave that gun around, {w=.3} there's no point in even trying anymore... {w=.3} might as well just point it at me..."
         v "Rocky's family is gonna be heartbroken, {w=.3} the son that took care of them...{w=.3}  worked his ass of for their wellbeing gone, {w=.3} just like that"
         v "If they're even alive that is, {w=.3} they could be dead for all I know,{w=.3} all ours could be so what's the point of it all anymore? Die out there or starve to death in here... {w=.3} sort of a hail mary even..."
         v "\"Best\" case scenario is if the national guard comes in here to rescue us... {w=.3} even then is it even worth living a life without the people who care about you..."
-        n "..."
-        n "I remember when I was about to live on the streets, {w=.3} Rocky saved me,{w=.3}  he welcomed me into his home and took care of me"
-        n "I made him get kicked out his own apartment from housing an extra tenant and he still chose to be my friend, {w=.3}said he would do it all over again"
-        n "Rocky loved all of us, {w=.3} he always talked about how you came into his life and saved him so he returns the favor to everyone he meets to give them that same experience"
-        n "He told me life is about taking the losses and accepting the opportunity it grants you; because a life without loss... {w=.3} means nothing to gain..."
-        n "\"What's a life worth without the people you care for?\" {w=.3} An opportunity to bring in people who think the same..."
-        n "You and Rocky were so close and you extended that to me... {w=.3} You two made me feel like I was apart of that and worthy of being loved..."
-        n "We did the same with [pov] who had no one else in their life...{w=.3}  You and Rocky saved us... {w=.3} he would still want that"
-        n "So please, don't give up, {w=.3} because Rocky never did, {w=.3} just because he's..." 
-        n "..."
-        n "Doesn't mean he's not in our hearts, {w=.3} what do you think he would do right now?{w=.3}  Shouldn't it be our responsibility to respect that?"
+        if norman_health >= 1:
+            n "..."
+            n "I remember when I was about to live on the streets, {w=.3} Rocky saved me,{w=.3}  he welcomed me into his home and took care of me"
+            n "I made him get kicked out his own apartment from housing an extra tenant and he still chose to be my friend, {w=.3}said he would do it all over again"
+            n "Rocky loved all of us, {w=.3} he always talked about how you came into his life and saved him so he returns the favor to everyone he meets to give them that same experience"
+            n "He told me life is about taking the losses and accepting the opportunity it grants you; because a life without loss... {w=.3} means nothing to gain..."
+            n "\"What's a life worth without the people you care for?\" {w=.3} An opportunity to bring in people who think the same..."
+            n "You and Rocky were so close and you extended that to me... {w=.3} You two made me feel like I was apart of that and worthy of being loved..."
+            n "We did the same with [pov] who had no one else in their life...{w=.3}  You and Rocky saved us... {w=.3} he would still want that"
+            n "So please, don't give up, {w=.3} because Rocky never did, {w=.3} just because he's..." 
+            n "..."
+            n "Doesn't mean he's not in our hearts, {w=.3} what do you think he would do right now?{w=.3}  Shouldn't it be our responsibility to respect that?"
         v "..."
         v "...{w=.3} Rocky would kick my ass if he saw me moping... {w=.3} say how it's just like me to sit and be a lazy sack of shit who feels nothing but self-pity..."
         v "Then he would, quite literally, lift me up and force me to keep going...{w=.3}  just like how he did years ago when I gave up..."
+       
         menu:
 
             "It's my fault he's dead...":
@@ -769,9 +768,11 @@ label cafe_floor_0:
             "...":
                 $ insanity_level += 1
                 pass
-        
-        n "I know it's hard Vinnie... but you're a smart cookie.. you know the government would set up safety perimeters, and that we'll starve out if we stay here without trying..."
 
+        if norman_health >= 1:
+            n "I know it's hard Vinnie... but you're a smart cookie.. you know the government would set up safety perimeters, and that we'll starve out if we stay here without trying..."
+    
+    label cafe_aftermath_2_electric_boogaloo:
     menu:
         
         "I can't just stay silent,{w=.3} I need to let Norman know where I stand"

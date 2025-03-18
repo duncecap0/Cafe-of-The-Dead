@@ -1,5 +1,14 @@
 
 
+
+
+#variables
+
+default norman_lab_death = False
+default vinnie_lab_death = False
+default rocky_lab_death = False
+
+
 #items
 default crowbar_collected = False
 default worker_key_collect = False
@@ -15,7 +24,8 @@ default examined_HVAC_machine = False
 
 #relationships
 default expose_samsara_together = False
-default vinnie_body_carried = False
+
+
 #who has gun?
 default norman_has_gun = True
 default vinnie_has_gun = False
@@ -112,7 +122,7 @@ label gun_check:
     if norman_has_gun == False:
         n "Here! {w=.2}Just flick this here to release the safety, {w=.3}remember to breathe slowly to aim for the head better,{w=.1} and press here to shoot!"
         if sage_has_gun == True:
-            $ renpy.notify("You recieved Norman's Gun!")
+            $ renpy.notify("You received Norman's Gun!")
 
     $ current_room = "mech_floor_main_room_1" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
@@ -239,7 +249,7 @@ label mech_hallway_right:
             $ examined_HVAC_machine == True
             r "This here is an HVAC, stands, for heating, ventilation, and air conditioning. {w=.3}Used to work on them back when I worked odd jobs for neighbors..."
             r "Looks like it's not on right now...{w=.3} I don't know what that means for long term but for now we should be fine"
-            v "Looks like you're blue collarness background has finally come to use!"
+            v "Looks like you're blue collar-ness background has finally come to use!"
             r "You've never worked a day in your life{w=.3} {i}trust fund baby{/i}"
             v "But I'm {i}your{/i} trust fund baby...{w=.3} I can be your sugar daddy too with all that supposed trust fund if you want!"
             #show rocky blush
@@ -261,14 +271,14 @@ label mech_hallway_right:
         play sound "audio/sfx/page turn.ogg"
         show black with Dissolve(1.):
                 alpha.6
-        centered "{font=Halogen.ttf}PROPERTY OF: Luis Garcia{/font}"
-        centered "{font=Halogen.ttf}August 27- When I first started working here in Lucian's tower I was but a wee lad o'17 that came here with nothin but the clothes on his back{/font}"
-        centered "{font=Halogen.ttf}The younger workers nowadays don't even know the original name! They just assumin' they always owned the place. Samsara made this fine building that kickstarted beginning businesses into just another one of their extravagant advertisements!{/font}"
-        centered "{font=Halogen.ttf}Those kids even dismiss the fact that Samsara make local hospitals gouge their prices, steal their resources, and give out their patient medical records to them. I wonder who made that seem like a hoax to all the common folk? I have no idea what they want with medical records of all things... {/font}"
-        centered "{font=Halogen.ttf}What resource could you want from a hospital besides medical equipment anyways?!?! The company is all types of wrong if they could do that and get away with it, must have some deal with the government to let them do that...{/font}"
-        centered "{font=Halogen.ttf}They bring in the wrong crowds now... Before it was fresh faced people who wanted to change the world for the betta! Now it something 'bout \"biotech\" or whateva the hell they call it. Sounds like a load of horseshit from me!(YEAH YOU HEARD ME CORPORATE){/font}"
-        centered "{font=Halogen.ttf}They had us expand the tower immensely for their more private businesses when they first bought the place out; had me sign an NDA and everything! Didn't let us know what exactly the floors were for damn do they take a helluva lot electricity.{/font}"
-        centered "{font=Halogen.ttf}Those bastards took the money required to power them out of our paychecks! Not to mention they treat us like trash! I've been working here for 47 damn years! Like hell am I gonna let them get away with this! I been starting a union with us mistreated workers... I'll teach them to mess with us...{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}PROPERTY OF: Luis Garcia{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}August 27- When I first started working here in Lucian's tower I was but a wee lad o'17 that came here with nothin but the clothes on his back{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}The younger workers nowadays don't even know the original name! They just assumin' they always owned the place. Samsara made this fine building that kickstarted beginning businesses into just another one of their extravagant advertisements!{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}Those kids even dismiss the fact that Samsara make local hospitals gouge their prices, steal their resources, and give out their patient medical records to them. I wonder who made that seem like a hoax to all the common folk? I have no idea what they want with medical records of all things... {/font}"
+        centered "{font=Dudu_Calligraphy.ttf}What resource could you want from a hospital besides medical equipment anyways?!?! The company is all types of wrong if they could do that and get away with it, must have some deal with the government to let them do that...{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}They bring in the wrong crowds now... Before it was fresh faced people who wanted to change the world for the betta! Now it something 'bout \"biotech\" or whateva the hell they call it. Sounds like a load of horseshit from me!(YEAH YOU HEARD ME CORPORATE){/font}"
+        centered "{font=Dudu_Calligraphy.ttf}They had us expand the tower immensely for their more private businesses when they first bought the place out; had me sign an NDA and everything! Didn't let us know what exactly the floors were for damn do they take a helluva lot electricity.{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}Those bastards took the money required to power them out of our paychecks! Not to mention they treat us like trash! I've been working here for 47 damn years! Like hell am I gonna let them get away with this! I been starting a union with us mistreated workers... I'll teach them to mess with us...{/font}"
         hide black with dissolve
         play sound "audio/sfx/page turn.ogg"
         #$ renpy.notify("Worker's Journal Entry #1 has been added to Notes!")
@@ -374,13 +384,13 @@ label mech_hallway_right:
         play sound "audio/sfx/page turn.ogg"
         show black with Dissolve(1.):
                 alpha.6
-        centered "{font=Halogen.ttf}September 2- Well, the union idea was a complete failure. The posse I gathered up marched straight to the head office demanding a raise and to be respected.{/font}"
-        centered "{font=Halogen.ttf}When we listed off all our demands we were met with a full minute of deafening silence, then try to trick thinkin' I'm so starry-eyed youngin' with their \"Thank you for being honest with us, your concerns will be met accordingly\" B.S.!{/font}"
-        centered "{font=Halogen.ttf}I've been working longer than you've been wiping your own ass boy! Don't toy with me! The workers and I rioted outside with signs in the main lobby until shouting and exposing our mistreatment until...{/font}"
-        centered "{font=Halogen.ttf}Some... men in black body armour showed up, evacuated all civilians from the premises and set up a mile wide perimeter preventing anyone from seeing us... and then started just... beating us with riot batons and pepper spray{/font}"
-        centered "{font=Halogen.ttf}Even when we surrendered they just kept going. I blacked out and when I woke up, I was in a bed. Some person in a suit said that I was under law to stay in these quarters and be restricted to this buildiong for the forseeable future{/font}"
-        centered "{font=Halogen.ttf}They implemented some new system where employees are rewarded now for reporting any sign of dissatisfaction with their job and disciplined for not doing so... God, I still don't where some of my long time friends are for refusing to surrender...{/font}"
-        centered "{font=Halogen.ttf}I'm scared to even write anymore... What if someone finds it? I have to get out here...{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}September 2- Well, the union idea was a complete failure. The posse I gathered up marched straight to the head office demanding a raise and to be respected.{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}When we listed off all our demands we were met with a full minute of deafening silence, then try to trick thinkin' I'm so starry-eyed youngin' with their \"Thank you for being honest with us, your concerns will be met accordingly\" B.S.!{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}I've been working longer than you've been wiping your own ass boy! Don't toy with me! The workers and I rioted outside with signs in the main lobby until shouting and exposing our mistreatment until...{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}Some... men in black body armour showed up, evacuated all civilians from the premises and set up a mile wide perimeter preventing anyone from seeing us... and then started just... beating us with riot batons and pepper spray{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}Even when we surrendered they just kept going. I blacked out and when I woke up, I was in a bed. Some person in a suit said that I was under law to stay in these quarters and be restricted to this building for the foreseeable future{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}They implemented some new system where employees are rewarded now for reporting any sign of dissatisfaction with their job and disciplined for not doing so... God, I still don't where some of my long time friends are for refusing to surrender...{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}I'm scared to even write anymore... What if someone finds it? I have to get out here...{/font}"
         hide black with dissolve
         play sound "audio/sfx/page turn.ogg"
         #$ renpy.notify("Worker's Journal Entry #2 has been added to Notes!")
@@ -438,14 +448,14 @@ label mech_hallway_right:
     play sound "audio/sfx/page turn.ogg"
     show black with Dissolve(1.):
         alpha.6
-    centered "{font=Halogen.ttf}October(?) something...- Been here for who knows how long... They keep me cooped up here to set an example for the others...{/font}"
-    centered "{font=Halogen.ttf}Conditions only got worse... it's a dog-eat-dog world out here now... men selling out their friend for a raise... never thought I'd see the day...{/font}"
-    centered "{font=Halogen.ttf}The kids here turned from desperate for a job to piranha overnight... never thought I'd miss their smartass mouths until now...{/font}"
-    centered "{font=Halogen.ttf}The workers have been getting taken more and more frequently... It's just me and a skeleton crew now... this one kid... early 20's maybe? Named Lucas been scaring me...{/font}"
-    centered "{font=Halogen.ttf}He was a chef here... got called higher up to deliver private food to a V.I.P and I guess he saw something he wasn't supposed to see... forced him to be locked up here like me... I gave him my quarters while I sleep on the desk...{/font}"
-    centered "{font=Halogen.ttf}Keeps ranting and raving about some monster... they must'a knocked his head up real bad to do this... he locked himself in the electric generator... said monsters can't get him there...{/font}"
-    centered "{font=Halogen.ttf}Hasn't eaten in days... I try to force him to but he locked me out. I'm trying to break my way in there but I don't know if I have the strength anymore. He honestly might be better off in there. No one to force him to do his required hours{/font}"
-    centered "{font=Halogen.ttf}I'm gonna save us kid. Ol' Luis will get ya outta here Lucas! And everyone else too, you're just being forced to by a broken system...{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}October(?) something...- Been here for who knows how long... They keep me cooped up here to set an example for the others...{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}Conditions only got worse... it's a dog-eat-dog world out here now... men selling out their friend for a raise... never thought I'd see the day...{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}The kids here turned from desperate for a job to piranha overnight... never thought I'd miss their smartass mouths until now...{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}The workers have been getting taken more and more frequently... It's just me and a skeleton crew now... this one kid... early 20's maybe? Named Lucas been scaring me...{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}He was a chef here... got called higher up to deliver private food to a V.I.P and I guess he saw something he wasn't supposed to see... forced him to be locked up here like me... I gave him my quarters while I sleep on the desk...{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}Keeps ranting and raving about some monster... they must'a knocked his head up real bad to do this... he locked himself in the electric generator... said monsters can't get him there...{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}Hasn't eaten in days... I try to force him to but he locked me out. I'm trying to break my way in there but I don't know if I have the strength anymore. He honestly might be better off in there. No one to force him to do his required hours{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}I'm gonna save us kid. Ol' Luis will get ya outta here Lucas! And everyone else too, you're just being forced to by a broken system...{/font}"
     hide black with dissolve
     play sound "audio/sfx/page turn.ogg"
     #$ renpy.notify("Worker's Journal Entry #3 has been added to Notes!")
@@ -456,9 +466,7 @@ label mech_hallway_right:
     v "Or the one crazy guy he was talking about..."
 
     if rocky_dead == False:
-        r "Luis was a good man,{w=.3} I bet he would have gotten everyone out if he had more time..."
-           
-        if expose_samsara_together == True:
+            r "Luis was a good man,{w=.3} I bet he would have gotten everyone out if he had more time..."
             r "We already decided on exposing this place! We'll pick up where you left off Luis!"
             v "Big thankies Luis!~{w=.3} I will make you internet famous so the world will remember your name!"
             n "We won't let your wish be in vain Luis!"
@@ -472,7 +480,7 @@ label mech_hallway_right:
 
     #ELECTRIC GENERATOR DOOR IMAGE BUTTON IS IMPOSSIBLE TO GO THROUGH
     label mech_electric_door:
-    "I peek through the door's tiny window and see a decomposing corpse in front of what looks like a machine"
+    "I peek through the door's shattered tiny window and see a decomposing corpse in front of what looks like a machine"
     v "It's impossible to get through this door without the key... "
 
     if worker_journal_3_collect:
@@ -557,7 +565,7 @@ label mech_hallway_right:
             if crowbar_collected == True:
                 "I use the crowbar to pry open the vent"
                 p "Unph!"
-                "Vinny and Norman take turns with me in trying to bash it open,{w=.3} it takes a long while but eventually we do, I take the crowbar with me"
+                "Vinnie and Norman take turns with me in trying to bash it open,{w=.3} it takes a long while but eventually we do, I take the crowbar with me"
                 jump mechanical_floor_escape
             else:
                 "We need some type of way to get this vent open it's the only way through this door..."
@@ -702,6 +710,8 @@ label mechanical_floor_escape:
                     $ vinnie_health -= 1
                     r "BEHIND YOU!"
                     v "AAAAAAAHHH!"
+                    $ crowbar_collected == False
+                    "The crowbar was lost in the chaos"
                     jump rocky_save_sequence
 
                 if rocky_dead:
@@ -740,8 +750,8 @@ label mechanical_floor_escape:
                 play sound "audio/sfx/zombie groan.ogg"
                 queue sound "audio/sfx/punch.ogg"
                 v "THANKS [pov!u]"
-                "I successfully made an opening for Vinnie as they run!"
-
+                "I successfully made an opening for Vinnie as they run but lose the crowbar in the process!"
+                $ crowbar_collected == False
                 if rocky_dead == False:
                     jump rocky_save_sequence
                 else:
@@ -778,7 +788,9 @@ label mechanical_floor_escape:
                     queue sound "audio/sfx/punch.ogg"
                     $ rocky_health -= 1
                     r "I got you Vinnie just get out of the way for crowbar!"
+                    $ crowbar_collected == False
                     v "OK!"
+                    "Rocky lunges at the zombies and gets injured! It makes him lose the crowbar to the horde!"
                     jump rocky_save_sequence
                 else:
                     $ rocky_health -= 3
@@ -830,8 +842,9 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/zombie huh.ogg"
                     queue sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/zombie what.ogg"
+                    $ crowbar_collected == False
                     r "EAT THIS YOU WALKING BAG OF SHIT!!!"
-                    "Rocky is able to get away!"   
+                    "Rocky is able to get away but loses the crowbar to the horde in the process!"   
                     jump office_floor_2                
 
                 "I tell Norman to shoot the zombies!" if norman_has_gun == True:
@@ -950,8 +963,7 @@ label mechanical_floor_escape:
                         v "I... {w=.3}really.. {w=.3}l-{w=.3}l-{w=.3} liked our time together...{w=.3} please don- t be... {w=.3}worry ...{w=.3} haha...haaa {w=.3}*cough*"
                         v "D- {w=.3}don't push yourself... {w=.3}when you have people like... {w=.3}me... {w=.3}who do care..."
                         v "Don't... {w=.4}be... {w=.4}a... {w=.4}stranger... {w=.5}ha... {w=.5}haaaaa"
-                        "Rocky carries Vinnie in their arms as they run towards the elevator"
-                        $ vinnie_body_carried 
+                        "Vinnie uses the last of their strength to shove Rocky away and gesture him to run inside the elevator"
                         jump office_floor_2
 
                     else:

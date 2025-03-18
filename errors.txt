@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/office_floor_2.rpy", line 331: choice menuitem expects a non-empty block.
-    "Leave for now it may be useful for later": 
-                                                ^
-
-File "game/office_floor_2.rpy", line 441: choice menuitem expects a non-empty block.
-    "Don't use for now it maybe useful for later":
-                                                  ^
+File "game/lab_floor_3.rpy", line 888: Line is indented, but the preceding one-line python statement statement does not expect a block. Please check this line's indentation. You may have forgotten a colon (:).
+    if norman_health <= 1:
+    ^
 
 Ren'Py Version: Ren'Py 8.3.4.24120703
-Mon Mar 17 00:03:09 2025
+Mon Mar 17 19:17:15 2025

@@ -884,9 +884,9 @@ label save_rocky_finale:
                 "Rocky use the crowbar against the zombies! But the horde yanks it out of his hands and it gets lost in the stampede"
 
             "I tell Norman to save Rocky!" if norman_dead == False:
-                $ norman_health += 1
-                    if norman_health <= 1:
-                        $ norman_lab_death == True
+                $ norman_health -= 1
+                if norman_health <= 1:
+                    $ norman_lab_death == True
                 n "Here I go! URGRGH!!"
                 "Norman gets damaged in turn..."
 
@@ -1022,7 +1022,7 @@ label boss_aftermath:
     "The deaths, the zombies, the people out to kill us.. it's all over..."
     if norman_dead or rocky_dead or vinnie_dead and insanity_level == 0:
         "I just wish everyone we came with made it out along too..."
-    if norman_dead == False
+    if norman_dead == False:
         n "Chin up! We've done it [pov]!"
 
         if norman_affection >=1:

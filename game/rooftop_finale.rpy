@@ -20,7 +20,7 @@ label endings:
             if closet_broken == True and tara == False:
                 n "Is that why you wanted us to leave the girl behind? Not because we didn't have the supplies.... but because she would hinder your survival!?!"
             n "You tricked me! You used me! You... you... {i}fucking{/i} freak..."
-            p "Hmm? Is that right? As I recall, you thought quite highly of me before... are you by chance regretting it? I can't quite tell..."\
+            p "Hmm? Is that right? As I recall, you thought quite highly of me before... are you by chance regretting it? I can't quite tell..."
             n "I can't believe I ever thought highly of such a demented creature..."
             n "Did you think you could just walk away? Think again... I'm not letting you get away... not this time..."
             if sage_has_gun == True:

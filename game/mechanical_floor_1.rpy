@@ -1,14 +1,6 @@
 
 
 
-
-#variables
-
-default norman_lab_death = False
-default vinnie_lab_death = False
-default rocky_lab_death = False
-
-
 #items
 default crowbar_collected = False
 default worker_key_collect = False

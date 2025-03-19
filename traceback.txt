@@ -1,32 +1,34 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "renpy/common/00start.rpy", line 193, in script
-    python:
-  File "renpy/common/00start.rpy", line 194, in <module>
-    renpy.execute_default_statement(True)
-  File "game/point_and_click/point_and_click.rpy", line 25, in execute_default
-    default current_room = None # This variable controls what list to get buttons from
-Exception: store.current_room is being given a default a second time.
+  File "game/script.rpy", line 34, in script call
+    call mechanical_floor_1 from _call_mechanical_floor_1
+  File "game/endings.rpy", line 129, in script call
+    call MainMenu
+  File "game/script.rpy", line 34, in script call
+    call mechanical_floor_1 from _call_mechanical_floor_1
+  File "game/endings.rpy", line 129, in script call
+    call MainMenu
+ScriptError: could not find label 'MainMenu'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/00start.rpy", line 193, in script
-    python:
-  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 827, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1178, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "renpy/common/00start.rpy", line 194, in <module>
-    renpy.execute_default_statement(True)
-  File "C:\Games\renpy-8.3.4-sdk\renpy\exports\statementexports.py", line 372, in execute_default_statement
-    i.execute_default(start)
-  File "game/point_and_click/point_and_click.rpy", line 25, in execute_default
-    default current_room = None # This variable controls what list to get buttons from
-Exception: store.current_room is being given a default a second time.
+  File "game/script.rpy", line 34, in script call
+    call mechanical_floor_1 from _call_mechanical_floor_1
+  File "game/endings.rpy", line 129, in script call
+    call MainMenu
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1420, in execute
+    rv = renpy.game.context().call(label, return_site=self.next.name)
+  File "game/script.rpy", line 34, in script call
+    call mechanical_floor_1 from _call_mechanical_floor_1
+  File "game/endings.rpy", line 129, in script call
+    call MainMenu
+  File "C:\Games\renpy-8.3.4-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'MainMenu'.
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.4.24120703
 Cafe of The Dead 1.0
-Mon Mar 17 19:18:40 2025
+Tue Mar 18 13:21:09 2025

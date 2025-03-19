@@ -35,12 +35,12 @@ label mechanical_floor_1:
     scene fire escape with dissolve
     show black with Dissolve(1.):
         alpha.6
-    "My heart beats as I march upwards, {w=.3}would we really be able to restore the power?{w=.3} Are the people here even okay?{w=.3} Would we really make it out of here?"
+    "My heart beats as I march upwards, {w=.3}would we really be able to restore the power?{w=.3} Are the people here even alright?{w=.3} Would we really make it out of here?"
     hide black with dissolve
 
     n "Hey [pov]..."
 
-    if norman_affection >= 0:
+    if norman_affection == 0:
         n "I know you're not 100 percent on board with this but,{w=.3} please trust in me..."
         n "I'm just as afraid of you...{w=.3} I just put on a front because I don't want the others seeing how weak I really am..."
         n "Please...{w=.3} I- {w=.3}WE- won't let anything bad happen to you...{w=.3} I promise..."
@@ -53,7 +53,7 @@ label mechanical_floor_1:
         n "But, {w=.3}it's nice to have someone like that for me too..."
     n "\"Your true family is the one who choose and accept one another\"...{w=.3} That's what you said right?"
     "Norman remembered my poem from class on the presentation day..."
-    if norman_affection >=0:
+    if norman_affection >=1:
         p "..."
         p "Norman, {w=.3}of course I'll be there..."
         p "Don't worry, {w=.3}we ALL got your back on this..."
@@ -171,7 +171,7 @@ label mech_hallway_right:
             n "Yay! Good Job [pov]!"
 
             if rocky_dead == False:
-                if insanity_level >= 0:
+                if insanity_level >= 1:
                     "I throw the crowbar down to Rocky as I descend the ladder"
                 else: 
                     "I throw the crowbar down to Rocky as a thought hits me"
@@ -182,11 +182,11 @@ label mech_hallway_right:
                     r "What the hell made you think of doing that?!?!"
                     p "...Hmm intrusive thoughts?"
                     v "HAHAHAHAHAHA THATS HI-LARIOUSSS! JUST STAY IN ROCKY'S ARMS LIKE THAT! YOU LOOK LIKE YOU COULD BE HIS NEWBORN OR SOMETHING HAHAHAHA!"
-                if norman_affection >= 0:
+                if norman_affection >= 1:
                     n "...Haaaaa... yeahhhh..."
                 "Rocky sets me down as we continue our search"
             else:
-                if norman_affection >= 0:
+                if norman_affection >= 2:
                     "Hmmm I wonder if HE could catch me..."
                     p "Geronimo!"
                     n "WOAH WOAH WOAH!"
@@ -208,6 +208,8 @@ label mech_hallway_right:
 
 #POINT AND CLICK LABELS
 
+    # HYPOTHETICAL DIALOGUE MOST LIKELY CUT FROM FINAL BUT HERE JUST IN CASE
+    
     #label mech_stairs:
         #"Just the fire exit from where we came from..."
         #if rocky_dead == False:
@@ -217,7 +219,7 @@ label mech_hallway_right:
         #"Vinnie says as they shiver uncontrollably"
         #hide vinnie with dissolve
 
-        #n "It's okay [pov]... {w=.3}remember what I told you?"
+        #n "It's ok [pov]... {w=.3}remember what I told you?"
         #jump pnc_loop
 
 
@@ -237,21 +239,22 @@ label mech_hallway_right:
         if examined_HVAC_machine == True:
             "Just an HVAC, nothing of use..."
 
-        if rocky_dead == False and examined_HVAC_machine == False:
-            $ examined_HVAC_machine == True
-            r "This here is an HVAC, stands, for heating, ventilation, and air conditioning. {w=.3}Used to work on them back when I worked odd jobs for neighbors..."
-            r "Looks like it's not on right now...{w=.3} I don't know what that means for long term but for now we should be fine"
-            v "Looks like you're blue collar-ness background has finally come to use!"
-            r "You've never worked a day in your life{w=.3} {i}trust fund baby{/i}"
-            v "But I'm {i}your{/i} trust fund baby...{w=.3} I can be your sugar daddy too with all that supposed trust fund if you want!"
-            #show rocky blush
-            r "...!"
+        else:
+            if rocky_dead == False and examined_HVAC_machine == False:
+                $ examined_HVAC_machine = True
+                r "This here is an HVAC, stands, for heating, ventilation, and air conditioning. {w=.3}Used to work on them back when I worked odd jobs for neighbors..."
+                r "Looks like it's not on right now...{w=.3} I don't know what that means for long term but for now we should be fine"
+                v "Looks like you're blue collar-ness background has finally come to use!"
+                r "You've never worked a day in your life{w=.3} {i}trust fund baby{/i}"
+                v "But I'm {i}your{/i} trust fund baby...{w=.3} I can be your sugar daddy too with all that supposed trust fund if you want!"
+                #show rocky blush
+                r "...!"
 
-        if rocky_dead == True and examined_HVAC_machine == False:
-            $ examined_HVAC_machine == True
-            n "I think this is an HVAC machine? I doubt it would help us even with power"
-            v "*sigh* Rocky is experienced with mechanical stuff like this he worked plenty of odd jobs like that.. he would have been so useful here..."
-            "Guess it's an HVAC"
+            elif rocky_dead == True and examined_HVAC_machine == False:
+                $ examined_HVAC_machine = True
+                n "I think this is an HVAC machine? I doubt it would help us even with power"
+                v "*sigh* Rocky is experienced with mechanical stuff like this he worked plenty of odd jobs like that.. he would have been so useful here..."
+                "Guess it's an HVAC"
 
         jump pnc_loop
 
@@ -403,7 +406,7 @@ label mech_hallway_right:
     n "This is why we practice and respect the fire safety drill people!"
     v "NEEEEERRRDD!!!!"
 
-    if norman_affection >= 0:
+    if norman_affection >= 1:
         p "He's my nerd..."
         v "...?"
         p "...!"
@@ -462,7 +465,7 @@ label mech_hallway_right:
             r "We already decided on exposing this place! We'll pick up where you left off Luis!"
             v "Big thankies Luis!~{w=.3} I will make you internet famous so the world will remember your name!"
             n "We won't let your wish be in vain Luis!"
-            if insanity_level >= 0:
+            if insanity_level >= 1:
                 "...{w=.3}how hopeless"
             else: 
                 p "I won't forget you Luis."
@@ -485,7 +488,7 @@ label mech_hallway_right:
         r "*huff* {w=.3}*huff*"
         n "Don't worry Rocky! It was a good effort!"
 
-    if rocky_dead and crowbar_collected:
+    if rocky_dead and crowbar_collected == True:
         "I attempt to use the crowbar,{w=.3} but it's not use..."
         n "Don't worry [pov]! It was a good effort!"
 
@@ -512,7 +515,7 @@ label mech_hallway_right:
                 else:
                     "Rocky enthusiastically kicks the vent in repeatedly"
 
-                if insanity_level >= 0:
+                if insanity_level >= 1:
                     v "Woo Woo!{w=.3} You got this Rocky!"
                     n "You can do it!"
                     jump mechanical_floor_escape
@@ -541,7 +544,7 @@ label mech_hallway_right:
                 
                 jump mechanical_floor_escape
 
-            elif crowbar_collected == True:
+            elif crowbar_collected == True and expose_samsara_together == False:
                 p "You can use the crowbar to smash open the vent,{w=.3} I think Rocky is most suitable for the task"
                 r "Got it!"
                 "*Thud*{w=.3} Thud*{w=.3} Thud*" with hpunch
@@ -569,7 +572,7 @@ label mech_hallway_right:
 label mechanical_floor_escape:
     $ pnc_flags = {}
     if rocky_dead == False:
-        if expose_samsara_together:
+        if expose_samsara_together == True:
             "[pov!u] IT'S UP TO YOU NOW!"
         else:
             "After a while, {w=.3}Rocky is able to get the vent open"
@@ -578,9 +581,9 @@ label mechanical_floor_escape:
     "I make my way through the vent,{w=.3} avoiding the massive fan blades in my way; good thing it's not on"
     scene electric generator with dissolve
     "The body in this cramped space creates a foul humid odor... {w=.3}I guess Lucas never got out of here..."
-    if insanity_level >= 0:
+    if insanity_level == 0:
         "Sorry for the intrusion..."
-    "...? {w=.3}On close examination Lucas's corpse has a massive hole in it? If we thought he shot Luis... then did he shoot himself?"
+    "...? {w=.3}On closer examination Lucas's corpse has a massive hole in it? If we thought he shot Luis... then did he shoot himself?"
     "...{w=.3}Then where's his gun...?"
     n "IS EVERYTHING GOOD IN THERE [pov!u]!?!?"
     p "Yeah! It's safe just real musty!"
@@ -627,8 +630,6 @@ label mechanical_floor_escape:
                 jump norman_deactivates_fan
 
             "FOR A FACT IN THE STARTING ROOM BECAUSE I CHECKED IT!!!" if examined_HVAC_machine == True:
-                "I hear the fan"
-                n "I Got it!"
                 jump norman_deactivates_fan
 
             "Maybe near the elevator!?" if checked_elevator == False:
@@ -648,15 +649,17 @@ label mechanical_floor_escape:
     label norman_gun_cant_find_fan:
             play sound "audio/sfx/shoot.ogg"
             with vpunch
-            $ ammo -=1
+            $ ammo -= 1
             "I hear a loud gunshot and an injured zombie!"
             "It wasn't there [pov]! {w=.3}Sorry,{w=.3} I wasted some ammo!"
             jump guide_norman 
 
     label norman_deactivates_fan:
     n "That was it!{w=.3} I'll meet you at the elevator now!"
-
-    "I hear the fan stop whirring and I immediately make my exit, {w=.3}on my way out I see Vinnie being cornered by a group of zombies!"
+    scene vent with dissolve
+    "I hear the fan stop whirring and I immediately make my exit"
+    scene mech room 2 with dissolve
+    extend ", on my way out I see Vinnie being cornered by a group of zombies!"
 
     if vinnie_has_gun == True:
         play sound "audio/sfx/shoot.ogg"
@@ -680,8 +683,7 @@ label mechanical_floor_escape:
                     r "I got you Vinnie!"
                     v "THANK YOU THANK YOU ROCKY!!"
                     jump rocky_save_sequence  
-                
-                if rocky_dead == False and expose_samsara_together == True:
+                elif rocky_dead == False and expose_samsara_together == True:
                     $ insanity_level += 1
                     play sound "audio/sfx/female zombie groan.ogg"
                     v "OH FUCK SOMEBODY HELP ME IT'S BITING MY ARM!!!"
@@ -690,9 +692,9 @@ label mechanical_floor_escape:
                     "Rocky valiantly swoops up Vinnie in his arms and carries him to safety"
                     jump rocky_save_sequence
 
-                if rocky_dead == False and crowbar_collected == True:
-                    $ vinnie_health -= 1
-                    $ rocky_health -= 1
+                elif rocky_dead == False and crowbar_collected == True:
+                    $ vinnie_health -= 2
+                    $ rocky_health -= 2
                     $ insanity_level += 1
                     play sound "audio/sfx/female zombie groan.ogg"
                     v "OH FUCK SOMEBODY HELP ME IT'S BITING MY ARM!!!"
@@ -706,9 +708,9 @@ label mechanical_floor_escape:
                     "The crowbar was lost in the chaos"
                     jump rocky_save_sequence
 
-                if rocky_dead:
-                    $ vinnie_health -= 3
-                    $ vinnie_dead == True
+                elif rocky_dead == True:
+                    $ vinnie_health -= 5
+                    $ vinnie_dead = True
                     $ insanity_level += 1
                     play sound "audio/sfx/female zombie groan.ogg"
                     queue sound "audio/sfx/eat.ogg"
@@ -729,7 +731,7 @@ label mechanical_floor_escape:
             "I shoot the zombies attacking Vinnie!" if sage_has_gun == True:
                 play sound "audio/sfx/cock.ogg"
                 queue sound "audio/sfx/shoot.ogg"
-                $ ammo -=1
+                $ ammo -= 1
 
                 "I successfully made an opening for Vinnie as they ran to the elevator!"
 
@@ -743,7 +745,7 @@ label mechanical_floor_escape:
                 queue sound "audio/sfx/punch.ogg"
                 v "THANKS [pov!u]"
                 "I successfully made an opening for Vinnie as they run but lose the crowbar in the process!"
-                $ crowbar_collected == False
+                $ crowbar_collected = False
                 if rocky_dead == False:
                     jump rocky_save_sequence
                 else:
@@ -780,7 +782,7 @@ label mechanical_floor_escape:
                     queue sound "audio/sfx/punch.ogg"
                     $ rocky_health -= 1
                     r "I got you Vinnie just get out of the way for crowbar!"
-                    $ crowbar_collected == False
+                    $ crowbar_collected = False
                     v "OK!"
                     "Rocky lunges at the zombies and gets injured! It makes him lose the crowbar to the horde!"
                     jump rocky_save_sequence
@@ -824,6 +826,7 @@ label mechanical_floor_escape:
             "Rocky is able to punch the zombie's head off and shoulder charge his way through a crowd without a scratch!"
             jump office_floor_2
         elif rocky_has_gun == True:
+            play sound "audio/sfx/shoot.ogg"
             "They fire their gun and make it out safely!"
             $ ammo -= 1
         else:
@@ -834,7 +837,7 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/zombie huh.ogg"
                     queue sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/zombie what.ogg"
-                    $ crowbar_collected == False
+                    $ crowbar_collected = False
                     r "EAT THIS YOU WALKING BAG OF SHIT!!!"
                     "Rocky is able to get away but loses the crowbar to the horde in the process!"   
                     jump office_floor_2                
@@ -850,6 +853,7 @@ label mechanical_floor_escape:
                 "I tell Norman to save Rocky" if norman_has_gun == False:
                     play sound "audio/sfx/zombie huh.ogg"
                     queue sound "audio/sfx/shoot.ogg"
+                    $ rocky_health -= 2
                     "Norman charges the zombie but gets hurt in return!"
                     r "Holy fuck thanks!!!{w=.3} Are you gonna be ok!?"    
                     n "R-{w=.3} Run!!"
@@ -858,30 +862,28 @@ label mechanical_floor_escape:
                 "I tell Vinnie to save Rocky" if vinnie_dead == False and vinnies_knife == False:
                     play sound "audio/sfx/zombie crowd.ogg"
                     queue sound "audio/sfx/shoot.ogg"
-                    $ vinnie_health -=2
+                    $ vinnie_health -= 2
                     "Vinnie charges forwards but gets their body ravaged by the zombies in return!"
-                    r "VINNIE NO!!!{w=.3} ARE YOU OKAY!"
+                    r "VINNIE NO!!!{w=.3} ARE YOU OK!"
                     v "C- {w=.3}carry me..."   
                     "Rocky carries Vinnie in their arms"                 
                     jump office_floor_2
 
-                "I tell Vinnie to stab the zombies" if vinnie_dead == False and vinnies_knife == True and vinnie_has_gun == False:
+                "I tell Vinnie to stab the zombies" if vinnie_dead == False and vinnies_knife == True:
                     play sound "audio/sfx/stab.ogg"
                     queue sound "audio/sfx/zombie crowd.ogg"
-                    $ vinnie_health -=1
-                    $ vinnies_knife == False
+                    $ vinnies_knife = False
 
-                    "Vinnie charges forwards and stabs the zombies! They get hurt in return and the knife is lost in the zombie's head!"
-                    r "VINNIE NO!!!{w=.3} ARE YOU OKAY!"
-                    v "C-carry{w=.3} me..."   
-                    "Rocky carries Vinnie in their arms"                 
+                    "Vinnie charges forwards and stabs the zombies! The knife is lost in the zombie's head!"
+                    r "NOW THAT'S WHAT I'M TALKING ABOUT VI!"
+                    v "WOOOOOO!!!!"   
                     jump office_floor_2
 
                 "I tell Vinnie to shoot the zombies!" if vinnie_dead == False and vinnie_has_gun == True:
                     play sound "audio/sfx/shoot.ogg"
                     queue sound "audio/sfx/zombie groan.ogg"
 
-                    $ ammo -=1
+                    $ ammo -= 1
 
                     v "Duck bitch!!!"
                     r "Huh?! HOLY FUCK!"
@@ -890,8 +892,8 @@ label mechanical_floor_escape:
                     queue sound "audio/sfx/zombie attack.ogg"
                     "Vinnie panics and shoots wildly, they don't hear the zombie behind them and get hurt in return!"
 
-                    $ vinnie_health -=1
-                    $ ammo -=1
+                    $ vinnie_health -= 1
+                    $ ammo -= 1
 
                     v "*huff*{w=.3} *huff*{w=.3} I JUST SAVED YOUR ASS I EXPECT TO GET THE HOLIEST SLOPPY IN RETURN FOR THIS!!!"
                     jump office_floor_2  
@@ -938,7 +940,7 @@ label mechanical_floor_escape:
                         "Vinnie charges forwards and stabs the zombies!{w=.3} They get hurt in return and the knife is lost in the zombie's head!"
                         $ vinnie_health -=2
                         $ vinnies_knife = False
-                        r "OH MY GOD ARE YOU GONNA BE OKAY?!?!"
+                        r "OH MY GOD ARE YOU GONNA BE OK?!?!"
                         v "C- {w=.3}carry me..."   
                         "Rocky carries Vinnie in their arms" 
                         jump office_floor_2
@@ -951,7 +953,7 @@ label mechanical_floor_escape:
                         play sound "audio/sfx/zombie crowd.ogg"
                         v "I'LL SAVE YOU ROCKY EVEN IF IT COST MY LIFE!!!"
                         "Vinnie charges forwards and gets lost in the horde in return... {w=.3}I hear chewing noises before Rocky yanks Vinnie out of there into their arms..."
-                        r "VINNIE NO!!! ARE YOU OKAY! SPEAK TO ME!! YOU'RE NOT DEAD! YOU'RE NOT!!!!"
+                        r "VINNIE NO!!! ARE YOU OK! SPEAK TO ME!! YOU'RE NOT DEAD! YOU'RE NOT!!!!"
                         v "I... {w=.3}really.. {w=.3}l-{w=.3}l-{w=.3} liked our time together...{w=.3} please don- t be... {w=.3}worry ...{w=.3} haha...haaa {w=.3}*cough*"
                         v "D- {w=.3}don't push yourself... {w=.3}when you have people like... {w=.3}me... {w=.3}who do care..."
                         v "Don't... {w=.4}be... {w=.4}a... {w=.4}stranger... {w=.5}ha... {w=.5}haaaaa"
@@ -963,7 +965,7 @@ label mechanical_floor_escape:
                         queue sound "audio/sfx/eat.ogg"
                         $ insanity_level += 1
                         $ rocky_health -=5
-                        $ rocky_dead == True
+                        $ rocky_dead = True
                         r "OH YEAH?!?! I-{w=.1} I'LL BEAT YOU ALL TO DEATH JUST YOU WAT-{w=.2} ARGGGHHHHH!!!"
                         "I hear chewing noises and the zombies moaning as I run further away..."
                         jump office_floor_2

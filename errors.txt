@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/lab_floor_3.rpy", line 888: Line is indented, but the preceding one-line python statement statement does not expect a block. Please check this line's indentation. You may have forgotten a colon (:).
-    if norman_health <= 1:
-    ^
+File "game/lab_floor_3.rpy", line 220: choice menuitem expects a non-empty block.
+    "Let's keep looking around":
+                                ^
 
 Ren'Py Version: Ren'Py 8.3.4.24120703
-Mon Mar 17 19:17:15 2025
+Tue Mar 18 17:50:23 2025

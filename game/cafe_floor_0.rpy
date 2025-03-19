@@ -5,11 +5,13 @@ default vinnie_dead = False
 default norman_dead = False
 
 #gun rounds aka bullets
-#should irl be 15 but norman fires 2 at the beginning...
-default ammo = 13
+
+#should irl be 15 but lets just ignore that...
+
+default ammo = 10
 
 #CHARACTER HEALTH
-default rocky_health = 5
+default rocky_health = 6
 default vinnie_health = 3
 default norman_health = 4
 default sage_health = 5
@@ -32,9 +34,8 @@ label insanity_level_loop:
 default first_zombie_attacker_dead = False
 
 
-
 label cafe_floor_0:
-    $ pov="Sage"
+    $ pov = "Sage"
 
     play music "audio/music/mixkit-positive-energy-973- Michael Ramir C.ogg" fadein 1
     scene cafe outer with dissolve
@@ -96,7 +97,7 @@ label cafe_floor_0:
     show norman at hop
     n "Hey Rocky nice to see you at your new post! {w=.3}Where's your co-workers?"
     r "She got a call from a family member, {w=.3}something about a medical emergency..."
-    n "Woah! That sounds really serious are they gonna be okay?"
+    n "Woah! That sounds really serious are they gonna be ok?"
     r "Honestly, {w=.3}I'm not sure she sounded real rattled when she heard the news, must've been real serious"
     "Rocky was the eldest of the group,{w=.3} a jaded Maned Wolf,{w=.3} he always seemed so grumpy with his place in life no matter where he was"
     "I'm relatively new to friend group yet I still know the others more than Rocky since he often misses our hangouts"
@@ -352,11 +353,8 @@ label cafe_floor_0:
         v "GOOD ONE! {w=.3}I SHOULD HAVE THOUGHT OF THAT!"
         hide vinnie with dissolve
 
-    else:
 
-        pass
-
-    r "Okay [pov], {w=.3}what would you like?"
+    r "ok [pov], {w=.3}what would you like?"
 
     hide rocky with dissolve
     pause 0.5
@@ -498,13 +496,13 @@ label cafe_floor_0:
     "There's that god awful noise again... {w=.3}I didn't even know anyone was capable of evoking anything like it"
     "Now that I'm closer I'm able to see just how disgusting looking he is..."
     "His fur is coming off with patches, {w=.3}his eyes are milky white, the odor is so pungent it stinks my eyes..."
-    r "[pov!u]!{w=.3} Check out the guy he jumped to see if he's okay!"
+    r "[pov!u]!{w=.3} Check out the guy he jumped to see if he's ok!"
     p "Got it!"
     hide rocky with dissolve
 
     "I walk up ahead to see that the victim is laying motionless on the floor..."
     "Blood pools beneath him as I see gashes across his throat"
-    p "Are you okay?!?!"
+    p "Are you ok?!?!"
     "I check the pulse on his neck to see if he's still with us"
     "There's nothing"
     
@@ -548,7 +546,7 @@ label cafe_floor_0:
                 p "Don't mention it"
                 jump norman_protects_rocky
 
-            elif sage_health <=1:
+            elif sage_health <= 1:
                 label sage_first_death:
                 play sound "audio/sfx/zombie attack.ogg"
                 queue sound "audio/sfx/eat.ogg"
@@ -567,7 +565,7 @@ label cafe_floor_0:
 
         "Call for help":
 
-            if rocky_health <=1:
+            if rocky_health <= 1:
                 $ rocky_dead = True
                 $ rocky_health -= 1
                 hide rocky with dissolve
@@ -608,7 +606,7 @@ label cafe_floor_0:
                 "When we arrive outside we see two of those monsters on top of Rocky, must've gone after him after I ran off..."
                 jump rocky_dead_norman_rescue_sage
 
-            elif sage_health <=1:
+            elif sage_health <= 1:
                 $ sage_health -= 1
                 jump sage_first_death
 
@@ -666,7 +664,6 @@ label cafe_floor_0:
     v "OH MY GOD I'M GONNA BE SICK WHAT THE FUCK HAPPENED HERE?!?!"
     n "No time to explain we gotta get back!"
     "Norman ushers a silent Rocky and panicked Vinnie back to the cafe"
-    jump cafe_aftermath
 
     label cafe_aftermath:
     scene cafe with dissolve
@@ -739,7 +736,7 @@ label cafe_floor_0:
         v "Rocky's family is gonna be heartbroken, {w=.3} the son that took care of them...{w=.3}  worked his ass of for their wellbeing gone, {w=.3} just like that"
         v "If they're even alive that is, {w=.3} they could be dead for all I know,{w=.3} all ours could be so what's the point of it all anymore? Die out there or starve to death in here... {w=.3} sort of a hail mary even..."
         v "\"Best\" case scenario is if the national guard comes in here to rescue us... {w=.3} even then is it even worth living a life without the people who care about you..."
-        if norman_health >= 1:
+        if norman_dead == False:
             n "..."
             n "I remember when I was about to live on the streets, {w=.3} Rocky saved me,{w=.3}  he welcomed me into his home and took care of me"
             n "I made him get kicked out his own apartment from housing an extra tenant and he still chose to be my friend, {w=.3}said he would do it all over again"
@@ -758,7 +755,7 @@ label cafe_floor_0:
         menu:
 
             "It's my fault he's dead...":
-                $ insanity_level == 0
+                $ insanity_level -= 0
                 v "Oh!{w=.3}  Don't you start now!{w=.3}  Rocky would beat the shit out of you if he heard that!"
                 v "Listen, {w=.3} I would have pussed out way worse than you did and taken out, like, the entire city PLUS you two if given the same dilemma"
                 v "It's not something we really control...{w=.3}  just sort of a flight or fight moment where we let our nerves get the better of us... guess we both need to work on that..."
@@ -769,7 +766,7 @@ label cafe_floor_0:
                 $ insanity_level += 1
                 pass
 
-        if norman_health >= 1:
+        if norman_dead == False:
             n "I know it's hard Vinnie... but you're a smart cookie.. you know the government would set up safety perimeters, and that we'll starve out if we stay here without trying..."
     
     label cafe_aftermath_2_electric_boogaloo:
@@ -779,7 +776,7 @@ label cafe_floor_0:
 
         "We can do this guys!":
             $ norman_affection += 1
-            $ insanity_level == 0
+            $ insanity_level -= 1
             n "Really?! {w=.3}I knew I could count on you [pov]!"
             if rocky_dead == False:
                     r "[pov]..."
@@ -803,7 +800,7 @@ label cafe_floor_0:
     if rocky_dead == False:
         r "..."
         r "They actually gave me a safety plans map to the building if anything goes wrong..."
-        hide rocky
+        hide rocky with dissolve
         pause 0.3
         "Rocky goes to the backroom and retrieves a hefty binder"
         show rocky at right with dissolve
@@ -819,7 +816,7 @@ label cafe_floor_0:
     v "Hey look here, it says there's a mechanical room on the 10th floor..."
     v "If the power is off and the people here are having trouble activating it...{w=.3} we could do it ourselves from there..."
 
-    if insanity_level >= 0:
+    if insanity_level >= 1:
         "Is this even worth the effort?"
     else:
         p "Also, I doubt the zombies would have made it that far up,{w=.3} I mean it's a pretty closed off building how far could the plague have spread?"
@@ -831,6 +828,7 @@ label cafe_floor_0:
         r "I guess I would just go crazy in here if I didn't even TRY escaping"
     else:
         n "You see?! We're real lucky to have you Vinnie!"
+        
     n "That's the spirit we need to make it through this thing!"
     "Norman motions for a group hug"
 
@@ -882,6 +880,9 @@ label cafe_floor_0:
 
     n "Let's just say it's not within OTHER people's legal boundaries...."
 
+    v "..."
+    v "...I noticed it's not at max capacity either... Norman... when did you have to use... the gun?"
+    n "..."
     "..."
     "Norman is not one to be trifled with..."
     if rocky_dead == False:

@@ -6,22 +6,17 @@ default medkit = False
 default scissors = False
 default norman_secret_death = False
 default examined_toilet = False
-
+default examined_medkit = False
 
 default norman_office_death = False
 default vinnie_office_death = False
 default rocky_office_death = False
-
+default examined_tara = False
  
 #password
 define password = "password"
 define password_input = ""
 
-
-
-# options being chosen
-default t_o_1 = False
-default t_o_2 = False
 
 #relationships
 
@@ -32,7 +27,7 @@ default expose_samsara_together_2 = False
 default save_tara_1 = False
 default save_tara_2 = False
 
-default tara  = False
+default tara = False
 
 #Zombie lives
 default juggernaut_zombie = True
@@ -54,7 +49,7 @@ label office_floor_2:
         #"Rocky has Vinnie's lifeless body's head resting on his lap, {w=.3} eyes closed as if they were sleeping;{w=.3}  Rocky seemed to be lost in them..."
         "Rocky hasn't spoken a word since it happened, {w=.3} the rest of us are too afraid to speak until-"
     n "..."
-    if insanity_level <= 1:
+    if insanity_level == 0:
         if norman_affection >= 1:
             n "We've gotten pretty far now haven't we?"
             if rocky_dead == True or vinnie_dead == True:
@@ -67,7 +62,7 @@ label office_floor_2:
                 n "Ah! {w=.3} Look at me getting emotional...{w=.3} we have work to do no? Haha..."
                 menu:
                         "I'm sorry for your losses":
-                            $ norman_affection +=1
+                            $ norman_affection += 1
                             n "...!"
                             n "They're your losses to you know... {w=.3} just because you're the newest member doesn't mean that your worth less...{w=.3}  especially to me..."
                             p "They're your friends, our friends, {w=.3} how can you not be sad?{w=.3}  It's ok to let it out Norman...{w=.3}  to feel pain is to be alive..."
@@ -88,8 +83,8 @@ label office_floor_2:
                             "A minute passes before everyone goes back to their respective part of the elevator, {w=.3} until Norman sidles up next to me again"
 
                         "Don't get sappy.":
-                            $ norman_affection -=2
-                            $ insanity_level +=1
+                            $ norman_affection -= 2 
+                            $ insanity_level += 1
                             n "{w=.3}...Oh...{w=.3}  I suppose you're... {w=.3} right..."
                             "Norman looks as if I had just slapped him,{w=.3}  not my fault someone isn't focusing on the fact we could die at any minute..."
                             jump office_floor_2_survivor_banter
@@ -122,9 +117,9 @@ label office_floor_2:
 
 label office_floor_2_survivor_banter:
 
-    if rocky_has_gun == True:
+    if rocky_has_gun:
 
-        if vinnie_body_carried == True:
+        if vinnie_dead == True:
             r "Your gun..."
         else:
             r "Here! {w=.3} Take your gun back Norman!"
@@ -135,14 +130,17 @@ label office_floor_2_survivor_banter:
     if sage_has_gun:
             p "Also,{w=.3}  I believe this gun belongs to you?"
 
-    if insanity_level <=1:
+    if insanity_level == 0:
         n "Hmm how about you keep it from now on [pov]! {w=.3} You proved yourself capable today!"
         p "You sure?{w=.3}  I'm not a marksman or have the training that you do..."
         n "Says the one that doesn't panic at a moment's notice! Haha!{w=.3}  Just take it you goof!"
-        $ sage_has_gun == True
+        $ sage_has_gun = True
+        $ norman_has_gun = False
+
     else:
         n "Thanks! {w=.3} Good thing I never leave home without it!"
-        $ norman_has_gun == True
+        $ norman_has_gun = True
+        $ sage_has_gun = False
 
     if rocky_dead == False and vinnie_dead == False:
         r "That battle was intense! Glad we made it through alright!"
@@ -166,8 +164,8 @@ label office_floor_2_survivor_banter:
             v "...Thank you...{w=.3} [pov]... {w=.3} he was like family to me... I..."
             v "..."
             v "You and Norman are my family as well. Got it?"
-            if norman_affection >=0:
-                p "...{w=.3} Norman especially is like a-"
+            if norman_affection >= 1:
+                p "...{w=.3} Norman especially is like a..."
             p "...{w=.3} I'm so grat-"
     if rocky_dead == False and vinnie_dead == True:
         "I hear Rocky muttering something under his breath... {w=.3} I think it's some type of religious prayer?"
@@ -179,8 +177,8 @@ label office_floor_2_survivor_banter:
             r "God, {w=.3} I wonder what mom and pa are up to right now... {w=.3} hope their safe..."
             r "..."
             r "You and Norman are my family too?{w=.3}  Got it?"
-            if norman_affection >=0:
-                p "...{w=.3} Norman especially is like a-"
+            if norman_affection >= 1:
+                p "...{w=.3} Norman especially is like a..."
             p "...{w=.3} I'm so grat-"
     if insanity_level >=1:
         "..."
@@ -191,15 +189,15 @@ label office_floor_2_survivor_banter:
     "The elevator comes to a screeching stop as the doors slide open"
 
     n "Hello is anyone-"
-
+    scene office start with dissolve
     extend "What in the world happened here! It's nothing but dead bodies!"
 
     p "They're not as fortunate as we thought they would be, it's putrid in here..."
     
-    if rocky_dead == True: 
+    if rocky_dead == True and vinnie_dead == False: 
         v "There goes another hope..."
 
-    if rocky_dead == False: 
+    if rocky_dead == False and vinnie_dead == False: 
         v "I should have remembered those clamps I bought for rocky since those would be real useful in blocking my nose"
 
         r "Ugh the smell-"
@@ -256,7 +254,7 @@ label office_computerdesk:
 
 ### POINT'n'CLICK LABELS ###
 
-label office_corpse_pile:
+label office_corpse:
 
     "Various corpses are strewn about, some seem to have been eaten while a few are shredded with bullet holes. I don't understand how they were able to die if they had access to machine guns..."
     "... Where even are the people with machine guns if they're not dead in here?"
@@ -269,26 +267,22 @@ label office_window:
     scene city view with dissolve
 
     "The city looks abandoned, with only hordes of zombies shambling together flooding the streets, the sky is burning as smoke fills the air" 
-
     v "Things got worse since we last saw outside..."
-
     r "...{w=.3} I'll save you mom and dad,{w=.3} this will only take a bit longer"
-
     n "..."
-
     "He's staring blankly at the floor; as if he cant comprehend whats happening outside"
 
     menu:
 
-        "It'll be okay Norman, don't worry":
+        "It'll be ok Norman, don't worry":
             $ norman_affection += 1
             n "t-thank you" 
             "Norman blurts out while still staring downwards"
     
         "Don't get distracted":
-            $ insanity_level +=1
+            $ insanity_level += 1 
             n "..."
-
+    scene office start with dissolve
     jump pnc_loop
 
 label toilets:
@@ -305,188 +299,266 @@ label toilets:
                 v "Shut it! NPC!"
             v "AHA! Found some morphine taped underneath this one? Who wants restroom drugs???"
             if norman_dead == False:
-                "Hang on, do we have to use it right now? Let's save it for when really need it! Morphine isn't something to be played around with!"
+                n "Hang on, do we have to use it right now? Let's save it for when really need it! Morphine isn't something to be played around with!"
 
             menu morphine_choice:
-                "Who should we use it on?"
+                "Who should I use it on?"
 
                 "Me":
+                    $ examined_toilet = True
                     $ sage_health +=2
 
                 "Norman" if norman_dead == False:
 
                     if closet_broken == False:
                         $ norman_health +=2
+                        $ examined_toilet = True
                         n "Never done drugs before..."
 
                     if closet_broken == True:
                         n "We should give it to the woman in the closet! Not ourselves!"
-
                         jump morphine_choice
 
                 "Rocky" if rocky_dead == False:
                     $ rocky_health +=2
+                    $ examined_toilet = True
                     r "Reminds me of when I broke my back at the warehouse..."
 
                 "Vinnie" if vinnie_dead == False:
-                    $ vinnie_health +=2
-                    v "I hope I don't get addicted to these things again...."
+                    if closet_broken == False:
+                        v "That girl could use this instead!"
+                        jump morphine_choice
+                    else:
+                        $ vinnie_health +=2
+                        $ examined_toilet = True
+                        v "I hope I don't get addicted to these things again...."
 
                 "Leave for now it may be useful for later":
                     pass
                 
-                "Save it for injured woman" if closet_broken == True:
-                    $ morphine == True
-                    jump try_save_woman
+                "Use on injured woman" if closet_broken == True:
+                    $ morphine = True
+                    jump injured_woman_closet
 
     jump pnc_loop
 
+label blocked_closet:
+    if tara == True:
+        scene office closet with dissolve
+        w "...I'm fine, thanks for checking up on me. Sorry but, I need to rest for a little bit longer than I'll join you..."
+        if norman_dead == False:
+            n "Take all the time you need!"
+        if vinnie_dead == False:
+            v "She's lost a lot of blood, please don't push her [pov]..."
+
+
+
+        ################## TO DO
+
+        ###########DELETE THIS, THIS IS A TEMP THING UNTIL WE FIGURE OUT THE WORD SCRAMBLE PUZZLE
+        $ renpy.notify("DELETE THIS, THIS IS A TEMP THING UNTIL WE FIGURE OUT THE WORD SCRAMBLE PUZZLE")
+
+        w "{size=*2}{color=#f00}TEMPORARY DEV MESSAGE DELETE LATER- PASSWORD IS: \" password \"{/size}{/color}"
+    
+        ######################
+
+
+
+        scene office hall with dissolve
+        jump pnc_loop
+
+    if closet_broken == False:
+        "The door to this room won't budge as if it were locked from the inside"
+        if crowbar_collected and rocky_dead == True:
+            $ closet_broken = True
+            $ crowbar_collected = False
+            "I use the crowbar to break the handle, the crowbar is mutually as broken afterwards..."
+            jump injured_woman_closet
+
+        elif expose_samsara_together and rocky_dead == False:
+            $ closet_broken = True
+            "Rocky is able to bust the door down!"
+            jump injured_woman_closet
+
+        elif crowbar_collected == True and expose_samsara_together == False and rocky_dead == False:
+            $ closet_broken = True
+            $ crowbar_collected = False
+            "Fortunately, Rocky uses the crowbar to break the handle, the crowbar also breaks in the process..."
+            jump injured_woman_closet
+
+        elif rocky_dead == True vinnies_knife == True and vinnie_dead == False:
+            $ closet_broken = True
+            $ vinnies_knife = False
+            "Fortunately, Vinnie uses their knife to slowly wear away the handle over time. Unfortunately, it breaks as consequence..."
+            jump injured_woman_closet
+
+        elif vinnies_knife == False and crowbar_collected == False and rocky_dead == True:
+            $ closet_broken = True
+            "I have nothing to break the handle, should the gun be used?"
+        
+            menu:
+                    "Shoot 4 times to break open the door handle":
+                        play sound "audio/sfx/shoot.ogg"
+                        queue sound "audio/sfx/shoot.ogg"
+                        queue sound "audio/sfx/shoot.ogg"
+                        queue sound "audio/sfx/shoot.ogg"
+                        pause 0.3
+                        "The handle breaks and I'm able to enter"
+                        jump injured_woman_closet
+
+                    "Find something else":
+                        jump pnc_loop
+        
+    else:
+        jump injured_woman_closet
+
 label injured_woman_closet:
-    scene office window with dissolve
+    scene office closet with dissolve
     $ w_name = "Injured Woman"
-    w "..."
-    "A bloodied woman lies on the floor, her arm seems to be missing"
-    p "Hello! Are you OK?"
-    if rocky_dead == False:
-        r "You're safe now! We're here for you! There {i}were{/i} other people here! Good thing we checked!"
-    if vinnie_dead == False:
-        v "There's so much blood!! How are you even still alive?!?!"
-        v "Don't worry I'm a med student! I could get help you here I just need the supplies!"
-    if norman_dead == False:
-        n "Oh my god I'm so happy to know we're not alone! We need to save her!"
+
+    if examined_tara == False:
+        $ examined_tara = True
+        w "..."
+        "A bloodied woman lies on the floor, her arm seems to be missing"
+        p "Hello! Are you OK?"
+        if rocky_dead == False:
+            r "You're safe now! We're here for you! There {i}were{/i} other people here! Good thing we checked!"
+        if vinnie_dead == False:
+            v "There's so much blood!! How are you even still alive?!?!"
+            v "Don't worry I'm a med student! I could get help you here I just need the supplies!"
+        if norman_dead == False:
+            n "Oh my god I'm so happy to know we're not alone! We need to save her!"
 
     menu try_save_woman:
-
         "That arm wound is brutal, how do I help with that?"
 
-        "Use Med kit" if medkit == True and t_o_1 == False:
-            $ t_o_1 == True
-            $ save_tara_2 = True
+        "Use Med kit" if medkit == True:
+            $ medkit = False
+            $ save_tara_1 = True
             w "...rearrange... words... days.. of week..."
-            "She's a little better, but not fully healed... she won't last long without further treatment, I wonder if there's anything else to give her?"
             if save_tara_1 and save_tara_2 == True:
                 jump saved_tara
             else:
+                "She's a little better, but not fully healed... she won't last long without further treatment, I wonder if there's anything else to give her?"
                 jump try_save_woman
 
-        "Have Vinnie help her in place of the med kit" if vinnie_dead and t_o_1 == False:
-            $ t_o_1 == True
-            $ save_tara_2 = True
+        "Have Vinnie help her in place of the med kit" if medkit == True and vinnie_dead == False:
+            $ medkit = False
+            $ save_tara_1 = True
+            v "Here! That should do it!"
             w "...rearrange... words... days.. of week..."
-            "She's a little better, but not fully healed... she won't last long without further treatment, I wonder if there's anything else to give her?"
             if save_tara_1 and save_tara_2 == True:
                 jump saved_tara
             else:
+                "She's a little better, but not fully healed... she won't last long without further treatment, I wonder if there's anything else to give her?"
                 jump try_save_woman
 
-        "Use Morphine" if morphine == True and t_o_2 == False:
-            $ t_o_2 == True
+        "Use Morphine" if morphine == True:
+            $ morphine = False
             $ save_tara_2 = True
             w "You... must go to... higher floor... only way out..."
-            "She's a little better, but not fully healed... she won't last long without further treatment, I wonder if there's anything else to give her?"
             if save_tara_1 and save_tara_2 == True:
                 jump saved_tara
             else:
+                "She's a little better, but not fully healed... she won't last long without further treatment, I wonder if there's anything else to give her?"
                 jump try_save_woman
                 
         "Leave to look for stuff":
             p "I have nothing on me right now, maybe there's something else around?"
-    
+            
+    scene office hall with dissolve
+    $ current_room = "office_hall"
     jump pnc_loop
 
-    label saved_tara:
-        $ tara == True
-        $ w_name = "Tara"
-        w "T-thank you.. I won't forget this, My name is Tara, I'm an employee here and barricaded myself into this room to hide from the rampage outside. We were all called here today for an \"important\" meeting."
-        w "We were all waiting, until people in black body armour showed up and started shooting everybody dead, all of the sudden the dead people rose back up again and started eating those who avoided being shot"
-        
-        if vinnie_dead == False:
-            v "Sounds like you've been through a lot"
+label saved_tara:
+    "She's better now!"
+    $ tara = True
+    $ w_name = "Tara"
+    w "T-thank you.. I won't forget this, My name is Tara, I'm an employee here and barricaded myself into this room to hide from the rampage outside. We were all called here today for an \"important\" meeting."
+    w "We were all waiting, until people in black body armour showed up and started shooting everybody dead, all of the sudden the dead people rose back up again and started eating those who avoided being shot"
+    
+    if vinnie_dead == False:
+        v "Sounds like you've been through a lot"
 
-        if rocky_dead == False:
-            r "I'm sorry to hear that"
+    if rocky_dead == False:
+        r "I'm sorry to hear that"
             
-        w "I've noticed that Samsara has been heading towards a dark path, so I investigated the company's records and found shady dealings with the local medical facilities around here"
-        w "The upper floors HAVE to be involved, all of us on the lower floors wanted to leave when when they started cracking things down, I saw that they headed upwards by going through the express elevator right outside this room"
-        w "It's locked up tight, you need to crack the code to be able to enter. I found out that the password input is hidden behind a false wall in the boardroom. We need to solve it!"
-        if rocky_dead == False:
-            r "No offense but, we're just trying to get out of here not solve a mystery"
-            w "Heh, none taken"
-        w "The upper floors have a comms room. We could signal for help and call in a chopper to save us"
-        if norman == False:
-            n "Ok [pov] let's check out the boardroom! Are you gonna be alright here Tara?"
-        "Tara tries to get up but sits back down after feeling a pain in her arm"
-        if vinnie_dead == False:
-            v "Try not moving! You've already lost a lot of blood I'll take care of this alright?"
-            "Vinnie spends a while dressing Tara's wound"
-            v "Just stay here for now. Don't overwork yourself we've got it under control!"
-        t "Alright, I trust you to handle this situation. I can't exactly get up, doctor's orders..."
-        jump pnc_loop
+    w "I've noticed that Samsara has been heading towards a dark path, so I investigated the company's records and found shady dealings with the local medical facilities around here"
+    w "The upper floors HAVE to be involved, all of us on the lower floors wanted to leave when when they started cracking things down, I saw that they headed upwards by going through the express elevator right outside this room"
+    w "It's locked up tight, you need to crack the code to be able to enter. I found out that the password input is hidden behind a false wall in the boardroom. We need to solve it!"
+    if rocky_dead == False:
+        r "No offense but, we're just trying to get out of here not solve a mystery"
+        w "Heh, none taken"
+    w "The upper floors have a comms room. We could signal for help and call in a chopper to save us"
+    if norman_dead == False:
+        n "Ok [pov] let's check out the boardroom! Are you gonna be alright here Tara?"
+    "Tara tries to get up but sits back down after feeling a pain in her arm"
+    if vinnie_dead == False:
+        v "Try not moving! You've already lost a lot of blood I'll take care of this alright?"
+        "Vinnie spends a while dressing Tara's wound"
+        v "Just stay here for now. Don't overwork yourself we've got it under control!"
+    w "Alright, I trust you to handle this situation. I can't exactly get up, doctor's orders..."
 
-label medkit:
+    ################## TO DO
 
-        "I find a med kit in one of the top cabinets"
+    ###########DELETE THIS, THIS IS A TEMP THING UNTIL WE FIGURE OUT THE WORD SCRAMBLE PUZZLE
+    $ renpy.notify("DELETE THIS, THIS IS A TEMP THING UNTIL WE FIGURE OUT THE WORD SCRAMBLE PUZZLE")
 
-        menu:
-            "Who should we use it on?"
+    w "{size=*2}{color=#f00}TEMPORARY DEV MESSAGE DELETE LATER- PASSWORD IS: \" password \"{/size}{/color}"
 
-            "Me":
-                $ sage_health +=1
-            "Norman" if norman_dead == False:
-                $ norman_health +=1
-                n "Never done drugs before..."
-            "Rocky" if rocky_dead == False:
-                $ rocky_health +=1
-                r "Reminds me of when I broke my back at the warehouse..."
+    ######################
 
-            "Vinnie" if vinnie_dead == False:
-                $ vinnie_health +=1
-                v "I hope I don't get addicted to these things again...."
 
-            "Leave for now it may be useful for later":
-                pass
+    scene office hall with dissolve
+    $ current_room = "office_hall"        
+    jump pnc_loop
 
-            "Use for Injured Woman" if closet_broken == True:
-                $ medkit == True
-                jump try_save_woman
+label medkit_choice:
+        if examined_medkit:
+            "There's nothing left in the top cabinets"
+        else:
+
+            "I find a med kit in one of the top cabinets"
+
+            menu:
+                "Who should I use it on?"
+    
+                "Me":
+                    $ sage_health +=1
+
+                "Norman" if norman_dead == False:
+                    if closet_broken:
+                        n "Hey I have an idea! Let's use this for the girl we found in the closet instead!"
+                        jump medkit_choice
+                    else:
+                        $ norman_health +=1
+                        $ examined_medkit = True
+                        n "Neat! Here I could tie the bandages too!"
+                
+                "Rocky" if rocky_dead == False:
+                    $ rocky_health +=1
+                    $ examined_medkit = True
+                    r "I could wrap my wounds don't need help or anything... but thanks..."
+
+                "Vinnie" if vinnie_dead == False:
+                    if closet_broken:
+                        v "Let's use this for the girl in the closet instead! I could help her!"
+                        jump medkit_choice
+                    else:
+                        $ vinnie_health +=2
+                        $ examined_medkit = True
+                        v "Ooo! I'm actually a medical professional in training so I could use this pretty well!"
         
-        jump pnc_loop
+                "Leave for now it may be useful for later":
+                    pass
 
-label blocked_closet:
-    "The door to this room won't budge as if it were locked from the inside"
-
-    if crowbar_collected and rocky_dead == True:
-        $ closet_broken == True
-        "I use the crowbar to break the handle"
-        jump injured_woman_closet
-
-    elif crowbar_collected == True and rocky_dead == False:
-        $ closet_broken == True
-        "Fortunately, Rocky uses the crowbar to break the handle"
-
-        jump injured_woman_closet
-
-    elif vinnies_knife == True and vinnie_dead == False:
-        $ closet_broken == True
-        "Fortunately, Vinnie uses their knife to slowly wear away the handle over time"
-        jump injured_woman_closet
-
-    elif vinnies_knife and crowbar_collected == False and vinnie_dead and rocky_dead and norman_dead == True:
-        $ closet_broken == True
-        "I have nothing to break the handle, should the gun be used?"
-        
-        menu:
-                "Shoot 4 times to break open the door handle":
-                    play sound "audio/sfx/shoot.ogg"
-                    queue sound "audio/sfx/shoot.ogg"
-                    queue sound "audio/sfx/shoot.ogg"
-                    queue sound "audio/sfx/shoot.ogg"
-                    pause 0.3
-                    "The handle breaks and I'm able to enter"
+                "Use on injured woman" if closet_broken == True:
+                    $ medkit = True
                     jump injured_woman_closet
+        
+        jump pnc_loop
 
-                "Find something else":
-                    jump pnc_loop
+
 
 
 label word_puzzle:
@@ -506,8 +578,11 @@ label secret_elevator:
     if norman_dead == False:
         n "This has to be the express elevator that leads to the higher floor! If the telecommunications isn't here it should be up there!"
     if tara == True:
-        p "Tara said it should be accessible once I enter code the in the boardroom's false wall"
-        
+        p "Tara said it should be accessible once I crack the code the in the boardroom's false wall"
+    else:
+        p "There has to be some terminal around here to open this"
+    jump pnc_loop
+
 
 
 label worker_diary:
@@ -562,7 +637,7 @@ label worker_email:
     if norman_dead == False:
         n "Sounds like you've been through a lot...I- I've never really had to get a job..."
 
-    if vinnie_dead and norman_dead == False:
+    if vinnie_dead == False and norman_dead == False:
         v "It's OK! We still love you, you trust fund baby!!!"
 
     jump pnc_loop    
@@ -583,7 +658,7 @@ label worker_memo:
     p "I would NOT like to meet who wrote this in person, seems like a real piece of work"
 
     if rocky_dead == False:
-        r "Honeyed words from a seasoned liar! That bitch!"
+        r "Honeyed words from a seasoned liar! That bitch!" with vpunch
 
     if vinnie_dead == False:
         v "Ah yes the classic ol' \"we love you!\" manipulation tactic B.S."
@@ -607,7 +682,7 @@ label worker_memo:
                 p "It's our responsibility to call it out and make sure no one else suffers as much as we did. If we saw and kept silent, we would be complicit right? It's ok to take the time you need, but make sure it isn't too late"
                 v "[pov]... That's... real clever actually... yeah... YEAH!!! Corruption only exists because we let it! Once I get home I'm suing everyone's asses for a drazillion dollars!!!"
                 v "I'm gonna boycott this place and yell to this heavens how they mistreated their employees here! Once Samsara of all companies gets in trouble EVERYONE ELSE IS NEXT!!!"
-                $ expose_samsara_together_2 == True
+                $ expose_samsara_together_2 = True
                 if norman_dead == False:
                     "...!"
 
@@ -669,7 +744,7 @@ label office_floor_ending:
         n "Don't worry! Tara we're all in this together!" 
     if insanity_level == 0:
         p "I can't believe we've made it this for guys! We got this!"       
-    if closet_broken == True:
+    if closet_broken == True and tara == False:
         n "I feel bad for that woman in the closet but, she'll most likely bleed out if we stand her up right now... it's best to wait and we'll come back once we found something to help her" 
     pause 0.2
     s "...Stop what you're doing."
@@ -680,7 +755,7 @@ label office_floor_ending:
         
         if rocky_dead == False:
             "Rocky sets Tara behind a potted plant"
-            r "Here girl, don't come out no matter what..."
+            r "Here, don't come out no matter what..."
             if vinnie_dead == False:
                 v "Listen to him Tara, don't make a noise..."
 
@@ -691,27 +766,12 @@ label office_floor_ending:
         if rocky_dead and vinnie_dead == True:
             "Norman and I set Tara down and hide her behind a potted plant"
             n "Don't make a sound Tara..."
+        w "...!"
 
 
     "I hear the express elevator rumbling as if it were currently in use, it eventually comes to a sudden stop and the doors slide open to reveal..."
     "A man in a black armour suit! He's carrying a stun baton and lunges at us!"
    
-    if tara == True:
-        
-        if rocky_dead == False:
-            "Rocky sets Tara behind a potted plant"
-            r "Here girl, don't come out no matter what..."
-            if vinnie_dead == False:
-                v "Listen to him Tara, don't make a noise..."
-
-        if rocky_dead == True and vinnie_dead == False:
-            "Vinnie hides Tara behind a potted plant"
-            v "Here! Don't make a peep!"
-
-        if rocky_dead and vinnie_dead == True:
-            "Norman and I set Tara down and hide her behind a potted plant"
-            n "Don't make a sound Tara..."
-    
     s "...Kill them all"
 
     if tara or closet_broken == True:
@@ -721,7 +781,7 @@ label office_floor_ending:
 
     if norman_has_gun == True:
         play sound "audio/sfx/shoot.ogg"
-        $ ammo -=1
+        $ ammo -= 1
         "He goes for Norman but the latter shoots a bullet straight at the man's face! His helmet protects him but Norman's gun makes it so that he goes for someone else instead!"
         jump vinnie_v_juggernaut
     else:
@@ -730,40 +790,42 @@ label office_floor_ending:
 
             "I save myself and do nothing!":
                 $ insanity_level += 1
-                $ norman_health -=2
+                $ norman_health -= 2
                 play sound "audio/sfx/punch.ogg"
                 if norman_health <= 1:
                     $ norman_office_death == True
-                n "Unf!"
+                n "Unf!" with hpunch
                 "Norman is brought down to the floor from the stun baton and isn't getting up..."
                 jump vinnie_v_juggernaut
                 
             "Push Norman into danger" if insanity_level >= 1 and norman_affection <= 1 and tara == False and rocky_dead and vinnie_dead == True:
-                $ norman_health -=5
+                $ norman_health -= 5
                 $ insanity == 100
-                $ norman_secret_death == True
-                $ norman_office_death == True
-                $ norman_dead == True
-                n "Unf!!"
+                $ norman_secret_death = True
+                $ norman_office_death = True
+                $ norman_dead = True
+                play sound "audio/sfx/punch.ogg"
+                n "Unf!!" with hpunch
                 "I shove Norman so he falters to the ground as the man beats him down, Norman is brought down to the floor from the stun baton and isn't getting up..."
                 jump vinnie_v_juggernaut
 
             "I tell Vinnie to stab the armored man with their knife!" if vinnies_knife == True:
                 $ vinnies_knife = False
-                v "Got it! I'll save you Norm!"
+                play sound "audio/sfx/punch.ogg"
+                v "Got it! I'll save you Norm!" with hpunch
                 "Vinnie rushes in front of Norman and penetrates the armored man's protected neck with their butterfly knife, the armored man yanks it out before crushing it with his hands"
                 jump vinnie_v_juggernaut
            
             "I tell Vinnie to save Norman!" if vinnies_knife == False:
                 if expose_samsara_together_2 == True:
-                    v "I got you Norman!"
+                    v "I got you Norman!" with hpunch
                     "Vinnie helps Norman with no issue"
                 else:
                     $ vinnie_health -= 1
                     if vinnie_health <= 1:
-                        $ vinnie_office_death == True
+                        $ vinnie_office_death = True
                     v "Got it! I'll save you Norm! OW!"
-                    "Vinnie punches the man but gets punched back HARD in the face"
+                    "Vinnie punches the man but gets punched back HARD in the face" with hpunch
                 jump vinnie_v_juggernaut
 
             "I headbutt the man with my horns!":
@@ -782,13 +844,13 @@ label office_floor_ending:
             "I shoot the man!" if sage_has_gun == True and ammo >= 1:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
-                "I shoot the man right in his helmet! It blocks the bullet but at least it distracts him from Norman"
+                "I shoot the man right in his helmet! It blocks the bullet but at least it distracts him from Norman" with hpunch
                 jump vinnie_v_juggernaut
             
             "I crowbar the man!" if crowbar_collected and rocky_dead == True:
                 play sound "audio/sfx/punch.ogg"
-                $ crowbar_collected == False
-                "I use my crowbar to hit the man over the head, he stumbles in response before grabbing it out of my arms and throwing it across the room"
+                $ crowbar_collected = False
+                "I use my crowbar to hit the man over the head, he stumbles in response before grabbing it out of my arms and throwing it across the room" with hpunch
                 "The crowbar was lost in the scuffle but at least Norman was protected"
                 jump vinnie_v_juggernaut
 
@@ -796,26 +858,32 @@ label office_floor_ending:
                 if expose_samsara_together:
                     play sound "audio/sfx/punch.ogg"
                     $ rocky_health -= 1
+
                     if rocky_health <= 1:
-                        $ rocky_office_death == True
-                    "Rocky tries to bear hug the man but gets punched in the chest and knocked to the floor, he's able to recover slightly!"
+                        $ rocky_office_death = True
+
+                    "Rocky tries to bear hug the man but gets punched in the chest and knocked to the floor, he's able to recover slightly!" with hpunch
                     r "*cough* *hack* *wheeze*"
                     jump vinnie_v_juggernaut
-                elif crowbar_collected:
+                elif expose_samsara_together == False and crowbar_collected:
                     play sound "audio/sfx/punch.ogg"
                     "Rocky tries to bear hug the man but gets punched in the chest and knocked to the floor, he looks hurt..."
-                    r "*cough* *hack* *wheeze* *wheeze*"
+                    r "*cough* *hack* *wheeze* *wheeze*" with hpunch
+                    $ rocky_health -= 2 
+
                     if rocky_health <= 1:
-                        $ rocky_office_death == True
-                    $ rocky_health -= 2
+                        $ rocky_office_death = True
+
                     jump vinnie_v_juggernaut
                 else:
                     play sound "audio/sfx/punch.ogg"
                     $ rocky_health -= 3
+
                     if rocky_health <= 1:
                         $ rocky_office_death == True
+
                     "Rocky tries to bear hug the man but gets punched in the chest and knocked to the floor, he looks pretty hurt and even coughs up blood..."
-                    r "*cough* *hack* *cough* *wheeze* *wheeze* *sputter*"
+                    r "*cough* *hack* *cough* *wheeze* *wheeze* *sputter*" with hpunch
                     jump vinnie_v_juggernaut
 
 label vinnie_v_juggernaut:
@@ -830,23 +898,27 @@ label vinnie_v_juggernaut:
             "I save myself and do nothing!":
                 $ insanity_level += 1
                 $ vinnie_health -=2
+
                 if vinnie_health <= 1:
-                    $ vinnie_office_death == True
+                    $ vinnie_office_death = True
+
                 play sound "audio/sfx/punch.ogg"
-                v "OW DAMN!!!"
+                v "OW DAMN!!!" with hpunch
                 "Vinnie is brought down to the floor from the stun baton and isn't getting up..."
                 jump rocky_v_juggernaut
                 
             "I tell Vinnie to stab the armored man with their knife!" if vinnies_knife == True:
                 $ vinnies_knife = False
-                v "TAKE IT YOU FUGLY HO!!!"
+                v "TAKE IT YOU FUGLY HO!!!" with hpunch
                 "Vinnie dashes forward and penetrates the armored man's protected neck with their butterfly knife, the armored man yanks it out before crushing it with his hands"
                 jump rocky_v_juggernaut
            
             "I tell Norman to save Vinnie!":
                 $ norman_health -= 1
+
                 if norman_health <= 1:
-                    $ norman_office_death == True
+                    $ norman_office_death = True
+
                 n "AAAAAAAAAAAHHHHH!!!!" with hpunch
                 "Norman blocks Vinnie with his body but takes the strike instead!"
                 jump rocky_v_juggernaut
@@ -854,32 +926,29 @@ label vinnie_v_juggernaut:
             "I tell Norman to shoot the man!" if norman_has_gun and ammo >= 1:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
-                "Norman shoots him in the face, the man is stunned in return!"
+                "Norman shoots him in the face, the man is stunned in return!" with hpunch
                 jump rocky_v_juggernaut
 
             "I headbutt the man with my horns!":
-                if norman_affection >= 0:
-                    play sound "audio/sfx/punch.ogg"
-                    "He thinks he could attack Norman?!? I run forward headfirst and stab the man's chest with my horns, I don't care about the pain I need Norman safe!" with hpunch
-                    jump rocky_v_juggernaut
-                else:
-                    $ sage_health -= 1
-                    play sound "audio/sfx/punch.ogg"
-                    "I run forward headfirst and stab the man's chest with my horns, I feel my brain hit the roof of my skull as I deter the man off course" with hpunch
-                    if sage_health <= 1:
-                        jump death_screen                    
-                    jump rocky_v_juggernaut
+                $ sage_health -= 1
+                play sound "audio/sfx/punch.ogg"
+                "I run forward headfirst and stab the man's chest with my horns, I feel my brain hit the roof of my skull as I deter the man off course" with hpunch
+                
+                if sage_health <= 1:
+                    jump death_screen 
+
+                jump rocky_v_juggernaut
             
             "I shoot the man!" if sage_has_gun == True and ammo >= 1:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
-                "I shoot the man right in his helmet! It blocks the bullet but at least it distracts him from attacking Vinnie"
+                "I shoot the man right in his helmet! It blocks the bullet but at least it distracts him from attacking Vinnie" with hpunch
                 jump rocky_v_juggernaut
 
             "I crowbar the man!" if crowbar_collected and rocky_dead == True:
                 play sound "audio/sfx/punch.ogg"
-                $ crowbar_collected == False
-                "I use my crowbar to hit the man over the head, he stumbles in response before grabbing it out of my arms and throwing it across the room"
+                $ crowbar_collected = False
+                "I use my crowbar to hit the man over the head, he stumbles in response before grabbing it out of my arms and throwing it across the room" with hpunch
                 "The crowbar was lost in the scuffle but at least Vinnie was protected"
                 jump rocky_v_juggernaut
 
@@ -887,14 +956,16 @@ label vinnie_v_juggernaut:
                 if expose_samsara_together:
                     play sound "audio/sfx/punch.ogg"
                     $ rocky_health -= 1
+
                     if rocky_health <= 1:
-                        $ rocky_office_death == True
+                        $ rocky_office_death = True
+
                     r "NOT IF I HAVE ANYTHING TO DO WITH IT YOU CUCK!!!"
-                    "Rocky blocks the strike against Vinnie, shrugs it off, and even throws a return punch which knocks the man off guard!"
+                    "Rocky blocks the strike against Vinnie, shrugs it off, and even throws a return punch which knocks the man off guard!" with hpunch
                     jump rocky_v_juggernaut
                 elif crowbar_collected:
                     play sound "audio/sfx/punch.ogg"
-                    "Rocky blocks the man's baton strike with the crowbar but it gets snapped in the process, the man kicks rocky in the groin!"
+                    "Rocky blocks the man's baton strike with the crowbar but it gets snapped in the process, the man kicks rocky in the groin!" with hpunch
                     r "*wheeze*"
                     v "Rocky! No!"
                     $ rocky_health -= 2
@@ -903,9 +974,11 @@ label vinnie_v_juggernaut:
                 else:
                     play sound "audio/sfx/punch.ogg"
                     $ rocky_health -= 3
+
                     if rocky_health <= 1:
-                        $ rocky_office_death == True
-                    "Rocky grabs the man's baton strike with his bare hands and gets struck in the process, the man proceeds to strike Rocky over the head with the baton. Rocky's in a terrible state..."
+                        $ rocky_office_death = True
+
+                    "Rocky grabs the man's baton strike with his bare hands and gets struck in the process, the man proceeds to strike Rocky over the head with the baton. Rocky's in a terrible state..." with hpunch
                     r "Ugh... *cough* *hack*"
                     jump rocky_v_juggernaut
 
@@ -913,30 +986,34 @@ label rocky_v_juggernaut:
     if rocky_dead == True:
         jump juggernaut_zombie_aftermath
     else:
-        r "YOU ROTTEN BASTARD WHY DON'T YOU PICK ON SOMEONE YOUR OWN SIZE? WHAT ARE YOU WAITING FOR!"
+        r "YOU ROTTEN BASTARD WHY DON'T YOU PICK ON SOMEONE YOUR OWN SIZE? WHAT ARE YOU WAITING FOR!" with hpunch
         menu:
             "While the man dashes furiously towards Rocky, must've really got under his skin, what can I do to help?"
              
             "I save myself and do nothing!":
                 $ insanity_level += 1
                 $ rocky_health -=3
+
                 if rocky_health <= 1:
-                    $ rocky_office_death == True
+                    $ rocky_office_death = True
+
                 play sound "audio/sfx/punch.ogg"
-                r "*retches*"
+                r "*retches*" with hpunch
                 "Rocky is brought down to the floor from the stun baton and isn't getting back up at all... is he breathing?"
                 jump juggernaut_zombie_aftermath
 
             "I tell Vinnie to stab the armored man with their knife!" if vinnies_knife == True:
                 $ vinnies_knife = False
                 v "DIE YOU DICK!!"
-                "Vinnie dashes forward and penetrates the armored man's protected neck with their butterfly knife, the armored man yanks it out before crushing it with his hands"
+                "Vinnie dashes forward and penetrates the armored man's protected neck with their butterfly knife, the armored man yanks it out before crushing it with his hands" with hpunch
                 jump juggernaut_zombie_aftermath
             
             "I tell Norman to save Rocky!":
                 $ norman_health -= 1
+
                 if rocky_health <= 1:
-                    $ rocky_office_death == True
+                    $ rocky_office_death = True
+
                 n "AAAAAAAAAAAHHHHH!!!!" with hpunch
                 "Norman blocks Rocky with his body but takes the strike instead!"
                 jump juggernaut_zombie_aftermath
@@ -944,42 +1021,46 @@ label rocky_v_juggernaut:
             "I tell Norman to shoot the man!" if norman_has_gun:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
-                "Norman shoots him in the face, the man is stunned in return!"
+                "Norman shoots him in the face, the man is stunned in return!" with hpunch
                 jump juggernaut_zombie_aftermath
 
             "I headbutt the man with my horns!":
                 $ sage_health -= 1
                 play sound "audio/sfx/punch.ogg"
                 "I run forward headfirst and stab the man's chest with my horns, I feel my brain hit the roof of my skull as I deter the man off course" with hpunch
-                if rocky_health <= 1:
+                
+                if sage_health <= 1:
                     jump death_screen
+
                 jump juggernaut_zombie_aftermath
             
             "I shoot the man!" if sage_has_gun == True:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
-                "I shoot the man right in his helmet! It blocks the bullet but at least it distracts him from attacking Vinnie"
+                "I shoot the man right in his helmet! It blocks the bullet but at least it distracts him from attacking Vinnie" with hpunch
                 jump juggernaut_zombie_aftermath
             
             "I tell Rocky to crowbar the man!" if crowbar_collected == True:
                 play sound "audio/sfx/punch.ogg"
                 if expose_samsara_together_2 == True:
-                    "Rocky bashes the man over the head with it, before the man could retaliate Rocky hits him again!"
+                    "Rocky bashes the man over the head with it, before the man could retaliate Rocky hits him again!" with hpunch
                 else:
-                    $ crowbar_collected == False
-                    "Rocky bashes the man over the head with it but the man grabs it and breaks it in response"
+                    $ crowbar_collected = False
+                    "Rocky bashes the man over the head with it but the man grabs it and breaks it in response" with hpunch
                 jump juggernaut_zombie_aftermath
 
             "I tell Vinnie to save Rocky!" if vinnie_dead == False:
                 play sound "audio/sfx/punch.ogg"
                 if expose_samsara_together_2 == True:
-                    v "SUCK ON THIS!!!"
+                    v "SUCK ON THIS!!!" with hpunch
                     "Vinnie runs to protect Rocky and does so without a hitch!"
                 else:
                     $ vinnie_health -= 1
+
                     if vinnie_health <= 1:
-                        $ vinnie_office_death == True
-                    "As Vinnie runs to protect Rocky, the armored man grabs Vinnie by the neck before throwing him to the floor"
+                        $ vinnie_office_death = True
+
+                    "As Vinnie runs to protect Rocky, the armored man grabs Vinnie by the neck before throwing him to the floor" with hpunch
                     v "Unnhhhh..."
 
                 jump juggernaut_zombie_aftermath
@@ -989,7 +1070,8 @@ label juggernaut_zombie_aftermath:
         if tara == True:
             w "Leave them alone!"
             "Apparently Tara ran off to grab a desk lamp and clubbed the man over the head with it!"
-        if rocky_health >= 1:
+
+        if rocky_dead == False:
             r "HOW MUCH MORE CAN HE POSSIBLY TAKE?"                 
 
         "I've had enough of this, I jumped onto the man's back and straddled his back. I then removed his helmet which revealed..."
@@ -998,7 +1080,7 @@ label juggernaut_zombie_aftermath:
         if tara == True:
             "Tara kicks it away far away from his grasp"
 
-        if norman_health >= 1:
+        if norman_dead == False:
             n "He's more focused on his helmet more than us!"
 
         "He's dead set on grabbing that helmet and sprints to put it back on! When his back is turned I realized he's wearing an explosive belt and a detonator in his pocket"
@@ -1009,7 +1091,7 @@ label juggernaut_zombie_aftermath:
         if vinnie_health >= 1:
             v "Take the detonator with you! You could explode his ass! {i}pause{/i}"        
         
-        if tara == True or rocky_health >= 1 or norman_health >= 1 or vinnie_health >= 1:
+        if tara == True or rocky_dead == False or norman_dead == False or vinnie_dead == False:
             "I snatch the detonator away from his we all sprint inside the express elevator"
         else:
             "I snatch the detonator away from him as I sprint inside the express elevator"
@@ -1023,75 +1105,77 @@ label juggernaut_zombie_aftermath:
             "Rocky is left behind as they're no longer with us, he took quite the beating for us to escape..."
             
         if norman_office_death == True:
-            $ norman_dead == True
+            $ norman_dead = True
             "Norman was killed in action, no time to carry him as I run"
-            if norman_affection >= 1:
+
+            if norman_affection >= 2:
                 "Norman, my Norman... no... I will avenge you..."
                 "...I loved you..."
-            elif insanity_level >= 1:
+            elif insanity_level >= 2:
                 "Oh well, no skin off my nose"
+
             if norman_has_gun:
-                "I quickly snatch the gun he carried while on my way"
+                "I quickly snatch the gun he had while on my way"
 
         ##THEY'RE IN THE ELEVATOR NOW!!!!!!
         scene black with dissolve
         pause 0.3
         scene elevator with dissolve
 
-        if tara == True or rocky_health >= 1 or norman_health >= 1 or vinnie_health >= 1:
+        if tara == True or rocky_dead == False or norman_dead == False or vinnie_dead == False:
             "They urge me to press the button and as soon as I do-"
         else:
             "I press the button and as soon as I do-"
+
         play sound "audio/sfx/explode.ogg"
         "The elevator rumbles for a bit as is it explodes beneath us... I wonder if it took out the whole floor or not?" with vpunch
         "..."
-        if insanity_level >= 0:
+
+        if insanity_level >= 1:
             p "What a pathetic creature..."
         else:
             p "That was certainly quite the experience"
+
         "It's deadly quiet for a while..."
 
-        if vinnie_health <= 1 and rocky_health >= 1:
+        if vinnie_office_death == True and rocky_dead == False:
             "Rocky stares absentmindedly at the floor..., he must be thinking about Vinnie. I hear him whisper some, I think religious, chant under his breath"
             r "Vinnie... Vinnie... you- y- you can-'t be..."
             r "Dear god... what kind of world does this... who would do this? Why them... why me..."
-            if norman_health >= 1:
+            if norman_dead == False:
                 "Norman rubs circles on his back for a bit"
                 n "It's ok... It's ok... I miss them too... it's ok to cry..."
                 "..."
             r "Vinnie I-..."
             "Rocky's voice breaks before they quit their attempt at speaking and remain silent"
-            if insanity_level >= 0:
+            if insanity_level >= 1:
                 "Maybe they shouldn't have gotten themselves killed then..."
             else:
                 "I'm gonna miss Vinnie, their humor, their voice, their spirit to keep us happy..."
             pause 0.3
 
-        if rocky_health >= 1 and rocky_health <= 1:
+        if rocky_office_death == True and vinnie_dead == False:
             call vinnie_reaction_rocky_death
         
-        if rocky_health <= 1 or rocky_health <= 1 or norman_health <= 1 and tara == True:
+        if rocky_office_death or vinnie_office_death or norman_office_death and tara == True:
             w "I'm so sorry about what happened with..."
 
-        if vinnie_health >= 1 and norman_dead and rocky_dead == False:
+        if vinnie_dead == False and norman_dead == False and rocky_dead == False:
             v "WE WOOOOOOOOOON!!!!!!!!!!!! YIIIIIIIIIPIIIIIIIIIIIEEEEE!!!!"
-            if rocky_health >= 1:
-                v "KISS ME ON THE MOUTH ROCKY!!! CARRY ME BRIDAL STYLE!!!"
-                if tara == True:
-                    r "The hell?? I'm not carrying you!!! AND TARA!"
-                    w "They look so excited though! Why don't we swap places?"
-                    v "DOCTOR'S ORDERS THAT YOU LISTEN TO MY PATIENT'S EVERY DEMAND!!!"
-                else:
-                    r "The hell?? I'm not carrying you!!!"
-                "Rocky grabs Vinnie's face cheeks and squishes them so Vinnie's tongue lolls out before shoving them across the elevator"
-
-        if rocky_health >= 1 and norman_dead and vinnie_dead == False:
-            r "Holy- I thought that was it for us, I didn't think we would make it"
-        if tara == True or rocky_health >= 1 or norman_health >= 1 or vinnie_health >= 1:
+            v "KISS ME ON THE MOUTH ROCKY!!! CARRY ME BRIDAL STYLE!!!"
+            if tara == True:
+                r "The hell?? I'm not carrying you!!! AND TARA!"
+                w "They look so excited though! Why don't we swap places?"
+                v "DOCTOR'S ORDERS THAT YOU LISTEN TO MY PATIENT'S EVERY DEMAND!!!"
+            r "The hell?? I'm not carrying you!!!"
+            "Rocky grabs Vinnie's face cheeks and squishes them so Vinnie's tongue lolls out before shoving them across the elevator"
+            r "Holy- I thought that was it for us Norman! I didn't think we would make it!"
             n "Great team effort everyone!"
+        
+        if norman_dead == False:
             "Norman starts inspecting our wounds to see if anything could be done"
         
-        if norman_dead == True:
+        if norman_office_death == True:
             if vinnie_dead == False:
                 v "Norman... no god no not Norman of all people..."
                 if rocky_dead == True:
@@ -1104,7 +1188,7 @@ label juggernaut_zombie_aftermath:
                     r "Couldn't protect Vinnie... couldn't protect you..."
                 r "What kind of man am I? Why did I live..."
 
-        if norman_health >= 1:
+        if norman_dead == False:
             n "Great effort! Great effort!"
             if norman_affection >= 1:
                 "Norman inspects me to see if I'm ok"
@@ -1113,7 +1197,7 @@ label juggernaut_zombie_aftermath:
                     if insanity_level >= 1:
                         p "Quit fussing"
                     else:
-                        p "I'm fine, thanks for asking"
+                        p "I'm fine, thank you for asking..."
                 else:
                     n "Glad to see you're ok [pov]!"
                     if insanity_level >= 1:
@@ -1131,36 +1215,36 @@ label juggernaut_zombie_aftermath:
             w "I noticed his true personality as I got older, I'm 22 now, it was only recently that I figured out the extent. When I confronted him about it, he put me on house arrest so I escaped and infiltrated my way here as an employee"
             w "My plan was to personally confront him in his office while working undercover but, I had no idea he has this plague in mind... I'm sorry for not being truthful, I was trying to figure out the right time to tell you"
 
-            if insanity_level >= 0:
+            if insanity_level >= 1:
                 "This bitch is hiding things from me, she can't be trusted"
             else:
                 p "It's ok, I understand. What's important is that you're telling now" 
-            if vinnie_health >= 1:
+            if vinnie_dead == False:
                 v "Talk about daddy issues girl..."
-            if rocky_health >= 1:
+            if rocky_dead == False:
                 r "No parent should treat their own family like that, what a degenerate. Keep close to us ok?"
-            if norman_health >= 1:
+            if norman_dead == False:
                 n "I'm so sorry to hear that, I can relate to a distant family like that"
-            w "That \"thing\" was specifically sent to retrieve me and kill you, I don't want to endanger you..."
-            if insanity_level >= 0:
+            w "That \"thing\" down there was specifically sent to retrieve me and kill you, I don't want to endanger you..."
+            if insanity_level >= 1:
                 "Maybe you'd be better left behind but I can't exactly throw you out right now..."
             p "We're always in danger so it doesn't matter if you're gone or not you're staying with us"             
-            if vinnie_health >= 1:
+            if vinnie_dead == False:
                 v "MY PATIENT CAN'T LEAVE UNTIL YOU GET YOUR DOCTOR REFERRAL, STAY WITH US TARA!!!"
-            if norman_health >= 1:
+            if norman_dead == False:
                 n "Yeah!!! Join us!!"
             w "T- thank you..., the top floor should have access to the rooftop and we could flag a helicopter from there"
         p "Hmm the floor this elevator leads to is labelled as a \"laboratory\", well this should be fun..."
         "Time passes"
         pause 0.2
-        if norman_health >= 1 and norman_affection >= 2:
+        if norman_dead == False and norman_affection >= 2:
             "Norman scoots very close next to me, almost leaning against my shoulder"
             n "Hey [pov]... I'm scared, so scared of dying..."
-            if rocky_health >= 1:
+            if rocky_dead == True:
                 n "Rocky's dead..."
-            if vinnie_health >= 1:
+            if vinnie_dead == True:
                 n "Vinnie's dead..."
-            if closet_broken == True:
+            if closet_broken == True and tara == False:
                 n "That girl we left behind in the closet is probably dead..."
             n "How much longer do {i}we{/i} have? I- I don't want to die or see anymore dead people... please help me..."
             n "I'm so afraid of being seen as weak... because pretending to have it under control is all I have... I can't EVER show myself because the people who rely on me will see me as the fraud I am..."
@@ -1171,25 +1255,45 @@ label juggernaut_zombie_aftermath:
                     n "[pov]... [pov]..."
                     "He only now starts hugging back, I think I can hear his tail wag"
                     n "Haahaa why can't this elevator last a little bit longer?"
-                    p "I wish it did to"
+                    p "I wish it did too..."
                     pause 0.3 
                     "We eventually unwrap our arms around each other but continue to hold hands"
-                    if vinnie_health >= 1 and rocky_health >= 1:
+
+                    if vinnie_dead == False and rocky_dead == False:
                         "Vinnie and Rocky are off in the corner pretending not to look at us while whispering into each other's ears"
                         v "*sniffle* *sniffle* Our lil' Normie and [pov] are becoming big grown muscular 6'9 men right before our very eyes... They grow up so fast I'M NOT READY TO LET THEM LEAVE THE NEST YET!! WAAAAAAA!!!! HOLD ME ROCKY!!!"
-                        r "Stop it you're embarrassing them! If you don't shut your hag mouth you're gonna scare them from each other! I'm personally very glad to see Norman and [pov] so happy, I've never seen either so ecstatic before"
+                        r "Stop it you're embarrassing them! If you don't shut your hag mouth you're gonna scare them away from each other! I'm personally very glad to see Norman and [pov] so happy, I've never seen either so ecstatic before"
                         v "*hic* I am too..."
-                    if vinnie_health <= 1 and rocky_health >= 1:
+
+                    if vinnie_dead == True and rocky_dead == False:
                         r "I'm proud of two, truly, you have my blessing for whatever that's worth. Vinnie also would be cool with it, learn from their and my mistakes..."
-                    if vinnie_health >= 1 and rocky_health <= 1:
+                    
+                    if vinnie_dead == False and rocky_dead == True:
                         v "It warms my heart to see you two be together. Rocky also would approve, make sure never to let go of each other like we did..."
+                    
                     if tara == True:
                         "Tara gives a thumbs up and wink from across the elevator"
                         
                 "Just forget about it":
+                    pause 0.5
                     n "...I guess it can't be a problem if It's not acknowledged..."
-
         jump lab_floor_3
+
+        return
+
+#BRADLEYS WORD SCRAMBLE PUZZLE
+
+#BRADLEY MESSAGE
+#So an idea for a puzzle I had was like trying to figure out the missing word through the given letters so the test message I made was:
+#"Her eyes      at the sight of them,
+#they ravage through the other researchers like    s to a flame
+
+#(Fuck I’m out of ideas pretend there's a cool line here)     MAYBE THE NEXT LINE?? _
+#"The future is bleak as I grow more weary"
+
+#Days scramble together the longer she stays"
+#Letters: MON TUE WED THU FRI
+#Then the missing words/the passcode would be: WIDEN, MOTH, and FUTURE
 
 label get_password:
     $ password_input = renpy.input("What's the password?", length = 8)
@@ -1224,6 +1328,7 @@ label wrong_password:
     play sound "audio/sfx/wrong beep.ogg"
     "{size=*1}{color=#f00}PASSWORD INCORRECT{/color}{/size}"
     hide screen input_pw_button
+    scene office computer with dissolve
     jump pnc_loop
     return
 

@@ -4,6 +4,8 @@ label endings:
     # play music "audio/music/"
     scene rooftop with flash
     "The door slides open to reveal an ashen cityscape, this is the first I've felt the outside air since the beginning of all this. I see the chopper circle around in the air, it's bound to notice if I call attention"
+    if vinnie_dead == False or rocky_dead == False or norman_dead == False or tara == True:
+        "We wave our hands in the air, signalling the copter to land..."
     if insanity_level >=1 and vinnie_dead and rocky_dead and norman_dead == True and tara == False:
         if norman_secret_death == True:
             omg "Did you think you could kill me?"
@@ -59,42 +61,47 @@ label endings:
     scene black with dissolve
     "..."
     "About a week has passed since then, the government called the national guard and quarantined the city and nearby areas. Fortunately the virus was contained and the rest of the country remains unaffected"
-    if vinnie_dead and rocky_dead and norman_dead == False:
+    if vinnie_dead == False and rocky_dead == False and norman_dead == False:
         v "IT'S A PARTY GUYS!!!! EVERYONE!! BREAK DANCE NOW!!!"
         n "I thought we would be goners for a second there!"
         r "Those zombies were no match for us!"
         if tara == True:
-            "We outsmarted those brainless dorks!"
+            w "We outsmarted those brainless dorks!"
         p "Let's hangout! In fact! Why don't we all get an apartment together?!?"
         r "I already pretty much am Vinnie's babysitter so that sounds good to me! I'm in!"
-        v "YAY! I AM GOING TO THE BEST ROOMIE EVER! I CALL DIBS ON THE DOGHOUSE!!!"
+        v "YAY! I AM GOING TO THE BEST ROOMIE EVER! I CALL DIBS ON THE DOGHOUSE!!! I already have 6 siblings so I'm used to living with people!"
         n "Of course! I love you guys so much! I wouldn't miss out on it for anything! Haha!"
         if tara == True:
             w "...Does that offer extend to me..."
             p "Yep! You're stuck with us!"
             w "Really?! I- I've never had friends before, only co-workers, THIS IS SO EXCITING!!"
         p "Great! We're almost like a real family now!"
-        v "Oo! Oo! I am simutaneously the smexy smexy house wife and man of the house!"
+        v "Oo! Oo! I am simultaneously the smexy smexy house wife and man of the house!"
         v "Rocky is the hen-pecked husband who obeys my commands!"
         v "Norman is are our daughter too good to be born to us!"
         v "[pov] is the homeless person who rifles through our trash that we let in!"
         if tara == True:
             v "And Tara is the person we kidnapped for ransom!"
         r "I would rather be eaten by the zombies then be married to you..."
-        if norman_affection >=3:
+        if norman_affection >= 5:
             n "I was swooned by the homeless person!"
-        else:
-            n "Umm how did you two even birth me????"
-            v "Mitosis."
+        n "Umm wait- how did you two even birth me????"
+        v "Mitosis."
+
         if tara == True:
             w "You'll all fare better than the last people who held me for ransom! Haha!"
+
         p "...What about me says I'm homeless?..."
+
         if expose_samsara_together and expose_samsara_together_2 and expose_samsara_together_3:
             "The surviving board members of Samsara and it's associates were held accountable in the court of law and arrested for crimes against society, thanks to us exposing them!"              
         "We did it, we all lived. A lot of innocent people died in the city but we will never forget them..."
-        "My friends are the best thing to have happened to me. Finally a family that accepts and loves me. I'm going to like it here!"    
+        "My friends are the best thing to have happened to me. Finally a family that accepts and loves me. I'm going to like it here!"
+        centered "{size=*2}END{/size}" with dissolve
+        centered "{size=*2}Thanks for playing!{/size}" with dissolve 
+
     
-    if vinnie_dead or norman_dead or rocky_dead == True:
+    if vinnie_dead == True or norman_dead == True or rocky_dead == True:
         if vinnie_dead == False:
             "Vinnie never quite recovered from that day, they've been very isolated and haven't been communicating as they usually do"
             "Their funny quirks and quips are gone, replaced with quiet chuckles and longing stares at the floor"
@@ -112,13 +119,13 @@ label endings:
         if norman_dead == False:
                 "Norman is the only one who regularly meets up and starts the hangouts now, he seems much more jumpy and scared than back then"
                 "He often checks in to see if everything is alright and if there's anything he could do"
-                if rocky_dead or vinnie_dead == True:
+                if rocky_dead == True or vinnie_dead == True:
                     "They keep a picture of all of us together in their jacket at all times..."
         if tara == True:
             "Tara has been kept in confinement from the government for being related to the CEO, she isn't arrested but might as well be..."
             "She sends letters saying how grateful she is and that she'll visit as soon as possible"
         "We've been trying to stay friends but it gets hard when we notice the people who are missing..."
         "It really makes me think... I wonder if there was anything I could've done differently?"
-
+    jump win_screen
 return
 

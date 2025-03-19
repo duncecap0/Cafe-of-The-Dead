@@ -60,18 +60,24 @@ screen death_nav():
             textbutton _("Load") action ShowMenu("load")
             textbutton _("Main Menu") action MainMenu()
 
-
 label death_screen:
     play sound "audio/sfx/stinger.ogg"
     play music "audio/music/mixkit-feedback-dreams-588- Eugenio Mininni.ogg"
-
-    hide screen kill_zombie
     
     scene black with pixellate
     show text "{size=+90}{b}{color=#f00}YOU HAVE PERISHED{/color}{/b}{/size}"
 
     call screen death_nav
 
+label win_screen:
+    play sound "audio/sfx/stinger.ogg"
+    play music "audio/music/mixkit-minimal-techno-01-162- Alejandro Magaña (A. M.).ogg"
+
+    scene black with pixellate
+    show text "{size=+90}{b}{color=#15ff00}GAME WIN{/color}{/b}{/size}"
+
+    call screen death_nav
+    
 return
 
 

@@ -76,11 +76,11 @@ define right_buttons = [
 
 #MECHANICAL FLOOR BUTTONS
 define mech_floor_main_room_1_buttons = [
-    (("look"),(300, 100),"mech_crowbar", None), #HOW DO YOU MAKE THIS GO AWAY WHEN IT APPEARS??
+    (("look"),(300, 150),"mech_crowbar", None), #HOW DO YOU MAKE THIS GO AWAY WHEN IT APPEARS??
     (("look"),(600, 440), "hvac", None),
-    (("look"),(750, 300),"mech_ladder",  None), # Condition. The way it's written ensures that the game doesn't throw an error if the "door_unlocked" key isn't in the dictionary
-    (("move"),(800, 100),"mech_floor_main_room_2", None),
-    (("move"),(1140, 430), "mech_hallway", None),
+    (("look"),(865, 300),"mech_ladder",  None), # Condition. The way it's written ensures that the game doesn't throw an error if the "door_unlocked" key isn't in the dictionary
+    (("move"),(315, 350),"mech_floor_main_room_2", None),
+    (("move"),(1160, 500), "mech_hallway", None),
 ]
 
 define mech_floor_main_room_2_buttons = [
@@ -93,19 +93,19 @@ define mech_floor_main_room_2_buttons = [
 ]
 
 define mech_hallway_buttons= [
-    (("look"),(650, 400), "mech_desk", None),
-    (("move"),(650, 700),"mech_floor_main_room_1", None), #this will return you the hallway loop
-    (("move"),(90, 400),"mech_hallway_left", None),
-    (("move"),(1200, 400),"mech_hallway_right", None),
+    (("look"),(645, 305), "mech_desk", None),
+    (("move"),(640, 700),"mech_floor_main_room_1", None), #this will return you the hallway loop
+    (("move"),(270, 400),"mech_hallway_left", None),
+    (("move"),(1020, 400),"mech_hallway_right", None),
 ]
 
 define mech_hallway_left_buttons= [
-    (("look"),(1200, 400), "mech_left_hall_jacket", None),
+    (("look"),(900, 400), "mech_left_hall_jacket", None),
     (("move"),(650, 700),"mech_hallway", None), #this will return you the hallway loop
 ]
 
 define mech_hallway_right_buttons= [
-    (("look"),(200, 540),"mech_right_hall_bed", None),
+    (("look"),(500, 540),"mech_right_hall_bed", None),
     (("move"),(650, 700),"mech_hallway", None), #this will return you the hallway loop
 ]
 
@@ -113,18 +113,20 @@ define mech_hallway_right_buttons= [
 
 ###OFFICE FLOOR BUTTONS
 define office_start_buttons = [
-    (("look"),(650, 440), "office_window", None),
-    (("look"),(800, 500), "office_corpse", None),
+    (("look"),(650, 300), "office_window", None),
+    (("look"),(650, 500), "office_corpse", None),
 
     (("move"),(1140, 430),"office_desks", None),
     (("move"),(60, 430),"office_hall", None), 
 ]
 
 define office_hall_buttons = [
-    (("move"),(1140, 430),"office_restroom", None),
+    (("look"),(670, 350),"secret_elevator", None),
 
-    (("look"),(60, 430),"blocked_closet", None),
-    (("move"),(60, 430),"office_closet", "pnc_flags.get('vent_unlocked') == True"),
+    (("move"),(950, 430),"office_restroom", None),
+
+    (("look"),(300, 430),"blocked_closet", None),
+    (("move"),(300, 430),"office_closet", "pnc_flags.get('vent_unlocked') == True"),
     
     (("move"),(650, 700),"office_start", None), 
 ]
@@ -149,82 +151,94 @@ define office_desks_buttons= [
 ]
 
 define office_breakroom_buttons= [
-    (("look"),(700, 440),"worker_memo", None),
-    (("look"),(900, 500),"medkit", None),
+    (("look"),(850, 330),"worker_memo", None),
+    (("look"),(400, 40),"medkit_choice", None),
 
     (("move"),(650, 700),"office_desks", None), 
 ]
 
 
 define office_boardroom_buttons= [
-    (("look"),(650, 400), "projector", None),
-    (("look"),(900, 200),"worker_diary", None),
 
     (("move"),(60, 430),"office_computerdesk", None), 
     (("move"),(650, 700),"office_desks", None), 
 ]
 
 define office_computerdesk_buttons= [
-    (("look"),(650, 440),"word_puzzle", None),
+    (("look"),(300, 300),"word_puzzle", None),
 
-    (("move"),(650, 700),"office_desks", None), 
+    (("move"),(650, 700),"office_boardroom", None), 
 ]
 
 
 
-### LAB FLOOR BUTTONS
+### LAB FLOOR START DOWNSTAIRS BUTTONS
 define lab_start_buttons = [
+    (("move"),(845, 300),"lab_upstairs", None),
+    (("move"),(445, 300),"lab_upstairs", None),
 
-    (("move"),(1140, 430),"lab_upstairs", None),
+
+    (("move"),(650, 350),"lab_puzzle_b_room", None),
+
+    (("move"),(1170, 430),"lab_tanks_room", None),
     (("move"),(60, 430),"lab_radio", None), 
 ]
 
 define lab_puzzle_b_room_buttons = [
-    (("look"),(60, 430),"piece_puzzle_b", None),
+    (("look"),(650, 350),"piece_puzzle_b", None),
     
-    (("move"),(650, 700),"office_start", None), 
+    (("move"),(650, 700),"lab_start", None), 
 ]
 
 define lab_radio_buttons = [
-    (("look"),(650, 500), "radio", None),
-    (("look"),(650, 300), "pills", None),
+    (("look"),(170, 400), "radio", None),
+    (("look"),(450, 500), "pills", None),
 
     (("move"),(650, 700),"lab_start", None), 
 ]
 
-define lab_test_room_buttons = [
-    (("look"),(650, 500), "bullets", None),
-    (("look"),(650, 400), "keycard_slider", None),
+# TANK ROOM BUTTONS
 
-    (("move"),(650, 300),"lab_downstairs_hall", None),
+define lab_tanks_room_buttons = [
+    (("look"),(1000, 550), "bullets", None),
+    (("look"),(400, 300), "keycard_slider", None),
+    (("look"),(850, 300), "bioreactor", None),
+
+    (("move"),(350, 300),"lab_downstairs_hall", None),
     (("move"),(650, 700),"lab_start", None), 
 
 ]
 
 define lab_downstairs_hall_buttons= [
 
-    (("move"),(650, 440),"lab_puzzle_piece_a_collect_room", None), 
-    (("move"),(650, 700),"lab_test_room", None), 
+    (("move"),(650, 370),"lab_puzzle_piece_a_collect_room", None), 
+    (("move"),(650, 700),"lab_tanks_room", None), 
 ]
 
 define lab_puzzle_piece_a_collect_room_buttons= [
-    (("look"),(700, 440),"piece_puzzle_a", None),
+    (("look"),(650, 350),"puzzle_piece_a_collect", None),
 
     (("move"),(650, 700),"lab_downstairs_hall", None), 
 ]
+
+#LAB UPSTAIRS BUTTONS
 
 define lab_upstairs_buttons= [
     (("look"),(650, 400), "locked_master_door", None),
 
     (("move"),(60, 430),"lab_upstairs_left_hall", None), 
-    (("move"),(1000, 700),"lab_upstairs_right_hall", None), 
+    (("move"),(1200, 430),"lab_upstairs_right_hall", None), 
+
     (("move"),(650, 700),"lab_start", None), 
 ]
 
+#LAB UPSTAIRS LEFT HALL BUTTONS
+
 define lab_upstairs_left_hall_buttons= [
 
-    (("move"),(60, 430),"lab_puzzle_a_room", None), 
-    (("move"),(1000, 700),"lab_puzzle_piece_b_collect_room", None), 
+    (("move"),(650, 350),"lab_closet_room", None), 
+    (("move"),(800, 350),"lab_puzzle_a_room", None), 
+    (("move"),(550, 350),"lab_puzzle_piece_b_collect_room", None), 
     (("move"),(650, 700),"lab_upstairs", None), 
 ]
 
@@ -242,44 +256,65 @@ define lab_puzzle_piece_b_collect_room_buttons= [
     (("move"),(650, 700),"lab_upstairs_left_hall", None), 
 ]
 
+define lab_closet_room_buttons= [
+    (("look"),(650, 440),"lab_note_2", None),
+
+    (("move"),(650, 700),"lab_upstairs_left_hall", None), 
+]
+
+#LAB UPSTAIRS RIGHT HALL BUTTONS
+
 define lab_upstairs_right_hall_buttons= [
 
-    (("move"),(60, 430),"lab_desk", None), 
-    (("move"),(1000, 700),"lab_upstairs_test_room", None), 
+    (("move"),(700, 300),"lab_upstairs_rightmost_hall", None), 
+
+
+    (("move"),(600, 300),"lab_tara_tank", None), 
+
+    (("move"),(350, 430),"lab_desk", None), 
+    (("move"),(900, 430),"lab_upstairs_test_room", None), 
+
     (("move"),(650, 700),"lab_upstairs", None), 
 ]
 
-define lab_desk_buttons = [
 
-    (("look"),(650, 500), "plague_note", None),
+define lab_desk_buttons = [
+    (("look"),(650, 500), "lab_note_1", None),
+
+    (("move"),(650, 700),"lab_upstairs_right_hall", None), 
+]
+
+define lab_upstairs_test_room_buttons = [
+
+    (("look"),(650, 500), "bullet", None),
+
+    (("move"),(650, 700),"lab_upstairs_right_hall", None), 
+]
+
+define lab_tara_tank_buttons = [
+
+    (("look"),(650, 440),"lab_note_3", None),
+
+    (("move"),(650, 700),"lab_upstairs_right_hall", None), 
+]
+
+#LAB UPSTAIRS RIGHTMOST HALL BUTTONS
+
+define lab_upstairs_rightmost_hall_buttons = [
+
+    (("move"),(650, 350),"lab_keycard_room", None), 
+
     (("move"),(650, 700),"lab_upstairs_right_hall", None), 
 ]
 
 
-define lab_upstairs_rightmost_hall_buttons = [
-    (("move"),(60, 500),"lab_keycard_room_buttons", None), 
-    (("move"),(1000, 500),"lab_tanks_buttons", None), 
-
-    (("move"),(650, 700),"lab_upstairs_rightmost_hall", None), 
-]
-
-
 define lab_keycard_room_buttons = [
-    (("look"),(650, 400), "keycard", None),
+    (("look"),(620, 450), "keycard", None),
+    (("look"),(800, 400), "lab_note_4", None),
 
     (("move"),(650, 700),"lab_upstairs_rightmost_hall", None), 
 ]
 
-define lab_tanks_buttons = [
-
-    (("look"),(650, 440),"zombie_large_attack", None),
-
-    (("move"),(650, 700),"lab_upstairs_rightmost_hall", None), 
-]
-
-define lab_boss_room_buttons = [
-    (("move"),(650, 700),"lab_upstairs", None), 
-]
 
 ########## OG STUFF
 

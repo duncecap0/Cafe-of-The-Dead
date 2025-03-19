@@ -40,15 +40,22 @@ label lab_floor_3:
     "Well here we are in the lab let's look for a way out through here"
     if tara == True:
         w "I know he's my father but if you see him, don't hesitate to use force if necessary he's a dangerous man"
-        if vinnie_dead == True:
+        if vinnie_dead == False:
             v "PERMISSION TO WHOOP ASS GRANTED"
-        if rocky_dead == True:
+        if rocky_dead == False:
             r "I didn't need permission but thanks I guess"
-        if norman_dead == True:
+        if norman_dead == False:
             n "We'll use diplomacy to solve our problems!"
-        if insanity_level >=0:
+        if insanity_level >=1:
             "I'll personally kill him for putting me through this"
         p "Don't worry, we'll be on the lookout for him"
+
+    if vinnie_dead == False and rocky_dead == False:
+        v "IT'S THE FINAL COUNTDOWN!! DUH DUH DUH DUHHHH!!!"
+        r "SHUT UP!"
+    if norman_dead == False:
+        n "We can do this!"
+    p "This place is huge, gonna be a hard time navigating" 
     
     jump pnc_loop
 
@@ -66,7 +73,7 @@ label lab_start:
 ## LAB DOWNSTAIRS CENTER BOTTOM ROOM
 
 label lab_puzzle_b_room:
-    scene lab main room with dissolve
+    scene lab puzzle room with dissolve
     $ current_room = "lab_puzzle_b_room" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
@@ -78,9 +85,9 @@ label lab_radio:
     jump pnc_loop
 
 ## LAB DOWNSTAIRS RIGHT ROOMS
-label lab_test_room:
-    scene lab test with dissolve
-    $ current_room = "lab_test_room" # this initializes the point'n'click segment to display the correct set of buttons.
+label lab_tanks_room:
+    scene lab tanks with dissolve
+    $ current_room = "lab_tanks_room" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
 label lab_downstairs_hall:
@@ -89,7 +96,7 @@ label lab_downstairs_hall:
     jump pnc_loop
 
 label lab_puzzle_piece_a_collect_room:
-    scene lab storage with dissolve
+    scene lab orientation puzzle room with dissolve
     $ current_room = "lab_puzzle_piece_a_collect_room" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
@@ -104,27 +111,31 @@ label lab_upstairs:
 #UPSTAIRS LEFT ROOMS !!!!!!!
 
 label lab_upstairs_left_hall:
-    scene lab hall with dissolve
+    scene lab upstairs left hall with dissolve
     $ current_room = "lab_upstairs_left_hall" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
 
 label lab_puzzle_a_room:
-    scene lab puzzle with dissolve
+    scene lab puzzle room with dissolve
     $ current_room = "lab_puzzle_a_room" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
 label lab_puzzle_piece_b_collect_room:
-    scene lab storage with dissolve
+    scene lab orientation puzzle room with dissolve
     $ current_room = "lab_puzzle_piece_b_collect_room" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
+label lab_closet_room:
+    scene lab closet with dissolve
+    $ current_room = "lab_closet_room" # this initializes the point'n'click segment to display the correct set of buttons.
+    jump pnc_loop
 
 #UPSTAIRS RIGHT ROOMS DONT CONFUSE FOR RIGHT-MOST ROOMS !!!!!!!
 ##### RIGHT !!!!!!!!!!!!!!!!
 
 label lab_upstairs_right_hall:
-    scene lab hall with dissolve
+    scene lab upstairs right hall with dissolve
     $ current_room = "lab_upstairs_right_hall" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
@@ -133,11 +144,20 @@ label lab_desk:
     $ current_room = "lab_desk" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
-label lab_upstairs_test_room:
-    scene lab hall with dissolve
-    $ current_room = "lab_upstairs_test_room" # this initializes the point'n'click segment to display the correct set of buttons.
+label lab_keycard_room:
+    scene lab keycard room with dissolve
+    $ current_room = "lab_keycard_room" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
+label lab_tara_tank:
+    scene lab tara tank with dissolve
+    $ current_room = "lab_tara_tank" # this initializes the point'n'click segment to display the correct set of buttons.
+    jump pnc_loop
+
+label lab_upstairs_test_room:
+    scene lab upstairs test room with dissolve
+    $ current_room = "lab_upstairs_test_room" # this initializes the point'n'click segment to display the correct set of buttons.
+    jump pnc_loop
 
 
 #UPSTAIRS RIGHT-MOST ROOMS DONT CONFUSE FOR RIGHT ROOMS !!!!!!!
@@ -148,29 +168,74 @@ label lab_upstairs_rightmost_hall:
     $ current_room = "lab_upstairs_rightmost_hall" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
-label lab_keycard_room:
-    scene lab keycard room with dissolve
-    $ current_room = "lab_keycard_room" # this initializes the point'n'click segment to display the correct set of buttons.
+label lab_keycard_entrance_room:
+    scene lab keycard entrance with dissolve
+    $ current_room = "lab_keycard_entrance_room" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
-
-label lab_tanks:
-    scene lab tanks with dissolve
-    $ current_room = "lab_tanks" # this initializes the point'n'click segment to display the correct set of buttons.
-    jump pnc_loop
-
-label lab_boss_room:
-    scene lab tanks with dissolve
-    $ current_room = "lab_tanks" # this initializes the point'n'click segment to display the correct set of buttons.
-    jump pnc_loop
-
 
 #LAB POINT AND CLICK LABELS
+
+#lab puzzle shenanigans
+
+label puzzle_piece_a_collect:
+    $ puzzle_piece_a_collect = True
+    "I collect puzzle piece A"
+    $ renpy.notify("Puzzle Piece A has been added to your inventory!")
+    jump pnc_loop
+
+label puzzle_piece_b_collect:
+    $ puzzle_piece_b_collect = True
+    "I collect puzzle piece B"
+    $ renpy.notify("Puzzle Piece B has been added to your inventory!")
+
+    jump pnc_loop
+
+label piece_puzzle_a:
+
+    "This needs Puzzle Piece A to use"
+
+    if puzzle_piece_a_collect == True:
+        $ piece_puzzle_a = True
+        "I solve it!"
+
+    jump pnc_loop
+
+label piece_puzzle_b:
+
+    "This needs Puzzle Piece B to use"
+
+    if puzzle_piece_b_collect == True:
+        $ piece_puzzle_b = True
+        "I solve it!"
+
+    jump pnc_loop
+
+#everything else
+
+
+label locked_master_door:
+    if piece_puzzle_a and piece_puzzle_b == True:
+        menu:
+            "The door is open now! Should I go through or keep exploring?"
+            
+            "Let's keep looking around":
+                jump pnc_loop
+
+            "Enter through the door":
+                jump boss_battle
+    else:
+        "This door won't open unless we activate something around here..."
+    jump pnc_loop
+
+
 
 label radio:
     
     p "The telecommunications in this room seem to be malfunctioning, don't think we'll be able to contact anyone within here. We have to find someplace else"
 
     jump pnc_loop
+
+
 
 label bullets:
     "Looks like two bullets are on the floor..."
@@ -182,91 +247,21 @@ label bullets:
         "I stuff them into my hoodie"
     jump pnc_loop    
 
+
 label bioreactor:
     p "These tanks house some type of organism, hope they don't get out"
     if tara == True:
         w "These are bioreactors, they most likely contain the patients kidnapped from local medical facilities implanted with the virus"
     if norman_dead == False:
-        "The patients... we found them..."
+        n "The patients... we found them..."
     if rocky_dead == False:
-        "I- I don't see my mom in any of these. That means she's ok right? Right?"
+        r "I- I don't see my mom in any of these. That means she's ok right? Right?"
         if vinnie_dead == False:
             v "Yeah me neither! You're mom is fine she's safe I promise!"
     if vinnie_dead == False:
         v "This is sick... how could they do this?"
-
-label puzzle_piece_a_collect:
-    $ puzzle_piece_a_collect == True
-    "I collect puzzle piece A"
-    $ renpy.notify("Puzzle Piece A has been added to your inventory!")
     jump pnc_loop
 
-label pills:
-    "There's some pill capsules on the floor"
-    if vinnie_dead == False:
-        v "Those look like painkillers, you can tell from the coloring and shape"
-        menu pill_choose:
-            "Who should I heal?"
-
-            "Me":
-                $ sage_health +=1
-                $ pills == True
-
-            "Norman":
-                if sage_health <= 4:
-                    n "Awww thank you [pov]!!! But, I think you should take them... you don't look so good..."
-                else:
-                    $ norman_health +=1
-                    $ pills == True
-                    n "Thanks [pov]! I feel better already!"
-
-            "Vinnie":
-                $ vinnie_health +=1
-                $ pills == True
-                v "Wow, I am just a PERUSER today!!!"
-
-            "Rocky":
-                $ pills == True
-                $ rocky_health +=1
-                r "I've never been more thankful for random floor pills before in my life..."
-    
-    else:
-        menu pill_risk:
-            "Should I risk using them? It may be useful..."
-            
-            "Me":
-                $ sage_health +=1
-                $ pills == True
-
-            "Norman":
-                if norman_affection >= 0:
-                    $ norman_health +=1
-                    $ pills == True
-                    n "I trust you with my life[pov]! I'm sure it'll be fine!"
-                    jump pnc_loop    
-                else:
-                    n "Don't take this the wrong way [pov]... but I don't trust it..."
-                    jump pill_risk
-
-            "Vinnie":
-                if insanity >= 0:
-                    $ vinnie_health +=1
-                    $ pills == True
-                    v "No"
-                    v "I'm not just gonna be eating random shit off the floor, I worked too hard to get back in to that again..."
-                    jump pill_risk
-                else:
-                    v "..."
-                    v "Ok, I'll trust you..."
-                    jump pnc_loop
-
-            "Rocky":
-                $ rocky_health +=1
-                $ pills == True
-
-                r "I'm a big guy, so if it {i}is{/i} something bad it won't hit too hard... right?"
-            
-    jump pnc_loop    
 
 label keycard_slider:
     if keycard == False:
@@ -275,6 +270,94 @@ label keycard_slider:
         play sound "audio/sfx/correct beep.ogg"
         "I slide the keycard through and loud beep confirms it!"
     jump pnc_loop   
+
+
+label pills:
+    if pills == True:
+        "There are no more pills left"
+    else:
+        "There's some pill capsules on the floor"
+        if vinnie_dead == False:
+            v "Those look like painkillers, you can tell from the coloring and shape"
+            menu pill_choose:
+                "Who should I heal?"
+    
+                "Me":
+                    $ sage_health += 1
+                    $ pills = True
+
+                "Norman":
+                    if sage_health <= 3 and insanity_level == 0:
+                        n "Awww thank you [pov]!!! But, I think you should take them... you don't look so good..."
+                    else:
+                        $ norman_health += 1
+                        $ norman_affection += 1
+                        $ pills = True
+                        n "Thanks [pov]! I feel better already! It means a lot that you would want me to be healed.."
+
+                "Vinnie":
+                    $ vinnie_health += 1
+                    $ pills = True
+                    v "Wow, I am just a PERUSER today!!!"
+
+                "Rocky":
+                    $ pills = True
+                    $ rocky_health += 1
+                    r "I've never been more thankful for random floor pills before in my life..."
+    
+        else:
+            menu pill_risk:
+                "Should I risk using them? It may be useful..."
+            
+                "Me":
+                    $ sage_health +=1
+                    $ pills = True
+    
+                "Norman":
+                    if norman_affection >= 3:
+                        $ norman_affection += 1
+                        $ norman_health += 1
+                        $ pills = True
+                        n "I trust you with my life[pov]! I'm sure it'll be fine!"
+                    else:
+                        n "Don't take this the wrong way [pov]... but I don't trust it..."
+                        jump pill_risk
+
+                "Vinnie":
+                    if insanity >= 1:
+                        $ vinnie_health += 1
+                        $ pills = True
+                        v "No"
+                        v "I'm not just gonna be eating random shit off the floor, I worked too hard to get back in to that again..."
+                        jump pill_risk
+                    else:
+                        v "..."
+                        v "Ok, I'll trust you..."
+
+                "Rocky":
+                    $ rocky_health += 1
+                    $ pills = True
+                    r "I'm a big guy, so if it {i}is{/i} something bad it won't hit too hard... right?"
+            
+    jump pnc_loop    
+
+
+label bullet:
+    "Looks like a single bullet...."
+    if norman_has_gun:
+        $ ammo += 1
+        "Norman stuffs it into his pockets"
+    else:
+        $ ammo += 1
+        "I stuff it into my hoodie"
+    jump pnc_loop
+
+
+label keycard:
+    $ keycard = True
+    "I look around the drawers and find an employee keycard!"
+    jump pnc_loop
+
 
 label lab_note_1:
 
@@ -300,7 +383,7 @@ label lab_note_1:
         v "A system of checks and balances only works if the system is ALSO being checked and balanced..."
 
     if tara == True:
-        t "...Father... couldn't you see how much this meant to people... how... why... "
+        w "...Father... couldn't you see how much this meant to people... how... why... "
     if norman_dead == False:
         n "These people... they're so... confusing... if you wanted to help people... then why cause all these monstrosities?"
         n "It's like... my parents... they say they love me but then act the opposite..."
@@ -310,8 +393,8 @@ label lab_note_1:
         n "They're never there for me when I need it, always busy somewhere else. Every time I need their help they tell me to quit bothering them..."
         n "My whole life has been me acting alone, until I met all of you... my first friends..."
         menu:
-            "Find a new family!":
-                $ expose_samsara_together_3 == True
+            "Find a new family!" if insanity_level == 0:
+                $ expose_samsara_together_3 = True
                 $ norman_affection += 1
                 p "Norman you'll always have a home within my heart..."
                 if rocky_dead == True:
@@ -326,20 +409,22 @@ label lab_note_1:
 
                 if tara == True:
                     p "Tara is so grateful for us saving her"
-                p "And I-"
+                if norman_affection >= 3:
+                    p "And I-"
                 p "..."
                 n "..."
                 n "...Thank you [pov], you've told me what I needed to hear..."
                 n "From now on, I'm done with my family's nonsense"
                 n "Remember what you said?"
                 p "Never forgot."
-                if rocky_dead and vinnie_dead == True and tara == False:
-                    n "You're what matters to me now..."
-                else:
-                    n "You're all what matters to me now..."
-                "Norman stares deep into my eyes before getting nervous and looking away..."
-                if insanity_level == 0 and norman_affection >= 2:
-                    "So cute..."
+                if norman_affection >= 2:
+                    if rocky_dead == True and vinnie_dead == True and tara == False:
+                        n "You're... all that matters to me now..."
+                    else:
+                        n "You matter... so much to me..."
+                        "Norman stares deep into my eyes before getting nervous and looking away..."
+                    if insanity_level == 0:
+                        "So cute..."
                 "I read a poem during class presentation about how you're real family is the one who truly cares about you, not who's tied through blood"
                 "Guess it really stuck to him, and me..."
 
@@ -353,7 +438,7 @@ label lab_note_2:
     play sound "audio/sfx/page turn.ogg"
     show black with Dissolve(1.):
             alpha.6
-    centered "{font=Dudu_Calligraphy.ttf}Jen Zhara- Lab Technician- The patients from the hospital seem nervous. We told them it will be okay, it's all for the good of society, their efforts won't go to waste.{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}Jen Zhara- Lab Technician- The patients from the hospital seem nervous. We told them it will be ok, it's all for the good of society, their efforts won't go to waste.{/font}"
     centered "{font=Dudu_Calligraphy.ttf}That seemed to have pacified them for now. We target people that would have died anyway, so what's the the point if they die during our experiments?{/font}"
     centered "{font=Dudu_Calligraphy.ttf}Better to go being useful than wasting away in a bed somewhere. Our virus experimentation seems to be going places.{/font}"
     centered "{font=Dudu_Calligraphy.ttf}We're putting strand #33 in the samsara coffee now; we'll be judging the effects on the local population by seeing the hospital intake. We initially were against it but the CEO made a passionate argument for it.{/font}"
@@ -394,10 +479,11 @@ label lab_note_2:
             r "..."
             r "I shouldn't have destroyed all this stuff too... people COULD change this for the better; my anger got the best of me..."
             #Show rocky blush
-            r "Sorry"
+            r "Sorry..."
             #Show Tara happy
             w "..."
             "..."
+            v "Rocky... you've changed..."
         
     elif tara = False:
 
@@ -419,7 +505,7 @@ label lab_note_2:
 
     jump pnc_loop
 
-
+# tara tank
 label lab_note_3:
 
     play sound "audio/sfx/page turn.ogg"
@@ -431,14 +517,14 @@ label lab_note_3:
     centered "{font=Dudu_Calligraphy.ttf}I wonder if he even recognizes her as her own unique life form, or as an extension of him? Taran what happened to you... you are not the man who recruited me all those years ago{/font}"
     hide black with dissolve
     play sound "audio/sfx/page turn.ogg"
-
+    
     if tara == True:
         w "This is where I was created... I never had a mother only father and Samsara to look after me... I wonder if I {i}am{/i} a carbon copy of father and turn out to repeat his mistakes..."
 
         menu:
 
             "The fact that your questioning it means you're not" if insanity_level == 0:
-                $ tara_against_dad == True
+                $ tara_against_dad = True
                 p "We are not our parents... the destiny you forge for yourself is your choice to make only, not anybody else's"
                 w "..."
                 w "Why, yes I suppose you are right... Why not stop focusing on his life and start focusing on mine"
@@ -495,59 +581,12 @@ label lab_note_4:
     
     if tara == True:
 
-        t "... you told me since I was a little girl this was supposed to help people, you lied to me! YOU LIED TO ME!!"
-        t "... you really are no different from your monsters, this isn't forgivable, we're gonna make you pay for all the lives you took..."
+        w "... you told me since I was a little girl this was supposed to help people, you lied to me! YOU LIED TO ME!!"
+        w "... you really are no different from your monsters, this isn't forgivable, we're gonna make you pay for all the lives you took..."
         "Tara says in clenched teeth"
 
     jump pnc_loop
 
-
-label keycard:
-    $ keycard == True
-    "I look around the drawers and find an employee keycard!"
-    jump pnc_loop
-
-label bullet:
-    "Looks like a single bullet...."
-    if norman_has_gun:
-        $ ammo += 1
-        "Norman stuffs it into his pockets"
-    else:
-        $ ammo += 1
-        "I stuff it into my hoodie"
-    jump pnc_loop
-
-label puzzle_piece_b_collect:
-    $ puzzle_piece_b_collect == True
-    "I collect puzzle piece B"
-    $ renpy.notify("Puzzle Piece B has been added to your inventory!")
-
-    jump pnc_loop
-
-label locked_master_door:
-    if piece_puzzle_a and piece_puzzle_b:
-        "I enter through the door"
-        jump boss_battle
-    else:
-        "This door won't open unless we activate something around here..."
-    jump pnc_loop
-
-
-label piece_puzzle_a:
-    if puzzle_piece_a_collect:
-        $ piece_puzzle_a == True
-        "I solve it"
-    else:
-        "This needs it's respective piece to open..."
-    jump pnc_loop
-
-label piece_puzzle_b:
-    if puzzle_piece_b_collect == True:
-        $ piece_puzzle_b == True
-        "I solve it"
-    else:
-        "This needs it's respective piece to open..."
-    jump pnc_loop
 
 
 ##LAB BOSS BATTLE ENDING
@@ -558,8 +597,8 @@ label boss_battle:
     "..."
     s "..."
     s "...Ah, you're here. I have to say I'm impressed with how far you've progressed. I figured the juggernaut would dispose of you"
-    s "I've been watching you know. There are cameras all over the facility. I've been with you ever since you stepped foot into this facility"
-    "The CEO is on a slight raised platform from the rest of us with a control panel"
+    s "I've been watching you, you know. There are cameras all over the facility. I've been with you ever since you stepped foot into this facility"
+    "The CEO is on a slightly raised platform from the rest of us with a control panel"
     if norman_dead == False:
         n "Sir! You need to stop what you're doing at once! Let us out of here!"
         s "The exit is right where you came from; never mind the inevitable horde bound to eat you from the inside out though..."
@@ -616,7 +655,7 @@ label boss_battle:
         w "Father no!"
 label save_norman_finale:
     if norman_dead == False:
-        if norman_affection >= 0:
+        if norman_affection >= 2:
             n "[pov]! Behind you! I won't let them hurt you!"
             "Norman runs up behind me and delivers a jump kick to the zombie behind me!"
             jump save_vinnie_finale
@@ -638,7 +677,7 @@ label save_norman_finale:
 
             "I save myself and do nothing!":
                 $ insanity_level += 1
-                $ norman_health -=1
+                $ norman_health -= 1
                 if norman_health <= 1:
                     $ norman_lab_death == True
                 play sound "audio/sfx/punch.ogg"
@@ -647,7 +686,7 @@ label save_norman_finale:
                 jump save_vinnie_finale
 
             "Push Norman into danger" if insanity_level >= 1 and norman_affection <= 1 and tara == False and rocky_dead and vinnie_dead == True:
-                $ norman_health -=5
+                $ norman_health -= 5
                 $ insanity_level == 100
                 $ norman_dead == True
                 n "HELP ME!! HELP ME!!"
@@ -671,11 +710,11 @@ label save_norman_finale:
                     v "Got it! I'll save you Norm! OW!"
                     "Vinnie punches the man but gets punched back HARD in the face"
                     if vinnie_health <= 1:
-                        $ vinnie_lab_death == True
+                        $ vinnie_lab_death = True
                 jump save_vinnie_finale
 
             "I skewer the zombies with my horns!":
-                if norman_affection >= 0:
+                if norman_affection >= 2:
                     play sound "audio/sfx/punch.ogg"
                     "I'm not letting HIM die!" with hpunch
                     n "Woah, That was awesome [pov]!"
@@ -702,7 +741,7 @@ label save_norman_finale:
 
             "I crowbar the zombies!" if crowbar_collected and rocky_dead == True:
                 play sound "audio/sfx/punch.ogg"
-                $ crowbar_collected == False
+                $ crowbar_collected = False
                 "I use the crowbar against the zombies! But the horde yanks it out of my hands and it gets lost in the stampede"
                 jump save_vinnie_finale
 
@@ -714,7 +753,7 @@ label save_norman_finale:
                     jump save_vinnie_finale
                 elif crowbar_collected:
                     play sound "audio/sfx/punch.ogg"
-                    $ crowbar_collected == False
+                    $ crowbar_collected = False
                     r "HUT!"
                     "Rocky uses the crowbar against the zombies but the horde yanks it out of his hand and it gets lost in the stampede"
                     jump save_vinnie_finale
@@ -724,7 +763,7 @@ label save_norman_finale:
                     r "URGH!"
                     "Rocky uses his body to shell Norman from danger but gets hurt in retaliation"
                     if rocky_health <= 1:
-                        $ rocky_lab_death == True
+                        $ rocky_lab_death = True
                     jump save_vinnie_finale
 
 label save_vinnie_finale:
@@ -749,7 +788,7 @@ label save_vinnie_finale:
 
             "I save myself and do nothing!":
                 $ insanity_level += 1
-                $ vinnie_health -=1
+                $ vinnie_health -= 1
                 play sound "audio/sfx/punch.ogg"
                 n "Yeowch!"
                 "Norman is hurt..."
@@ -757,7 +796,7 @@ label save_vinnie_finale:
             "Push Vinnie into danger" if insanity_level >= 1 and tara == False and rocky_dead and norman_dead == True:
                 $ vinnie_health -=5
                 $ insanity_level == 100
-                $ vinnie_dead == True
+                $ vinnie_dead = True
                 v "ROCKY!!"
                 "Were Vinnie's last words before being lost to the horde..."
                 $ vinnie_lab_push_death == True
@@ -817,7 +856,7 @@ label save_rocky_finale:
         if expose_samsara_together == True:
             r "AAAAAAAAAAAAAAGHHHHHHHHH!!!"
             "Rocky lifts a zombie over his head and throws it into the horde at full force!"
-            jump boss_aftermath
+            jump the_juggernaut
         else:
             jump boss_zombies_v_rocky
     else:
@@ -834,17 +873,17 @@ label save_rocky_finale:
 
             "I save myself and do nothing!":
                 $ insanity_level += 1
-                $ rocky_health -=1
+                $ rocky_health -= 1
                 play sound "audio/sfx/punch.ogg"
                 r "Oof!"
                 if rocky_health <= 1:
-                    $ rocky_lab_death == True
+                    $ rocky_lab_death = True
 
             "Push Rocky into danger" if insanity_level >= 1 and norman_affection <= 1 and tara == False and norman_dead and vinnie_dead == True:
                 $ rocky_health -=10
                 $ insanity_level == 100
-                $ rocky_dead == True
-                $ rocky_lab_push_death == True
+                $ rocky_dead = True
+                $ rocky_lab_push_death = True
                 r "VINNIE! I'LL SEE YOU SOON!"
                 "Were Rocky's last words before being lost to the horde..."
 
@@ -863,7 +902,7 @@ label save_rocky_finale:
                     v "Got it! I'll save you Rocko! OW!"
                     "Vinnie kicks the zombies but gets hurt"
                     if vinnie_health <= 1:
-                        $ vinnie_lab_death == True
+                        $ vinnie_lab_death = True
 
             "I skewer the zombies with my horns!":
                 $ sage_health -= 1
@@ -886,12 +925,11 @@ label save_rocky_finale:
             "I tell Norman to save Rocky!" if norman_dead == False:
                 $ norman_health -= 1
                 if norman_health <= 1:
-                    $ norman_lab_death == True
+                    $ norman_lab_death = True
                 n "Here I go! URGRGH!!"
                 "Norman gets damaged in turn..."
-
 label the_juggernaut:
-        $ boss_juggernaut_zombie == False
+        $ boss_juggernaut_zombie = False
         play sound "audio/sfx/punch.ogg"
         "I dash and jump on top of the juggernaut zombie like before, as I'm on it's shoulder's I rip off his helmet and throw it into the acid pit!"
         queue sound "audio/sfx/zombie moan.ogg"
@@ -901,6 +939,8 @@ label the_juggernaut:
             "Vinnie uses their claws rip out it's eyes!"
         if rocky_dead == False:
             "Rocky uses his jaws to inflict large gashes upon it's neck!"
+        if tara == True:
+            "Tara picked up some debris and is chucking at it's face, knocking it off balance!"
         "The juggernaut moans in distress before jumping into vat of acid to chase after his helmet, it takes the majority of the zombies along with it"
 
 label boss_aftermath:
@@ -920,7 +960,7 @@ label boss_aftermath:
         "I let Tara go as she stares daggers into her father's eyes"
 
     if norman_lab_death == True:
-        $ norman_dead == True
+        $ norman_dead = True
         "Norman was lost, I presume he was eaten whole as I don't see his corpse anywhere"
 
     if rocky_lab_death == True:
@@ -936,8 +976,8 @@ label boss_aftermath:
     if norman_dead == False:
         n "Does he really have the ability to wipe minds or is he bluffing?"
     if vinnie_dead == False:
-        n "He's gotta be bluffing! He's just saying that because we caught his ass!"
-    if rocky_dead == True:
+        v "He's gotta be bluffing! He's just saying that because we caught his ass!"
+    if rocky_dead == False:
         r "You're shitting me if you think we're letting you get away scot-free!"
     p "So there is a way out of here..."
     if insanity_level == 0:
@@ -1025,10 +1065,10 @@ label boss_aftermath:
     if norman_dead == False:
         n "Chin up! We've done it [pov]!"
 
-        if norman_affection >=1:
+        if norman_affection >=5:
             "Norman comes up to me while I'm stewing and nuzzles my nose with his"
 
-    if insanity_level >=1 and vinnie_dead and rocky_dead and norman_dead == True and tara == False:
+    if insanity_level >=1 and vinnie_dead == True and rocky_dead == True and norman_dead == True and tara == False:
         "I did it, I lived. I left the others to their fates so {i}I{/i} could live"
         "...They..."
         "I didn't even know them for that long. Why {i}should{/i} I feel guilty? In this new world it's about survival. It's about {i}me{/i}, everyone else is secondary"
@@ -1041,11 +1081,11 @@ label boss_aftermath:
         "If I forgot... It must not be important..."
         "..."
 
-    if vinnie_dead and rocky_dead and norman_dead == False:
+    if vinnie_dead == False and rocky_dead == False and norman_dead == False:
         v "WE FUCKIN DID IT LADIES AND GENTLEMEN! WE CAME STRAIGHT IN THIS PLACE WITH ONE GOAL IN MIND! SURVIVAL! AND PULLED IT OFF!!!!"
         v "WOOOOOHOOOOOOO YEAHHHH!!!! JUMP FOR JOY HOS!!!!"
         if norman_affection >=5:
-            V "AND THE BEST PART IS THAT [pov!u] AND NORMAN GET TO GET LAID!!!!!!!!!!!!!!"
+            v "AND THE BEST PART IS THAT [pov!u] AND NORMAN GET TO GET LAID!!!!!!!!!!!!!!"
             n "VINNIE! NO!"
             p "Are you for real..."
             r "Eww! You're gonna scare them away from each other!!"
@@ -1054,19 +1094,20 @@ label boss_aftermath:
         v "YIPEE KI-YAY MOFOS!!!!!!!!! WE'RE ALL ALIVE HAHAHAHAHAHAHA!!!!!!!!!!!!"
         n "We did it! We did it! We get to live! Haha!"
         v "KISS ME LIKE YOU MEAN IT ROCKY! PUCKER UP!"
+        r "Ugh!"
         if tara == True:
-            w "Indeed! Indubitably! Without a doubt! \"Abso-fruitly\" if you will, considering who I'm traveling with..."
+            w "We survived indeed! Indubitably! Without a doubt! \"Abso-fruitly\" if you will, considering who I'm traveling with..."
             p "Hey is that homophobia I hear?"
             w "No! Not at all I support you all very much!"
             v "Hmmm my homophobic vision senses it deep within your soul..."
             v "RELEASE IT!! MY PATIENT! LET THE HOMOPHOBIA FLOW THROUGH YOU!!! Rocky this isn't safe place for you anymore, we're the straight club now!"
         r "The hell? I'm the straightest guy here! Just take a look at you!"
         if norman_affection >=5:
-            r "Two of you literally {i}dating{/i} each other!"
+            r "Also, two of you are literally {i}dating{/i} each other!"
         r "What's gayer than that!"
-        v "Ummm I think your search history is when I was trying to look up something is!!"
+        v "Ummm def your search history when I was trying to look something up!!!"
         r "...! Tha- That's- It was just the firefighter recruitment site!"
-        v "ER! WRONG! Why were all of those firefighters exclusively men and half nake-"
+        v "ERRRR! WRONG! Why were all of those firefighters exclusively men and half nake-"
         "Rocky bear hugs Vinnie before strangling them in the corner!"
         r "IF THE ZOMBIES DIDN'T KILL YOU I WILL!"
         v "HELP MEEEEEEE!!!!!!!!"
@@ -1082,7 +1123,7 @@ label boss_aftermath:
         n "I love you all more than my actual family!"
         if tara == True:
             w "I'm my own person now thanks to you all! Thank you so much!"
-    else:
+    elif vinnie_dead or rocky_dead or norman_dead == True:
         if vinnie_dead == False and rocky_dead == True:
             v "I did it Rocky, we did it for you... We lived... Thank you Rocky, you're still motivating me to keep going..."
             if norman_dead == True:
@@ -1098,15 +1139,16 @@ label boss_aftermath:
                 w "I'm so sorry about your friends..."
             w "At least we survived..."
         if insanity_level == 0:
+            #WTF??
             "They're dead and there's nothing I could do about it. I wanted to keep my new friends, my new family, safe but..."
             "I'm so sorry I failed you... now we pay the price for death..."        
 
         "..."
 
-        pause 0.3
-        scene black with dissolve
-        pause 0.2
-return
-
+    pause 0.3
+    scene black with dissolve
+    pause 0.2
+    jump endings
+    return
 
 

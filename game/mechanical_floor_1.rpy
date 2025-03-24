@@ -37,7 +37,7 @@ label mechanical_floor_1:
         alpha.6
     "My heart beats as I march upwards, {w=.3}would we really be able to restore the power?{w=.3} Are the people here even alright?{w=.3} Would we really make it out of here?"
     hide black with dissolve
-
+    show n 6 with dissolve
     n "Hey [pov]..."
 
     if norman_affection == 0:
@@ -45,35 +45,39 @@ label mechanical_floor_1:
         n "I'm just as afraid of you...{w=.3} I just put on a front because I don't want the others seeing how weak I really am..."
         n "Please...{w=.3} I- {w=.3}WE- won't let anything bad happen to you...{w=.3} I promise..."
     else:
-        n "Thank you for backing me up earlier [pov]..."
-        n "To be honest, {w=.3}I'm not sure about this myself, {w=.3}I'm glad to know I have someone to rely on..."
+        n 4a"Thank you for backing me up earlier [pov]..."
+        n 8"To be honest, {w=.3}I'm not sure about this myself, {w=.3}I'm glad to know I have someone to rely on..."
+        show n 3 with dissolve
         n "You're someone I can trust... {w=.3} sometimes it feels like I can't really open up because I don't want to worry anyone..."
-        n "I can't let them know that... {w=.3}I-{w=.3} don't really know what I'm doing..."
-        n "Don't get it wrong! I'm always glad to help someone out it's like someone needs me... {w=.3}and hears me..."
-        n "But, {w=.3}it's nice to have someone like that for me too..."
-    n "\"Your true family is the one who choose and accept one another\"...{w=.3} That's what you said right?"
+        show n 8 with dissolve
+        n 8"I can't let them know that... {w=.3}I-{w=.3} don't really know what I'm doing..."
+        n 5"Don't get it wrong! I'm always glad to help someone out it's like someone needs me... {w=.3}and hears me..."
+        n 4a"But, {w=.3}it's nice to have someone like that for me too..."
+    n 9"\"Your true family is the one who choose and accept one another\"...{w=.3} That's what you said right?"
     "Norman remembered my poem from class on the presentation day..."
     if norman_affection >=1:
-        p "..."
-        p "Norman, {w=.3}of course I'll be there..."
-        p "Don't worry, {w=.3}we ALL got your back on this..."
-        p "Just look how far you've gotten us already..."
+        p 2"..."
+        p 1"Norman, {w=.3}of course I'll be there..."
+        p 1"Don't worry, {w=.3}we ALL got your back on this..."
+        p 13"Just look how far you've gotten us already..."
+        show n 9 at shiver
         n "...!"
         "Norman turns his head away sharply... {w=.3}I've never seen him this flustered... {w=.3}like he said,{w=.3} he always has to put on a perfect front..."
         "I swear Norman I'll ease your burdens... {w=.3}I'll let everyone else know so we can all be there for each other... {w=.3}In, {w=.3}fact we're already on the first step..."
     else:
         "..."
 
-    pause 0.3
+    pause 0.7
 
     scene mech room 1 with dissolve
 
     $ renpy.notify("Remember to save often...")
     "Here we are,{w=.3} the room is lined with pipes and exposed machinery, {w=.3}it feels humid and I can almost taste the dust in the air... {w=.3}why would they not have windows here?"
+    show n 8 with dissolve
     n "It's hard to see..."
-    p "That's right Golden Retrievers can't see as well in the dark,{w=.3} would it be better if someone else had the gun?"
+    p 15"That's right Golden Retrievers can't see as well in the dark,{w=.3} would it be better if someone else had the gun?"
     menu:
-        n "Ok!{w=.3} But who?"
+        n 2"Ok!{w=.3} But who?"
 
         "I'll take it, Pygmy Goats can see well in the dark":
             $ sage_has_gun = True
@@ -83,28 +87,33 @@ label mechanical_floor_1:
         "Vinnie, Opossums have perfect night vision":
             $ vinnie_has_gun = True
             $ norman_has_gun = False
+            show v 24 at right with dissolve
             v "Wow!{w=.3} Uh... {w=.3}o- {w=.3}ok not who I would choose but sure!{w=.3} I can dual wield my knife and gun! ENEMIES BEWARE!"
             if rocky_dead == False:
+                show r 3 at left with dissolve
                 r "Why not me?{w=.3} I DO NOT trust Vinnie with a gun..."
-                v "I told you once that it's apart of Opossum culture to eat the smallest of their young and you believed me..."
-                v "Why would I trust someone like that with a loaded weapon?"
-                r "I uh,{w=.3} didn't want to judge cultures..."
+                v 13"I told you once that it's apart of Opossum culture to eat the smallest of their young and you believed me..."
+                v 2"Why would I trust someone like that with a loaded weapon?"
+                r 7"I uh,{w=.3} didn't want to judge cultures..."
                 v "Exactly another reason if you think eating children is a valid thing to just do..."
             else:
-                v "*sigh* Rocky with his Maned Wolf night vision and sturdiness would've been a better candidate..."
+                v 2 2"*sigh* Rocky with his Maned Wolf night vision and sturdiness would've been a better candidate..."
             jump gun_check
 
         "Rocky, Maned-wolves are nocturnal hunters" if rocky_dead == False:
             $ rocky_has_gun = True
             $ norman_has_gun = False
+            show r 10 at left with dissolve
             r "Got it,{w=.3} I promise you won't regret this"
+            show v 22 at right with dissolve
             v "Meh, {w=.3}I wouldn't trust someone who takes conspiracy theories as fact"
             r "... {w=.3}The chem-trails... {w=.3}I know it's in the chem-trails..."
-            v "*sigh*{w=.3} guess this is our best option... {w=.3}I'm scared of guns..."
+            v 5"*sigh*{w=.3} guess this is our best option... {w=.3}I'm scared of guns..."
             jump gun_check
 
         "Never mind, just hang on to it Norman":
             n "Ok!"
+            show v 10 at right with dissolve
             v "Yeah probably best for the person with the most training to keep it..."
             jump gun_check
      
@@ -112,9 +121,12 @@ label mechanical_floor_1:
 label gun_check:
 
     if norman_has_gun == False:
-        n "Here! {w=.2}Just flick this here to release the safety, {w=.3}remember to breathe slowly to aim for the head better,{w=.1} and press here to shoot!"
+        n 13"Here! {w=.2}Just flick this here to release the safety, {w=.3}remember to breathe slowly to aim for the head better,{w=.1} and press here to shoot!"
         if sage_has_gun == True:
             $ renpy.notify("You received Norman's Gun!")
+    hide v with dissolve
+    hide r with dissolve
+    hide n with dissolve
 
     $ current_room = "mech_floor_main_room_1" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
@@ -162,13 +174,20 @@ label mech_hallway_right:
             
             $ crowbar_collected = True
             "The key fits perfectly as the padlock falls off"
-            p "Hmm I'm the smallest so my weight shouldn't mess with the under constructed platform as much"
+            p 1"Hmm I'm the smallest so my weight shouldn't mess with the under constructed platform as much"
+            show v 9 with dissolve
             v "Hey! You actually should be thankful for being as light as a feather for once!"
+            hide v 9 with dissolve
             if rocky_dead == False:
+                show r 11 with dissolve
+
                 r "You're one to talk string bean..."
+                hide r 11 with dissolve
             "I steady myself on top of the elevated platform and reach out for the crowbar"
-            p "Got it!"
+            p 13"Got it!"
+            show n 2 with dissolve
             n "Yay! Good Job [pov]!"
+            hide n 2 with dissolve
 
             if rocky_dead == False:
                 if insanity_level >= 1:
@@ -176,31 +195,44 @@ label mech_hallway_right:
                 else: 
                     "I throw the crowbar down to Rocky as a thought hits me"
                     "This is a stupid idea but worth a shot..."
-                    p "Hey! Rocky! Catch THIS!"
-                    r "What? Oh! OOF!"
+                    p 13"Hey! {w=.3}Rocko!{w=.3} Catch THIS!"
+                    show r 4a with dissolve
+                    r "What?{w=.3} Oh!{w=.3} OOF!"
                     "I jumped off the raised platform straight into Rocky's arms as he set down the crowbar to replace me in his arms instead"
-                    r "What the hell made you think of doing that?!?!"
-                    p "...Hmm intrusive thoughts?"
-                    v "HAHAHAHAHAHA THATS HI-LARIOUSSS! JUST STAY IN ROCKY'S ARMS LIKE THAT! YOU LOOK LIKE YOU COULD BE HIS NEWBORN OR SOMETHING HAHAHAHA!"
+                    r 3a"What the hell made you think of doing that?!?!"
+                    p 15"...{w=.3}Hmm intrusive thoughts?"
+                    show v 2 4 at right with dissolve
+                    v "HAHAHAHAHAHA THATS HI-LARIOUSSS! JUST STAY IN ROCKY'S ARMS LIKE THAT! {w=.3}YOU LOOK LIKE YOU COULD BE HIS NEWBORN OR SOMETHING HAHAHAHA!"
                 if norman_affection >= 1:
-                    n "...Haaaaa... yeahhhh..."
+                    show n9 at left with dissolve
+                    n "...Haaaaa... {w=.3}yeahhhh..."
                 "Rocky sets me down as we continue our search"
+                hide v
+                hide r
+                hide n
             else:
                 if norman_affection >= 2:
                     "Hmmm I wonder if HE could catch me..."
                     p "Geronimo!"
+                    show n15 with dissolve
                     n "WOAH WOAH WOAH!"
-                    "I fall on top of Norman, making him break my fall with his body as he lays on the ground"
-                    n "[pov]! What was that for?!?!"
-                    p "Hmm I dunno honestly..."
+                    "I fall on top of Norman,{w=.3} making him break my fall with his body as he lays on the ground"
+                    n 9"[pov]!{w=.3} What was that for?!?!"
+                    p 15"Hmm I dunno honestly..."
                     "Norman looks flustered as ever when I lock eyes with him while pinning myself above him"
-                    v "JEEZUZ H CHRISTMAS GET A ROOM YOU TWO!!! NEVER THOUGHT {i}I'D{/i} BE THE THIRD WHEEL!"
+                    show v 6 at left with dissolve 
+                    v 6"JEEZUZ H CHRISTMAS GET A ROOM YOU TWO!!!{w=.3} NEVER THOUGHT {w=.3}{i}I'D{/i}{w=.3} BE THE THIRD WHEEL!"
+                    hide v with dissolve
+                    hide n  with dissolve
                 else:
-                    "I throw the crowbar down to Vinnie and Norman who stumble to catch it as I descend down the ladder, I pick it up back up"
+                    "I throw the crowbar down to Vinnie and Norman who stumble to catch it as I descend down the ladder,{w=.3} I pick it up back up"
         else:
-            p "The ladder is locked behind a padlock..."
+            p 1"The ladder is locked behind a padlock..."
             if rocky_dead == False:
+                show r 11 with dissolve
                 r "Workers usually have a key to this type of stuff if only we could find someone with it..."
+                hide r 11 with dissolve
+
         jump pnc_loop
 
 
@@ -228,8 +260,12 @@ label mech_hallway_right:
         
         p "That crowbar up there would be great at smashing stuff in..."
         if rocky_dead == False:
+            show r 2 with dissolve
             r "Looks like they were installing a higher level here. {w=.3}They never got the chance to finish it..."
+            hide r 2 with dissolve
+        show v 2 with dissolve
         v "Woah it seem's pretty flimsy dunno about going up there or not... "
+        hide v 2 with dissolve
         jump pnc_loop
     
 
@@ -242,23 +278,31 @@ label mech_hallway_right:
         else:
             if rocky_dead == False and examined_HVAC_machine == False:
                 $ examined_HVAC_machine = True
+                show r 11 with dissolve
                 r "This here is an HVAC, stands, for heating, ventilation, and air conditioning. {w=.3}Used to work on them back when I worked odd jobs for neighbors..."
                 r "Looks like it's not on right now...{w=.3} I don't know what that means for long term but for now we should be fine"
+                show v 18 at left with dissolve
                 v "Looks like you're blue collar-ness background has finally come to use!"
-                r "You've never worked a day in your life{w=.3} {i}trust fund baby{/i}"
+                r 4a"You've never worked a day in your life{w=.3} {i}trust fund baby{/i}"
+                show v 22 at hop
                 v "But I'm {i}your{/i} trust fund baby...{w=.3} I can be your sugar daddy too with all that supposed trust fund if you want!"
-                #show rocky blush
+                show r 5 at shiver
                 r "...!"
+                scene mech room 1 with dissolve
 
             elif rocky_dead == True and examined_HVAC_machine == False:
                 $ examined_HVAC_machine = True
+                show n 8 with dissolve
                 n "I think this is an HVAC machine? I doubt it would help us even with power"
+                show v 2 2 at left with moveinleft
+                show n 8 at sink
                 v "*sigh* Rocky is experienced with mechanical stuff like this he worked plenty of odd jobs like that.. he would have been so useful here..."
+                scene mech room 1 with dissolve
                 "Guess it's an HVAC"
 
         jump pnc_loop
 
-    #examine work desk
+    #examine work deskPERNIS
     ## make this a toggleable imagebutton
     label mech_desk:
         "Looks like a personal journal, {w=.3}some of the pages have been ripped out..."
@@ -279,78 +323,84 @@ label mech_hallway_right:
         #$ renpy.notify("Worker's Journal Entry #1 has been added to Notes!")
 
         if rocky_dead == False:
-
+            show r3a with dissolve
             r "This is horrible, just fucking disgusting. My MOM'S been forced into paying for those ridiculous prices!"
             r "I've sacrificed my entire LIFE into paying them! I've never been able to enjoy affording something because the guilt of my mom not being able to kills me as well"
-            r "My dad worked my entire childhood just to keep her alive! Imagine that! Being forced to give out all your money to keep your loved one trapped in a fucking chamber where they DIE if you can't pay"
+            r 8"My dad worked my entire childhood just to keep her alive! Imagine that! Being forced to give out all your money to keep your loved one trapped in a fucking chamber where they DIE if you can't pay"
             r "No free-time for us, no family trips, no nice clothing, barely enough food to have enough energy to work the rest of the day!"
             r "We're still working our asses of! He never got to enjoy retirement! My family and others sacrificed all for a CEO's 47th trip to the Bahamas!"
+            show v 11 at left with dissolve
             v "Rocky..."
+            show n 8 at right with dissolve
             n "..."
 
             menu:
                 "Now's your chance to fix it":
                     $ expose_samsara_together = True
-                    r "Huh?"
-                    p "Well, the business is literally going under armageddon... so what better chance than now to expose them!"
-                    p "We could find evidence of their wrongdoings while going through the building and find more people in here who also want to expose them"
-                    p "The apocalypse is the perfect opportunity for people who bend the law since it doesn't exist right now"
-                    p "They have nothing to take advantage of anymore, and once this comes out to the public they won't have anywhere to hide"
-                    n "[pov]..."
-                    v "...{w=.3}That's the longest time I've heard you talk..."
-                    r "...{w=.3}You're right! These fuckers are gonna get what's coming to them!"
+                    r 3"Huh?"
+                    p 1"Well, the business is literally going under armageddon... so what better chance than now to expose them!"
+                    p 4"We could find evidence of their wrongdoings while going through the building and find more people in here who also want to expose them"
+                    p 4"The apocalypse is the perfect opportunity for people who bend the law since it doesn't exist right now"
+                    p 1"They have nothing to take advantage of anymore, and once this comes out to the public they won't have anywhere to hide"
+                    n 3a"[pov]..."
+                    v 10"...{w=.3}That's the longest time I've heard you talk..."
+                    r 2"...{w=.3}You're right! These fuckers are gonna get what's coming to them!"
                     r "You guys will support me in fighting them after this right?!"
-                    p "Of course!"
-                    v "To the end"
-                    n "I'm already stashing the documents!"
-                    r "Haha! Thank you guys! You're the bestest friends I could have asked for..."
-                    r "I wish... {w=.3}I had met you all sooner...{w=.3} then things wouldn't have been so hard on me..."
+                    p 14"Of course!"
+                    v 19"To the end"
+                    n 10"I'm already stashing the documents!"
+                    r 9"Haha! Thank you guys! You're the bestest friends I could have asked for..."
+                    r 6"I wish... {w=.3}I had met you all sooner...{w=.3} then things wouldn't have been so hard on me..."
                 
                 "Let's keep searching":
-                    r "..."
-                    r "Fine..."
-                    r "{w=.3}I hope every person who allowed this was devoured alive by those monsters..."
+                    r 1"..."
+                    r 3"Fine..."
+                    r 3a"{w=.3}I hope every person who allowed this was devoured alive by those monsters..."
                 
-            v "Rocky...{w=.3} I'm so sorry... I-{w=.3}... {w=.3}It's my fault for...{w=.3} making you care for my immature ass..."
+            v 12"Rocky...{w=.3} I'm so sorry... I-{w=.3}... {w=.3}It's my fault for...{w=.3} making you care for my immature ass..."
             v "If I wasn't so stupid back then... {w=.3}I could have worked as well to help you out... "
-            v "All those damn pranks I pulled on people and police... {w=.3}and the times of me making you do some dumbass shit with me for fun... {w=.3}All just for my selfishness..."
-            r "..."
-            r "...{w=.3}Don't say that.... {w=.3}you're one of the few people who {i}have{/i} been helping me out... {w=.3}my whole life..."
+            v 11"All those damn pranks I pulled on people and police... {w=.3}and the times of me making you do some dumbass shit with me for fun... {w=.3}All just for my selfishness..."
+            r 1"..."
+            r 3"...{w=.3}Don't say that.... {w=.3}you're one of the few people who {i}have{/i} been helping me out... {w=.3}my whole life..."
             r "The few chances I did get of free time. {w=.3}I didn't even know how to relax properly without thinking of a missed opportunity for working..."
             r "You made me think of something besides my own failures...{w=.3} I felt... {w=.3}alive for those moments with you..."
-            r "Like I actually existed for something that wasn't a job..."
-            v "...!"
+            show v 28 at left
+            r 5"Like I actually existed for something that wasn't a job..."
+            v 2 2"...!"
             "Vinnie looks away,{w=.3} I think I spot a tear?{w=.3} Hard to tell in the dark..."
             if expose_samsara_together == True:
-                r "Norman. {w=.3}[pov], {w=.3}that goes for you too. {w=.3}I love you guys..."
-            r "Anyways, {w=.3}let's stop sulking,{w=.3} we got a job to do!"
+                r 9"Norman. {w=.3}[pov], {w=.3}that goes for you too. {w=.3}I love you guys..."
+            r 3"Anyways, {w=.3}let's stop sulking,{w=.3} we got a job to do!"
+            hide r with dissolve
             "Rocky steps further away by himself as Vinnie waits around in the hallway stares at his back"
         else:
-            v "Ahh the wonders of a capitalist empire... we should be so thankful! I wonder what Rock would have thought of this... his family struggled with the healthcare system..."
-
-        n "I never knew how deep Rocky's money problems went...{w=.3} Vinnie knew him better than I did"
-        n "They were childhood friends you know...{w=.3} They had some type of falling and didn't meet again til college,{w=.3} I was the who convinced Rocky to see his childhood friend again when we first met"
+            v 12"Ahh the wonders of a capitalist empire... we should be so thankful! I wonder what Rock would have thought of this... his family struggled with the healthcare system..."
+        hide v with dissolve
+        show n 3a at center with move
+        n 3a"I never knew how deep Rocky's money problems went...{w=.3} Vinnie knew him better than I did"
+        n 8"They were childhood friends you know...{w=.3} They had some type of falling and didn't meet again til college,{w=.3} I was the who convinced Rocky to see his childhood friend again when we first met"
         if rocky_dead == False:
             n "I don't think Vinnie and Rocky have been that honest with each other in a while..."
-            n "I'm glad they have each other in their lives, {w=.3}they work well together no?"
+            n 1"I'm glad they have each other in their lives, {w=.3}they work well together no?"
         else:
-            n "They worked so well together... {w=.3}I'm glad Rocky at least got to meet them before this all happened... they belonged together..."
+            n 8"They worked so well together... {w=.3}I'm glad Rocky at least got to meet them before this all happened... they belonged together..."
             
         menu:
             "I'm glad I have you like they have each other":
                 $ norman_affection += 1
-                #show norman blush
+                show n 9 with dissolve
                 n "...!"
                 n "[pov]... {w=.3}I'm glad to have you too..."
                 n "You're a good... friend [pov],{w=.3} that means something...{w=.3} remember?"
-                p "I never forgot."
+                p 3"I never forgot."
+                show n 3 with dissolve
                 n "..."
 
             "Only true friends think like you do":
-                n "Awww don't forget you're my friend too!"
-                p "Thank you.{w=.3} Sometimes I'ts just that I feel like an outsider here..."
+                n 2"Awww don't forget you're my friend too!"
+                p 2"Thank you.{w=.3} Sometimes I'ts just that I feel like an outsider here..."
                 n "You're no outsider... {w=.5}to me..."
-
+        hide n with dissolve
         jump pnc_loop
     
 
@@ -360,14 +410,18 @@ label mech_hallway_right:
         "Looks like a large worn out worker's jacket,{w=.3} I check the pockets to see if there's anything..."
         "...! {w=.3}I feel a key in one of the pockets!"
         $ worker_key_collect = True
-        p "Guys look!"
+        p 4"Guys look!"
         if rocky_dead == False:
+            show r 1 with dissolve
             r "That's a padlock key,{w=.3} you can tell from how small it is and the notches"
+            show n 1 at left with dissolve
             n "Impressive! {w=.3}How did you know that!"
             r "Used to work in a warehouse and they had me lock up all sorts of stuff similar to this..."
         else:
+            show v 12 with dissolve
             v "Hmm probably a padlock key... could tell from my years worth of stealing shit from faculty..."
         $ renpy.notify("Padlock key has been added to inventory!")
+        scene mech jacket with dissolve
         jump pnc_loop
     
 
@@ -390,8 +444,11 @@ label mech_hallway_right:
         play sound "audio/sfx/page turn.ogg"
         #$ renpy.notify("Worker's Journal Entry #2 has been added to Notes!")
         if rocky_dead == False:
+            show r 3a with dissolve
             r "How could they mistreat their workers like that?!?{w=.3} Don't they know how hard it is for some people?"
+        show v at right with dissolve
         v "Yeah, pretty fucked up how the system's just stacked against lower wage workers, {w=.3}people who claim there isn't a class system are total dumbasses when shit like this happens..."
+        scene mech bed with dissolve
         jump pnc_loop
 
 
@@ -399,22 +456,29 @@ label mech_hallway_right:
     label mech_elevator:
         
     if rocky_dead == False:
+        show r1 with dissolve
         r "This is the elevator, won't turn on unless the power's on..."
     else:
-        p "The elevator won't work without power"
-    
+        p 4"The elevator won't work without power"
+    show n 5 with dissolve
     n "This is why we practice and respect the fire safety drill people!"
+    show n 5 at offscreen_right with move
+    hide n 5
+    show v 2 4 at center with with moveinleft
+    show v 2 4 at hop
     v "NEEEEERRRDD!!!!"
 
     if norman_affection >= 1:
-        p "He's my nerd..."
+        p 3"He's my nerd..."
+        show v 16 at hop
         v "...?"
-        p "...!"
-        p "OUR nerd..."
+        p 7"...!"
+        p 14"OUR nerd..."
         "I'm pretty sure Norman was out of earshot for that one... {w=.3}too busy guiding himself on the walls..."
     else:
-        p "He's our nerd..."
-        v "Meh, {w=.3}I {i}GUESS{/i} we'll keep him..."
+        p 13"He's our nerd..."
+        v 8"Meh, {w=.3}I {i}GUESS{/i} we'll keep him..."
+    scene mech room 2 with dissolve
     
     jump pnc_loop
     
@@ -422,22 +486,28 @@ label mech_hallway_right:
     #corpse with note
     label mech_corpse:
     $ pnc_flags["vent_unlocked"] = True
+    show v 2 3 with dissolve
+    show v 2 3 at shiver
     v "OH MY FUCKING GOD IT'S A DEAD BODY! SHOOT IT! IT MIGHT BE A ZOMBIE!!!"
     if vinnie_has_gun == True:
+        show v 2 3 at hop
         v "Oh hot damn I'm the one with the gun!"
-    n "...{w=.3}I'm preeeeeetty sure he isn't coming back... {w=.3}wouldn't he have been roaming around here?"
-    p "Hmm, {w=.3}true..."
+    show n at left with dissolve
+    n 6"...{w=.3}I'm preeeeeetty sure he isn't coming back... {w=.3}wouldn't he have been roaming around here?"
+    p 1"Hmm, {w=.3}true..."
     "I step forward and start rummaging through the bodies pockets..."
     if insanity_level >= 1:
         "Useless pile of meat..."
     else:
         "Sorry, but this is necessary..."
+    show v 2 3 at hop
+    show v 2 3 at shiver
     v "DUUUUUDEE YOU CAN'T MAKE THIS SHIT UP!!!!!"
 
     if rocky_dead == False:
-        r "You're braver than I thought..."
-    
-    n "Now that's what I call thorough!"
+        show r 10 at right with dissolve
+        r "You're braver than I thought!"
+    n 5"Now that's what I call thorough!"
     "I find a hastily written scrap of paper in his hand"
     $ worker_journal_3_collect = True
     play sound "audio/sfx/page turn.ogg"
@@ -456,19 +526,20 @@ label mech_hallway_right:
     #$ renpy.notify("Worker's Journal Entry #3 has been added to Notes!")
     "..."
     "Norman approaches the body closer with me and notices something..."
-    n "...{w=.3}The back of his head... {w=.3}It already has a bullet hole in it? {w=.3}Who did... {w=.3}that..."
-    p "Some people just can't handle it maybe... {w=.3}he... {w=.3}you know..."
-    v "Or the one crazy guy he was talking about..."
+    n 5"...{w=.3}The back of his head... {w=.3}It already has a bullet hole in it? {w=.3}Who did... {w=.3}that..."
+    p 2"Some people just can't handle it maybe... {w=.3}he... {w=.3}you know..."
+    v 2"Or the one crazy guy he was talking about..."
 
     if rocky_dead == False:
-            r "Luis was a good man,{w=.3} I bet he would have gotten everyone out if he had more time..."
-            r "We already decided on exposing this place! We'll pick up where you left off Luis!"
-            v "Big thankies Luis!~{w=.3} I will make you internet famous so the world will remember your name!"
-            n "We won't let your wish be in vain Luis!"
+            r 5"Luis was a good man,{w=.3} I bet he would have gotten everyone out if he had more time..."
+            r 10"We already decided on exposing this place! We'll pick up where you left off Luis!"
+            v 6"Big thankies Luis!~{w=.3} I will make you internet famous so the world will remember your name!"
+            n 1"We won't let your wish be in vain Luis!"
             if insanity_level >= 1:
                 "...{w=.3}how hopeless"
             else: 
-                p "I won't forget you Luis."
+                p 2"I won't forget you Luis."
+    scene mech room 2 with dissolve
 
     jump pnc_loop
 
@@ -476,38 +547,47 @@ label mech_hallway_right:
     #ELECTRIC GENERATOR DOOR IMAGE BUTTON IS IMPOSSIBLE TO GO THROUGH
     label mech_electric_door:
     "I peek through the door's shattered tiny window and see a decomposing corpse in front of what looks like a machine"
+    show v 25 with dissolve
     v "It's impossible to get through this door without the key... "
 
     if worker_journal_3_collect:
         "That must be Lucas..."
 
-    if rocky_dead == False and crowbar_collected == True: 
+    if rocky_dead == False and crowbar_collected == True:
+        show v 18 at right with move 
         v "This door is locked! Hey meathead! Use your muscle gut for something good for once!"
+        show r 2a with dissolve
         r "...{w=.3}I'll just pretend the door is your face!"
         "Rocky tries smashing the door and it's window in,{w=.3} but it won't budge..."
-        r "*huff* {w=.3}*huff*"
+        r 8"*huff* {w=.3}*huff*"
+        show n 1 at left with dissolve
         n "Don't worry Rocky! It was a good effort!"
 
     if rocky_dead and crowbar_collected == True:
         "I attempt to use the crowbar,{w=.3} but it's not use..."
+        show n 1 at left with dissolve
         n "Don't worry [pov]! It was a good effort!"
 
     if worker_journal_3_collect:
+        show n 1 at left with dissolve
         n "Didn't the note say there was another way in?"
-
+    scene mech room 2 with dissolve
     jump pnc_loop
 
 
     #ELECTRIC GENERATOR VENT
     #toggable image buttons that only appears if you got the worker journal 3
     label mech_vent:
-        p "This vent has to be the alternative path the note was talking about"
+        p 1"This vent has to be the alternative path the note was talking about"
+        show v 16 at right with dissolve
         v "How do we get in though?"
+        show n 3a at left with dissolve
         n "It seems real small... {w=.3}I think [pov] might be the only one who fits..."
 
         if rocky_dead == False:
-
+            show r 1a with dissolve
             if expose_samsara_together == True:
+                show r 1a at hop_loop
                 r "I got this! Watch and learn!{w=.3} I'll get us all outta here!"
 
                 if crowbar_collected == True:
@@ -520,17 +600,19 @@ label mech_hallway_right:
                     n "You can do it!"
                     jump mechanical_floor_escape
                 else:
-                    p "You're mom is waiting on us!{w=.3} She's chilling in her room just knowing that Rocky the great is on his way!"
+                    p 13"You're mom is waiting on us!{w=.3} She's chilling in her room just knowing that Rocky the great is on his way!"
+                    show r 2a at hop_loop
                     r "YARGHH!!!"
-                    p "C'mon guys help me motivate Rocky!"
-                    v "Uh uhhh- {w=.3}You're mouth smells like rotten meat and you look,{w=.3} act, {w=.3}and think like a conservative!"
-                    p "ROCKY ROCKY ROCKY! You got this! Use that maned wolf strength! If Rocky can't do it! No one can!"
-                    v "-Your legs are freakishly long,{w=.3}  your teeth are yellow,{w=.3}  you haven't worked out in years so stop saying ya got muscle"
+                    p 13"C'mon guys help me motivate Rocky!"
+                    v 5"Uh uhhh- {w=.3}You're mouth smells like rotten meat and you look,{w=.3} act, {w=.3}and think like a conservative!"
+                    p 13"ROCKY ROCKY ROCKY! You got this! Use that maned wolf strength! If Rocky can't do it! No one can!"
+                    v 6"-Your legs are freakishly long,{w=.3}  your teeth are yellow,{w=.3}  you haven't worked out in years so stop saying ya got muscle"
                     r "*huff*"
-                    p "Norman!{w=.3} Get in on this!{w=.3} Get the adrenaline flowing!"
-                    n "Hmm,{w=.3} I {i}could{/i} mention how you though Vinni-"
+                    p 13"Norman!{w=.3} Get in on this!{w=.3} Get the adrenaline flowing!"
+                    n 7"Hmm,{w=.3} I {i}could{/i} mention how you though Vinni-"
+                    show r 2a at shiver_loop
                     r "RAAAAAAAAAAGHHH!!!!"
-                    v "wait- {w=.3}wachoo u say?"
+                    v 21"wait- {w=.3}wachoo u say?"
 
                 if crowbar_collected == True:
                     "With one final overzealous crowbar bashing, he opens the vent"
@@ -538,17 +620,22 @@ label mech_hallway_right:
                     "With one final overzealous kick,{w=.3} he opens the vent"
     
                 if crowbar_collected == True:
+                    show r 2a at hop
                     r "I'M GONNA BASH YOU WITH THE CROWBAR NEXT RETRIEVER!"
                 else:
+                    show r 2a at hop
                     r "I'M GONNA KICK YOU DOWN NEXT RETRIEVER!"
-                
+                scene mech room 2
                 jump mechanical_floor_escape
 
             elif crowbar_collected == True and expose_samsara_together == False:
-                p "You can use the crowbar to smash open the vent,{w=.3} I think Rocky is most suitable for the task"
+                p 1"You can use the crowbar to smash open the vent,{w=.3} I think Rocky is most suitable for the task"
+                show r 1a with dissolve
                 r "Got it!"
                 "*Thud*{w=.3} Thud*{w=.3} Thud*" with hpunch
+                show v 26 at right with dissolve
                 v "C'mon Rocky... {w=.3}You got this..."
+                show n 5 at left with dissolve
                 n "Give it your all!"
                 jump mechanical_floor_escape
 
@@ -559,7 +646,7 @@ label mech_hallway_right:
         else: 
             if crowbar_collected == True:
                 "I use the crowbar to pry open the vent"
-                p "Unph!"
+                p 10"Unph!"
                 "Vinnie and Norman take turns with me in trying to bash it open,{w=.3} it takes a long while but eventually we do, I take the crowbar with me"
                 jump mechanical_floor_escape
             else:
@@ -573,10 +660,10 @@ label mechanical_floor_escape:
     $ pnc_flags = {}
     if rocky_dead == False:
         if expose_samsara_together == True:
-            "[pov!u] IT'S UP TO YOU NOW!"
+            r 10"[pov!u] IT'S UP TO YOU NOW!"
         else:
             "After a while, {w=.3}Rocky is able to get the vent open"
-            r "*huff* {w=.3}phew- {w=.3}Well-{w=.3} You can go in now [pov]!"
+            r 11"*huff* {w=.3}phew- {w=.3}Well-{w=.3} You can go in now [pov]!"
     scene vent with dissolve
     "I make my way through the vent,{w=.3} avoiding the massive fan blades in my way; good thing it's not on"
     scene electric generator with dissolve
@@ -586,8 +673,8 @@ label mechanical_floor_escape:
     "...? {w=.3}On closer examination Lucas's corpse has a massive hole in it? If we thought he shot Luis... then did he shoot himself?"
     "...{w=.3}Then where's his gun...?"
     n "IS EVERYTHING GOOD IN THERE [pov!u]!?!?"
-    p "Yeah! It's safe just real musty!"
-    p "Ah,{w=.3} here's the switch...{w=.3} whoops..."
+    p 4"Yeah! It's safe just real musty!"
+    p 4"Ah,{w=.3} here's the switch...{w=.3} whoops..."
     play sound "audio/sfx/generator on.ogg" fadein 0.2
     "The switch handle broke off when I turned I shifted it, at least the power is permanently on now"
     "I can feel the walls vibrate while the building itself feels like it's booting up" with hpunch
@@ -604,7 +691,7 @@ label mechanical_floor_escape:
         r "You were motivating me to dipshit!"
     "I try to open the door from the inside but... {w=.3}the door handle is missing! The vent!{w=.2} No wait,{w=.2} the fan must be turned on now..."
     "I put the switch handle into the electric generator in an attempt to fix it but it won't go in!"
-    p "Guys!{w=.3} The door and generator handle is broken and the fan is blocking the vent out of here!{w=.3} Is there any way to turn it off from outside?!?"
+    p 7"Guys!{w=.3} The door and generator handle is broken and the fan is blocking the vent out of here!{w=.3} Is there any way to turn it off from outside?!?"
     "I look through the window and see my friends avoiding the zombies,{w=.3} Norman is closest to the door"
     n "H-{w=.3} how do I get you out of there?"
     p "This is the mechanical floor!{w=.3} The HVAC's can be turned off! Go deactivate it!"
@@ -657,8 +744,10 @@ label mechanical_floor_escape:
     label norman_deactivates_fan:
     n "That was it!{w=.3} I'll meet you at the elevator now!"
     scene vent with dissolve
-    "I hear the fan stop whirring and I immediately make my exit"
-    scene mech room 2 with dissolve
+    "I hear the fan stop whirring and I immediately make my exit!"
+    scene mech room 2 with fade
+    show v 2 3 at shiver_loop with dissolve
+    show breadly at shiver_loop_right with moveinright
     extend ", on my way out I see Vinnie being cornered by a group of zombies!"
 
     if vinnie_has_gun == True:
@@ -676,19 +765,27 @@ label mechanical_floor_escape:
                 if rocky_dead == False and rocky_has_gun == True:
                     $ vinnie_health -= 1
                     $ insanity_level += 1
-                    play sound "audio/sfx/female zombie groan.ogg"
+                    play sound "audio/sfx/zombie attack.ogg"
                     v "OH FUCK SOMEBODY HELP ME IT'S BITING MY ARM!!!"
                     play sound "audio/sfx/shoot.ogg"
+                    show breadly at offscreen_bottom with move
+                    hide breadly
+                    show r 2a at right with moveinright
                     $ ammo -=1
-                    r "I got you Vinnie!"
-                    v "THANK YOU THANK YOU ROCKY!!"
+                    r 2"I got you Vinnie!"
+                    v 18"THANK YOU THANK YOU ROCKY!!"
                     jump rocky_save_sequence  
                 elif rocky_dead == False and expose_samsara_together == True:
                     $ insanity_level += 1
                     play sound "audio/sfx/female zombie groan.ogg"
                     v "OH FUCK SOMEBODY HELP ME IT'S BITING MY ARM!!!"
                     play sound "audio/sfx/punch.ogg"
+                    show r 1a with moveinright
                     r "I GOT YOU VINNIE!"
+                    show r 1a at offscreen_right with move
+                    show v 2 3 at offscreen_right with move
+                    hide r 
+                    hide v
                     "Rocky valiantly swoops up Vinnie in his arms and carries him to safety"
                     jump rocky_save_sequence
 
@@ -699,13 +796,22 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/female zombie groan.ogg"
                     v "OH FUCK SOMEBODY HELP ME IT'S BITING MY ARM!!!"
                     play sound "audio/sfx/punch.ogg"
+                    show r 1a with moveinright
                     r "I got you Vinnie just get out of the way for crowbar!"
+                    show v 2 3 at hop_loop
                     v "I CAN'T THEY'RE ALL ON ME! {w=.3} SHIT YOU HIT ME WITH IT YOU DICK!"
                     $ vinnie_health -= 1
-                    r "BEHIND YOU!"
+                    r 2a"BEHIND YOU!"
                     v "AAAAAAAHHH!"
+                    show breadly at offscreen_bottom with move
+                    hide breadly
+                    show r 1a at offscreen_right with move
+                    show v 2 3 at offscreen_right with move
+                    hide r 
+                    hide v
                     $ crowbar_collected == False
                     "The crowbar was lost in the chaos"
+
                     jump rocky_save_sequence
 
                 elif rocky_dead == True:
@@ -714,15 +820,21 @@ label mechanical_floor_escape:
                     $ insanity_level += 1
                     play sound "audio/sfx/female zombie groan.ogg"
                     queue sound "audio/sfx/eat.ogg"
+                    show breadly at center with move
+                    show v 2 3 at offscreen_bottom with move
+                    hide v
                     v "SHITSHITSHIT SOMEBODY HELP ME!!{w=.3} THEY'RE ON ME!{w=.3} THEY'RE ON ME!!!!"
+                    hide breadly with dissolve
                     "I hear loud chewing noises and distant screaming as I run further away"
+                    
                     jump office_floor_2
 
             "I headbutt the zombie attacking Vinnie with my horns!" if sage_has_gun == False:
                 $ sage_health -= 1
                 play sound "audio/sfx/zombie groan.ogg"
+                show breadly at offscreen_bottom with move
+                hide breadly
                 "I was able to clear a path for Vinnie,{w=.3} but got hurt in the process when the zombie slashed my head!" with hpunch
-
                 if rocky_dead == False:
                     jump rocky_save_sequence
                 else:
@@ -732,7 +844,8 @@ label mechanical_floor_escape:
                 play sound "audio/sfx/cock.ogg"
                 queue sound "audio/sfx/shoot.ogg"
                 $ ammo -= 1
-
+                show breadly at offscreen_bottom with move
+                hide breadly
                 "I successfully made an opening for Vinnie as they ran to the elevator!"
 
                 if rocky_dead == False:
@@ -743,7 +856,11 @@ label mechanical_floor_escape:
             "I crowbar the zombies attacking Vinnie!" if rocky_dead == True:
                 play sound "audio/sfx/zombie groan.ogg"
                 queue sound "audio/sfx/punch.ogg"
-                v "THANKS [pov!u]"
+                show breadly at offscreen_bottom with move
+                hide breadly
+                queue sound "audio/sfx/zombie-19.ogg"
+                queue sound "audio/sfx/hit.ogg"
+                v 2 4"THANKS [pov!u]"
                 "I successfully made an opening for Vinnie as they run but lose the crowbar in the process!"
                 $ crowbar_collected = False
                 if rocky_dead == False:
@@ -754,7 +871,9 @@ label mechanical_floor_escape:
             "I tell Vinnie to stab the zombies with their knife!" if vinnies_knife == True:
                 $ vinnie_health -= 1
                 $ vinnies_knife = False
-                v "Uh uhhh Ok!!{w=.3} OWWWW FUCK!!!!"
+                v 2 1"Uh uhhh Ok!!{w=.3} OWWWW FUCK!!!!"
+                show breadly at offscreen_bottom with move
+                hide breadly
                 "Their knife gets stuck in the zombie's head, {w=.3}who slashed Vinnie's arm in turn!"
                 if rocky_dead == False:
                     jump rocky_save_sequence
@@ -762,25 +881,30 @@ label mechanical_floor_escape:
                     jump office_floor_2
 
             "I tell Rocky to shoot the zombies!" if rocky_dead == False and rocky_has_gun == True:
-                    play sound "audio/sfx/female zombie groan.ogg"
+                    play sound "audio/sfx/zombie-19.ogg"
                     queue sound "audio/sfx/shoot.ogg"
                     $ ammo -=1
+                    show breadly at offscreen_bottom with move
+                    hide breadly
+                    show r 2a at right with moveinright
                     r "I got you Vinnie!"
-                    v "THANK YOU THANK YOU ROCKY!!"
+                    v 2 1"THANK YOU THANK YOU ROCKY!!"
                     jump rocky_save_sequence
 
             "I tell Rocky to save Vinnie!" if rocky_dead == False:
                 if expose_samsara_together:
-                    play sound "audio/sfx/female zombie groan.ogg"
+                    play sound "audio/sfx/zombie-19.ogg"
                     queue sound "audio/sfx/punch.ogg"
+                    show r 2a at right with moveinright
                     "Rocky is able to take down EVERY zombie in his path without problem!"
                     r "I got you Vinnie!"
-                    v "THANK YOU THANK YOU ROCKY!!"
+                    v 2 1"THANK YOU THANK YOU ROCKY!!"
                     jump rocky_save_sequence
                 elif crowbar_collected:
-                    play sound "audio/sfx/female zombie groan.ogg"
+                    play sound "audio/sfx/zombie-19.ogg"
                     queue sound "audio/sfx/punch.ogg"
                     $ rocky_health -= 1
+                    show r 4a at right with moveinright
                     r "I got you Vinnie just get out of the way for crowbar!"
                     $ crowbar_collected = False
                     v "OK!"
@@ -788,6 +912,7 @@ label mechanical_floor_escape:
                     jump rocky_save_sequence
                 else:
                     $ rocky_health -= 3
+                    show r 4a at right with moveinright
                     "Rocky punches his way through to save Vinnie but gets badly hurt in the process!"
                     v "THANK YOU THANK YOU ROCKY!!"
                     r "D-{w=.3}don't mention it..."                  
@@ -799,6 +924,7 @@ label mechanical_floor_escape:
                     queue sound "audio/sfx/shoot.ogg"
                     queue sound "audio/sfx/zombie attack.ogg"
                     $ ammo -= 1
+                    show n 12 at right with moveinright
                     n "I'LL SAVE YOU VINNIE!"
                     "Norman was able to clear a path for Vinnie without a hitch!"
                     if rocky_dead == False:

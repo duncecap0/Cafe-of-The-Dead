@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 ## Initialization
 ################################################################################
 
@@ -113,8 +113,7 @@ screen say(who, what):
     ## If there's a side image, display it above the text. Do not display on the
     ## phone variant - there's no room.
     if not renpy.variant("small"):
-        add SideImage() xalign 0.0 yalign 1.0
-
+        add SideImage() xalign -0.04 yalign 2.222
 
 ## Make the namebox available for styling through the Character object.
 init python:
@@ -561,11 +560,14 @@ screen about():
 
             label "[config.name!t]"
             text _("Version [config.version!t]\n")
-
             ## gui.about is usually set in options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
-
+            text "Music, GUI, Play Testing, Coding, Writing Help, and Concept Art by{a=https://x.com/B0redBradley}B0redBradley{/a}"
+            text "Sprite Art and Writing by {a=https://x.com/DunceCap0}Dunce Cap{/a}"
+            text "Additional Music from {a=https://mixkit.co/}Mixkit{/a}"
+            text "SFX from {a=https://opengameart.org/}OpenGameArt{/a},{a=https://freesound.org/}Freesound{/a}, {a=https://www.zapsplat.com/}ZapSplat{/a}, and {a=https://www.youtube.com/}Youtube Audio Library{/a} "
+            text "Font by {a=https://www.dafont.com/vcr-osd-mono.font}Riciery Leal{/a}"
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 

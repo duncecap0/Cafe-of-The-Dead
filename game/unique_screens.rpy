@@ -32,26 +32,6 @@ screen character_stats:
             text "Vinnie: DECEASED"
 
 
-
-
-image zombie:
-    "zombie.png"
-
-
-screen kill_zombie():
-
-    text "Click to kill or you die in 3 seconds"
-
-    imagebutton:
-        xalign 0.5
-        yalign 0.5
-        idle "zombie"
-        action [Hide("kill_zombie")]
-
-
-    timer 3.0 action Jump("death_screen")
-
-
 screen death_nav():
     
         vbox:

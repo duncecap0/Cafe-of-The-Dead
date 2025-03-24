@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/lab_floor_3.rpy", line 220: choice menuitem expects a non-empty block.
-    "Let's keep looking around":
-                                ^
+File "game/mechanical_floor_1.rpy", line 305: end of line expected.
+    label mech_desk:PERNIS
+                    ^
 
 Ren'Py Version: Ren'Py 8.3.4.24120703
-Tue Mar 18 17:50:23 2025
+Sun Mar 23 12:08:04 2025

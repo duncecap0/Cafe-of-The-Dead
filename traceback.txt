@@ -1,34 +1,50 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 34, in script call
-    call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/endings.rpy", line 129, in script call
-    call MainMenu
-  File "game/script.rpy", line 34, in script call
-    call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/endings.rpy", line 129, in script call
-    call MainMenu
-ScriptError: could not find label 'MainMenu'.
+Compiling ATL code at game/effects.rpy:38
+  File "game/script.rpy", line 32, in script call
+    call cafe_floor_0 from _call_cafe_floor_0
+  File "game/cafe_floor_0.rpy", line 54, in script
+    v 3"HEY! GUYS OVER HERE!!!{w=.3} HAHA!!"
+Exception: Expression '1.0' is not an ATL transform, and so cannot be included in an ATL interpolation.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 34, in script call
-    call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/endings.rpy", line 129, in script call
-    call MainMenu
-  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1420, in execute
-    rv = renpy.game.context().call(label, return_site=self.next.name)
-  File "game/script.rpy", line 34, in script call
-    call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/endings.rpy", line 129, in script call
-    call MainMenu
-  File "C:\Games\renpy-8.3.4-sdk\renpy\script.py", line 1103, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'MainMenu'.
+  File "game/script.rpy", line 32, in script call
+    call cafe_floor_0 from _call_cafe_floor_0
+  File "game/cafe_floor_0.rpy", line 54, in script
+    v 3"HEY! GUYS OVER HERE!!!{w=.3} HAHA!!"
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 2579, in execute
+    Say.execute(self)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 621, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\exports\sayexports.py", line 132, in say
+    who(what, *args, **kwargs)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\character.py", line 1455, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\character.py", line 1106, in do_display
+    display_say(who,
+  File "C:\Games\renpy-8.3.4-sdk\renpy\character.py", line 682, in display_say
+    what_ctc = what_ctc._duplicate(None)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\image.py", line 459, in _duplicate
+    rv.find_target()
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\image.py", line 421, in find_target
+    self.target = target._duplicate(a)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\display\transform.py", line 1194, in _duplicate
+    rv.take_execution_state(self)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\atl.py", line 551, in take_execution_state
+    block = self.compile()
+  File "C:\Games\renpy-8.3.4-sdk\renpy\atl.py", line 723, in compile
+    block = self.atl.compile(self.context)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\atl.py", line 925, in compile
+    statements = [ i.compile(ctx) for i in self.statements ]
+  File "C:\Games\renpy-8.3.4-sdk\renpy\atl.py", line 925, in <listcomp>
+    statements = [ i.compile(ctx) for i in self.statements ]
+  File "C:\Games\renpy-8.3.4-sdk\renpy\atl.py", line 1293, in compile
+    raise Exception("Expression %r is not an ATL transform, and so cannot be included in an ATL interpolation." % expr)
+Exception: Expression '1.0' is not an ATL transform, and so cannot be included in an ATL interpolation.
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.4.24120703
 Cafe of The Dead 1.0
-Tue Mar 18 13:21:09 2025
+Sun Mar 23 11:28:46 2025

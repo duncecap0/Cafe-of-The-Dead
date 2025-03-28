@@ -1,18 +1,24 @@
 label endings:
     stop sound
     stop music
-    # play music "audio/music/"
+    play music "audio/sfx/Wind.ogg"
     scene rooftop with flash
     "The door slides open to reveal an ashen cityscape, this is the first I've felt the outside air since the beginning of all this. I see the chopper circle around in the air, it's bound to notice if I call attention"
     if vinnie_dead == False or rocky_dead == False or norman_dead == False or tara == True:
         "We wave our hands in the air, signalling the copter to land..."
     if insanity_level >=1 and vinnie_dead and rocky_dead and norman_dead == True and tara == False:
         if norman_secret_death == True:
+            stop music fadeout 0.5
+            play music "audio/sfx/Final Captain&#039;s Log.mp3"
             omg "Did you think you could kill me?"
             "I hear a familiar voice as I turn around and see..."
-            n '...'
+            show n 5a with Dissolve(1.)
+            n "..."
             if norman_has_gun == True:
+                show n 2a
                 "He pulled his gun on me..."
+            else:
+                show n 1a with dissolve
             "Doesn't seem too happy..."
             n "...[pov]... I thought I knew you..."
             n "..But the way you've acted... is no different than the monsters..."
@@ -22,7 +28,7 @@ label endings:
             if closet_broken == True and tara == False:
                 n "Is that why you wanted us to leave the girl behind? Not because we didn't have the supplies.... but because she would hinder your survival!?!"
             n "You tricked me! You used me! You... you... {i}fucking{/i} freak..."
-            p "Hmm? Is that right? As I recall, you thought quite highly of me before... are you by chance regretting it? I can't quite tell..."
+            p insaneb"Hmm? Is that right? As I recall, you thought quite highly of me before... are you by chance regretting it? I can't quite tell..."
             n "I can't believe I ever thought highly of such a demented creature..."
             n "Did you think you could just walk away? Think again... I'm not letting you get away... not this time..."
             if sage_has_gun == True:
@@ -32,11 +38,11 @@ label endings:
             "I run as fast as my legs could carry me, headfirst into Norman's chest. My horns puncture him as he starts bleeding out"
             if norman_has_gun == True:
                 "He dropped his gun out of reach, I don't need it though. I have something else in mind for him..."
-            p "You couldn't save Vinnie, Rocky, or yourself!"
+            p insaneA"You couldn't save Vinnie, Rocky, or yourself!"
             "I say as I start strangling Norman, He clocks me in the side of the head before I bite down on his arm"
             "We start wrestling for a bit, each of us trying to surmount the other until I always find a way to stay on top, even if it means fighting dirty"
             if norman_affection >= 3:
-                p "Aww what happened Norman? Not the type of wrestling with me you had in mind? Hahaha!"
+                p insaneA"Aww what happened Norman? Not the type of wrestling with me you had in mind? Hahaha!"
                 "He grimacess"
             if norman_has_gun == True:
                 "Norman kept trying to crawl for his gun but I kept pulling him back by the ears and smashing his face into the ground"
@@ -46,17 +52,22 @@ label endings:
             "As he was catching his breath, I charged into him with my arms pushed outwards"
             "He was sent over! But grabbed onto the ledge, I started stomping out his fingers"
             n "I. KNOW. WHAT. YOU. DID!"
+            show black with Dissolve(1.):
+                alpha.6
             "Were his last words before dropping into the ocean of zombies down below..."
             "Good riddance..."
             "..."
             "I did it, I killed everyone who stood in my path."
-        "Life, death, love, hate, creation, destruction, war, and peace. All meaningless in the end when it comes to it..."
-        "What matters is the fact that {i}I{/i} am the one who controls it. {i}I{/i} am the one the world revolves around. {i}I{/i} decide who is worthy."
-        "It doesn't matter if you don't agree with it, because the decision is up to me in the end"
-        "\"How could you? How would like it if someone else was in control?\"{i} Exactly,{/i} you aren't."
+        scene black with fade
+        p insaneA"Life, death, love, hate, creation, destruction, war, and peace. All meaningless in the end when it comes to it..."
+        p insaneB"What matters is the fact that {i}I{/i} am the one who controls it. {i}I{/i} am the one the world revolves around. {i}I{/i} decide who is worthy."
+        p insaneA"It doesn't matter if you don't agree with it, because the decision is up to me in the end"
+        p insaneA"\"How could you? How would like it if someone else was in control?\"{i} Exactly,{/i} you aren't."
+        p insaneB"Prepare for the second coming."
+        pause 1.0
         "Hail."
-        return
-    scene chopper with flash
+        hide window with dissolve
+        jump insane_screen
     #play sound "audio/sfx/"
     scene black with dissolve
     "..."
@@ -83,7 +94,7 @@ label endings:
         if tara == True:
             v "And Tara is the person we kidnapped for ransom!"
         r "I would rather be eaten by the zombies then be married to you..."
-        if norman_affection >= 5:
+        if norman_affection >= 4:
             n "I was swooned by the homeless person!"
         n "Umm wait- how did you two even birth me????"
         v "Mitosis."
@@ -97,7 +108,7 @@ label endings:
             "The surviving board members of Samsara and it's associates were held accountable in the court of law and arrested for crimes against society, thanks to us exposing them!"              
         "We did it, we all lived. A lot of innocent people died in the city but we will never forget them..."
         "My friends are the best thing to have happened to me. Finally a family that accepts and loves me. I'm going to like it here!"
-        centered "{size=*2}END{/size}" with dissolve
+        centered "{size=*2}TRUE END{/size}" with dissolve
         centered "{size=*2}Thanks for playing!{/size}" with dissolve 
 
     
@@ -113,7 +124,7 @@ label endings:
         if rocky_dead == False:
                 "Rocky isn't the same, I don't think he even works anymore. Just drinks his days away at some run down bar..."
                 if vinnie_dead == True:
-                    "They visited Vinnie's family to tell them what an inspiration Vinnie was to him and their death was his fault..."
+                    "They visited Vinnie's family to tell them what an inspiration Vinnie was to him and that their death is his fault..."
                 if norman_dead == True:
                     "They went to Norman's family to beg them to press charges for murder since he feels like he should be locked up for letting Norman die..."
         if norman_dead == False:
@@ -124,8 +135,9 @@ label endings:
         if tara == True:
             "Tara has been kept in confinement from the government for being related to the CEO, she isn't arrested but might as well be..."
             "She sends letters saying how grateful she is and that she'll visit as soon as possible"
-        "We've been trying to stay friends but it gets hard when we notice the people who are missing..."
+        "We've been trying to stay friends but it gets hard when we notice the missing space..."
         "It really makes me think... I wonder if there was anything I could've done differently?"
+    hide window 
     jump win_screen
 return
 

@@ -1,39 +1,28 @@
 
 define flash =Fade(2.0, 1.0, 2.0, color="#fff")
-define left1 = Position(xalign=0.4, yalign=0.0)
-define right2 = Position(xalign=0.9, yalign=0.0)
 
+define left1 = Position(xalign=0.3)
 
-#for text spacing
-init -2:
-    style say_thought:
-        line_spacing 10
-    style say_dialogue:
-        line_spacing 10
-
+define right2 = Position(xalign=0.6)
 
 image breadly:
-    ypos 219
+    yalign 1.0
     "images/breadly.png"
 
 image dunce:
-    ypos 219
     "images/dunce.png"
 
 image bigzom:
     "images/z 1.png"
 
 image bluzom:
-    ypos 140
     "images/z 2.png"
 
 image orangzom:
-    ypos 140
     "images/z 3.png"
 
 image jug = "images/naut.png"
 image jug2 = "images/naut 2.png"
-
 
 image black ="#000000"
 
@@ -151,6 +140,14 @@ transform shiver_loop:
         easein 0.15 xpos 640 
         0.43
         xpos 640
+        repeat
+
+transform shiver_loop_center:
+        xpos 430 
+        easein_bounce 0.18 xpos 450 
+        easein 0.15 xpos 440 
+        0.43
+        xpos 440
         repeat
 
 transform slow_r2l_loop:

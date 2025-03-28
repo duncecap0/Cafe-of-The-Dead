@@ -12,6 +12,10 @@ init python:
         elif event == "slow_done" or event == "end":
             renpy.music.stop(channel="beepy_voice")
 
+### maybe this could help with the text issue?
+
+####################window_ypadding =-20
+
 #main charas            
 
 define p = DynamicCharacter("[pov]", color= "#57578f",image='p', ctc="click_to_continue", ctc_pause="click_to_continue", ctc_timedpause="click_to_continue",  callback=beepy_voice)
@@ -25,7 +29,7 @@ define s = Character("The Stranger", color= "#ffffff",image="c", ctc="click_to_c
 define w = DynamicCharacter("[w_name]", color= "#e4d1f7",image="w", ctc="click_to_continue", callback=beepy_voice)
 
 #npcs     
-define omg = Character("???", callback=beepy_voice, ctc="click_to_continue")
+define omg = Character("???", color= "#ffffff", callback=beepy_voice, ctc="click_to_continue")
 define zombie = Character("Zombie", ctc="click_to_continue")
 define npc = Character("Civilian", callback=beepy_voice, ctc="click_to_continue")
 define tv = Character("TV", callback=beepy_voice, ctc="click_to_continue")

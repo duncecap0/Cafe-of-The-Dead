@@ -8,7 +8,7 @@ default norman_dead = False
 
 #should irl be 15 but lets just ignore that...
 
-default ammo = 10
+default ammo = 7
 
 #CHARACTER HEALTH
 default rocky_health = 6
@@ -50,8 +50,8 @@ label cafe_floor_0:
     "There's even an indoor park and shopping district! The other floors were locked to the business associates and office workers of Samsara"
     "We came in from the underground railway, {w=.3}it was a nightmare trying to navigate our way through hordes of people"
 
-    show v with dissolve
-    v 3"HEY! GUYS OVER HERE!!!{w=.3} HAHA!!"
+    show v 1 with dissolve
+    v 1"HEY! GUYS OVER HERE!!!{w=.3} HAHA!!"
     show v at hop_loop
     v "HURRY UP!!! I {i}NEED{/i} TO SEE ROCKY IN HIS NEW STUPID LITTLE APRON HAHAHAHAHA!!!"
     "This was Vinnie,{w=.3} my gender diverse Opossum friend, being their boisterous self per usual"
@@ -122,6 +122,7 @@ label cafe_floor_0:
     v "A half caffeine quad venti at 200 degrees with half soy, no foam with foam steamed with cinnamon, crosshatched caramel hazelnut swirl drizzling, pulled ristretto, sugar-free sugar, and a cherry on top please!"
     v "And my friends here would like an eggnog flat white and a unicorn frappe with a whole unpeeled banana in it, also make sure to use sugar-free replacements!"
     v "What do you mean it's out of season and you don't accept $100s? I want to speak with the regional manager!!!"
+    show r 3a at hop
     r 3a"{w=.3}Suck actual fucking cock"
     show v at hop
     v 2 4"BAHAHAHAHAHAHAHAHAHA!!!"
@@ -555,6 +556,7 @@ label cafe_floor_0:
             $ first_zombie_attacker_dead = True
             show bluzom at offscreen_bottom with move
             hide bluezom
+            play sound "audio/sfx/zombie-2.ogg"
             "I use my small stature to my advantage and was able to knock the zombie over; It's down but not dead, now's my chance!"
             jump rocky_first_death_choice
 
@@ -574,8 +576,10 @@ label cafe_floor_0:
                 p 13"Don't mention it!"
                 jump norman_protects_rocky
 
-            elif sage_health <= 1:
+            elif sage_health <= 1 and first_zombie_attacker_dead == False:
                 label sage_first_death:
+                show black with dissolve:
+                    alpha .7
                 play sound "audio/sfx/zombie attack.ogg"
                 queue sound "audio/sfx/eat.ogg"
                 "The zombie was able to fully grab onto my arm and bite into my neck" with hpunch
@@ -605,15 +609,14 @@ label cafe_floor_0:
                 $ rocky_health -= 1
                 p 7"NORMAN! VINNIE! ANYONE OUT THERE PLEASE HELP US!" with hpunch
                 play sound "audio/sfx/zombie attack.ogg"
-                show r 2 2 at hop
                 r "AGH!" with vpunch
                 "Shit... looks like Rocky just got a piece of his wrist dug up... I need to do something!"
                 jump rocky_first_death_choice
 
-        "Run back to the cafe":
+        "Abandon Rocky":
 
-            if first_zombie_attacker_dead:
-                $ rocky_health -= 3
+            if first_zombie_attacker_dead == True:
+                $ rocky_health -= 6
                 $ rocky_dead = True
                 $ insanity_level += 1
                 play sound "audio/sfx/492220__vincentkurtanderes__running-on-the-road"
@@ -893,14 +896,14 @@ label cafe_floor_0:
         n 8"Shh It's ok... just let it out..."
         "Vinnie sobs into Norman's shoulders for a moment... before stepping backwards and wiping their face..."
     else:
-        if insanity_level == 0:
+        if insanity_level <= 1:
             p 13"Who can turn down a hug from NORMAN of all people!"
             "We all rush forwards to give Norman a hug!"
         else:
             "Rocky and Vinnie gingerly step forward before rushing in to give Norman a hug"
             "Rocky pretty much just lifted Norman and I off the ground from how strong he is...{w=.3} guess he really needed that hug...{w=.3}... I did too..."
         
-        if insanity_level == 0:
+        if insanity_level <= 1:
             p "I feel invincible already!"
         else:
             "I'm just a stranger compared to them... what right do I have?"
@@ -919,7 +922,7 @@ label cafe_floor_0:
     if rocky_dead == False:
         r 10"YEAH!!!"
     v 6"YEAH!!!"
-    if insanity_level == 0:
+    if insanity_level <= 1:
         p 13"Yeah!"
 
     pause 0.5

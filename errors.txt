@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/mechanical_floor_1.rpy", line 305: end of line expected.
-    label mech_desk:PERNIS
-                    ^
+File "game/point_and_click/point_and_click.rpy", line 273: invalid syntax
+        (("move"),(700, =400),"lab_upstairs_rightmost_hall", None), \
+                         ^
 
 Ren'Py Version: Ren'Py 8.3.4.24120703
-Sun Mar 23 12:08:04 2025
+Thu Mar 27 03:32:31 2025

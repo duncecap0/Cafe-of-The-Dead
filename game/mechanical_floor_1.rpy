@@ -204,7 +204,7 @@ label mech_hallway_right:
                     show v 2 4 at right with dissolve
                     v "HAHAHAHAHAHA THATS HI-LARIOUSSS! JUST STAY IN ROCKY'S ARMS LIKE THAT! {w=.3}YOU LOOK LIKE YOU COULD BE HIS NEWBORN OR SOMETHING HAHAHAHA!"
                 if norman_affection >= 1:
-                    show n9 at left with dissolve
+                    show n 9 at left with dissolve
                     n "...Haaaaa... {w=.3}yeahhhh..."
                 "Rocky sets me down as we continue our search"
                 hide v
@@ -323,7 +323,7 @@ label mech_hallway_right:
         #$ renpy.notify("Worker's Journal Entry #1 has been added to Notes!")
 
         if rocky_dead == False:
-            show r3a with dissolve
+            show r 3a with dissolve
             r "This is horrible, just fucking disgusting. My MOM'S been forced into paying for those ridiculous prices!"
             r "I've sacrificed my entire LIFE into paying them! I've never been able to enjoy affording something because the guilt of my mom not being able to kills me as well"
             r 8"My dad worked my entire childhood just to keep her alive! Imagine that! Being forced to give out all your money to keep your loved one trapped in a fucking chamber where they DIE if you can't pay"
@@ -456,15 +456,16 @@ label mech_hallway_right:
     label mech_elevator:
         
     if rocky_dead == False:
-        show r1 with dissolve
+        show r 1 with dissolve
         r "This is the elevator, won't turn on unless the power's on..."
+        hide r with dissolve
     else:
         p 4"The elevator won't work without power"
     show n 5 with dissolve
     n "This is why we practice and respect the fire safety drill people!"
     show n 5 at offscreen_right with move
     hide n 5
-    show v 2 4 at center with with moveinleft
+    show v 2 4 at center with moveinleft
     show v 2 4 at hop
     v "NEEEEERRRDD!!!!"
 
@@ -492,7 +493,7 @@ label mech_hallway_right:
     if vinnie_has_gun == True:
         show v 2 3 at hop
         v "Oh hot damn I'm the one with the gun!"
-    show n at left with dissolve
+    show n 6 at left with dissolve
     n 6"...{w=.3}I'm preeeeeetty sure he isn't coming back... {w=.3}wouldn't he have been roaming around here?"
     p 1"Hmm, {w=.3}true..."
     "I step forward and start rummaging through the bodies pockets..."
@@ -546,6 +547,9 @@ label mech_hallway_right:
 
     #ELECTRIC GENERATOR DOOR IMAGE BUTTON IS IMPOSSIBLE TO GO THROUGH
     label mech_electric_door:
+    hide window with dissolve
+    scene electric generator window
+    pause 1.0
     "I peek through the door's shattered tiny window and see a decomposing corpse in front of what looks like a machine"
     show v 25 with dissolve
     v "It's impossible to get through this door without the key... "
@@ -583,7 +587,6 @@ label mech_hallway_right:
         v "How do we get in though?"
         show n 3a at left with dissolve
         n "It seems real small... {w=.3}I think [pov] might be the only one who fits..."
-
         if rocky_dead == False:
             show r 1a with dissolve
             if expose_samsara_together == True:
@@ -641,6 +644,7 @@ label mech_hallway_right:
 
             else:
                 "We need some type of way to get this vent open it's the only way through this door..."
+                scene mech room 2 with dissolve
                 jump pnc_loop
 
         else: 
@@ -651,6 +655,7 @@ label mech_hallway_right:
                 jump mechanical_floor_escape
             else:
                 "We need some type of way to get this vent open it's the only way through this door..."
+                scene mech room 2 with dissolve
                 jump pnc_loop
 
 
@@ -668,7 +673,7 @@ label mechanical_floor_escape:
     "I make my way through the vent,{w=.3} avoiding the massive fan blades in my way; good thing it's not on"
     scene electric generator with dissolve
     "The body in this cramped space creates a foul humid odor... {w=.3}I guess Lucas never got out of here..."
-    if insanity_level == 0:
+    if insanity_level <= 1:
         "Sorry for the intrusion..."
     "...? {w=.3}On closer examination Lucas's corpse has a massive hole in it? If we thought he shot Luis... then did he shoot himself?"
     "...{w=.3}Then where's his gun...?"
@@ -790,7 +795,7 @@ label mechanical_floor_escape:
                     jump rocky_save_sequence
 
                 elif rocky_dead == False and crowbar_collected == True:
-                    $ vinnie_health -= 2
+                    $ vinnie_health -= 1
                     $ rocky_health -= 2
                     $ insanity_level += 1
                     play sound "audio/sfx/female zombie groan.ogg"
@@ -896,6 +901,8 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/zombie-19.ogg"
                     queue sound "audio/sfx/punch.ogg"
                     show r 2a at right with moveinright
+                    show breadly at offscreen_bottom with move
+                    hide breadly
                     "Rocky is able to take down EVERY zombie in his path without problem!"
                     r "I got you Vinnie!"
                     v 2 1"THANK YOU THANK YOU ROCKY!!"
@@ -909,10 +916,16 @@ label mechanical_floor_escape:
                     $ crowbar_collected = False
                     v "OK!"
                     "Rocky lunges at the zombies and gets injured! It makes him lose the crowbar to the horde!"
+
+                    show breadly at offscreen_bottom with move
+                    hide breadly
+
                     jump rocky_save_sequence
                 else:
                     $ rocky_health -= 3
                     show r 4a at right with moveinright
+                    show breadly at offscreen_bottom with move
+                    hide breadly
                     "Rocky punches his way through to save Vinnie but gets badly hurt in the process!"
                     v "THANK YOU THANK YOU ROCKY!!"
                     r "D-{w=.3}don't mention it..."                  
@@ -923,6 +936,8 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/cock.ogg"
                     queue sound "audio/sfx/shoot.ogg"
                     queue sound "audio/sfx/zombie attack.ogg"
+                    show breadly at offscreen_bottom with move
+                    hide breadly
                     $ ammo -= 1
                     show n 12 at right with moveinright
                     n "I'LL SAVE YOU VINNIE!"
@@ -932,23 +947,16 @@ label mechanical_floor_escape:
                     else:
                         jump office_floor_2
 
-            "I tell Norman to save Vinnie!" if norman_has_gun == False:
-                        play sound "audio/sfx/female zombie groan.ogg"
-                        queue sound "audio/sfx/punch.ogg"
-                        queue sound "audio/sfx/zombie attack.ogg"
-                        $ norman_health -= 1
-                        n "I'LL SAVE YOU VINNIE!{w=.5} OW!"
-                        "Norman was able to clear a path for Vinnie but got slashed in the process..."
-                        if rocky_dead == False:
-                            jump rocky_save_sequence
-                        else:
-                            jump office_floor_2
-
     label rocky_save_sequence:
-
+        scene mech room 2 with dissolve
+        show r 3a with dissolve
+        show dunce at right with moveinright
         "On my way I see Rocky being restrained by zombies!"
 
         if expose_samsara_together == True:
+            show r 1a at hop
+            show dunce at offscreen_bottom with move
+            hide dunce
             "Rocky is able to punch the zombie's head off and shoulder charge his way through a crowd without a scratch!"
             jump office_floor_2
         elif rocky_has_gun == True:
@@ -964,7 +972,10 @@ label mechanical_floor_escape:
                     queue sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/zombie what.ogg"
                     $ crowbar_collected = False
+                    show r 3a at hop
                     r "EAT THIS YOU WALKING BAG OF SHIT!!!"
+                    show dunce at offscreen_bottom with move
+                    hide dunce
                     "Rocky is able to get away but loses the crowbar to the horde in the process!"   
                     jump office_floor_2                
 
@@ -972,25 +983,23 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/zombie moan.ogg"
                     queue sound "audio/sfx/shoot.ogg"
                     $ ammo -=1
+                    show dunce at offscreen_bottom with move
+                    hide dunce
+                    show n 5 at right with moveinright
                     r "Thanks Norman!"
                     n "No problem!"                    
                     jump office_floor_2   
-
-                "I tell Norman to save Rocky" if norman_has_gun == False:
-                    play sound "audio/sfx/zombie huh.ogg"
-                    queue sound "audio/sfx/shoot.ogg"
-                    $ rocky_health -= 2
-                    "Norman charges the zombie but gets hurt in return!"
-                    r "Holy fuck thanks!!!{w=.3} Are you gonna be ok!?"    
-                    n "R-{w=.3} Run!!"
-                    jump office_floor_2
 
                 "I tell Vinnie to save Rocky" if vinnie_dead == False and vinnies_knife == False:
                     play sound "audio/sfx/zombie crowd.ogg"
                     queue sound "audio/sfx/shoot.ogg"
                     $ vinnie_health -= 2
+                    show v 2 at right with moveinright
+                    show dunce at offscreen_bottom with move
+                    hide dunce
                     "Vinnie charges forwards but gets their body ravaged by the zombies in return!"
                     r "VINNIE NO!!!{w=.3} ARE YOU OK!"
+                    show v 2 1 at right
                     v "C- {w=.3}carry me..."   
                     "Rocky carries Vinnie in their arms"                 
                     jump office_floor_2
@@ -999,9 +1008,13 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/stab.ogg"
                     queue sound "audio/sfx/zombie crowd.ogg"
                     $ vinnies_knife = False
-
+                    show v 5 at right with moveinright
+                    show dunce at offscreen_bottom with move
+                    hide dunce
                     "Vinnie charges forwards and stabs the zombies! The knife is lost in the zombie's head!"
+                    show r 2 at hop
                     r "NOW THAT'S WHAT I'M TALKING ABOUT VI!"
+                    show v 5 at hop
                     v "WOOOOOO!!!!"   
                     jump office_floor_2
 
@@ -1010,17 +1023,25 @@ label mechanical_floor_escape:
                     queue sound "audio/sfx/zombie groan.ogg"
 
                     $ ammo -= 1
-
+                    show v 5 at left with moveinleft
+                    show dunce at offscreen_bottom with move
+                    hide dunce
                     v "Duck bitch!!!"
                     r "Huh?! HOLY FUCK!"
+                    show z 3 at left with moveinright
+                    show v 5 at right with move
+                    show z 3 at offscreen_bottom with move
+                    hide z 3
+
                     queue sound "audio/sfx/cock.ogg"
                     queue sound "audio/sfx/shoot.ogg"
                     queue sound "audio/sfx/zombie attack.ogg"
+                    show v 2 1 at right with moveinright
                     "Vinnie panics and shoots wildly, they don't hear the zombie behind them and get hurt in return!"
 
                     $ vinnie_health -= 1
                     $ ammo -= 1
-
+                    show r 5 at sink
                     v "*huff*{w=.3} *huff*{w=.3} I JUST SAVED YOUR ASS I EXPECT TO GET THE HOLIEST SLOPPY IN RETURN FOR THIS!!!"
                     jump office_floor_2  
 
@@ -1028,7 +1049,10 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/m zombie moan.ogg"
                     $ sage_health -= 1
+                    show dunce at offscreen_bottom with move
+                    hide dunce
                     "I was able to save Rocky but got my fists banged up by the zombies in return!"
+                    show r 10 at hop
                     r "Thanks [pov]!"
                     jump office_floor_2
 
@@ -1036,7 +1060,10 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/shoot.ogg"
                     queue sound "audio/sfx/zombie what.ogg"
                     $ ammo -= 1
+                    show dunce at offscreen_bottom with move
+                    hide dunce
                     "I was able to save Rocky with no error!"
+                    show r 10 at hop
                     r "Thanks [pov]!"                    
                     jump office_floor_2
                     
@@ -1044,6 +1071,9 @@ label mechanical_floor_escape:
                     if vinnie_dead == False and vinnie_has_gun == True:
                         play sound "audio/sfx/zombie groan.ogg"
                         queue sound "audio/sfx/shoot.ogg"
+                        show v 2 at left with moveinleft
+                        show dunce at offscreen_bottom with move
+                        hide dunce
                         $ insanity_level += 1
                         v "Duck bitch!!!"
                         r "Huh?! HOLY FUCK!"
@@ -1053,8 +1083,12 @@ label mechanical_floor_escape:
                         queue sound "audio/sfx/shoot.ogg"
                         queue sound "audio/sfx/zombie attack.ogg"
                         $ ammo -= 3
-
-                        "Vinnie panics and shoots wildly,{w=.3} they don't hear the zombie behind them and get hurt in return!"
+                        show z 1 at left with moveinleft
+                        show z 3 at left with moveinright
+                        show v 5 at right with move
+                        show z 3 at offscreen_bottom with move
+                        hide z 3
+                        "Vinnie panics and shoots wildly,{w=.3} they didn't hear the zombies behind them and get hurt in return!"
                         v "*huff*{w=.3} *huff*{w=.3} I JUST SAVED YOUR ASS I EXPECT TO GET THE HOLIEST SLOPPY IN RETURN FOR THIS!!!"   
                         jump office_floor_2
 
@@ -1062,10 +1096,12 @@ label mechanical_floor_escape:
                         play sound "audio/sfx/stabwd.ogg"
                         queue sound "audio/sfx/zombie crowd.ogg"
                         $ insanity_level += 1
+                        show v 2 at left with moveinleft
                         v "I'LL SAVE YOU ROCKY!!"
                         "Vinnie charges forwards and stabs the zombies!{w=.3} They get hurt in return and the knife is lost in the zombie's head!"
                         $ vinnie_health -=2
                         $ vinnies_knife = False
+                        show v 2 1 at left
                         r "OH MY GOD ARE YOU GONNA BE OK?!?!"
                         v "C- {w=.3}carry me..."   
                         "Rocky carries Vinnie in their arms" 
@@ -1075,15 +1111,30 @@ label mechanical_floor_escape:
                         $ vinnie_health -=3
                         $ vinnie_dead = True
                         $ insanity_level += 1
-
                         play sound "audio/sfx/zombie crowd.ogg"
+                        show v 2 at left with moveinleft
+                        show dunce at offscreen_bottom with bottom
+                        hide dunce
+                        show z 3 at left with moveinleft
+                        show z 2 at left with moveinleft
+                        show z 1 at left with moveinleft
+                        show z 3 at shiver
+                        show z 2 at shiver
+                        show z 1 at shiver                    
                         v "I'LL SAVE YOU ROCKY EVEN IF IT COST MY LIFE!!!"
                         "Vinnie charges forwards and gets lost in the horde in return... {w=.3}I hear chewing noises before Rocky yanks Vinnie out of there into their arms..."
+                        show r 8 at hop
                         r "VINNIE NO!!! ARE YOU OK! SPEAK TO ME!! YOU'RE NOT DEAD! YOU'RE NOT!!!!"
+                        show v 2 5 at offscreen_bottom with bottom
+                        show r 8 at sink
                         v "I... {w=.3}really.. {w=.3}l-{w=.3}l-{w=.3} liked our time together...{w=.3} please don- t be... {w=.3}worry ...{w=.3} haha...haaa {w=.3}*cough*"
                         v "D- {w=.3}don't push yourself... {w=.3}when you have people like... {w=.3}me... {w=.3}who do care..."
                         v "Don't... {w=.4}be... {w=.4}a... {w=.4}stranger... {w=.5}ha... {w=.5}haaaaa"
-                        "Vinnie uses the last of their strength to shove Rocky away and gesture him to run inside the elevator"
+                        show r 5 at shiver
+                        "Vinnie uses the last of their strength to shove Rocky away and gestures him to run to the elevator, Rocky hesistates but eventually does so"
+                        show r 5 at shiver
+                        pause 0.5
+                        show r 5 at offscreen_right with move
                         jump office_floor_2
 
                     else:
@@ -1093,6 +1144,11 @@ label mechanical_floor_escape:
                         $ rocky_health -=5
                         $ rocky_dead = True
                         r "OH YEAH?!?! I-{w=.1} I'LL BEAT YOU ALL TO DEATH JUST YOU WAT-{w=.2} ARGGGHHHHH!!!"
+                        show z 3 at shiver_loop with moveinleft
+                        show z 2 at shiver_loop with moveinleft
+                        show z 1 at shiver_loop with moveinleft
+                        show r 2a at offscreen_bottom
+                        hide r 2a 
                         "I hear chewing noises and the zombies moaning as I run further away..."
                         jump office_floor_2
                         

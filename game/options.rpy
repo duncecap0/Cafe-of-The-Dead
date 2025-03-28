@@ -55,7 +55,7 @@ define config.has_voice = True
 ## uncomment a line below and use it to set a sample sound to play.
 
 define config.sample_sound = "audio/sfx/zombie huh.ogg"
-define config.sample_voice = "voice beep.ogg"
+define config.sample_voice = "audio/sfx/voice beep.ogg"
 
 
 ## Uncomment the following line to set an audio file that will be played while

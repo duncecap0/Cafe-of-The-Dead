@@ -3,7 +3,7 @@ define flash =Fade(2.0, 1.0, 2.0, color="#fff")
 
 define left1 = Position(xalign=0.3)
 
-define right2 = Position(xalign=0.6)
+define right2 = Position(xalign=0.7)
 
 image breadly:
     yalign 1.0
@@ -16,9 +16,11 @@ image bigzom:
     "images/z 1.png"
 
 image bluzom:
+    xalign 0.0
     "images/z 2.png"
 
 image orangzom:
+    yalign 1.0
     "images/z 3.png"
 
 image jug = "images/naut.png"
@@ -38,24 +40,6 @@ image click_to_continue:
     repeat
 
 
-screen item_shit_UI:
-    frame:
-        #add "UI/bg_FUCK.png":
-            #xsize 500
-            #ysize 500    
-        add Solid ("#3b3b3b")
-        xsize 500
-        ysize 500
-        xalign 1.0
-        yalign 0.5
-        text "Item Acquired!"
-        #hbox:
-            #spacing 20
-            #text "Item Acquired!"
-
-style item_shit_UI:
-    size 40
-    #color "#f00"
 
 transform sink:
         ypos 710 
@@ -116,13 +100,11 @@ transform shiver:
 
 
 transform shiver_loop_left:
-        xanchor 2
-        yanchor 0.0
-        xpos 30 
-        easein_bounce 0.18 xpos 50 
-        easein 0.15 xpos 40 
+        xpos -10 
+        easein_bounce 0.18 xpos 10 
+        easein 0.15 xpos 5 
         0.43
-        xpos 40
+        xpos -5
         repeat
 
 transform shiver_loop_right:

@@ -8,13 +8,13 @@ default norman_dead = False
 
 #should irl be 15 but lets just ignore that...
 
-default ammo = 7
+default ammo = 3
 
 #CHARACTER HEALTH
-default rocky_health = 6
+default rocky_health = 4
 default vinnie_health = 3
 default norman_health = 4
-default sage_health = 5
+default sage_health = 3
 
 
 #SAGE STATS
@@ -37,12 +37,10 @@ default first_zombie_attacker_dead = False
 label cafe_floor_0:
     $ pov = "Sage"
 
-    play music "audio/music/mixkit-positive-energy-973- Michael Ramir C.ogg" fadein 1
+    play music "audio/music/Morning_Joe.mp3"
     scene cafe outer with dissolve
     
     "Today is the first day of October, college was finally almost over for my new group of friends and I so It was as good as any other time to wind back and enjoy ourselves"
-    #show screen kill_zombie
-    #FIX UP!!!
     "We decided after class we should visit our friend at his new job as a barista"
     "He's employed on the first floor of a skyscraper belonging to a massive company called \"Samsara Enterprises\""
     "I've never really gone in here before since it's always full of white collars and bigiwgs"
@@ -53,7 +51,7 @@ label cafe_floor_0:
     show v 1 with dissolve
     v 1"HEY! GUYS OVER HERE!!!{w=.3} HAHA!!"
     show v at hop_loop
-    v "HURRY UP!!! I {i}NEED{/i} TO SEE ROCKY IN HIS NEW STUPID LITTLE APRON HAHAHAHAHA!!!"
+    v "HURRY UP!!! I {i}NEED{/i} TO SEE ROCKY IN HIS NEW STUPID LITTLE JOB HAHAHAHAHA!!!"
     "This was Vinnie,{w=.3} my gender diverse Opossum friend, being their boisterous self per usual"
     "They were the one who really pushed for us to visit Rocky after class, Vinnie was always the one who initiated the group hangouts"
     show n 2 at right with dissolve
@@ -61,7 +59,8 @@ label cafe_floor_0:
     n "You're really excited for this aren't you?"
     "Here's Norman,{w=.3} my compassionate Golden Retriever friend, as caring as ever trying to humor Vinnie"
     "They were seen as the \"mom\" friend in the group,{w=.3} always responsible with keeping us from killing ourselves with our antics {w=.5}{i}well mainly just Vinnie to be honest...{/i}"
-    show c 13 at right with moveinright 
+    show c 13 at right with moveinright
+    play sound "audio/sfx/short run.ogg"
     show v 4 at hop
     show n 6 at hop
     s "Pardon."
@@ -69,8 +68,9 @@ label cafe_floor_0:
     show v 4 at hop
     show n 6 at hop
     n 5"Ough!" with hpunch
-    "A stranger Pine Marten wearing a coat bumped into Norman on his way to the upper floor elevator"
+    "A stranger Pine Marten wearing a coat bumped into Norman on his way into the main building"
     show c 13 at offscreen_left with move
+    play sound "audio/sfx/short run.ogg"
     show v 2 at hop
     v 2"Hey! {w=.3}Not cool man!{w=.3} That was totally on purpose!"
     hide c 13
@@ -78,7 +78,7 @@ label cafe_floor_0:
     n "Just drop it,{w=.3} I'm not hurt; {w=.3}let's not start anything unnecessary alright?{w=.3} It's all about Rocky's new job today!"
     v 12"...{w=.3}Ok if you say so..."
     v 8"If you change your mind... I'll use this epic butterfly knife I got from the gas station! Ha!"
-    "Vinnie twists the knife around on his fingers..."
+    "Vinnie twists the knife around on their fingers..."
     n 1"...I don't think gas station knives are the best quality though...{w=.3} It'll probably snap if you actually try to stab something with it..."
     v 5"Nuh-uh! the guy at the store said he got it from a good vendor!"
     n "Wouldn't the person trying to sell you something be the one who brags how great it is?"
@@ -143,6 +143,7 @@ label cafe_floor_0:
     hide v 15 with dissolve
     show r 10 at hop
     r "Oh that's right...{w=.3} I'm so sorry,{w=.3} but I'm having trouble remembering your name..."
+    $ renpy.notify("Use the keyboard to type...")
 
     $ pov = renpy.input("It's fine, my name is", length=10).strip() or "Sage"    
 
@@ -389,6 +390,7 @@ label cafe_floor_0:
     p 15"\"Have to admit?\",{w=.3}as in, {w=.3}you didn't expect Vinnie to be this smart?"
     r 10"Hahaha! {w=.3}Serves you right if {i}Norman{/i} of all people thinks that less of you!"
     v 2 3"Norman! H{w=.3}-how could y{w=.3}-you... {w=.3}I THOUGHT WE WERE FRIENDS!!!"
+    stop music fadeout 1.0
     show v 9 at right
     "Vinnie pretends to bawl and stuffs their face in their hands"
     n 7"Hey! {w=.3}I didn't say any of that!"
@@ -474,7 +476,7 @@ label cafe_floor_0:
     n "Are you serious?!?!"
     
     scene cafe outer
-    play music "audio/music/mixkit-fright-night-871-Michael Ramir C.ogg"
+    play audio "audio/sfx/Wind.ogg"
     pause 0.3
     show r 1 with dissolve
     r 1"Oh you decided to come with,{w=.3} here follow I just want a glance at the cause of this..."
@@ -498,6 +500,7 @@ label cafe_floor_0:
     "The attacker finally notices Rocky and tries clawing at his face,{w=.3} he makes the most unpleasant noise I have ever heard from someone..."
     "I didn't even know anyone was capable of evoking such a groan,{w=.3} it's almost like he wasn't even alive..."
     r 3a"What the hell are you?!?!"
+    play sound "audio/sfx/zombie (2).ogg"
     show bigzom at shiver_loop with moveinright
     "The attacker is able to twist himself backwards and is facing Rocky directly when tussling with him"
     "He's trying to bite at Rocky's neck while his arms are restrained"
@@ -511,7 +514,7 @@ label cafe_floor_0:
     play sound "audio/sfx/zombie moan.ogg"
     "There's that god awful noise again... {w=.3}I didn't even know anyone was capable of evoking anything like it"
     "Now that I'm closer I'm able to see just how disgusting looking he is..."
-    "His fur is coming off with patches, {w=.3}his eyes are milky white, the odor is so pungent it stings my eyes..."
+    "His fur is dyed in blood, {w=.3}his eyes are milky white, the odor is so pungent it stings my eyes..."
     r 2"[pov!u]!{w=.3} Check out the guy he jumped to see if he's ok!"
     p 4"Got it!"
     hide r with dissolve
@@ -528,10 +531,10 @@ label cafe_floor_0:
     r 3"Hey! {w=.3}[pov]!{w=.3} He alright!?!?"
     "I turn back to see a panicked Rocky still pinning down the attacker"
     p 7"We need to call an ambulance his neck is-"
-    play sound "audio/sfx/zombie attack.ogg"
-    show bluzom at sink_rise_little with dissolve
+    show bluzom at offscreen_bottom
+    play sound "audio/sfx/Zombie_03.ogg"
+    show bluzom at left with move
     "I turn 180 and see the previously dead man about to lunge at me!" with hpunch
-    show bluzom at left with moveinleft
     show bluzom at shiver_loop_left
     p 7"How are you alive!?" with vpunch
     r 3a"[pov!u]! Don't worry! I'll get to you!"
@@ -542,21 +545,22 @@ label cafe_floor_0:
     r 2a"JESUS! {w=.3}GET IT OFF!{w=.3} GET IT OFF!"
     show r at sink_rise
     show r at shiver_loop
+    play music "audio/music/live or die intro.ogg"
 
-    play music "audio/music/live or die.ogg"
+    queue music "audio/music/live or die.ogg"
 
-    #THIS IS A TEMPORARY DEV SCREEN FOR ME TO CHECK STATS!!!!!! 
-    show screen character_stats
-
+    show screen character_stats with dissolve
 
     menu rocky_first_death_choice:
         "What do I do now?"
 
-        "Kick zombie attacking me knees" if first_zombie_attacker_dead == False:
+        "Kick zombie attacking me in the knees" if first_zombie_attacker_dead == False:
             $ first_zombie_attacker_dead = True
+            play sound "audio/sfx/hit.ogg"
+            queue sound "audio/sfx/zombie huh.ogg"
             show bluzom at offscreen_bottom with move
-            hide bluezom
-            play sound "audio/sfx/zombie-2.ogg"
+            hide bluzom
+            queue sound "audio/sfx/zombie-2.ogg"
             "I use my small stature to my advantage and was able to knock the zombie over; It's down but not dead, now's my chance!"
             jump rocky_first_death_choice
 
@@ -590,6 +594,7 @@ label cafe_floor_0:
                 label sage_being_pulled_back:
                 $ sage_health -= 1
                 $ rocky_health -= 1
+                play sound "audio/sfx/zombie-19.ogg"
                 "I tried running as fast as possible but,{w=.3} the zombie lunging at me pulled my arm back" with vpunch
                 "Didn't this exact thing happen to Rocky?{w=.3} I feel sharp nails dig into my arm,{w=.3} but was able to struggle out of it"
                 "Damn that hurt... I see the other zombie similarly dig into Rocky's wrists; better be careful this time..."
@@ -619,9 +624,9 @@ label cafe_floor_0:
                 $ rocky_health -= 6
                 $ rocky_dead = True
                 $ insanity_level += 1
-                play sound "audio/sfx/492220__vincentkurtanderes__running-on-the-road"
-                queue sound "audio/sfx/fem zombie"
-                queue sound "audio/sfx/eat"
+                play sound "audio/sfx/short run.ogg"
+                queue sound "audio/sfx/zombie talk.ogg"
+                queue sound "audio/sfx/eat.ogg"
                 scene black with dissolve
                 "I ran as fast as my legs could carry me all the way to the cafe, in the distance I could hear a shriek and chewing noises"
                 r "No! No! Get off me you fucks! AGH!!"
@@ -652,8 +657,8 @@ label cafe_floor_0:
             else:
                 jump sage_being_pulled_back
     
-
     label rocky_dead_norman_rescue_sage:
+
     scene cafe outer with dissolve
     stop music
     play sound "audio/sfx/cock.ogg"
@@ -663,22 +668,22 @@ label cafe_floor_0:
     "They drop dead with a hard thud as the bullet meets their brain"
     "Except,{w=.5} Rocky still hasn't gotten up..."
     show v 2 1 with moveinleft
-    v 2 1"Rocky! Get up! Wake up!"
+    v 2 1"Rocky!{w=.3} Get up!{w=.3} Wake up!"
     "I've never heard Vinnie sound or look like this before..."
     v "Nonono...{w=.3} NO!!! GET UP YOU TOUGH SUNUVA BITCH!"
     v "GET UP! STOP JUST LAYING THERE!"
     "Vinnie kneels as they lift up Rocky's motionless body, looks like his neck has been torn up... Norman stays still as if he had just seen a ghost"
     v 2 2"THIS ISN'T HAPPENING! SOMEONE CALL THE POLICE!{w=.3}  HE ISN'T THAT HURT! {w=.3} STOP LOOKING AT ME LIKE THAT!"
-    p 2"Vinnie... his neck..."
+    p 2"Vinnie... {w=.3}his neck..."
     show v 2 1 at hop
     v 2 1"SHUT THE FUCK UP! HE'S FINE!"
     "Vinnie tries to put together Rocky's neck wound up as if it were that simple..."
     show n 5 at left with dissolve
-    n 5"We have to get out of here! Look over there! More of them are coming!"
-    "Norman seems to have snapped out of his trance to pull Vinnie away from Rocky, I help when I see Vinnie resist"
+    n 5"We have to get out of here! {w=.3}Look over there!{w=.3} More of them are coming!"
+    "Norman seems to have snapped out of his trance to pull Vinnie away from Rocky,{w=.3} I help when I see Vinnie resist"
     show v 2 2 at shiver_loop
-    v 2 2"Stop it! Are you crazy? We can't just leave him here! Look he's gonna be ok!"
-    v "LET GO OF ME!!! ROCKY NEEDS ME!!!"
+    v 2 2"Stop it! {w=.3}Are you crazy? {w=.3}We can't just leave him here! {w=.3}Look he's gonna be ok!"
+    v "LET GO OF ME!!!{w=.3} ROCKY NEEDS ME!!!"
     "Vinnie keeps protesting as we struggle with getting him all the way back to the cafe"
     jump cafe_aftermath
 
@@ -702,7 +707,7 @@ label cafe_floor_0:
     n "No one can survive a gun shot to the heart and live"
     n "C'mon we need to take cover, {w=.3}it isn't safe being exposed like this"
     show v 10 at right with moveinright
-    v 10"Uh guys? You really shouldn't have left us behind lik-"
+    v 10"Uh guys?{w=.3} You really shouldn't have left us behind lik-"
     v 16"..."
     show v 2 3 at hop
     v 2 3"{w=.3} HOLY FUCKING SHIT"
@@ -712,6 +717,7 @@ label cafe_floor_0:
     "Norman ushers a silent Rocky and panicked Vinnie back to the cafe"
 
     label cafe_aftermath:
+    hide screen character_stats with dissolve
     scene cafe with dissolve
     pause 1.0
     show v 11 at right with dissolve
@@ -739,7 +745,7 @@ label cafe_floor_0:
         "Rocky and Norman already barricaded the windows with chairs and boxes from the backrooms"
     else:
         "Norman and I already barricaded the windows with chairs and boxes from the backrooms"
-        "Vinnie hasn't moved or talked since we dragged them in, I think Rocky's passing finally set in..."
+        "Vinnie hasn't moved or talked since we dragged them in,{w=.3} I think Rocky's passing finally set in..."
     "The screams from outside turned from cries of help to shuffling feet and a cacophony of moans...{w=.3} Don't think it's safe to go out..."
     "We all traveled here by the underground train system so I doubt that's the safest option to go from here..."
     "We could try hot-wiring one of the cars from outside but,{w=.3} what if we run into a huge horde of those things from outside?{w=.3} We'll be surrounded!"
@@ -777,7 +783,7 @@ label cafe_floor_0:
         n 6"I'm saying that my friends are amazing people that don't deserve to be trapped like this"
         n "Stuck in here,{w=.3} twiddling our thumbs hoping for the best"
         n "We can call for help and reach a safe-zone somewhere!"
-        n "Think about it! {w=.3}The government is bound to have set up some contained perimeter; all we have to do is come in contact with them and let them know there are survivors here!"
+        n "Think about it! {w=.3}The government is bound to have set up some contained perimeter;{w=.3} all we have to do is come in contact with them and let them know there are survivors here!"
         r "Weren't you the one who said it was best to take cover?"
         n "I know what I said...{w=.3} but look outside... {w=.3}if they find us we'll be completely trapped in here and... {w=.3}they'll eventually starve us out"
         v "Yeah I don't think we could survive off frappes and cake pops forever..."
@@ -787,13 +793,14 @@ label cafe_floor_0:
         "Vinnie speaks in a somber tone from the corner of the room for the first time in a while"
 
         label vinnie_reaction_rocky_death:
-       
+        show v 2 2 with dissolve
         v "If someone as capable of Rocky didn't make it then we're gonna die here just like him..."
         v "It doesn't matter if you wave that gun around,{w=.3} there's no chance in survival...{w=.3} might as well just point it at me..."
-        v "Rocky's family is gonna be heartbroken,{w=.3} the son that took care of them...{w=.3}  worked his ass of for their wellbeing gone,{w=.3} just like that"
+        v "Rocky's family is gonna be heartbroken,{w=.3} the son that took care of them...{w=.3} worked his ass of for their wellbeing gone,{w=.3} just like that"
         v "If they're even alive that is,{w=.3} they could be dead for all I know,{w=.3} all ours could be so what's the point of it all anymore? Die out there or starve to death in here... {w=.3} sort of a hail mary even..."
         v "\"Best\" case scenario is if the national guard comes in here to rescue us...{w=.3} even then is it even worth living a life without the people who care about you..."
         if norman_dead == False:
+            show n 8 at left with dissolve
             n 8"..."
             n "I remember when I was about to live on the streets,{w=.3} Rocky saved me,{w=.3} he welcomed me into his home and took care of me"
             n "I made him get kicked out his own apartment from housing an extra tenant and he still chose to be my friend, {w=.3}said he would do it all over again"
@@ -827,6 +834,7 @@ label cafe_floor_0:
             n 3a"It's going to be hard Vinnie...{w=.3} but you're a smart cookie!{w=.3} you know the government would set up safety perimeters somewhere,{w=.3} and that we need to make an effort to reach them..."
             n "It can be anything really!{w=.3} From a hospital they've safeguarded.{w=.3} Or a blocked off neighborhood....{w=.3} The problem right now is that the streets are just too crowded... {w=.3}Unless..?"
             n "There's someone in here that can help us?"
+        return
     label cafe_aftermath_2_electric_boogaloo:
     menu:
         
@@ -850,28 +858,28 @@ label cafe_floor_0:
                 r "I have firsthand experience with how strong those things are,{w=.3} It's a death sentence to even try..."
             v 10"Yeah... {w=.3}I want to get out here as much as the next guy but it is pretty dangerous..."
             n 6"...I know it's scary guys, {w=.3}but we could do it I think I have a plan..."
-
-    n 2"We're already in a pretty big building right? That means it's an easy to find land marker for any nearby helicopters to land on!"
-    n "Skyscrapers like this usually have their own antennae on top! Which means there has to be a way for us to reset it and contact someone!"
+    play music "audio/music/Morning_Joe.mp3"
+    n 2"We're already in a pretty big building right? {w=.3}That means it's an easy to find land marker for any nearby helicopters to land on!"
+    n "Skyscrapers like this usually have their own antennae on top!{w=.3} Which means there has to be a way for us to reset it and contact someone!"
     v 25"I'm pretty sure the people that work here are trying to already do that...{w=.3}I mean, what are civilians meant to even do?"
 
     if rocky_dead == False:
         r 1"..."
-        r 3"They actually gave me a safety plans map to the building if anything goes wrong..."
+        r 3"They actually gave me a safety plan map to the building if anything goes wrong..."
         show r 3 at offscreen_left with move
         pause 0.3
         "Rocky goes to the backroom and retrieves a hefty binder"
         show r 1 at left with moveinleft
         r 1"Here it is..."
     else:
-        v 11"Corporate usually give employees safety plans maps... let me look in the backroom for it..."
+        v 11"Corporate usually give employees safety plans maps... {w=.3}let me look in the backroom for it..."
         pause 0.3
         "Vinnie goes to the backroom and retrieves a hefty binder"
-        v 2 2"Oh Rocky... you're still helping us out even when you're gone..."
+        v 2 2"Oh Rocky...{w=.3} you're still helping us out even when you're gone..."
 
     n 2"Yeah this is a great start!"
     "We all gather around the skyscraper map"
-    v 1"Hey look here, it says there's a mechanical room on the 10th floor..."
+    v 1"Hey look here,{w=.3} it says there's a mechanical room on the 10th floor..."
     v "If the power is off and the people here are having trouble activating it...{w=.3} we could do it ourselves from there..."
 
     if insanity_level >= 1:
@@ -885,28 +893,28 @@ label cafe_floor_0:
         r 2"I say it's worth a shot..."
         r "I guess I would just go crazy in here if I didn't even TRY escaping"
     else:
-        n 2"You see?! We're real lucky to have you Vinnie!"
+        n 2"You see?! {w=.3}We're real lucky to have you Vinnie!"
         
     n 2"That's the spirit we need to make it through this thing!"
     "Norman motions for a group hug"
 
     if rocky_dead == True:
-        "Vinnie drunkenly steps forwards before wrapping Norman in a tight embrace, lifting him off the ground with the sheer height difference"
+        "Vinnie drunkenly steps forwards before wrapping Norman in a tight embrace,{w=.3} lifting him off the ground with the sheer height difference"
         v 2 2"I can't believe he's dead man!"
-        n 8"Shh It's ok... just let it out..."
-        "Vinnie sobs into Norman's shoulders for a moment... before stepping backwards and wiping their face..."
+        n 8"Shh It's ok...{w=.3} just let it out..."
+        "Vinnie sobs into Norman's shoulders for a moment...{w=.3} before stepping backwards and wiping their face..."
     else:
         if insanity_level <= 1:
             p 13"Who can turn down a hug from NORMAN of all people!"
             "We all rush forwards to give Norman a hug!"
         else:
             "Rocky and Vinnie gingerly step forward before rushing in to give Norman a hug"
-            "Rocky pretty much just lifted Norman and I off the ground from how strong he is...{w=.3} guess he really needed that hug...{w=.3}... I did too..."
+            "Rocky pretty much just lifted Norman and I off the ground from how strong he is...{w=.3} guess he really needed that hug...{w=.3}...{w=.3} I did too..."
         
         if insanity_level <= 1:
             p "I feel invincible already!"
         else:
-            "I'm just a stranger compared to them... what right do I have?"
+            "I'm just a stranger compared to them... {w=.3}what right do I have?"
         
     v 3"The power of friendship guides me!"
 
@@ -939,7 +947,7 @@ label cafe_floor_0:
     n 11"Let's just say it's not within OTHER people's legal boundaries...."
 
     v "..."
-    v 10"... Norman... when did you have to use... the gun?"
+    v 10"...{w=.3} Norman...{w=.3} when did you have to use...{w=.3} the gun?"
     n 13"..."
     "..."
     "Norman is not one to be trifled with..."
@@ -956,7 +964,7 @@ label cafe_floor_0:
         "Rocky blurts out as we make our way to the staircase..."
     else:
         "I think as we me make our to the staircase..."
-        
+    play sound "audio/sfx/short run.ogg"
     scene black with dissolve
     pause 0.5
 

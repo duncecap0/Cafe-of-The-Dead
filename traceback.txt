@@ -3,30 +3,30 @@
 While running game code:
   File "game/script.rpy", line 34, in script call
     call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/lab_floor_3.rpy", line 1299, in script
-    if norman_dead and rocky_dead and vinnie_dead and Tara == False:
-  File "game/lab_floor_3.rpy", line 1299, in <module>
-    if norman_dead and rocky_dead and vinnie_dead and Tara == False:
-NameError: name 'Tara' is not defined
+  File "game/lab_floor_3.rpy", line 551, in script
+    if rocky_dead == False:
+SyntaxError: invalid syntax (game/lab_floor_3.rpy, line 606)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/script.rpy", line 34, in script call
     call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/lab_floor_3.rpy", line 1299, in script
-    if norman_dead and rocky_dead and vinnie_dead and Tara == False:
+  File "game/lab_floor_3.rpy", line 551, in script
+    if rocky_dead == False:
   File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1849, in execute
     if renpy.python.py_eval(condition):
-  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1209, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1202, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/lab_floor_3.rpy", line 1299, in <module>
-    if norman_dead and rocky_dead and vinnie_dead and Tara == False:
-NameError: name 'Tara' is not defined
+  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1207, in py_eval
+    code = py_compile(code, 'eval')
+  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1144, in py_compile
+    raise e
+  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1081, in py_compile
+    raise orig_e
+  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1073, in py_compile
+    tree = compile(source, filename, py_mode, ast.PyCF_ONLY_AST | flags, 1)
+SyntaxError: invalid syntax (game/lab_floor_3.rpy, line 606)
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.4.24120703
 Cafe of The Dead 1.0
-Thu Mar 27 04:12:45 2025
+Sat Mar 29 11:49:29 2025

@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/point_and_click/point_and_click.rpy", line 273: invalid syntax
-        (("move"),(700, =400),"lab_upstairs_rightmost_hall", None), \
-                         ^
+File "game/lab_floor_3.rpy", line 605: expected python_expression
+    elif:
+        ^
+
+File "game/lab_floor_3.rpy", line 621: expected statement.
+    else:
+        ^
 
 Ren'Py Version: Ren'Py 8.3.4.24120703
-Thu Mar 27 03:32:31 2025
+Sat Mar 29 11:50:53 2025

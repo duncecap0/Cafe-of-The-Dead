@@ -81,6 +81,9 @@ screen character_stats:
             #text "Norman Health: [norman_health] "
             #text "Rocky Health: [rocky_health] "
             #text "Vinnie Health: [vinnie_health] "
+
+screen ammo_stats:
+    zorder 3
     frame:
         background Frame("gui/uibox.png", 25, 25, tile="integer")
         padding (30,25)
@@ -105,7 +108,6 @@ screen death_nav():
 label death_screen:
     hide window with dissolve
     play sound "audio/sfx/stinger.ogg"
-    play music "audio/music/mixkit-feedback-dreams-588- Eugenio Mininni.ogg"
     scene black with pixellate
     show text "{size=+90}{b}{color=#f00}YOU HAVE PERISHED{/color}{/b}{/size}":
             yalign 0.3    
@@ -116,10 +118,9 @@ label death_screen:
 label win_screen:
     hide window with dissolve
     play sound "audio/sfx/stinger.ogg"
-    play music "audio/music/mixkit-minimal-techno-01-162- Alejandro Magaña (A. M.).ogg"
     scene black with pixellate
 
-    show text "{size=+90}{b}{color=#15ff00}GAME WIN{/color}{/b}{/size}":
+    show text "{size=+90}{b}{color=#15ff00}END{/color}{/b}{/size}":
         yalign 0.3    
 
     call screen death_nav
@@ -127,13 +128,14 @@ label win_screen:
 label insane_screen:
     hide window with dissolve
     play sound "audio/sfx/stinger.ogg"
-    play music "audio/music/Wind.ogg"
+    play music "audio/sfx/Wind.ogg" fadein 1.0
     scene black with pixellate
     show text "{size=+90}{b}{color=#f00}Hail.{/color}{/b}{/size}":
         yalign 0.3    
 
 
     call screen death_nav    
+
 
 return
 

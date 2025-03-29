@@ -19,7 +19,7 @@ define config.check_conflicting_properties = True
 ## GUI Configuration Variables
 ################################################################################
 
-## Misc Bradley Changes
+## Misc Bradley Changes #omg thank you...
 init -2:
     style say_dialogue:
         line_spacing 10  
@@ -43,11 +43,11 @@ define gui.name_text_italic = True
 define gui.accent_color = '#cc0066'
 
 ## The color used for a text button when it is neither selected nor hovered.
-define gui.idle_color = '#888888'
+define gui.idle_color = '#9c9599'
 
 ## The small color is used for small text, which needs to be brighter/darker to
 ## achieve the same effect.
-define gui.idle_small_color = '#aaaaaa'
+define gui.idle_small_color = '#9c9599'
 
 ## The color that is used for buttons and bars that are hovered.
 define gui.hover_color = '#e066a3'
@@ -57,7 +57,7 @@ define gui.hover_color = '#e066a3'
 define gui.selected_color = '#ffffff'
 
 ## The color used for a text button when it cannot be selected.
-define gui.insensitive_color = '#8888887f'
+define gui.insensitive_color = '#9c9599'
 
 ## Colors used for the portions of bars that are not filled in. These are not
 ## used directly, but are used when re-generating bar image files.
@@ -93,7 +93,7 @@ define gui.interface_text_size = 22
 define gui.label_text_size = 24
 
 ## The size of text on the notify screen.
-define gui.notify_text_size = 16
+define gui.notify_text_size = 20
 
 ## The size of the game's title.
 define gui.title_text_size = 50
@@ -145,11 +145,11 @@ define gui.namebox_tile = False
 ## The placement of dialogue relative to the textbox. These can be a whole
 ## number of pixels relative to the left or top side of the textbox, or 0.5 to
 ## center.
-define gui.dialogue_xpos = 268
-define gui.dialogue_ypos = 30
+define gui.dialogue_xpos = 260
+define gui.dialogue_ypos = 15
 
 ## The maximum width of dialogue text, in pixels.
-define gui.dialogue_width = 744
+define gui.dialogue_width = 850
 
 ## The horizontal alignment of the dialogue text. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
@@ -272,7 +272,7 @@ define gui.skip_ypos = 10
 define gui.notify_ypos = 45
 
 ## The spacing between menu choices.
-define gui.choice_spacing = 22
+define gui.choice_spacing = 15
 
 ## Buttons in the navigation section of the main and game menus.
 define gui.navigation_spacing = 8

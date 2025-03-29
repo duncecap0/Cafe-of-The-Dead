@@ -12,16 +12,13 @@ init python:
         elif event == "slow_done" or event == "end":
             renpy.music.stop(channel="beepy_voice")
 
-### maybe this could help with the text issue?
-
-####################window_ypadding =-20
 
 #main charas            
 
-define p = DynamicCharacter("[pov]", color= "#57578f",image='p', ctc="click_to_continue", ctc_pause="click_to_continue", ctc_timedpause="click_to_continue",  callback=beepy_voice)
-define r = Character("Rocky", color= "#812c2c",image='r', ctc="click_to_continue", callback=beepy_voice)
-define v = Character("Vinnie", color= "#57ffc7f3",image='v', ctc="click_to_continue", callback=beepy_voice)
-define n = Character("Norman", color= "#daca74",image='n', ctc="click_to_continue", callback=beepy_voice)
+define p = DynamicCharacter("[pov]", color= "#7272f0",image='p', ctc="click_to_continue", ctc_pause="click_to_continue", ctc_timedpause="click_to_continue",  callback=beepy_voice)
+define r = Character("Rocky", color= "#bd2727",image='r', ctc="click_to_continue", callback=beepy_voice)
+define v = Character("Vinnie", color= "#64ffcbf3",image='v', ctc="click_to_continue", callback=beepy_voice)
+define n = Character("Norman", color= "#ecd75e",image='n', ctc="click_to_continue", callback=beepy_voice)
 
 #side charas            
 
@@ -31,8 +28,8 @@ define w = DynamicCharacter("[w_name]", color= "#e4d1f7",image="w", ctc="click_t
 #npcs     
 define omg = Character("???", color= "#ffffff", callback=beepy_voice, ctc="click_to_continue")
 define zombie = Character("Zombie", ctc="click_to_continue")
-define npc = Character("Civilian", callback=beepy_voice, ctc="click_to_continue")
-define tv = Character("TV", callback=beepy_voice, ctc="click_to_continue")
+define npc = Character("Civilian",color= "#9b9b9b", callback=beepy_voice, ctc="click_to_continue")
+define tv = Character("TV",color= "#5e5e5e", callback=beepy_voice, ctc="click_to_continue")
 
 
 return

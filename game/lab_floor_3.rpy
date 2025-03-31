@@ -4,7 +4,7 @@
 
 default tara_against_dad = False
 default tara_hostage = False
-
+default ceo_caught_bluff = False
 default vinnie_lab_death = False
 default rocky_lab_death = False
 default norman_lab_death = False
@@ -17,8 +17,10 @@ default expose_samsara_together_3 = False
 
 default keycard_accepted = False
 
-#ITEMS
+default examined_lab_note_2 = False
 
+#ITEMS
+default drawer_key_collected = False
 default keycard = False
 default pills = False
 default lab_ammo_1_collected = False
@@ -37,19 +39,13 @@ default boss_juggernaut_zombie = True
 default boss_zombie_horde = True
 
 label lab_floor_3:
-    scene black with dissolve
-    stop sound
-    stop music
-    pause 1.0
-    scene elevator with dissolve
     play sound "audio/sfx/elevatording.ogg"
+    "The elevator comes to a slow stop and the doors begin to slide open"
+    play music "audio/music/FLOOR_3.mp3"
+    scene lab main room with dissolve
     show screen character_stats with dissolve
     show screen ammo_stats with dissolve
-
-    "The elevator comes to a slow stop and the doors begin to slide open"
     $ current_room = "lab_start" # this initializes the point'n'click segment to display the correct set of buttons.
-    scene lab main room with dissolve
-    play music "audio/music/FLOOR_3.mp3"
     "It's the lab...{w=.3} let's look for a way out through here"
     if tara == True:
         show w 15 at right2 with dissolve
@@ -65,7 +61,7 @@ label lab_floor_3:
             n "We'll use diplomacy to solve our problems!"
         if insanity_level >=1:
             "I'll personally kill him for putting me through this"
-        p 4"Don't worry,{w=.3} we'll be on the lookout for him"
+        p 4"Don't worry,{w=.3} I'll be on the lookout for him"
 
     if vinnie_dead == False and rocky_dead == False and norman_dead == False:
         show v 2 4 at right with dissolve
@@ -243,6 +239,12 @@ label puzzle_piece_b_collect:
 
     jump pnc_loop
 
+label drawer_key:
+    $ drawer_key_collected = True
+    "I found a drawer key!"
+    $ renpy.notify("Drawer Key has been added to your inventory!")
+    jump pnc_loop
+
 label piece_puzzle_a:
     play sound "audio/sfx/wrong beep.ogg"
 
@@ -321,7 +323,7 @@ label bioreactor:
         r "I- {w=.3}I don't see my mom in any of these.{w=.3} That means she's ok right? Right?"
         if vinnie_dead == False:
             show v 11 at right with dissolve
-            v "Yeah me neither{w=.3} You're mom is fine she's safe I promise!"
+            v "Yeah me neither;{w=.3} You're mom is fine, {w=.3}she's safe I promise!"
     if vinnie_dead == False:
         show v 11 at right with dissolve
         v "This is sick...{w=.3} how could they do this?"
@@ -350,30 +352,30 @@ label pills:
                 "Who should I heal?"
     
                 "Me":
-                    $ sage_health += 2
+                    $ sage_health += 1
                     $ pills = True
 
-                "Norman":
+                "Norman" if norman_dead == False:
                     if sage_health <= 3 and insanity_level <= 1:
                         show n 1 with dissolve
                         n "Awww thank you [pov]!!! But,{w=.3} I think you should take them... {w=.3}you don't look so good..."
                     else:
-                        $ norman_health += 2
+                        $ addNormhealth(1)
                         $ norman_affection += 1
                         $ pills = True
                         show n 1 with dissolve
                         n "Thanks [pov]! I feel better already! It means a lot that you would want me to be healed.."
 
-                "Vinnie":
-                    $ vinnie_health += 2
+                "Vinnie" if vinnie_dead == False:
+                    $ addVinhealth(1)
                     $ pills = True
                     show v 1 with dissolve
 
                     v "Wow,{w=.3} I am just a PERUSER today!!!"
 
-                "Rocky":
+                "Rocky" if rocky_dead == False:
                     $ pills = True
-                    $ rocky_health += 2
+                    $ addRockyhealth(1)
                     show r 1 with dissolve
                     r "I've never been more thankful for random floor pills before in my life..."
     
@@ -382,41 +384,40 @@ label pills:
                 "Should I risk using them? {w=.3}It may be useful... "
             
                 "Use on me":
-                    $ sage_health +=2
+                    $ sage_health +=1
                     $ pills = True
     
                 "Use on Norman" if norman_dead == False:
                     if norman_affection >= 3:
                         $ norman_affection += 1
-                        $ norman_health += 2
+                        $ addNormhealth(1)
                         $ pills = True
                         show n 2 with dissolve
-                        n "I trust you with my life[pov]! I'm sure it'll be fine!"
+                        n "I trust you with my life [pov]! I'm sure it'll be fine!"
                     else:
                         n "Don't take this the wrong way [pov]...{w=.3} but I don't trust it..."
                         jump pill_risk
-                    hide n with dissolve
 
-                "Use on Vinnie" if vinnie_dead == False:
-                    if insanity_level >= 1:
-                        $ vinnie_health += 2
-                        $ pills = True
-                        show v 12 with dissolve
-                        v "No"
-                        v "I'm not just gonna be eating random shit off the floor,{w=.3}I worked too hard to get back in to that again..."
-                        jump pill_risk
-                    else:
-                        show v 12 with dissolve
-                        v "..."
-                        v 25"Ok, {w=.3}I'll trust you..."
-                    hide v with dissolve
+                #"Use on Vinnie" if vinnie_dead == False:
+                    #if insanity_level >= 1:
+                        #$ addVinhealth(2)
+                        #$ pills = True
+                        #show v 12 with dissolve
+                        #v "No"
+                        #v "I'm not just gonna be eating random shit off the floor,{w=.3}I worked too hard to get back in to that again..."
+                        #jump pill_risk
+                    #else:
+                        #show v 12 with dissolve
+                        #v "..."
+                        #v 25"Ok, {w=.3}I'll trust you..."
+                    #hide v with dissolve
 
                 "Use on Rocky" if rocky_dead == False:
-                    $ rocky_health += 2
+                    $ addRockyhealth(1)
                     $ pills = True
                     show r 1 with dissolve
-                    hide r with dissolve
                     r "I'm a big guy, so if it {i}is{/i} something bad it won't hit too hard... {w=.6}right?"
+
         scene lab radio with dissolve
         jump pnc_loop    
 
@@ -436,100 +437,106 @@ label bullet:
 
 
 label keycard:
-    $ keycard = True
     play sound "audio/sfx/use.ogg"
-    "I look around the drawers and find an employee keycard!"
+    if drawer_key_collected == True:
+        $ keycard = True
+        "It unlocks! {w=.3}I look around the drawer and find an employee keycard!"
+    else:
+        "This drawer needs a key to open"
+
     jump pnc_loop
 
 
 label lab_note_2:
-
     play sound "audio/sfx/page turn.ogg"
     show black with Dissolve(1.):
             alpha.6
     centered "{font=Dudu_Calligraphy.ttf}Frank Daniels- Junior Researcher- I was 11 when I promised my father I would find a cure for him. He died 2 months later. He would be so proud to see his boy working to prevent the same tragedy for others.{/font}"
     centered "{font=Dudu_Calligraphy.ttf}I know what we're doing may seem to wrong to others but two wrongs CAN make a right as along as you have a system of checks and balances.{/font}"
-    centered "{font=Dudu_Calligraphy.ttf}I'm going to make sure losing your loved ones from a disease is a thing of the past.{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}I'm going to make sure losing your loved ones from illness is a thing of the past.{/font}"
     centered "{font=Dudu_Calligraphy.ttf}For you dad.{/font}"
     hide black with dissolve
     play sound "audio/sfx/page turn.ogg"
+    if examined_lab_note_2 == True:
+        scene lab closet with dissolve
+        jump pnc_loop
+    else:
+        $ examined_lab_note_2 = True
+        if norman_dead == False:
+            show n 8 with dissolve
+            n "Guess the researchers aren't as one note as we thought... {w=.3}their goal was to help, at least some were..."
 
-    if norman_dead == False:
-        show n 8 with dissolve
-        n "Guess the researchers aren't as one note as we thought... {w=.3}their goal was to help, at least some were..."
+        p 4"The road to hell is paved with good intentions..." 
 
-    p 4"The road to hell is paved with good intentions..." 
+        if rocky_dead == False:
+            show r 2 at left with dissolve
+            r "Oh please you're giving them too credit! If they were so innocent how did they let this happen?{w=.3} Liars,{w=.3} the lot of them"
 
-    if rocky_dead == False:
-        show r 2 at left with dissolve
-        r "Oh please you're giving them too credit! If they were so innocent how did they let this happen?{w=.3} Liars,{w=.3} the lot of them"
+        if vinnie_dead == False:
+            show v 11 at right with dissolve
+            v "A system of checks and balances only works if the system is ALSO being checked and balanced..."
 
-    if vinnie_dead == False:
-        show v 11 at right with dissolve
-        v "A system of checks and balances only works if the system is ALSO being checked and balanced..."
-
-    if tara == True:
-        show w 15 at right2 with dissolve
-        w "...Father...{w=.3} couldn't you see how much this meant to people...{w=.3} how...{w=.3} why... "
-    if norman_dead == False:
-        n 8"These people... {w=.3}they're so...{w=.3} confusing... {w=.3}if you wanted to help people... {w=.3}then why cause all these monstrosities?"
-        n "It's like...{w=.3} my parents...{w=.3} they say they love me but then act the opposite..."
-        n 3a"I don't know how to feel about them.{w=.3} They're big donors and associates to a lot of corporations, including Samsara.{w=.3} They...{w=.3} helped... {w=.3}fuel this..."
-        n "They're two-faced, {w=.3}they act so sweet and innocent and pose me with them to create a happy family image for the public"
-        n 8"Behind closed doors they've had all these high expectations for me to take over their work and locked me out of their wealth because I have to \"earn\" it..."
-        n "They're never there for me when I need it, always busy somewhere else.{w=.3} Every time I need their help they tell me to quit bothering them..."
-        n 6"My whole life has been me acting alone, until I met all of you...{w=.3} my first friends..."
-        menu:
-            "Find a new family!" if insanity_level <= 1:
-                $ expose_samsara_together_3 = True
-                $ norman_affection += 1
-                p 3"Norman you'll always have a home within my heart..."
-                if rocky_dead == True:
-                    p 3"Rocky loved you..."
-                else:
-                    p 3"Rocky loves you..."
-
-                if vinnie_dead == True:
-                    p 3"Vinnie loved you..."
-                else:
-                    p 3"Vinnie loves you..."
-
-                if tara == True:
-                    p 3"Tara is so grateful for us saving her"
-                if norman_affection >= 3:
-                    p 4"And I-"
-                p 4"..."
-                show n 9 with dissolve
-                n "..."
-                n 6"...Thank you [pov], {w=.3}you've told me what I needed to hear..."
-                n 1"From now on, I'm done with my family's nonsense"
-                n "Remember what you said?"
-                p 1"Never forgot."
-                if norman_affection >= 2:
-                    if rocky_dead == True and vinnie_dead == True and tara == False:
-                        n 1"You're...{w=.3} all that matters to me now..."
+        if tara == True:
+            show w 15 at right2 with dissolve
+            w "...Father...{w=.3} couldn't you see how much this meant to people...{w=.3} how...{w=.3} why... "
+        if norman_dead == False:
+            n 8"These people... {w=.3}they're so...{w=.3} confusing... {w=.3}if you wanted to help people... {w=.3}then why cause all these monstrosities?"
+            n "It's like...{w=.3} my parents...{w=.3} they say they love me but then act the opposite..."
+            n 3a"I don't know how to feel about them.{w=.3} They're big donors and associates to a lot of corporations, including Samsara.{w=.3} They...{w=.3} helped... {w=.3}fuel this..."
+            n "They're two-faced, {w=.3}they act so sweet and innocent and pose me with them to create a happy family image for the public"
+            n 8"Behind closed doors they've had all these high expectations for me to take over their work and locked me out of their wealth because I have to \"earn\" it..."
+            n "They're never there for me when I need it, always busy somewhere else.{w=.3} Every time I need their help they tell me to quit bothering them..."
+            n 6"My whole life has been me acting alone, until I met all of you...{w=.3} my first friends..."
+            menu:
+                "Find a new family!" if insanity_level == 0 or norman_affection >= 3:
+                    $ expose_samsara_together_3 = True
+                    $ norman_affection += 1
+                    p 3"Norman you'll always have a home within my heart..."
+                    if rocky_dead == True:
+                        p 3"Rocky loved you..."
                     else:
-                        n 9"You matter... {w=.3}so much to me..."
-                        "Norman stares deep into my eyes before getting nervous and looking away..."
-                    if insanity_level <= 1:
-                        "So cute..."
-                "I read a poem during class presentation about how you're real family is the one who truly cares about you, {w=.3}not who's tied through blood"
-                "Guess it really stuck to him, and me..."
+                        p 3"Rocky loves you..."
 
-            "Sounds rough":
-                n 8"...Yeah it is..."
-    if rocky_dead == False:
-        r 11"Norman,{w=.3} you're like the most mature one out of all of us, {w=.3}even though me and Vin are older than you... {w=.3}Always had our backs and set our sights straight..."
-        r "What kind of friend would I be if I weren't there for you? {w=.3}I'll always have your back too little buddy...{w=.3} no matter what..."
-    if vinnie_dead == False:
-        v 12"You really did save me and rocky, {w=.3}we were just sort of aimlessly drifting in life, until we met you. {w=.3}You made us realize that we had passions"
-        v "My medical degree to save lives... {w=.3}Rocky's architect degree to build housing for low income families...{w=.3} we would never have put it into action..."
-    if tara == True:
-        show w 4 at left1
-        w "I haven't been with you for too long but I can tell you've had quite the affect on people's lives..."
-        w "When you have someone you can trust... {w=.3}don't let them go...{w=.3} because you never know if it'll be the last time you'll be with them..."
-    if norman_dead == False:
-        n "..."    
+                    if vinnie_dead == True:
+                        p 3"Vinnie loved you..."
+                    else:
+                        p 3"Vinnie loves you..."
+
+                    if tara == True:
+                        p 3"Tara is so grateful for us saving her"
+                    if norman_affection >= 3:
+                        p 4"And I-"
+                    p 4"..."
+                    show n 9 with dissolve
+                    n "..."
+                    n 6"...Thank you [pov], {w=.3}you've told me what I needed to hear..."
+                    n 1"From now on, I'm done with my family's nonsense"
+                    n "Remember what you said?"
+                    p 1"Never forgot."
+                    if norman_affection >= 2:
+                        if rocky_dead == True and vinnie_dead == True and tara == False:
+                            n 1"You're...{w=.3} all that matters to me now..."
+                        else:
+                            n 9"You matter... {w=.3}so much to me..."
+                        "Norman stares deep into my eyes before getting nervous and looking away..."
+                        if insanity_level == 0:
+                            "So cute..."
+                    "I read a poem during class presentation about how you're real family is the one who truly cares about you, {w=.3}not who's tied through blood"
+                    "Guess it really stuck to him, {w=.5}and me..."
+
+                "Sounds rough":
+                    n 8"...Yeah it is..."
+            if rocky_dead == False:
+                r 11"Norman,{w=.3} you're like the most mature one out of all of us, {w=.3}even though me and Vin are older than you... {w=.3}Always had our backs and set our sights straight..."
+                r "What kind of friend would I be if I weren't there for you? {w=.3}I'll always have your back too little buddy...{w=.3} no matter what..."
+            if vinnie_dead == False:
+                v 12"You really did save me and rocky, {w=.3}we were just sort of aimlessly drifting in life, until we met you. {w=.3}You made us realize that we had passions"
+                v "My medical degree to save lives... {w=.3}Rocky's architect degree to build housing for low income families...{w=.3} we would never have put it into action..."
+            if tara == True:
+                w 4"I haven't been with you for too long but I can tell you've had quite the affect on people's lives..."
+                w "When you have someone you can trust... {w=.3}don't let them go...{w=.3} because you never know if it'll be the last time you'll be with them..."
+            if norman_dead == False:
+                n "..."    
     scene lab closet with dissolve
     jump pnc_loop
 
@@ -541,7 +548,7 @@ label lab_note_1:
     centered "{font=Dudu_Calligraphy.ttf}Jen Zhara- Lab Technician- The patients from the hospital seem nervous. We told them it will be ok, it's all for the good of society, their efforts won't go to waste.{/font}"
     centered "{font=Dudu_Calligraphy.ttf}That seemed to have pacified them for now. We target people that would have died anyway, so what's the the point if they die during our experiments?{/font}"
     centered "{font=Dudu_Calligraphy.ttf}Better to go being useful than wasting away in a bed somewhere. Our virus experimentation seems to be going places.{/font}"
-    centered "{font=Dudu_Calligraphy.ttf}We're putting strand #33 in the samsara coffee now; we'll be judging the effects on the local population by seeing the hospital intake. We initially were against it but the CEO made a passionate argument for it.{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}We're putting strand #33 in the Samsara coffee now; we'll be judging the effects on the local population by seeing the hospital intake. We initially were against it but the CEO made a passionate argument for it.{/font}"
     centered "{font=Dudu_Calligraphy.ttf}If what we're doing has such a minimal impact when compared to the common cold. Then where's the harm in being one step closer to curing the curse of mortality?{/font}"
     hide black with dissolve
     play sound "audio/sfx/digi beep.ogg"
@@ -564,54 +571,55 @@ label lab_note_1:
 
         if norman_dead == False:
             show n 5 at left with dissolve
-            n "*gasp* Calm down please! Your fist is bleeding!"
+            n "*gasp* {w=.3}Calm down please!{w=.3} Your fist is bleeding!"
             hide n with dissolve
-            hide v with dissolve
+        hide v with dissolve
         r "BASTARDS!!!!!!!!"
         if tara == True:
             show w 2 at right with dissolve
             w "Yeah go ahead! Smash the thing that hundreds gave their lives for! {w=.3}I'm sure the data on there want important or anything!"
             show r 3a at hop
-            r "GAVE?!?!? More like stolen! {w=.3}Listen here! PEOPLE were INFECTED by this.{w=.3} Oh sorry! I guess daddy's little girl never had to worry about being hurt like the rest of us?! Must be nice being born into the 1 percent!"
-            w "Relax,{w=.3} it said here \"strand 33\" having similar effects to the common cold,{w=.3} they were most likely testing how their manufactured virus would survive amongst healthy hosts they didn't have access to. If it was anything bigger the apocalypse would have happened much sooner"
+            r "GAVE?!?!? More like stolen! {w=.3}Listen here! PEOPLE were INFECTED by this.{w=.3} Oh sorry! I guess daddy's little girl never had to worry about being hurt like the rest of us!!! Must be nice being born into the 1 percent!"
+            w "Relax,{w=.3} it said here \"strand 33 having similar effects to the common cold\",{w=.3} they were most likely testing how their manufactured virus would survive amongst healthy hosts they didn't have access to"
+            w "If it was anything bigger the apocalypse would have happened much sooner"
             r "I made my friends and family victims to their experiments with the damn coffee! {w=.3}If they wanted to experiment they should have done it on themselves!" 
             w "Real smart, how could sick people work in the first plac-"
-
+            hide r with dissolve
+            hide w with dissolve
             if expose_samsara_together == True:
                 "I touch Tara's shoulder and whisper about Rocky's mother, {w=.3}she's stunned in place for a moment before closing her eyes and starts solemnly nodding her head and recomposing herself"
             else:
                 "I touch Tara's shoulder and whisper about Rocky's home life,{w=.3} she's stunned in place for a moment before closing her eyes and starts solemnly nodding her head and recomposing herself"
-            hide r with dissolve
-            hide w with dissolve
             show w 14 at right with dissolve
-            show r 3a
+            show r 3a with dissolve
             w "..."
             w 3"...{w=.3}You're right...{w=.3} I'm downplaying it aren't I...{w=.3} and by extension...{w=.3} downplaying your suffering... {w=.3}It was heinous for them to have the populace unknowingly ingest the coffee"
             w "I just didn't want those horrors to go to waste... {w=.3}It could be possible for people to return here and backwards engineer a cure of some sort?" 
             w 8"We come from two different worlds... one good one bad, {w=.3} I- {w=.3}just didn't want the place where I came from...{w=.3} to be pure bad.{w=.3} Because,{w=.3} then what would that make me?"
             w 14"...{w=.3}and I'm still making it about me...{w=.3} when you're the one suffering...{w=.3} I'm sorry..."
             r 4a"..."
-            r 3"...{w=.3}Its fine,{w=.3} I may have overreacted.{w=.3} As long as you keep in mind that things happening here are unjustifiable... {w=.3}we'll be good"
+            r 3"...{w=.3}Its fine,{w=.3} I may have overreacted.{w=.3} As long as you keep in mind that the things happening here are unjustifiable... {w=.3}we'll be good"
             r 1"..."
-            r 3"I shouldn't have destroyed all this stuff too...{w=.3} people COULD change this for the better; my anger got the best of me..."
-            show r 7 with dissolve
+            r 3"I shouldn't have destroyed all this stuff too...{w=.3} people probably {w=.2}COULD{w=.2} use this for the better;{w=.3}  my anger got the best of me..."
+            r 7"..."
             r "Sorry... {w=.3}if I scared you..."
             w 5"...{w=.3}It's fine... {w=.3}I overreacted too..."
             "..."
             hide r with dissolve
             hide w with dissolve
-            show v 1 with dissolve
-            v "Rocky...{w=.3} you've changed..."
+            if vinnie_dead == False:
+                show v 1 with dissolve
+                v "Rocky...{w=.3} you've changed..."
         else:
 
             "Rocky continues punching the screen until it blacks out and his fist is a mess"
-
-            n "..."
+            if norman_dead == False:
+                n "..."
 
             if insanity_level <= 1:
                 p 14"Stop it! {w=.3}I'm mad too but this isn't helping anyone!"
-
-            v "Rocky please stop you're scaring me..."
+            if vinnie_dead == False:
+                v "Rocky please stop you're scaring me..."
             hide r with dissolve
             "He stops when he hears those words and wordlessly turns around"
             r "..."
@@ -626,33 +634,32 @@ label lab_note_1:
 # tara tank
 label lab_note_3:
 
-    play sound "audio/sfx/page turn.ogg"
+    play sound "audio/sfx/digi beep.ogg"
     show black with Dissolve(1.):
             alpha.6
-    centered "{font=Dudu_Calligraphy.ttf}Hakim Lee Head Senior researcher- Artificial Womb Experiment- Take #3- SUCCESS{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}Hakim Lee- Head Senior Researcher- Artificial Womb Experiment- Take #6- SUCCESS{/font}"
     centered "{font=Dudu_Calligraphy.ttf}First lab grown subject successfully developed from a solo male. The subject exhibits zero abnormalities and appears to be fully conscious. Subject is female and was created using the CEO's DNA. {/font}"
     centered "{font=Dudu_Calligraphy.ttf}He seems oddly intrigued by her. In all my years of working with him, I've never seen him so interested in another life that wasn't his...{/font}"
     centered "{font=Dudu_Calligraphy.ttf}I wonder if he even recognizes her as her own unique life form, or as an extension of him? Taran what happened to you... you are not the man who recruited me all those years ago{/font}"
     hide black with dissolve
-    play sound "audio/sfx/page turn.ogg"
     
     if tara == True:
         show w 2 with dissolve
-        "Tara steps closer next to me to read the note as well"
+        "Tara steps closer next to me to read the text as well"
         if rocky_dead == False or norman_dead == False or vinnie_dead == False:
             "We're the only ones in this part of the room"
-        w "This is where I was created...{w=.3} I never had a mother only father and Samsara to look after me... {w=.3}I wonder if I {i}am{/i} a carbon copy of father and turn out to repeat his mistakes..."
+        w "This is where I was created...{w=.3} I never had a mother only a father and Samsara to look after me... {w=.3}I wonder if I {i}am{/i} a carbon copy of father and turn out to repeat his mistakes..."
 
         menu:
 
-            "The fact that your questioning it means you're not" if insanity_level <= 1:
+            "The fact that your questioning it means you're not" if insanity_level == 0:
                 $ tara_against_dad = True
-                p "We are not our parents... {w=.3}the destiny you forge for yourself is your choice to make only, {w=.3}not anybody else's"
+                p 2"We are not our parents... {w=.3}the destiny you forge for yourself is your choice to make only, {w=.3}not anybody else's"
                 w 14"..."
                 w 11"Why,{w=.3} yes I suppose you are right... {w=.3}Why not stop focusing on his life and start focusing on mine"
-                w 2"My entire life has been composed of figuring out if my father is really who he says he is and trying to fix his mistakes to save him..."
+                w 2"My entire life has been composed of discovering his true nature and fixing his mistakes to protect us..."
                 w 5"From now on,{w=.3} I'll be doing it to save the world, {w=.3}and this is his last mistake..."
-                p 10"That's the spirit!"
+                p 13"That's the spirit!"
                 w 1"Father, {w=.3}I don't want to hurt you or anyone else... {w=.3}but if the time comes...{w=.3} I'm ready..."
 
             "...":
@@ -669,18 +676,19 @@ label lab_note_4:
             alpha.6
     centered "{font=Dudu_Calligraphy.ttf}Daniel McGee- Research Assistant- Finally! AFTER YEARS FINALLY!!! We have successfully created a virus that doesn't kill the host AND overrides other diseases the former may have!{/font}"
     centered "{font=Dudu_Calligraphy.ttf}This isn't what we were achieving in our search for immortality but it's the closest we're gonna get! The entire lab has been celebrating for the past couple days!{/font}"
-    centered "{font=Dudu_Calligraphy.ttf}Our families will be cured! Disease is a thing of the past! We dont care if we dont have permission from the CEO anymore! We're dispatching it in the chem trails ASAP! I'm saving you Grandma! Only downside is that it makes subjects near brain dead{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}Our families will be cured! Disease is a thing of the past! We don't care if we don't have permission from the CEO anymore! We're dispatching it in the chem trails ASAP! I'm saving you Grandma! Only downside is that it makes subjects near brain dead...{/font}"
     centered "{font=Dudu_Calligraphy.ttf}The CEO has been even more quiet and solitary than usual, is he not happy with what we've achieved? He said he wanted to make one final adjustment to the virus before we dispatch it... guess that's reasonable.. {/font}"
-    centered "{font=Dudu_Calligraphy.ttf}. we're already releasing it without his permission so might as well let the head researcher and founder work his magic? Perhaps he saw a flaw we didn't...{/font}"
+    centered "{font=Dudu_Calligraphy.ttf}We're already releasing it without his permission so might as well let the head researcher and founder work his magic? Perhaps he saw a flaw we didn't...{/font}"
     hide black with dissolve
     play sound "audio/sfx/page turn.ogg"
     if vinnie_dead == False:
         show v 25 at right with dissolve
-        v "Welp, {w=.3}this is how they initially started out...{w=.3} guess I better apologize to Rocky for saying his conspiracies were stupid..."
+        v "Welp, {w=.3}this is how it started out...{w=.3} guess I better apologize to Rocky for saying his conspiracies were stupid..."
 
     if rocky_dead == True and vinnie_dead == False:
         show v 2 2 at right with dissolve
         v "Rocky if your out there...{w=.3} I'm sorry"
+        hide v with dissolve
 
     if rocky_dead == False and vinnie_dead == False:
         v 2 4"NOT!!! I will never apologize even {i}IF{/i} the frogs turn gay!!!"
@@ -696,8 +704,9 @@ label lab_note_4:
         show v 4 at offscreen_left with move
         v "WHATEVER DUDE! Let's get out of here..."
         show r 10 at offscreen_right with move
-        hide r 
         hide v
+        pause 0.3
+        hide r 
     if vinnie_dead == True and rocky_dead == False:
         show r 6 with dissolve
         r "Guess the chem trail conspiracy was true... {w=.3}Vinnie...{w=.3} you would be so pissed if you were still here...{w=.3} I can even hear you doing your pouty voice whenever something goes wrong heh"
@@ -725,12 +734,12 @@ label boss_battle:
     "Here we are... {w=.3}it's taken so long but we're finally here..."
     scene boss battle with fade
     "..."
-    show c 13 with dissolve
+    show c 15 with dissolve
     s "..."
-    show c 10 with dissolve
+    show c 14 with dissolve
     s "...Ah,{w=.3} you're here.{w=.3} I have to say I'm impressed with how far you've progressed.{w=.3} I figured the juggernaut would dispose of you"
     s 1"I've been watching you, you know. {w=.3}There are cameras all over this building. {w=.3}I've been with you ever since you stepped foot into this building..."
-    "The CEO is on a elevated platform with a control panel"
+    "The CEO is on an elevated platform with a control panel"
     if norman_dead == False:
         show n 5 at left with dissolve
         n "Sir!{w=.3} You need to stop what you're doing at once!{w=.3} Let us out of here!"
@@ -756,7 +765,7 @@ label boss_battle:
         s 7"Oh my how unrestrained, {w=.3}would you still behave this way if you were alone?"
 
         if vinnie_dead == True:
-            s 3"Are you making up for your lack of ferocity with saving the opossum?{w=.3} They died because of you.{w=.3} I'm sure you know that"
+            s 3"Are you making up for your lack of ferocity with saving the Opossum?{w=.3} They died because of you.{w=.3} I'm sure you know that"
         if norman_dead == True:
             s 12"I'm sure the Golden Retriever would'nt be a fan of your attitude,{w=.3} good thing they're not here right now right?"   
         hide r 4a with dissolve
@@ -773,7 +782,7 @@ label boss_battle:
         s 12"Were you trying to get them all killed? {w=.3}Or do you just not care either way?"
     else:
         s 3"Oh it's you the leader I presume? You've done {i}so{/i} well guiding everyone... {w=.3}Props to you I suppose..."
-        if norman_affection >= 3:
+        if norman_affection >= 5:
             s 1"You even made yourself a little boyfriend in all this,{w=.3} I wonder if you took advantage of the situation for this very purpose"
             if norman_dead == True:
                 s 2"Too bad you couldn't protect them!{w=.3} I'm sure their last thoughts were of pretending they were in your arm's instead of the monsters"
@@ -795,7 +804,7 @@ label boss_battle:
     if vinnie_dead == True and rocky_dead == True:
         s 5"Oh no both the poor clueless lovers are dead..."
         show c 6
-        extend "they're fucking each other while burning in hell...{w=.3} does that make you feel better?"
+        extend "they're fucking each other whilst burning in hell...{w=.3} would that make you feel better?"
     if vinnie_dead == True and rocky_dead == True and norman_dead == True:
         s 3"Wow nice job leading the team champ! {w=.3}Be honest,{w=.3} it was satisfying to watch them die{w=.3} no?"
         s 2"You're really some type of sick freak...{w=.3} I would be blushing if I weren't so hellbent on killing you..."
@@ -807,8 +816,9 @@ label boss_battle:
     s 6"When they wanted to use it for something else...{w=.3} I corrupted it into this zombie virus.{w=.3} I realized the world only cares about each other, so I need to remake it to care about ME and only ME as the one who guides them out of armageddon!"
     s 3"I needed to tie up a few loose ends here,{w=.3} so I got this here private military force of mine to shoot up any survivors and blow up the building so none can tell what really happened here!"
     show c 3 at hop
+    play sound "audio/sfx/hit.ogg"
     "The CEO kicks one of the many armored men's corpses in the head"
-    s 2"Of course,{w=.3} {i}they{/i} had to be dispatched too,{w=.3} so I ordered them all to kill one another!{w=.3} The were infected by a special of the virus a long time ago and are completely bound to my will"
+    s 2"Of course,{w=.3} {i}they{/i} had to be dispatched too,{w=.3} so I ordered them all to kill one another!{w=.3} The were infected by a special form of the virus a long time ago and are completely bound to my will"
     s 6"Hmm if you're not up for jumping into this here pit of hydrofluoric acid, {w=.3}then there is an alternative..."
     hide c 7 with dissolve
     play music "audio/music/live or die intro.ogg"
@@ -829,7 +839,7 @@ label boss_battle:
     show breadly at left with moveinleft
     show breadly at shiver_loop_left
 
-    queue sound "audio/sfx/Monster_00.wav"
+    queue sound "audio/sfx/Monster_00.ogg"
 
     show naut with dissolve
     show naut at hop_loop
@@ -844,7 +854,7 @@ label boss_battle:
 
 label save_norman_finale:
     if norman_dead == False:
-        if norman_affection >= 2:
+        if norman_affection >= 5:
             show n 5 with dissolve
             n "[pov]!{w=.3} Behind you! {w=.3}I won't let them hurt you!"
             show n at hop
@@ -854,7 +864,7 @@ label save_norman_finale:
         else:
             show n 5 with dissolve
             n "Ah!{w=.3} I need help!"
-            if norman_has_gun == True:
+            if norman_has_gun == True and ammo >= 1:
                 "Norman's gun was wrestled out of his hand by one of the zombies"
             show n 5 at hop_loop
             jump boss_zombies_v_norman
@@ -863,34 +873,55 @@ label save_norman_finale:
 
         menu boss_zombies_v_norman:
 
-            "Shoot at the CEO" if sage_has_gun == True:
+            "Shoot at the CEO" if sage_has_gun == True and ammo >= 1:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
                 "I tried shooting at the CEO but he ducked behind his control panel, he's too high up to get an accurate shot or attack..."
                 s "Hahahaha!!!{w=.3} Stop it! {w=.3}You're too funny! It's unsightly!!{w=.3} Hahahaha!!!!"
                 "I wasted a bullet for nothing!"
-                jump boss_zombies_v_norman
+                $ addNormhealth(-1)
+                if norman_health == 0:
+                    $ norman_lab_death = True
+                    jump save_vinnie_finale
+                else:
+                    jump boss_zombies_v_norman
 
-            "Use Tara against the CEO" if tara == True:
-                $ tara_hostage = True
-                jump boss_aftermath
+            "Use Tara against the CEO" if tara == True and ceo_caught_bluff == False:
+                if rocky_dead == True and norman_dead == True and vinnie_dead == True:
+                    $ tara_hostage = True
+                    jump boss_aftermath
+                else:
+                    $ ceo_caught_bluff = True
+                    p 14 "Look at your daughter!{w=.3} How could you put her through this!"
+                    s "Hmm? My daughter is perfectly safe!{w=.3} Haven't you noticed she isn't being targeted?"
+                    s "If you're referring to her dissaproval...{w=.3} then shut it! {w=.3}It's typical child rebelliousness!{w=.3} She'll grow used to the role I have in mine for her!"
+                    w "I will never!{w=.3} Stop right now! {w=.3}Leave them alone!"
+                    s "Tsk{w=.3}, being a parent is so difficult sometimes..."
+                    p 14"I-{w=.3} I'll kill her i-{w=.3}if you don't stop this!"
+                    s "HAHAHAHAHA NICE TRY I KNOW YOU'RE BLUFFING! YOU'RE TOO SOFT TO HURT HER!!!"
+                    "Dammit he caught my ruse..."
+                    $ addNormhealth(-1)
+                    if norman_health == 0:
+                        $ norman_lab_death = True
+                        jump save_vinnie_finale
+                    else:
+                        jump boss_zombies_v_norman
 
             "Take off the helmet of the juggernaut zombie" if boss_juggernaut_zombie == True:
                 jump the_juggernaut
 
             "I save myself and do nothing!":
-                $ insanity_level += 1
-                $ norman_health -= 4
-                if norman_health <= 0:
+                $ addInsanity_level(1)
+                $ addNormhealth(-4)
+                if norman_health == 0:
                     $ norman_lab_death = True
                 play sound "audio/sfx/punch.ogg"
                 queue sound "audio/sfx/Monster_00.ogg"
                 n "Yeowch!" with hpunch
                 "Norman is hurt..."
-                jump save_vinnie_finale
 
             #"Push Norman into danger" if insanity_level >= 1 and norman_affection <= 1 and tara == False and rocky_dead and vinnie_dead == True:
-            #    $ norman_health -= 5
+            #    $ addNormhealth(-5)
             #    $ insanity_level == 90
             #    $ norman_dead = True
             #    n "HELP ME!! HELP ME!!"
@@ -906,7 +937,6 @@ label save_norman_finale:
                 v "I'll protect you Normie!" with hpunch
                 n "Thank you Vinnie!"
                 "Vinnie stabs one of the zombies attacking Norman but loses the knife in the process"
-                jump save_vinnie_finale
            
             "I tell Vinnie to save Norman!" if vinnies_knife == False and vinnie_dead == False:
                 if expose_samsara_together_2 == True:
@@ -916,19 +946,18 @@ label save_norman_finale:
                     v "I got you Norman!" with hpunch
                     "Vinnie helps Norman with no issue"
                 else:
-                    $ vinnie_health -= 1
+                    $ addVinhealth(-1)
                     show v 2 at right with moveinright
                     play sound "audio/sfx/hit.ogg"
                     queue sound "audio/sfx/Monster_00.ogg"
                     v "Got it! {w=.3}I'll save you Norm! OW!" with hpunch
                     "Vinnie punches the man but gets punched back HARD in the face"
                     show v 2 1 at offscreen_bottom with move
-                    if vinnie_health <= 0:
+                    if vinnie_health == 0:
                         $ vinnie_lab_death = True
-                jump save_vinnie_finale
 
             "I skewer the zombies with my horns!":
-                if norman_affection >= 2:
+                if norman_affection >= 5:
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/Monster_00.ogg"
                     "I'm not letting HIM die!" with hpunch
@@ -938,42 +967,37 @@ label save_norman_finale:
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/Monster_00.ogg"
                     "I take some damage in return..." with hpunch
-                    if sage_health <= 1:
+                    if sage_health == 0:
                         jump death_screen
                     n 2"Thanks!"
-                jump save_vinnie_finale
             
             "I shoot the zombies!" if sage_has_gun == True and ammo >= 1:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
                 queue sound "audio/sfx/Monster_00.ogg"
                 "I shoot the zombie attacking Norman!" with hpunch
-                jump save_vinnie_finale
 
-            "I shoot the zombies!" if norman_has_gun == True and ammo >= 1:
+            "I pick up the gun and shoot the zombies!" if norman_has_gun == True and ammo >= 1:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
                 queue sound "audio/sfx/Monster_00.ogg"
                 "I pick up the gun he dropped and shoot the zombie attacking Norman! I'm in control of the gun from now"  with hpunch
-                jump save_vinnie_finale       
 
             "I crowbar the zombies!" if crowbar_collected and rocky_dead == True:
                 play sound "audio/sfx/hit.ogg"
                 queue sound "audio/sfx/Monster_00.ogg"
                 $ crowbar_collected = False
                 "I use the crowbar against the zombies! But the horde yanks it out of my hands and it gets lost in the stampede" with hpunch
-                jump save_vinnie_finale
 
             "I tell Rocky to save Norman!" if rocky_dead == False:
-                if expose_samsara_together:
+                if expose_samsara_together == True:
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/Monster_00.ogg"
                     show r 1a at left with moveinleft
                     r "GET BEHIND ME!" with hpunch
                     n "GOT IT!"
                     hide r 1a with dissolve
-                    jump save_vinnie_finale
-                elif crowbar_collected:
+                elif crowbar_collected == True and expose_samsara_together == False:
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/Monster_00.ogg"
                     $ crowbar_collected = False
@@ -981,21 +1005,20 @@ label save_norman_finale:
                     r "HUT!" with hpunch
                     "Rocky uses the crowbar against the zombies but the horde yanks it out of his hand and it gets lost in the stampede"
                     hide r 1a with dissolve
-                    jump save_vinnie_finale
                 else:
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/Monster_00.ogg"
-                    $ rocky_health -= 1
+                    $ addRockyhealth(-1)
                     show r 1a at left with moveinleft
                     r "URGH!" with hpunch
                     "Rocky uses his body to shell Norman from danger but gets hurt in retaliation"
-                    if rocky_health <= 0:
+                    if rocky_health == 0:
                         $ rocky_lab_death = True
                     hide r 1a with dissolve
-                    jump save_vinnie_finale
                 hide n with dissolve
                 hide r with dissolve
                 hide v with dissolve
+
 label save_vinnie_finale:
     if vinnie_dead == False:
         show v 2 with dissolve
@@ -1013,33 +1036,57 @@ label save_vinnie_finale:
 
         menu boss_zombies_v_vinnie:
 
-            "Shoot at the CEO" if sage_has_gun == True:
+            "Shoot at the CEO" if sage_has_gun == True and ammo >= 1:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
                 "I tried shooting at the CEO but he ducked behind his control panel,{w=.3} he's too high up to get an accurate shot or attack..."
                 s "Hahahaha!!! Stop it! You're too funny! It's unsightly!! Hahahaha!!!!"
                 "I wasted a bullet for nothing!"
-                jump boss_zombies_v_vinnie
 
-            "Use Tara against the CEO" if tara == True:
-                $ tara_hostage = True
-                jump boss_aftermath
+                $ addVinhealth(-1)
+                if vinnie_health == 0:
+                    $ vinnie_lab_death = True
+                    jump save_rocky_finale
+                else:
+                    jump boss_zombies_v_vinnie
+
+            "Use Tara against the CEO" if tara == True and ceo_caught_bluff == False:
+                if rocky_dead == True and norman_dead == True and vinnie_dead == True:
+                    $ tara_hostage = True
+                    jump boss_aftermath
+                else:
+                    $ ceo_caught_bluff = True
+                    p 14 "Look at your daughter!{w=.3} How could you put her through this!"
+                    s "Hmm? My daughter is perfectly safe!{w=.3} Haven't you noticed she isn't being targeted?"
+                    s "If you're referring to her dissaproval...{w=.3} then shut it! {w=.3}It's typical child rebelliousness!{w=.3} She'll grow used to the role I have in mine for her!"
+                    w "I will never!{w=.3} Stop right now! {w=.3}Leave them alone!"
+                    s "Tsk{w=.3}, being a parent is so difficult sometimes..."
+                    p 14"I-{w=.3} I'll kill her i-{w=.3}if you don't stop this!"
+                    s "HAHAHAHAHA NICE TRY I KNOW YOU'RE BLUFFING! YOU'RE TOO SOFT TO HURT HER!!!"
+                    "Dammit he caught my ruse..."
+                    $ addVinhealth(-1)
+
+                    if vinnie_health == 0:
+                        $ vinnie_lab_death = True
+                        jump save_rocky_finale
+                    else:
+                        jump boss_zombies_v_vinnie
 
             "Take off the helmet of the juggernaut zombie" if boss_juggernaut_zombie == True:
                 jump the_juggernaut
 
             "I save myself and do nothing!":
-                $ insanity_level += 1
-                $ vinnie_health -= 3
+                $ addInsanity_level(1)
+                $ addVinhealth(-3)
                 play sound "audio/sfx/punch.ogg"
                 queue sound "audio/sfx/zombie-19.ogg"
                 v "AGH!" with hpunch
                 "Vinnie is hurt..."
-                if vinnie_health <= 0:
+                if vinnie_health == 0:
                     $ vinnie_lab_death = True
 
             #"Push Vinnie into danger" if insanity_level >= 1 and tara == False and rocky_dead and norman_dead == True:
-            #    $ vinnie_health -=5
+            #    $ addVinhealth(-5)
             #    $ insanity_level == 90
             #    $ vinnie_dead = True
             #    show v 2 at offscreen with move
@@ -1055,7 +1102,7 @@ label save_vinnie_finale:
                 "The knife was lost in the process..."
            
             "I tell Norman to save Vinnie!" if norman_dead == False:
-                if norman_affection >= 1:
+                if expose_samsara_together_3 == True:
                     show n 5 at left with moveinleft
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/zombie-19.ogg"
@@ -1063,8 +1110,8 @@ label save_vinnie_finale:
                     "Norman does a high kick so hard it knocks a zombie's head off! Norman helps Vinnie with no issue"
                 else:
                     show n 5 at left with moveinleft
-                    $ norman_health -= 1
-                    if norman_health <= 0:
+                    $ addNormhealth(-1)
+                    if norman_health == 0:
                         $ norman_lab_death = True
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/zombie-19.ogg"
@@ -1073,12 +1120,14 @@ label save_vinnie_finale:
 
             "I attack the zombies!":
                 $ sage_health -= 1
+                if sage_health == 0:
+                    jump death_screen
                 play sound "audio/sfx/punch.ogg"
                 queue sound "audio/sfx/zombie-19.ogg"
                 v "THANK YOU GOAT PERSON!" with hpunch
                 "I get hurt in return..."
             
-            "I shoot the zombies!" if sage_has_gun == True  and ammo >= 1:
+            "I shoot the zombies!" if sage_has_gun == True and ammo >= 1:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
                 queue sound "audio/sfx/zombie-19.ogg"
@@ -1096,7 +1145,7 @@ label save_vinnie_finale:
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/zombie-19.ogg"
                     "Rocky sprints at full force while punching any zombie thats get in his way to the ground, he then pummels the zombie attacking Vinnie to ground" with hpunch
-                elif crowbar_collected:
+                elif crowbar_collected == True and expose_samsara_together == False:
                     play sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/zombie-19.ogg"
                     $ crowbar_collected = False
@@ -1104,8 +1153,8 @@ label save_vinnie_finale:
                     "Rocky uses the crowbar against the zombies but the horde yanks it out of his hand and it gets lost in the stampede" with hpunch
                 else:
                     play sound "audio/sfx/punch.ogg"
-                    $ rocky_health -= 1
-                    if rocky_health <= 0:
+                    $ addRockyhealth(-1)
+                    if rocky_health == 0:
                         $ rocky_lab_death = True
                     r "URGH!"
                     "Rocky uses his body to shell Vinnie from danger but gets hurt in retaliation" with hpunch
@@ -1125,36 +1174,59 @@ label save_rocky_finale:
         else:
             jump boss_zombies_v_rocky
     else:
-        jump boss_aftermath
+        jump the_juggernaut
 
         menu boss_zombies_v_rocky:
 
-            "Shoot at the CEO" if sage_has_gun == True:
+            "Shoot at the CEO" if sage_has_gun == True and ammo >= 1:
                 $ ammo -= 1
                 play sound "audio/sfx/shoot.ogg"
                 "I tried shooting at the CEO but he ducked behind his control panel, he's too high up to get an accurate shot or attack..."
                 s "Hahahaha!!! Stop it! You're too funny! It's unsightly!! Hahahaha!!!!"
                 "I wasted a bullet for nothing!"
-                jump boss_zombies_v_rocky
+                $ addRockyhealth(-1)
+                if rocky_health == 0:
+                    $ rocky_lab_death = True
+                    jump the_juggernaut
+                else:
+                    jump boss_zombies_v_rocky
 
-            "Use Tara against the CEO" if tara == True:
-                $ tara_hostage = True
-                jump boss_aftermath
+            "Use Tara against the CEO" if tara == True and ceo_caught_bluff == False:
+                if rocky_dead == True and norman_dead == True and vinnie_dead == True:
+                    $ tara_hostage = True
+                    jump boss_aftermath
+                else:
+                    $ ceo_caught_bluff = True
+                    p 14 "Look at your daughter!{w=.3} How could you put her through this!"
+                    s "Hmm? My daughter is perfectly safe!{w=.3} Haven't you noticed she isn't being targeted?"
+                    s "If you're referring to her dissaproval...{w=.3} then shut it! {w=.3}It's typical child rebelliousness!{w=.3} She'll grow used to the role I have in mine for her!"
+                    w "I will never!{w=.3} Stop right now! {w=.3}Leave them alone!"
+                    s "Tsk{w=.3}, being a parent is so difficult sometimes..."
+                    p 14"I-{w=.3} I'll kill her i-{w=.3}if you don't stop this!"
+                    s "HAHAHAHAHA NICE TRY I KNOW YOU'RE BLUFFING! YOU'RE TOO SOFT TO HURT HER!!!"
+                    "Dammit he caught my ruse..."
+                    $ addRockyhealth(-1)
+                    if rocky_health == 0:
+                        $ rocky_lab_death = True
+                        jump the_juggernaut
+                    else:
+                        jump boss_zombies_v_rocky
+
 
             "Take off the helmet of the juggernaut zombie" if boss_juggernaut_zombie == True:
                 jump the_juggernaut
 
             "I save myself and do nothing!":
-                $ insanity_level += 1
-                $ rocky_health -= 6
+                $ addInsanity_level(1)
+                $ addRockyhealth(-6)
                 play sound "audio/sfx/punch.ogg"
                 queue sound "audio/sfx/Zombie_03.ogg"
                 r "Oof!"
-                if rocky_health <= 0:
+                if rocky_health == 0:
                     $ rocky_lab_death = True
 
             #"Push Rocky into danger" if insanity_level >= 1 and norman_affection <= 1 and tara == False and norman_dead and vinnie_dead == True:
-            #    $ rocky_health -=10
+            #    $ addRockyhealth(-10)
             #    $ insanity_level == 90
             #    $ rocky_dead = True
             #    $ rocky_lab_push_death = True
@@ -1179,12 +1251,12 @@ label save_rocky_finale:
                     v "I got you Rocky!"
                     "They pierce their claws through a zombies eyes! Vinnie saves Rocky with no issue!" with hpunch
                 else:
-                    $ vinnie_health -= 1
+                    $ addVinhealth(-1)
                     play sound "audio/sfx/stab.ogg"
                     queue sound "audio/sfx/Zombie_03.ogg"
                     v "Got it! I'll save you Rocko! OW!" with hpunch
                     "Vinnie kicks the zombies but gets hurt"
-                    if vinnie_health <= 0:
+                    if vinnie_health == 0:
                         $ vinnie_lab_death = True
 
             "I skewer the zombies with my horns!":
@@ -1192,7 +1264,7 @@ label save_rocky_finale:
                 play sound "audio/sfx/punch.ogg"
                 queue sound "audio/sfx/Zombie_03.ogg"
                 "I take some damage in return..." with hpunch
-                if sage_health <= 1:
+                if sage_health == 0:
                     jump death_screen
                 r 10"Thankya [pov]!"
             
@@ -1209,14 +1281,20 @@ label save_rocky_finale:
                 "Rocky use the crowbar against the zombies! But the horde yanks it out of his hands and it gets lost in the stampede" with hpunch
 
             "I tell Norman to save Rocky!" if norman_dead == False:
-                show n 5 at left with moveinleft
-                $ norman_health -= 1
-                play sound "audio/sfx/hit.ogg"
-                queue sound "audio/sfx/Zombie_03.ogg"
-                if norman_health <= 0:
-                    $ norman_lab_death = True
-                n "Here I go! URGRGH!!"with hpunch
-                "Norman gets damaged in turn..."
+                if expose_samsara_together_3 == True:
+                    show n 5 at left with moveinleft
+                    n "NO MORE DEATHS ON MY WATCH!"
+                    r "WOW THAT WAS AMAZING!!!"
+                else:
+                    show n 5 at left with moveinleft
+                    $ addNormhealth(-1)
+                    play sound "audio/sfx/hit.ogg"
+                    queue sound "audio/sfx/Zombie_03.ogg"
+                    if norman_health == 0:
+                        $ norman_lab_death = True
+                    n "Here I go! URGRGH!!"with hpunch
+                    "Norman gets damaged in turn..."
+
 label the_juggernaut:
         $ boss_juggernaut_zombie = False
         play sound "audio/sfx/punch.ogg"
@@ -1226,15 +1304,24 @@ label the_juggernaut:
         queue sound "audio/sfx/monster-1.ogg"
         queue sound "audio/sfx/monster-3.ogg"
         queue sound "audio/sfx/monster-10.ogg"
-        if norman_health >= 0:
+        if norman_lab_death == True:
+            $ norman_dead = True
+
+        if rocky_lab_death == True:
+            $ rocky_dead = True
+
+        if vinnie_lab_death == True:
+            $ vinnie_dead = True
+
+        if norman_dead == False:
             show n 5 at left with moveinright
             "Norman takes his chance to tear off some more of the juggernaut's armor!"
             show n 5 at offscreen_right with move
-        if vinnie_health >= 0:
+        if vinnie_dead == False:
             show v 3 at right with moveinleft
             "Vinnie uses their claws rip out it's eyes!"
             show v 3 at offscreen_left with move
-        if rocky_health >= 0:
+        if rocky_dead == False:
             show r 3a at right2 with moveinright
             "Rocky uses his jaws to inflict large gashes upon it's neck!"
             show r 3a at offscreen_left with move
@@ -1242,7 +1329,7 @@ label the_juggernaut:
             show w 4 at left with moveinright
             "Tara picked up some debris and is chucking at it's face, knocking it off balance!"
             show w 4 at offscreen_right with move
-        "The juggernaut moans in distress before jumping into vat of acid to chase after his helmet, it takes the majority of the zombies along with it"
+        "The juggernaut moans in distress before jumping into the vat of acid to chase after his helmet, it takes the majority of the zombies along with it"
         pause 1.0
 label boss_aftermath:
     scene boss battle with dissolve
@@ -1254,7 +1341,7 @@ label boss_aftermath:
             "I grab her and point a gun towards her head"
         else:
             "I grab her and threaten to throw her into the pit of acid"
-        if insanity_level <= 1:
+        if insanity_level <= 2:
             p "Play along ok?"
             show w 3
             "I whisper in Tara's ear as she nods in understanding"
@@ -1262,8 +1349,9 @@ label boss_aftermath:
         show w 3 at right with move
         show c 6 with dissolve
         s 1"Halt!"
-        "The CEO raises his fist and slams it down onto his control panel which dispenses some type of powder from above"
-        "It rains onto the zombie horde below them and they drop to ground while flailing wildly,{w=.3} until eventually,{w=.3} they stop moving entirely..."
+    "The CEO raises his fist and slams it down onto his control panel which dispenses some type of powder from above"
+    "It rains onto the zombie horde below them and they drop to ground while flailing wildly,{w=.3} until eventually,{w=.3} they stop moving entirely..."
+    if tara_hostage == True:
         s 10"Return her to me..."
         show w 2
         "I let Tara go as she stares daggers into her father's eyes"
@@ -1274,7 +1362,7 @@ label boss_aftermath:
         $ norman_dead = True
         "Norman was lost, {w=.3}I presume he was eaten whole as I don't see his corpse anywhere"
 
-        if norman_affection >= 2:
+        if norman_affection >= 4:
             "Norman,{w=.3} my Norman... {w=.3}no...{w=.3} I will avenge you..."
             "...{w=.3}I loved you..."
                 
@@ -1292,6 +1380,7 @@ label boss_aftermath:
     if vinnie_lab_death == True:
         $ vinnie_dead = True
         "Vinnie didn't survive,{w=.3} the horde lifted them and threw them over the ledge"
+        
     show c 6 with dissolve
     show c 6 at hop_loop
     s 6"That's enough of this!{w=.3} I'm giving you one last chance to give up!{w=.3} You're destroying ALL my research! {w=.3}You're setting society back by generations!"
@@ -1301,21 +1390,21 @@ label boss_aftermath:
     if norman_dead == True:
         pass
     else:
-        #show n 8 at left1 with dissolve
+        show n 8 at left1 with dissolve
         n "Does he really have the ability to wipe minds or is he bluffing?"
-
+        hide n with dissolve
     if vinnie_dead == True:
         pass
     else:
-        #show v 2 at right with dissolve
+        show v 2 at right with dissolve
         v "He's gotta be bluffing!{w=.3} He's just saying that because we caught his ass!"
-
+        hide v with dissolve
     if rocky_dead == True:
         pass
     else:
-        #show r 3a at left with dissolve
+        show r 3a at left with dissolve
         r "You're shitting me if you think we're letting you get away scot-free!"
-
+        hide r with dissolve
     p 1"So there is a way out of here..."
     if insanity_level <= 1:
         p 4"You know it's not too late,{w=.3} you can come with and answer for your crimes peacefully..."
@@ -1324,21 +1413,23 @@ label boss_aftermath:
     s 9"I-{w=.3} It's too late for me anyways... {w=.3}I... {w=.9}was bit..."
     "He rolls up his sleeve and reveals a large bite on his arm"
     p 2"I see..{w=.3} that makes an escape for you unnecessary right?"
-    s 5"Indeed,{w=.3} there is no cure"
+    s 5"Indeed,{w=.3} there is no cure... I... {w=.3}I... {w=.3} tried and failed...{w=.3} for the first time in my life.... {w=.3} I can't s-succeed..."
     if tara == True:
         hide n with dissolve
         hide r with dissolve
         hide v with dissolve
-        show w at right with moveinright
+        show w 9 at right with moveinright
         w 9"No! No! NO!! {w=.3}Father you can't die! You can't!"
         s 9"I am sorry my daughter...{w=.3} It's over for me..."
         w 7"You did such terrible things. Such disgusting things!{w=.3} Why!{w=.3} Why are you still trying to hurt me! Even now!"
-        s 10"...{w=.3}Tara... {w=.3}I've never called you by your name to your face...{w=.3} Tara... {w=.3}you're father can't provide the life you need..."
-        s "I see it now, before when you were created. I deluded myself into thinking you were nothing but a clone of me.{w=.3} You aren't though... {w=.3}I see it now,{w=.3} especially with the friends you made"
+        s 10"...{w=.3}Tara... {w=.3}I've never called you by your name to your face...{w=.9} Tara... {w=.5}you're father can't provide the life you need..."
+        s "I see it now, before when you were created. I deluded myself into thinking you were nothing but a clone of me.{w=.3} You aren't though... {w=.3}I see it now,{w=.3} especially with the attempts you've made against me"
+        show c 6
+        "He shoots me a dirty look before looking back at Tara"
         s 5"You tried so hard to protect everyone here and expose me as the monster I am... {w=.3}Tara... {w=.3}There's something wrong with my brain... {w=.3}I can't think like you do..."
-        s "I want to become god of this universe and guide the world into a new era of progression.{w=.3} I am aware that it's not something a typical person would think but I still do"
+        s "I want to become god of this universe and guide the world into a new era of progression.{w=.3} I am aware that it's not something a typical person would think {w=.9}but I do..."
         s "Even now, {w=.3}after all this death and destruction I am going to continue my ways. {w=.3}It hasn't changed me one bit, {w=.3}which made me realize how this affects you"
-        pause 0.5
+        pause 1.0
         s "..."
         s 9"You are going to die if you keep following me Tara. {w=.3}The new world will have me as it's sole ruler, {w=.3}no one can be equal to my power."
         w 15"But you're changing right now don't you see!?!{w=.3} Snap out of it! Come back to me!{w=.3} Quit your experiments and business and we can go back home and start from scratch!"
@@ -1350,10 +1441,11 @@ label boss_aftermath:
         show c 5 at hop
         s "I-"
         show w 15 at hop
-        w "Look me in the eyes when you say it! {w=.3}I don't believe your words for a second!{w=.3} I know you're head isn't right!{w=.3} But it's right enough to acknowledge your daughter for crying out loud!"
+        w "Look me in the eyes when you say it! {w=.3}I don't believe your words for a second!{w=.3} I know your head isn't right!{w=.3} But it's right enough to acknowledge your daughter for crying out loud!"
         show c 4 at shiver_loop
-        s "I- {w=.3}I- {w=.3}AAAAAAAAAAAAAAAAAAAAAAAAAAAGHHHHHHH!!!!!!!"
-        show c 4 at offscreen_left with move
+        s "I- {w=.3}I- {w=.8}AAAAAAAAAAAAAAAAAAAAAAAAAAAGHHHHHHH!!!!!!!"
+        play sound "audio/sfx/short run.ogg"
+        show c 4 at offscreen_bottom with move
         show w 9 at center with move
         "The CEO clutches his head before running away and jumping into the pit below"
         show w 9 at hop
@@ -1367,7 +1459,7 @@ label boss_aftermath:
         if norman_dead == False:
             show n 8 at left with moveinleft
             n "Oh Tara I'm so sorry..."
-            pause 0.5
+            pause 1.0
             show w 14 at sink_rise
             w "no...{w=.3}I should be the one sorry...{w=.3} for what he's done to all you..."
             "Norman pats her back as he gazes upon the abyss"
@@ -1383,7 +1475,7 @@ label boss_aftermath:
             show n 8 at left1 with move
             r "..."
             r 2"This doesn't fix what he's done.{w=.3} But at least one part of his mind knew it wasn't right"
-        w 7"I know..{w=.3} he was a monster but...{w=.3} I really thought I could bring him back..."
+        w 7"I know...{w=.3} he was a monster but...{w=.3} I really thought I could bring him back..."
         p 4"One half dominant, {w=.3}making him the monster that we knew. {w=.3}The other half deep inside,{w=.3} only coming out when he saw the first and only person he cared about..."    
         scene black with dissolve
         "Tara slowly stands up before walking over to the control panel"
@@ -1406,13 +1498,13 @@ label boss_aftermath:
         "The CEO looks back and fourth before sighing and pressing a button on the control panel that reveals an elevator door"
         s "Leads straight to the rooftop..."
         if norman_dead == False:
-            show n 6 at left with moveinleft
+            show n 6 at left1 with moveinleft
             n "Thank you for coming to reason..."
         if vinnie_dead == False:
             show v 2 at right with moveinright
             v "Finally a way out!"  
         if rocky_dead == False:
-            show r 1 at left1 with moveinright
+            show r 1 at left with moveinright
             r "...? {w=.3}I don't know if I can trust this..."
         s 1"Just one last thing... "
 
@@ -1420,28 +1512,40 @@ label boss_aftermath:
             "He's standing near the ledge"
         else:
             "We all turn around and didn't even notice he was standing near the ledge"
-        $ renpy.music.set_pause(True, channel="music")     
-        show c 2:
+
+        hide v with dissolve
+        hide w with dissolve
+        hide r with dissolve
+        hide n with dissolve
+        $ renpy.music.set_pause(True, channel="music")
+
+        show black with dissolve:
+            alpha 0.8     
+        show c 2 at center:
             ease 0.5 zoom 0.9
         s 2"{w=.3}{cps=*0.5} Prepare for the second coming.{/cps}"
         if insanity_level >=1 and vinnie_dead == True and rocky_dead == True and norman_dead == True and tara == False:
             s 5"{cps=*0.5}I see it right now in this very room. {w=.5}How... {w=.9}haunting...{/cps}"
-
+        
         show c 2 at offscreen_bottom with move
         $ renpy.music.set_pause(False, channel="music") 
         "He throws himself into to the pit below"
         hide c 2
         "..."
+        hide black with dissolve
 
         if vinnie_dead == False:
+            show v 12 at right with dissolve
             v 12"Geez..."
             if rocky_dead == True:
                 v 2"Fucker deserved worse for what happened to Rocky..."
         if rocky_dead == False:
+            show r 2 at left with dissolve
             r 2"Guess that's that taken care of..."
             if vinnie_dead == True:
                 r 2a"I wish I had the chance to rip his fucking throat out for what he caused happen to Vinnie..."
         if norman_dead == False:
+            show n 8 at left1 with dissolve 
             n 8"Oh..."
         pause 0.5
         "I stand in shock before heading for the elevator,{w=.3} I decide to take a look at the control panel to check if he called for a chopper"
@@ -1451,8 +1555,11 @@ label boss_aftermath:
             n "Better switch that off!{w=.3} I'm sure the ventilation system will get rid of it in due time!"                    
         if rocky_dead == False and tara == False:
             r 2"...I REALLY wish he was still here so I could kill him..."
-        if vinnie_dead == False and tara == False:
+        if vinnie_dead == False and tara == False and norman_dead == False:
             v 2"Wow! {w=.3}Even after death he's still just as vindictive!"
+        if vinnie_dead == False and tara == False:
+            v 2 "Let's just get out of here... the acid fumes burn my eyes..."
+        
 
     pause 0.5
     hide screen character_stats with dissolve
@@ -1464,7 +1571,7 @@ label boss_aftermath:
     "..."
     "I can't believe after all this time it's over..."
     "The deaths,{w=.3} the zombies, the people out to kill us...{w=.3} it's all over..."
-    if norman_dead == True and insanity_level <= 1 or rocky_dead == True and insanity_level <= 1  or vinnie_dead == True and insanity_level <= 1:
+    if norman_dead == True and insanity_level == 0 or rocky_dead == True and insanity_level == 0  or vinnie_dead == True and insanity_level == 0:
         "I just wish everyone I came with made it out too..."
     if norman_dead == False:
         show n 1 with dissolve
@@ -1494,15 +1601,15 @@ label boss_aftermath:
         show v 2 4 at right with dissolve
         v "WE FUCKIN DID IT LADIES AND GENTLEMEN! {w=.3}WE CAME STRAIGHT IN THIS PLACE WITH ONE GOAL IN MIND! SURVIVAL! AND PULLED IT OFF!!!!"
         v "WOOOOOHOOOOOOO YEAHHHH!!!! {w=.3}JUMP FOR JOY HOS!!!!"
-        if norman_affection >=4:
+        if norman_affection >=5:
             v "AND THE BEST PART IS THAT [pov!u] AND NORMAN GET TO GET LAID!!!!!!!!!!!!!!"
-            n 15"VINNIE!{w=.3} NO!"
+            n 16"VINNIE!{w=.3} NO!"
             p 9"Are you for real dude..."
             show r 3 at left with dissolve
             r 3"Eww! You're gonna scare them away from each other!!"
         show r 2 at left with dissolve
-        r 2"Vinnie man,{w=.3} come on stop with this!"
-        "Vinnie is bouncing up and down while shaking Rock with him!!"
+        r 2"Vinnie,{w=.3} dude,{w=.3} come on stop with this!"
+        "Vinnie is bouncing up and down while shaking Rock with them!!!"
         v "YIPEE KI-YAY MOFOS!!!!!!!!!{w=.3} WE'RE ALL ALIVE HAHAHAHAHAHAHA!!!!!!!!!!!!"
         n 2"We did it!{w=.3} We did it! {w=.3}We get to live! Haha!"
         v 22"KISS ME LIKE YOU MEAN IT ROCKY! PUCKER UP!"
@@ -1513,7 +1620,7 @@ label boss_aftermath:
             p 8"Hey is that homophobia I hear?"
             w 4"No!{w=.3} Not at all I support you all very much!"
             v 1"Hmmm my homophobic vision senses it deep within your soul..."
-            v 6"RELEASE IT!! MY PATIENT! {w=.3}LET THE HOMOPHOBIA FLOW THROUGH YOU!!! {w=.3}Rocky this isn't safe place for you anymore, {w=.3}we're the straight club now!"
+            v 6"RELEASE IT!! MY PATIENT! {w=.3}LET THE HOMOPHOBIA FLOW THROUGH YOU!!! {w=.3}Rocky this isn't a safe place for you anymore, {w=.3}we're the straight club now!"
         r 1a"The hell? I'm the straightest guy here! Just take a look at you!"
         if norman_affection >=5:
             r 3"Also, {w=.3}two of you are literally {i}dating{/i} each other!"
@@ -1543,7 +1650,7 @@ label boss_aftermath:
             w 4"I'm my own person now thanks to you all!{w=.3} Thank you so much!"
     elif vinnie_dead or rocky_dead or norman_dead == True:
         if vinnie_dead == False and rocky_dead == True:
-            show v 2 2 at right
+            show v 2 2 at right with dissolve
             v "I did it Rocky, we did it for you...{w=.3} We lived... {w=.3}Thank you Rocky, {w=.3}you're still motivating me to keep going..."
             if norman_dead == True:
                 v "I couldn't protect Norman either...{w=.3} I failed you two... {w=.3}we swore to keep him safe and I fucked up like I always do..."
@@ -1557,9 +1664,10 @@ label boss_aftermath:
         if tara == True:
             if vinnie_dead or norman_dead or rocky_dead == True:
                 show w 14 at right2 with dissolve
-                w "I'm so sorry about what happened to everyone..."
+                w "I'm so sorry about what happened to..."
+                w "..."
             w "At least we survived...{w=.3} I'm sure they want you to live for them..."
-        if insanity_level <= 1:
+        if insanity_level == 0:
             scene black with fade
             "They're dead and there's nothing I could do about it. I wanted to keep my new friends, my new family,{w=.3} safe but..."
             "I'm so sorry I failed you... {w=.3}now we pay the price for death..."        

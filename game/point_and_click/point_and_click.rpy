@@ -76,12 +76,12 @@ define right_buttons = [
 
 #MECHANICAL FLOOR BUTTONS
 define mech_floor_main_room_1_buttons = [
-    (("look"),(300, 150),"mech_crowbar", "crowbar_collected == False"), 
-    (("look"),(600, 440), "hvac", "examined_HVAC_machine == False"),
-    (("look"),(865, 480),"mech_ladder",  "crowbar_collected == False"), # Condition. The way it's written ensures that the game doesn't throw an error if the "door_unlocked" key isn't in the dictionary
-    (("move"),(1030, 490),"mech_floor_main_room_2", None),
-    (("move"),(280, 490),"mech_floor_main_room_2", None),
-    (("move"),(1200, 350), "mech_hallway", None),
+    (("look"),(330, 130),"mech_crowbar", "crowbar_collected == False"), 
+    (("look"),(500, 420), "hvac", "examined_HVAC_machine == False"),
+    (("look"),(865, 480),"mech_ladder", "crowbar_collected == False"), # Condition. The way it's written ensures that the game doesn't throw an error if the "door_unlocked" key isn't in the dictionary
+    (("move"),(1030, 530),"mech_floor_main_room_2", None),
+    (("move"),(130, 530),"mech_floor_main_room_2", None),
+    (("move"),(1200, 450), "mech_hallway", None),
 ]
 
 define mech_floor_main_room_2_buttons = [
@@ -152,14 +152,14 @@ define office_desks_buttons= [
 ]
 
 define office_breakroom_buttons= [
-    (("look"),(535, 200),"worker_memo", None),
-    (("look"),(310, 100),"medkit_choice", "medkit_used == False"),
+    (("look"),(590, 260),"worker_memo", None),
+    (("look"),(280, 150),"medkit_choice", "medkit_used == False"),
 
     (("move"),(650, 700),"office_desks", None), 
 ]
 
 define office_boardroom_buttons= [
-    (("look"),(700, 370),"worker_email", None),
+    (("look"),(720, 390),"worker_email", None),
 
     (("move"),(130, 300),"office_computerdesk", None), 
     (("move"),(650, 700),"office_desks", None), 
@@ -246,6 +246,7 @@ define lab_upstairs_left_hall_buttons= [
 
 define lab_puzzle_a_room_buttons= [
     (("look"),(650, 500),"piece_puzzle_a", None),
+    (("look"),(350, 650),"drawer_key", "drawer_key_collected == False"),
 
     (("move"),(650, 700),"lab_upstairs_left_hall", None), 
 ]
@@ -325,41 +326,41 @@ define lab_keycard_room_buttons = [
 ### POINT'n'CLICK LABELS ###
 # Labels within a point'n'click segment almost always end in a jump statement.
 
-label left_frame:
-    "An empty frame."
-    "Nothing special."
-    jump pnc_loop
+#label left_frame:
+    #"An empty frame."
+    #"Nothing special."
+    #jump pnc_loop
 
-label right_frame:
-    "An empty frame."
-    "Nothing special."
-    extend " Except for the fact that when you touch it, you hear a click."
-    $ pnc_flags["door_unlocked"] = True # this adds a key-value pair into the pnc_flags dictionary.
-    jump pnc_loop
+#label right_frame:
+    #"An empty frame."
+    #"Nothing special."
+    #extend " Except for the fact that when you touch it, you hear a click."
+    #$ pnc_flags["door_unlocked"] = True # this adds a key-value pair into the pnc_flags dictionary.
+    #jump pnc_loop
 
-label left_door:
-    "A door."
-    if pnc_flags.get("door_unlocked") == True: # This ensures that the game doesn't throw an error if the value isn't in the dictionary
-        "It's unlocked, so there's nothing stopping you from leaving."
-    else:
-        "It's locked."
-    jump pnc_loop # this throws the player out from the point'n'click segment
+#label left_door:
+    #"A door."
+    #if pnc_flags.get("door_unlocked") == True: # This ensures that the game doesn't throw an error if the value isn't in the dictionary
+    #    "It's unlocked, so there's nothing stopping you from leaving."
+    #else:
+    #    "It's locked."
+    #jump pnc_loop # this throws the player out from the point'n'click segment
 
-label escape:
-    "You open the door."
-    jump end
+#label escape:
+    #"You open the door."
+    #jump end
 
 # The following is an example of interactions that move the player or change perspective.
 # They change the background and set the room variable so that the correct set of buttons is displayed
 
-label to_left:
-    window hide diss
-    scene room_left with dissolve
-    $ current_room = "left"
-    jump pnc_loop
+#label to_left:
+    #window hide diss
+    #scene room_left with dissolve
+    #$ current_room = "left"
+    #jump pnc_loop
 
-label to_right:
-    window hide diss
-    scene room_right with dissolve
-    $ current_room = "right"
-    jump pnc_loop
+#label to_right:
+    #window hide diss
+    #scene room_right with dissolve
+    #$ current_room = "right"
+    #jump pnc_loop

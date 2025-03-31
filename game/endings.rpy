@@ -57,6 +57,7 @@ label endings:
                 alpha.6
             "Were his last words before dropping into the ocean of zombies down below..."
             "Good riddance..."
+            show side p 17 with dissolve
             "..."
             "I did it, {w=.3}I killed everyone who stood in my path."
         scene black with fade
@@ -68,12 +69,12 @@ label endings:
         pause 1.0
         stop music fadeout 1.0
         "Hail."
-        hide window with dissolve
+        window hide diss
         jump insane_screen
     play sound "audio/sfx/chopper.ogg" fadein 2.0
     scene black with dissolve
     "..."
-    "About a week has passed since then, {w=.3}the government called the national guard and quarantined the city and nearby areas.{w=.3} Fortunately the virus was contained and the rest of the country remains unaffected"
+    "About a week has passed since then, {w=.3}the government called the national guard and quarantined the city and nearby areas.{w=.3} Fortunately, {w=.3}the virus was contained and the rest of the country remains unaffected"
     if vinnie_dead == False and rocky_dead == False and norman_dead == False:
         v "IT'S A PARTY GUYS!!!!{w=.3} EVERYONE!! BREAK DANCE NOW!!!"
         n "I thought we would be goners for a second there!"
@@ -82,7 +83,7 @@ label endings:
             w "We outsmarted those brainless dorks!"
         p "Let's hangout! {w=.3}In fact!{w=.3} Why don't we all get an apartment together?!?"
         r "I already pretty much am Vinnie's babysitter so that sounds good to me! I'm in!"
-        v "YAY!{w=.3} I AM GOING TO THE BEST ROOMIE EVER! I CALL DIBS ON THE DOGHOUSE!!! I already have 6 siblings so I'm used to living with people!"
+        v "YAY!{w=.3} I AM GOING TO THE BEST ROOMIE EVER! I CALL DIBS ON THE DOGHOUSE!!! I already have six siblings so I'm used to living with a LOT of people!"
         n "Of course! I love you guys so much! I wouldn't miss out on it for anything! Haha!"
         if tara == True:
             w "...Does that offer extend to me..."
@@ -97,7 +98,7 @@ label endings:
         if tara == True:
             v "And Tara is the person we kidnapped for ransom!"
         r "I would rather be eaten by the zombies then be married to you..."
-        if norman_affection >= 4:
+        if norman_affection >= 5:
             n "I was swooned by the homeless person!"
         n "Umm wait- {w=.3}how did you two even birth me????"
         v "Mitosis."
@@ -106,15 +107,25 @@ label endings:
             w "You'll all fare better than the last people who held me for ransom! Haha!"
 
         p "...{w=.3}What about me says I'm homeless?..."
-
+        window hide diss
+        pause 1.0
         if expose_samsara_together and expose_samsara_together_2 and expose_samsara_together_3:
-            "The surviving board members of Samsara and it's associates were held accountable in the court of law and arrested for crimes against society,{w=.3} thanks to us exposing them!"              
+            show side p 4 with dissolve
+            "The surviving board members of Samsara and it's associates were held accountable in the court of law and arrested for crimes against society,{w=.3} thanks to us exposing them!"
+        show side p 8 with dissolve
         "We did it,{w=.3} we all lived.{w=.3} A lot of innocent people died in the city but we will never forget them..."
-        "My friends are the best thing to have happened to me. {w=.3}Finally a family that accepts and loves me. I'm going to like it here!"
-        hide window with dissolve
-        centered "{size=*2}TRUE END{/size}" with dissolve
-        centered "{size=*2}Thanks for playing!{/size}" with dissolve 
-
+        show side p 13 with dissolve
+        p "My friends are the best thing to have happened to me. {w=.3}Finally a family that accepts and loves me. I'm going to like it here!"
+        show black with dissolve
+        show side p 13
+        show n 2 at left1  with dissolve
+        show r 11 at left with dissolve
+        show v 1 at right with dissolve
+        if tara == True:
+            show w 4 at right2 with dissolve
+            pause 1.0
+        "{size=*2}TRUE END{/size}" with dissolve
+        "{size=*2}Thanks for playing!{/size}"
     
     if vinnie_dead == True or norman_dead == True or rocky_dead == True:
         if vinnie_dead == False:
@@ -132,18 +143,24 @@ label endings:
                 if norman_dead == True:
                     "They went to Norman's family to beg them to press charges for murder since he feels like he should be locked up for letting Norman die..."
         if norman_dead == False:
-                "Norman is the only one who regularly meets up and starts the hangouts now, he seems much more jumpy and scared than back then"
+                "Norman regularly meets up and starts the hangouts now, he seems much more jumpy and scared than back then"
                 "He often checks in to see if everything is alright and if there's anything he could do"
                 if rocky_dead == True or vinnie_dead == True:
                     "They keep a picture of all of us together in their jacket at all times..."
-                if norman_affection >=4:
+                if norman_affection >= 5 and insanity_level == 0:
                     "He lives we me now in a small apartment. I'm doing the best I can to support him and make him comfortable..."
         if tara == True:
             "Tara has been kept in confinement from the government for being related to the CEO, {w=.3}she isn't arrested but might as well be..."
             "She sends letters saying how grateful she is and that she'll visit as soon as possible"
+        if insanity_level >= 1:
+            "Something inside me changed too... {w=.3}I don't feel the same anymore..."
+        elif insanity >= 2:
+            "I've definitely noticed a gear shift inside my brain.{w=.3} I can't understand emotions as well...{w=.3} I feel broken..."
+        if norman_affection >= 4 and insanity_level >= 1 and norman_dead == False:
+            "I feel like Norman wanted to start something with me but I can't reciprocate... {w=.3}I'm different now...{w=.5} empty..."
         "We've been trying to stay friends but it gets hard when we notice the missing space..."
         "It really makes me think...{w=.3} I wonder if there was anything I could've done differently?"
-    hide window with dissolve
+    window hide diss
     jump win_screen
 return
 

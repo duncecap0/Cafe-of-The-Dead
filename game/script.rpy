@@ -19,7 +19,7 @@
    with Pause(1)
    hide text with dissolve
 
-   show text "{color=#f00}WARNING: THIS GAME CONTAINS: Foul Language, Dead Bodies, Jumpscares, Guns, Haunting Imagery, Violence, Zombies!!!{/color}" with dissolve
+   show text "{color=#f00}WARNING: THIS GAME CONTAINS: Foul Language, Dead Bodies, Jumpscares, Guns, Haunting Imagery, Suicide, Violence, Zombies!!!{/color}" with dissolve
    with Pause(3)
 
    hide text with dissolve

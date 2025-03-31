@@ -1,32 +1,30 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 34, in script call
-    call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/lab_floor_3.rpy", line 551, in script
-    if rocky_dead == False:
-SyntaxError: invalid syntax (game/lab_floor_3.rpy, line 606)
+  File "game/script.rpy", line 36, in script call
+    call office_floor_2 from _call_office_floor_2
+  File "game/office_floor_2.rpy", line 759, in script
+    $ addRockyhealth(-1)
+  File "game/office_floor_2.rpy", line 759, in <module>
+    $ addRockyhealth(-1)
+NameError: name 'addRockyhealth' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 34, in script call
-    call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/lab_floor_3.rpy", line 551, in script
-    if rocky_dead == False:
-  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 1849, in execute
-    if renpy.python.py_eval(condition):
-  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1207, in py_eval
-    code = py_compile(code, 'eval')
-  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1144, in py_compile
-    raise e
-  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1081, in py_compile
-    raise orig_e
-  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1073, in py_compile
-    tree = compile(source, filename, py_mode, ast.PyCF_ONLY_AST | flags, 1)
-SyntaxError: invalid syntax (game/lab_floor_3.rpy, line 606)
+  File "game/script.rpy", line 36, in script call
+    call office_floor_2 from _call_office_floor_2
+  File "game/office_floor_2.rpy", line 759, in script
+    $ addRockyhealth(-1)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\ast.py", line 827, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Games\renpy-8.3.4-sdk\renpy\python.py", line 1178, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/office_floor_2.rpy", line 759, in <module>
+    $ addRockyhealth(-1)
+NameError: name 'addRockyhealth' is not defined
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.4.24120703
 Cafe of The Dead 1.0
-Sat Mar 29 11:49:29 2025
+Mon Mar 31 07:45:58 2025

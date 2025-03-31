@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/lab_floor_3.rpy", line 605: expected python_expression
-    elif:
-        ^
-
-File "game/lab_floor_3.rpy", line 621: expected statement.
-    else:
+File "game/unique_screens.rpy", line 128: 'show' is not a keyword argument or valid child of the vbox statement.
+    show text"   "
         ^
 
 Ren'Py Version: Ren'Py 8.3.4.24120703
-Sat Mar 29 11:50:53 2025
+Mon Mar 31 07:59:36 2025

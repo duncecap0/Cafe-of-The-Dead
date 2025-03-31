@@ -570,12 +570,17 @@ screen about():
             ## gui.about is usually set in options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
-            text "Music, GUI, Play Testing, Coding, Writing Help, and Concept Art by{a=https://x.com/B0redBradley}B0redBradley{/a}"
-            text "Sprite Art and Writing by {a=https://x.com/DunceCap0}Dunce Cap{/a}"
+                
+            text "Music, GUI, Play Testing, Coding, Writing Help, and Concept Art by {a=https://x.com/B0redBradley}B0redBradley{/a}"
+
+            text "Writing, Sprite Art, Background Art, Live or Die, Main Menu, and Death themes by {a=https://x.com/DunceCap0}Dunce Cap{/a}"
 
             text "Point and Click Code Framework by {a=https://devilspider.itch.io//a}Devil Spider"
-            text "SFX from {a=https://opengameart.org/}OpenGameArt{/a},{a=https://freesound.org/}Freesound{/a}, {a=https://www.zapsplat.com/}ZapSplat{/a}, and {a=https://www.youtube.com/}Youtube Audio Library{/a} "
+
+            text "SFX from {a=https://opengameart.org/}OpenGameArt{/a}, {a=https://freesound.org/}Freesound{/a}, {a=https://www.zapsplat.com/}ZapSplat{/a}, and {a=https://www.youtube.com/}Youtube Audio Library{/a} "
+            
             text "Font by {a=https://www.dafont.com/vcr-osd-mono.font}Riciery Leal{/a}"
+           
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 

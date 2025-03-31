@@ -1168,6 +1168,8 @@ screen confirm(message, yes_action, no_action):
     add "gui/overlay/confirm.png"
 
     frame:
+        background Frame("gui/uibox.png", 25, 25, tile="integer")
+        padding (35,30)
 
         vbox:
             xalign .5

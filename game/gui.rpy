@@ -32,6 +32,11 @@ define gui.name_text_outlines = [ (3, "#300019", 0, 0) ]
 define gui.name_outline_scaling = "linear"
 define gui.name_text_italic = True
 
+## Link to screen outline:
+# https://lemmasoft.renai.us/forums/viewtopic.php?t=32770
+## Link to line spacing:
+# https://www.reddit.com/r/RenPy/comments/130kxct/how_to_make_screen_text_be_outlined/
+
 
 
 
@@ -40,7 +45,7 @@ define gui.name_text_italic = True
 ## The colors of text in the interface.
 
 ## An accent color used throughout the interface to label and highlight text.
-define gui.accent_color = '#cc0066'
+define gui.accent_color = '#ff85b8'
 
 ## The color used for a text button when it is neither selected nor hovered.
 define gui.idle_color = '#9c9599'

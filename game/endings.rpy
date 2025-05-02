@@ -3,12 +3,21 @@ label endings:
     "The door slides open to reveal an ashen cityscape,{w=.3} this is the first time I've felt the outside air since we started... {w=.3}I see the chopper circle around in the air,{w=.3} it's bound to notice if I call attention"
     if vinnie_dead == False or rocky_dead == False or norman_dead == False or tara == True:
         "We wave our hands in the air, {w=.3}signalling the copter to land..."
-    if insanity_level >=1 and vinnie_dead and rocky_dead and norman_dead == True and tara == False:
+    if insanity_level >=1 and vinnie_dead == True and rocky_dead == True and norman_dead == True and tara == False:
         if norman_secret_death == True:
+            show static_anim with dissolve
+            play audio "audio/sfx/static.ogg"
+            camera:
+                perspective True
+                easein_bounce 0.54 zpos -20
+            pause 0.3 
+            hide static_anim with dissolve
+            camera:
+                reset
             stop music fadeout 0.5
             play sound "audio/sfx/Wind.ogg"
             play music "audio/music/hail.ogg"
-            omg "Did you think you could kill me?"
+            omg2 "Did you think you could kill me?"
             "I hear a familiar voice as I turn around and see..."
             show n 5a with Dissolve(1.)
             n "..."
@@ -65,12 +74,100 @@ label endings:
         p 17"What matters is the fact that {i}I{/i} am the one who controls it. {w=.3}{i}I{/i} am the one the world revolves around. {w=.3}{i}I{/i} decide who is worthy."
         p 17"It doesn't matter if you don't agree with it,{w=.3} because the decision is up to me in the end"
         p 16"\"How could you?{w=.3} How would like it if someone else was in control?\" Exactly, {w=.8}{i}they aren't.{/i}"
-        p 17"Prepare for the second coming."
         pause 1.0
         stop music fadeout 1.0
-        "Hail."
         window hide diss
-        jump insane_screen
+        if norman_secret_death == True:
+            p 17"Prepare for the second coming."
+            "Hail."
+            $ notices.append("Ending Unlocked: Hail.")
+            $ persistent.hailending = True
+            $ config.window_title = _("Hail.")
+            if norman_dead == True:
+                $ notices.append("Achievement Unlocked: Taking The Dog Out Back")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.killnorman = True
+            if vinnie_dead == True:
+                $ notices.append("Achievement Unlocked: Roadkill After All")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.killvin = True
+            if rocky_dead == True:
+                $ notices.append("Achievement Unlocked: Wolf or Fox? Now we will never know...")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.killrocky = True
+            if tara == True:
+                $ notices.append("Achievement Unlocked: Coming Out The Closet")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.savetara = True
+            if tara_against_dad == True:
+                $ notices.append("Achievement Unlocked: Mad Father")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.tara_against_dad = True
+            if ammo >= 3:
+                $ notices.append("Achievement Unlocked: I Don't Need No Dang Gun!")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.dontusebullets = True
+            if medkit_used == False and morphine_used == False and crowbar_collected == True and vinnies_knife == True and ammo == 3 and pills == False:
+                $ notices.append("Achievement Unlocked: Bad MotherFucker!")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.dontuseitems = True
+            if insanity_level == 0:
+                $ notices.append("Achievement Unlocked: Coffee AU")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.nosanityloss = True
+            if norman_affection >= 5:
+                $ notices.append("Achievement Unlocked: Dog Boyfriend")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.romancenorman = True
+            if expose_samsara_together == True and expose_samsara_together_2 == True and expose_samsara_together_3 == True:
+                $ notices.append("Achievement Unlocked: Samsara's End")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.motivatefriends = True
+            $ notify_me("and so it ends...")
+            jump insane_screen
+        else:
+            if norman_dead == True:
+                $ notices.append("Achievement Unlocked: Taking The Dog Out Back")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.killnorman = True
+            if vinnie_dead == True:
+                $ notices.append("Achievement Unlocked: Roadkill After All")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.killvin = True
+            if rocky_dead == True:
+                $ notices.append("Achievement Unlocked: Wolf or Fox? Now we will never know...")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.killrocky = True
+            if tara == True:
+                $ notices.append("Achievement Unlocked: Coming Out The Closet")
+                play audio "audio/sfx/achievement.ogg"
+            if tara_against_dad == True:
+                $ notices.append("Achievement Unlocked: Mad Father")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.tara_against_dad = True
+            if ammo >= 3:
+                $ notices.append("Achievement Unlocked: I don't need no dang gun!")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.dontusebullets = True
+            if medkit_used == False and morphine_used == False and crowbar_collected == True and vinnies_knife == True and ammo == 3 and pills == False:
+                $ notices.append("Achievement Unlocked: Bad MotherFucker!")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.dontuseitems = True
+            if insanity_level == 0:
+                $ notices.append("Achievement Unlocked: Coffee AU")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.nosanityloss = True
+            if norman_affection >= 5:
+                $ notices.append("Achievement Unlocked: Dog Boyfriend")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.romancenorman = True
+            if expose_samsara_together == True and expose_samsara_together_2 == True and expose_samsara_together_3 == True:
+                $ notices.append("Achievement Unlocked: Samsara's End")
+                play audio "audio/sfx/achievement.ogg"
+                $ persistent.motivatefriends = True
+            $ notify_me("and so it ends...")
+            jump sad_screen
+
     play sound "audio/sfx/chopper.ogg" fadein 2.0
     scene black with dissolve
     "..."
@@ -124,9 +221,13 @@ label endings:
         if tara == True:
             show w 4 at right2 with dissolve
             pause 1.0
-        "{size=*2}TRUE END{/size}" with dissolve
+        if tara == True:
+            "{size=*2}TRUE END{/size}" with dissolve
+            $ persistent.trueending = True
+        else:
+            "{size=*2}GOOD END{/size}" with dissolve
         "{size=*2}Thanks for playing!{/size}"
-    
+        
     if vinnie_dead == True or norman_dead == True or rocky_dead == True:
         if vinnie_dead == False:
             "Vinnie never quite recovered from that day,{w=.3} they've been very isolated and haven't been communicating as they usually do"
@@ -161,6 +262,47 @@ label endings:
         "We've been trying to stay friends but it gets hard when we notice the missing space..."
         "It really makes me think...{w=.3} I wonder if there was anything I could've done differently?"
     window hide diss
+    if norman_dead == True:
+        $ notices.append("Achievement Unlocked: Taking The Dog Out Back")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.killnorman = True
+    if vinnie_dead == True:
+        $ notices.append("Achievement Unlocked: Roadkill After All")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.killvin = True
+    if rocky_dead == True:
+        $ notices.append("Achievement Unlocked: Wolf or Fox? Now we will never know...")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.killrocky = True
+    if tara == True:
+        $ notices.append("Achievement Unlocked: Coming Out The Closet")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.savetara = True
+    if tara_against_dad == True:
+        $ notices.append("Achievement Unlocked: Mad Father")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.tara_against_dad = True
+    if ammo >= 3:
+        $ notices.append("Achievement Unlocked: I don't need no dang gun!")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.dontusebullets = True
+    if medkit_used == False and morphine_used == False and crowbar_collected == True and vinnies_knife == True and ammo == 3 and pills == False:
+        $ notices.append("Achievement Unlocked: Bad MotherFucker!")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.dontuseitems = True
+    if insanity_level == 0:
+        $ notices.append("Achievement Unlocked: Coffee AU")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.nosanityloss = True
+    if norman_affection >= 5:
+        $ notices.append("Achievement Unlocked: Dog Boyfriend")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.romancenorman = True
+    if expose_samsara_together == True and expose_samsara_together_2 == True and expose_samsara_together_3 == True:
+        $ notices.append("Achievement Unlocked: Samsara's End")
+        play audio "audio/sfx/achievement.ogg"
+        $ persistent.motivatefriends = True
+    $ notify_me("and so it ends...")
     jump win_screen
 return
 

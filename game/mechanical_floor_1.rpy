@@ -19,7 +19,6 @@ default expose_samsara_together = False
 
 
 #who has gun?
-default norman_has_gun = True
 default vinnie_has_gun = False
 default rocky_has_gun = False
 default sage_has_gun = False
@@ -32,12 +31,23 @@ default checked_ramp = False
 
 ##INTRO
 label mechanical_floor_1:
-    scene fire escape with dissolve
+    scene fire escape with Dissolve(0.2)
     show black with Dissolve(1.):
         alpha.6
     "My heart beats as I march upwards, {w=.3}would we really be able to restore the power?{w=.3} Are the people here even alright?{w=.3} Would we really make it out of here?"
-    hide black with dissolve
-    show n 6 with dissolve
+    if insanity_level >= 1:
+        show static_anim with Dissolve(0.2)
+        play audio "audio/sfx/static.ogg"
+        "The things I've said and done have affected me greatly..."
+        "Did I really mean all the things I said back then?{w=.3} It's strange but,{w=.3} I already feel..."
+        "Different."
+        "Like when you know you did something{w=.3} \"wrong\"{w=.3} and your parents chide you for it.{w=.3} Your ears flush red and your head hurts"
+        "..."
+        "I want to live.{w=.2} No matter what.{w=.3} No matter {i}who{/i}"
+        "I don't feel so good... {w=.5}There's a sinking pit in my stomach until-"
+        hide static_anim with Dissolve(0.2)
+    hide black with Dissolve(0.2)
+    show n 6 with Dissolve(0.2)
     n "Hey [pov]..."
 
     if norman_affection == 0:
@@ -47,9 +57,9 @@ label mechanical_floor_1:
     else:
         n 4a"Thank you for backing me up earlier..."
         n 8"To be honest, {w=.3}I'm not sure about this myself, {w=.3}I'm glad to know I have someone to rely on..."
-        show n 3 with dissolve
+        show n 3 with Dissolve(0.2)
         n "You're someone I can trust... {w=.3} sometimes it feels like I can't really open up because I don't want to worry anyone..."
-        show n 8 with dissolve
+        show n 8 with Dissolve(0.2)
         n 8"I can't let them know that... {w=.3}I-{w=.3} don't really know what I'm doing..."
         n 5"Don't get it wrong! I'm always glad to help someone out it's like someone needs me... {w=.3}and hears me..."
         n 4a"But, {w=.3}it's nice to have someone like that for me too..."
@@ -69,12 +79,12 @@ label mechanical_floor_1:
 
     pause 0.7
     play music "audio/music/FLOOR_1.mp3"
-    scene mech room 1 with dissolve
-    show screen character_stats with dissolve
-    show screen ammo_stats with dissolve
+    scene mech room 1 with Dissolve(0.2)
+    show screen character_stats with Dissolve(0.2)
+    show screen ammo_stats with Dissolve(0.2)
     $ renpy.notify("Remember to save often...")
     "Here we are,{w=.3} the room is lined with pipes and exposed machinery, {w=.3}it feels humid and I can almost taste the dust in the air... {w=.3}why would they not have windows here?"
-    show n 8 with dissolve
+    show n 8 with Dissolve(0.2)
     n "It's hard to see..."
     p 15"That's right Golden Retrievers can't see as well in the dark,{w=.3} would it be better if someone else had the gun?"
     menu:
@@ -88,10 +98,10 @@ label mechanical_floor_1:
         "Vinnie, Opossums have perfect night vision":
             $ vinnie_has_gun = True
             $ norman_has_gun = False
-            show v 24 at right with dissolve
+            show v 24 at right with Dissolve(0.2)
             v "Wow!{w=.3} Uh... {w=.3}o- {w=.3}ok not who I would choose but sure!{w=.3} I can dual wield my knife and gun! ENEMIES BEWARE!"
             if rocky_dead == False:
-                show r 3 at left with dissolve
+                show r 3 at left with Dissolve(0.2)
                 r "Why not me?{w=.3} I DO NOT trust Vinnie with a gun..."
                 v 13"I told you once that it's apart of Opossum culture to eat the smallest of their young and you believed me..."
                 v 2"Why would I trust someone like that with a loaded weapon?"
@@ -104,9 +114,9 @@ label mechanical_floor_1:
         "Rocky, Maned-wolves are nocturnal hunters" if rocky_dead == False:
             $ rocky_has_gun = True
             $ norman_has_gun = False
-            show r 10 at left with dissolve
+            show r 10 at left with Dissolve(0.2)
             r "Got it,{w=.3} I promise you won't regret this"
-            show v 22 at right with dissolve
+            show v 22 at right with Dissolve(0.2)
             v "Meh, {w=.3}I wouldn't trust someone who takes conspiracy theories as fact"
             r "... {w=.3}The chem-trails... {w=.3}I know it's in the chem-trails..."
             v 5"*sigh*{w=.3} guess this is our best option... {w=.3}I'm scared of guns..."
@@ -114,7 +124,7 @@ label mechanical_floor_1:
 
         "Never mind, just hang on to it Norman":
             n "Ok!"
-            show v 10 at right with dissolve
+            show v 10 at right with Dissolve(0.2)
             v "Yeah probably best for the person with the most training to keep it..."
             jump gun_check
      
@@ -125,9 +135,9 @@ label gun_check:
         n 13"Here! {w=.2}Just flick this here to release the safety, {w=.3}remember to breathe slowly to aim for the head better,{w=.1} and press here to shoot!"
         if sage_has_gun == True:
             $ renpy.notify("You received Norman's Gun!")
-    hide v with dissolve
-    hide r with dissolve
-    hide n with dissolve
+    hide v with Dissolve(0.2)
+    hide r with Dissolve(0.2)
+    hide n with Dissolve(0.2)
 
     $ current_room = "mech_floor_main_room_1" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
@@ -138,31 +148,31 @@ label gun_check:
 #MECH ROOM 
 label mech_floor_main_room_1:
     window hide diss
-    scene mech room 1 with dissolve
+    scene mech room 1 with Dissolve(0.2)
     $ current_room = "mech_floor_main_room_1"
     jump pnc_loop
 
 label mech_floor_main_room_2:
     window hide diss
-    scene mech room 2 with dissolve
+    scene mech room 2 with Dissolve(0.2)
     $ current_room = "mech_floor_main_room_2"
     jump pnc_loop
 
 label mech_hallway:
     window hide diss
-    scene mech hall with dissolve
+    scene mech hall with Dissolve(0.2)
     $ current_room = "mech_hallway"
     jump pnc_loop
 
 label mech_hallway_left:
     window hide diss
-    scene mech jacket with dissolve
+    scene mech jacket with Dissolve(0.2)
     $ current_room = "mech_hallway_left"
     jump pnc_loop
 
 label mech_hallway_right:
     window hide diss
-    scene mech bed with dissolve
+    scene mech bed with Dissolve(0.2)
     $ current_room = "mech_hallway_right"
     jump pnc_loop
 
@@ -171,23 +181,26 @@ label mech_hallway_right:
     label mech_ladder:
         if  worker_key_collect == True:
 
-            $ crowbar_collected = True
             play sound "audio/sfx/door open.ogg"
+            $ renpy.notify("Padlock key was removed from your inventory!")
+            $ worker_key_collect = False 
             "The key fits perfectly as the padlock falls off"
             p 1"Hmm {w=.3}I'm the smallest so my weight shouldn't mess with the under constructed platform as much"
-            show v 9 with dissolve
+            show v 9 with Dissolve(0.2)
             v "Hey!{w=.3} You actually should be thankful for being as light as a feather for once!"
-            hide v 9 with dissolve
+            hide v 9 with Dissolve(0.2)
             if rocky_dead == False:
-                show r 11 with dissolve
-
+                show r 11 with Dissolve(0.2)
                 r "You're one to talk string bean..."
-                hide r 11 with dissolve
+                hide r 11 with Dissolve(0.2)
+            play sound "audio/sfx/metal run.ogg"
             "I steady myself on top of the elevated platform and reach out for the crowbar"
+            $ renpy.notify("Crowbar was added to your inventory!")
+            $ crowbar_collected = True
             p 13"Got it!"
-            show n 2 with dissolve
+            show n 2 with Dissolve(0.2)
             n "Yay! Good Job [pov]!"
-            hide n 2 with dissolve
+            hide n 2 with Dissolve(0.2)
 
             if rocky_dead == False:
                 if insanity_level >= 1:
@@ -197,48 +210,45 @@ label mech_hallway_right:
                     "This is a stupid idea but worth a shot..."
                     p 13"Hey! {w=.3}Rocko!{w=.3} Catch THIS!"
                     with hpunch
-                    show r 4a with dissolve
+                    show r 4a with Dissolve(0.2)
                     r "What?{w=.3} Oh!{w=.3} OOF!"
                     "I jumped off the raised platform straight into Rocky's arms as he set down the crowbar to replace me in his arms instead"
                     r 3a"What the hell made you think of doing that?!?!"
                     p 15"...{w=.3}Hmm intrusive thoughts?"
-                    show v 2 4 at right with dissolve
+                    show v 2 4 at right with Dissolve(0.2)
                     v "HAHAHAHAHAHA THATS HI-LARIOUSSS! JUST STAY IN ROCKY'S ARMS LIKE THAT! {w=.3}YOU LOOK LIKE YOU COULD BE HIS NEWBORN OR SOMETHING HAHAHAHA!"
                     if norman_affection >= 1:
-                        show n 9 at left with dissolve
+                        show n 9 at left with Dissolve(0.2)
                         n "...Haaaaa... {w=.3}yeahhhh..."
                     "Rocky sets me down as we continue our search"
-                hide v
-                hide r
-                hide n
+                hide v with Dissolve(0.2)
+                hide r with Dissolve(0.2)
+                hide n with Dissolve(0.2)
             else:
                 if norman_affection >= 2:
                     "Hmmm I wonder if HE could catch me..."
                     p "Geronimo!"
                     with hpunch
-                    show n 16 with dissolve
+                    show n 16 with Dissolve(0.2)
                     n "WOAH WOAH WOAH!"
                     "I fall on top of Norman,{w=.3} making him break my fall with his body as he lays on the ground"
                     n 9"[pov]!{w=.3} What was that for?!?!"
                     p 15"Hmm I dunno honestly..."
                     "Norman looks flustered as ever when I lock eyes with him while pinning myself above him"
-                    show v 6 at left with dissolve 
+                    show v 6 at left with Dissolve(0.2) 
                     v 6"JEEZUZ H CHRISTMAS GET A ROOM YOU TWO!!!{w=.3} NEVER THOUGHT {w=.3}{i}I'D{/i}{w=.3} BE THE THIRD WHEEL!"
-                    hide v with dissolve
-                    hide n  with dissolve
+                    hide v with Dissolve(0.2)
+                    hide n with Dissolve(0.2)
                 else:
                     "I throw the crowbar down to Vinnie and Norman who stumble to catch it as I descend down the ladder,{w=.3} I pick it up back up"
         else:
             p 1"The ladder is locked behind a padlock..."
             if rocky_dead == False:
-                show r 11 with dissolve
+                show r 11 with Dissolve(0.2)
                 r "Workers usually have a key to this type of stuff if only we could find someone with it..."
-                hide r 11 with dissolve
+                hide r 11 with Dissolve(0.2)
 
         jump pnc_loop
-
-
-
 
 #POINT AND CLICK LABELS
 
@@ -249,9 +259,9 @@ label mech_hallway_right:
         #if rocky_dead == False:
             #r "Really,{w=.3} you wanna go back already?"
         #v "Jeez!{w=.3} Don't just give up now! {w=.3}Look at me!{w=.3} If I can handle it so can y-{w=.3}you!"
-        #show vinnie at shiver_loop with dissolve
+        #show vinnie at shiver_loop with Dissolve(0.2)
         #"Vinnie says as they shiver uncontrollably"
-        #hide vinnie with dissolve
+        #hide vinnie with Dissolve(0.2)
 
         #n "It's ok [pov]... {w=.3}remember what I told you?"
         #jump pnc_loop
@@ -262,12 +272,12 @@ label mech_hallway_right:
         
         p "That crowbar up there would be great at smashing stuff in..."
         if rocky_dead == False:
-            show r 2 with dissolve
+            show r 2 with Dissolve(0.2)
             r "Looks like they were installing a higher level here. {w=.3}They never got the chance to finish it..."
-            hide r 2 with dissolve
-        show v 2 with dissolve
+            hide r 2 with Dissolve(0.2)
+        show v 2 with Dissolve(0.2)
         v "Woah it seems pretty rickety up there..."
-        hide v 2 with dissolve
+        hide v 2 with Dissolve(0.2)
         jump pnc_loop
     
 
@@ -280,26 +290,26 @@ label mech_hallway_right:
         else:
             if rocky_dead == False and examined_HVAC_machine == False:
                 $ examined_HVAC_machine = True
-                show r 11 with dissolve
+                show r 11 with Dissolve(0.2)
                 r "This here is an HVAC, stands, for heating, ventilation, and air conditioning. {w=.3}Used to work on them back when I worked odd jobs for neighbors..."
                 r "Looks like it's not on right now...{w=.3} I don't know what that means for long term but for now we should be fine"
-                show v 18 at left with dissolve
-                v "Looks like you're blue collar-ness background has finally come to use!"
+                show v 18 at left with Dissolve(0.2)
+                v "Looks like your blue collar-ness background has finally come to use!"
                 r 4a"You've never worked a day in your life{w=.3} {i}trust fund baby{/i}"
                 show v 22 at hop
                 v "But I'm {i}your{/i} trust fund baby...{w=.3} I can be your sugar daddy too with all that supposed trust fund if you want!"
                 show r 5 at shiver
                 r "...!"
-                scene mech room 1 with dissolve
+                scene mech room 1 with Dissolve(0.2)
 
             elif rocky_dead == True and examined_HVAC_machine == False:
                 $ examined_HVAC_machine = True
-                show n 6 with dissolve
+                show n 6 with Dissolve(0.2)
                 n "I think this is an HVAC machine? I doubt it would help us even with power"
                 show v 2 2 at right with moveinright
                 show n 8 at sink
                 v "*sigh* {w=.3}Rocky is experienced with mechanical stuff like this he worked plenty of odd jobs like that.. he would have been so useful here..."
-                scene mech room 1 with dissolve
+                scene mech room 1 with Dissolve(0.2)
                 "Guess it's an HVAC"
 
         jump pnc_loop
@@ -308,6 +318,7 @@ label mech_hallway_right:
     label mech_desk:
         "Looks like a personal journal, {w=.3}some of the pages have been ripped out..."
         $ worker_journal_1_collect = True
+        window hide diss
         play sound "audio/sfx/page turn.ogg"
         show black with Dissolve(1.):
                 alpha.6
@@ -319,20 +330,20 @@ label mech_hallway_right:
         centered "{font=Dudu_Calligraphy.ttf}They bring in the wrong crowds now... Before it was fresh faced people who wanted to change the world for the betta! Now it something 'bout \"biotech\" or whateva the hell they call it. Sounds like a load of horseshit from me!(YEAH YOU HEARD ME CORPORATE){/font}"
         centered "{font=Dudu_Calligraphy.ttf}They had us expand the tower immensely for their more private businesses when they first bought the place out; had me sign an NDA and everything! Didn't let us know what exactly the floors were for but, damn do they take a helluva lot electricity.{/font}"
         centered "{font=Dudu_Calligraphy.ttf}Those bastards took the money required to power them out of our paychecks! Not to mention they treat us like trash! I've been working here for 47 damn years! Like hell am I gonna let them get away with this! I been starting a union with us mistreated workers... I'll teach them to mess with us...{/font}"
-        hide black with dissolve
+        hide black with Dissolve(0.2)
         play sound "audio/sfx/page turn.ogg"
         #$ renpy.notify("Worker's Journal Entry #1 has been added to Notes!")
 
         if rocky_dead == False:
-            show r 3a with dissolve
+            show r 3a with Dissolve(0.2)
             r "This is horrible,{w=.3} just fucking disgusting. {w=.3}My MOM'S been forced into paying for those ridiculous prices!"
             r "I've sacrificed my entire LIFE into paying them!{w=.3} I've never been able to enjoy affording something because the guilt of my mom not being able to kills me as well"
             r 8"My dad worked my entire childhood just to keep her alive!{w=.3} Imagine that!{w=.3} Being forced to give out all your money to keep your loved one trapped in a fucking chamber where they DIE if you can't pay"
             r "No free-time for us,{w=.3} no family trips, no nice clothing,{w=.3} barely enough food to have enough energy to work the rest of the day!"
             r "We're still working our asses of!{w=.3} He never got to enjoy retirement!{w=.3} My family and others sacrificed all for a CEO's 47th trip to the Bahamas!"
-            show v 11 at left with dissolve
+            show v 11 at left with Dissolve(0.2)
             v "Rocky..."
-            show n 8 at right with dissolve
+            show n 8 at right with Dissolve(0.2)
             n "..."
 
             menu:
@@ -350,7 +361,7 @@ label mech_hallway_right:
                     p 14"Of course!"
                     v 19"To the end"
                     n 10"I'm already stashing the documents!"
-                    r 9"Haha!{w=.3} Thank you guys! {w=.3}You're the bestest friends I could have asked for..."
+                    r 9"Haha!{w=.3} Thank you guys! {w=.3}You're all the bestest friends I could have asked for..."
                     r 6"I wish... {w=.3}I had met you all sooner...{w=.3} then things wouldn't have been so hard on me..."
                 
                 "Let's keep searching":
@@ -372,13 +383,13 @@ label mech_hallway_right:
             if expose_samsara_together == True:
                 r 9"Norman. {w=.3}[pov], {w=.3}that goes for you too. {w=.3}I love you guys..."
             r 3"Anyways, {w=.3}let's stop sulking,{w=.3} we got a job to do!"
-            hide r with dissolve
+            hide r with Dissolve(0.2)
             "Rocky steps out the room by himself slowly"
             "Vinnie follows him while staring longingly at his back "
         else:
-            show v 12 at right with dissolve
+            show v 12 at right with Dissolve(0.2)
             v 12"Ahh the wonders of a capitalist empire...{w=.3} we should be so thankful!{w=.3} I wonder what Rock would have thought of this... {w=.3}his family struggled with the healthcare system..."
-        hide v with dissolve
+        hide v with Dissolve(0.2)
         show n 3a at center with move
         n 3a"I never knew how deep Rocky's money problems went...{w=.3} Vinnie knew him better than I did"
         n 8"They were childhood friends you know...{w=.3} They had some type of falling out and didn't meet again til college,{w=.3} I was the who convinced Rocky to reunite with them when we first met"
@@ -396,14 +407,14 @@ label mech_hallway_right:
                 n "[pov]... {w=.3}I'm glad to have you too..."
                 n "You're a good... friend [pov],{w=.3} that means something...{w=.3} remember?"
                 p 3"I never forgot."
-                show n 3 with dissolve
+                show n 3 with Dissolve(0.2)
                 n "..."
 
             "Only true friends think like you do":
                 n 2"Awww don't forget you're my friend too!"
                 p 2"Thank you.{w=.3} Sometimes I'ts just that I feel like an outsider here..."
                 n "You're no outsider... {w=.5}to me..."
-        hide n with dissolve
+        hide n with Dissolve(0.2)
         jump pnc_loop
     
 
@@ -415,16 +426,16 @@ label mech_hallway_right:
         $ worker_key_collect = True
         p 4"Guys look!"
         if rocky_dead == False:
-            show r 1 with dissolve
+            show r 1 with Dissolve(0.2)
             r "That's a padlock key,{w=.3} you can tell from how small it is and the notches"
-            show n 1 at left with dissolve
+            show n 1 at left with Dissolve(0.2)
             n "Impressive! {w=.3}How did you know that!"
             r "Used to work in a warehouse and they had me lock up all sorts of stuff similar to this..."
         else:
-            show v 12 with dissolve
+            show v 12 with Dissolve(0.2)
             v "Hmm probably a padlock key... {w=.3}could tell from my years worth of stealing shit from faculty..."
         $ renpy.notify("Padlock key has been added to inventory!")
-        scene mech jacket with dissolve
+        scene mech jacket with Dissolve(0.2)
         jump pnc_loop
     
 
@@ -433,6 +444,7 @@ label mech_hallway_right:
     label mech_right_hall_bed:
         "I pick up the loose paper scrap from the mattress"
         $ worker_journal_2_collect = True
+        window hide diss
         play sound "audio/sfx/page turn.ogg"
         show black with Dissolve(1.):
                 alpha.6
@@ -443,15 +455,15 @@ label mech_hallway_right:
         centered "{font=Dudu_Calligraphy.ttf}Even when we surrendered they just kept going. I blacked out and when I woke up, I was in a bed. Some person in a suit said that I was under law to stay in these quarters and be restricted to this building for the foreseeable future{/font}"
         centered "{font=Dudu_Calligraphy.ttf}They implemented some new system where employees are rewarded now for reporting any sign of dissatisfaction with their job and disciplined for not doing so... God, I still don't where some of my long time friends are for refusing to surrender...{/font}"
         centered "{font=Dudu_Calligraphy.ttf}I'm scared to even write anymore... What if someone finds it? I have to get out here...{/font}"
-        hide black with dissolve
+        hide black with Dissolve(0.2)
         play sound "audio/sfx/page turn.ogg"
         #$ renpy.notify("Worker's Journal Entry #2 has been added to Notes!")
         if rocky_dead == False:
-            show r 3a with dissolve
+            show r 3a with Dissolve(0.2)
             r "How could they mistreat their workers like that?!?{w=.3} Don't they know how hard it is for some people?"
-        show v 2 at right with dissolve
+        show v 2 at right with Dissolve(0.2)
         v "Yeah, pretty fucked up how the system's just stacked against lower wage workers, {w=.3}people who claim there isn't a class system are total dumbasses when shit like this happens..."
-        scene mech bed with dissolve
+        scene mech bed with Dissolve(0.2)
         jump pnc_loop
 
 
@@ -459,12 +471,12 @@ label mech_hallway_right:
     label mech_elevator:
         
     if rocky_dead == False:
-        show r 1 with dissolve
+        show r 1 with Dissolve(0.2)
         r "This is the elevator,{w=.3} won't turn on unless the power's on..."
-        hide r with dissolve
+        hide r with Dissolve(0.2)
     else:
         p 4"The elevator won't work without power"
-    show n 5 with dissolve
+    show n 5 with Dissolve(0.2)
     n "This is why we practice and respect the fire safety drill people!"
     show n 5 at offscreen_right with move
     hide n 5
@@ -482,7 +494,7 @@ label mech_hallway_right:
     else:
         p 13"He's our nerd..."
         v 8"Meh, {w=.3}I {i}GUESS{/i} we'll keep him..."
-    scene mech room 2 with dissolve
+    scene mech room 2 with Dissolve(0.2)
     
     jump pnc_loop
     
@@ -490,18 +502,26 @@ label mech_hallway_right:
     #corpse with note
     label mech_corpse:
     $ pnc_flags["vent_unlocked"] = True
-    show v 2 3 with dissolve
+    show v 2 3 with Dissolve(0.2)
     show v 2 3 at shiver
     v "OH MY FUCKING GOD IT'S A DEAD BODY! SHOOT IT! IT MIGHT BE A ZOMBIE!!!"
     if vinnie_has_gun == True:
         show v 2 3 at hop
         v "Oh hot damn I'm the one with the gun!"
-    show n 6 at left with dissolve
+    show n 6 at left with Dissolve(0.2)
     n 6"...{w=.3}I'm preeeeeetty sure he isn't coming back... {w=.3}wouldn't he have been roaming around here?"
     p 1"Hmm, {w=.3}true..."
     "I step forward and start rummaging through the bodies pockets..."
     if insanity_level >= 1:
+        show static_anim with Dissolve(0.2)
+        play audio "audio/sfx/static.ogg"
+        camera:
+            perspective True
+            easein_bounce 0.54 zpos -20
         "Useless pile of meat..."
+        hide static_anim with Dissolve(0.2)
+        camera:
+            reset
     else:
         "Sorry, but this is necessary..."
     show v 2 3 at hop
@@ -509,11 +529,12 @@ label mech_hallway_right:
     v "DUUUUUDEE YOU CAN'T MAKE THIS SHIT UP!!!!!"
 
     if rocky_dead == False:
-        show r 10 at right with dissolve
+        show r 10 at right with Dissolve(0.2)
         r "You're braver than I thought!"
     n 5"Now that's what I call thorough!"
     "I find a hastily written scrap of paper in his hand"
     $ worker_journal_3_collect = True
+    window hide diss
     play sound "audio/sfx/page turn.ogg"
     show black with Dissolve(1.):
         alpha.6
@@ -525,7 +546,7 @@ label mech_hallway_right:
     centered "{font=Dudu_Calligraphy.ttf}Keeps ranting and raving about some monster... they must'a knocked his head up real bad to do this... he locked himself in the electric generator... said monsters can't get him there...{/font}"
     centered "{font=Dudu_Calligraphy.ttf}Hasn't eaten in days... I try to force him to but he locked me out. I'm trying to break my way in there but I don't know if I have the strength anymore. He honestly might be better off in there. No one to force him to do his required hours{/font}"
     centered "{font=Dudu_Calligraphy.ttf}I'm gonna save us kid. Ol' Luis will get ya outta here Lucas! And everyone else too, you're just being forced to by a broken system...{/font}"
-    hide black with dissolve
+    hide black with Dissolve(0.2)
     play sound "audio/sfx/page turn.ogg"
     #$ renpy.notify("Worker's Journal Entry #3 has been added to Notes!")
     "..."
@@ -535,31 +556,40 @@ label mech_hallway_right:
     v 2"Or the one crazy guy he was talking about did it..."
 
     if rocky_dead == False:
-            r 5"Luis was a good man,{w=.3} I bet he would have gotten everyone out if he had more time..."
-            r 10"We already decided on exposing this place! We'll pick up where you left off Luis!"
+            r 11"Luis was a good man,{w=.3} I bet he would have gotten everyone out if he had more time..."
+            if expose_samsara_together == True:
+                r 10"We already decided on exposing this place! We'll pick up where you left off Luis!"
             v 6"Big thankies Luis!~{w=.3} I will make you internet famous so the world will remember your name!"
             n 1"We won't let your wish be in vain Luis!"
             if insanity_level >= 1:
+                show static_anim with Dissolve(0.2)
+                play audio "audio/sfx/static.ogg"
+                camera:
+                    perspective True
+                    easein_bounce 0.54 zpos -20
                 "...{w=.3}how hopeless"
+                hide static_anim with Dissolve(0.2)
+                camera:
+                    reset
             else: 
                 p 2"I won't forget you Luis."
-    scene mech room 2 with dissolve
+    scene mech room 2 with Dissolve(0.2)
 
     jump pnc_loop
 
 
     label mech_electric_door:
     window hide diss
-    scene electric generator window with dissolve
+    scene electric generator window with Dissolve(0.2)
     pause 1.0
     "I peek through the door's shattered tiny window and see a decomposing corpse in front of what looks like a machine"
     if worker_journal_3_collect:
         "That must be Lucas..."
 
-    show v 25 at right with dissolve
+    show v 25 at right with Dissolve(0.2)
     v "It's impossible to get through this door without the key... "
     if rocky_dead == False:
-        show r 2 with dissolve
+        show r 2 with Dissolve(0.2)
         r "[pov] is small.. {w=.3}BUT NOT THAT SMALL! {w=.3}Sorry buddy but you won't be able to squeeze through this window!"
 
     if rocky_dead == False and crowbar_collected == True:
@@ -568,19 +598,19 @@ label mech_hallway_right:
         play sound "audio/sfx/metal.ogg"
         "Rocky tries smashing the door,{w=.3} but it won't budge..."
         r 8"*huff* {w=.3}*huff*"
-        show n 1 at left with dissolve
+        show n 1 at left with Dissolve(0.2)
         n "Don't worry Rocky! It was a good effort!"
     elif rocky_dead == True and crowbar_collected == True:
         play sound "audio/sfx/metal.ogg"
         "I attempt to use the crowbar,{w=.3} but it's not use..."
-        show n 1 at left with dissolve
+        show n 1 at left with Dissolve(0.2)
         n "Don't worry [pov]! It was a good effort!"
 
     if worker_journal_3_collect:
-        show n 1 at left with dissolve
+        show n 1 at left with Dissolve(0.2)
         n "Didn't the note say there was another way in?"
 
-    scene mech room 2 with dissolve
+    scene mech room 2 with Dissolve(0.2)
     jump pnc_loop
 
 
@@ -596,12 +626,12 @@ label mech_hallway_right:
             "Let's keep looking around this floor":
                 jump pnc_loop
 
-        show v 16 at right with dissolve
+        show v 16 at right with Dissolve(0.2)
         v "Ok cool but, how exactly {i}do{/i} we get in though?"
-        show n 3a at left with dissolve
+        show n 3a at left with Dissolve(0.2)
         n "It seems real small... {w=.3}I think [pov] might be the only one who fits..."
         if rocky_dead == False:
-            show r 1a with dissolve
+            show r 1a with Dissolve(0.2)
             r "There has to be a tool around to open this!"
             r 1 "And for once I don't mean Vinnie!"
             v 24"Heyyyyy not nice..."
@@ -621,11 +651,11 @@ label mech_hallway_right:
                     jump mechanical_floor_escape
                 else:
                     play sound "audio/sfx/metal.ogg"
-                    p 13"You're mom is waiting on us!{w=.3} She's chilling in her room just knowing that Rocky the great is on his way!"
+                    p 13"Your mom is waiting on us!{w=.3} She's chilling in her room just knowing that Rocky the great is on his way!"
                     show r 2a at hop_loop
                     r "YARGHH!!!"
                     p 13"C'mon guys help me motivate Rocky!"
-                    v 5"Uh uhhh- {w=.3}You're mouth smells like rotten meat and you look,{w=.3} act, {w=.3}and think like a conservative!"
+                    v 5"Uh uhhh- {w=.3}Your mouth smells like rotten meat and you look,{w=.3} act, {w=.3}and think like a conservative!"
                     p 13"ROCKY ROCKY ROCKY! You got this! Use that maned wolf strength! If Rocky can't do it! No one can!"
                     v 6"-Your legs are freakishly long,{w=.3}  your teeth are yellow,{w=.3}  you haven't worked out in years so stop saying ya got muscle"
                     play sound "audio/sfx/metal.ogg"
@@ -654,19 +684,19 @@ label mech_hallway_right:
 
             elif crowbar_collected == True and expose_samsara_together == False:
                 p 1"You can use the crowbar to smash open the vent,{w=.3} I think Rocky is most suitable for the task"
-                show r 1a with dissolve
+                show r 1a with Dissolve(0.2)
                 r "Got it!"
                 play sound "audio/sfx/metal.ogg"
                 "*Thud*{w=.3} Thud*{w=.3} Thud*" with hpunch
-                show v 26 at right with dissolve
+                show v 26 at right with Dissolve(0.2)
                 v "C'mon Rocky... {w=.3}You got this..."
-                show n 5 at left with dissolve
+                show n 5 at left with Dissolve(0.2)
                 n "Give it your all!"
                 jump mechanical_floor_escape
 
             else:
                 "We need some type of way to get this vent open it's the only way through this door..."
-                scene mech room 2 with dissolve
+                scene mech room 2 with Dissolve(0.2)
                 jump pnc_loop
 
         else: 
@@ -678,7 +708,7 @@ label mech_hallway_right:
                 jump mechanical_floor_escape
             else:
                 "We need some type of way to get this vent open it's the only way through this door..."
-                scene mech room 2 with dissolve
+                scene mech room 2 with Dissolve(0.2)
                 jump pnc_loop
 
 
@@ -692,13 +722,23 @@ label mechanical_floor_escape:
         else:
             "After a while, {w=.3}Rocky is able to get the vent open"
             r 11"*huff* {w=.3}phew- {w=.3}Well-{w=.3} You can go in now [pov]!"
-    scene vent with dissolve
+    scene vent with Dissolve(0.2)
     play sound "audio/sfx/vent.ogg"
     "I make my way through the vent,{w=.3} avoiding the massive fan blades in my way; good thing it's not on"
-    scene electric generator with dissolve
+    scene electric generator with Dissolve(0.2)
     "The body in this cramped space creates a foul humid odor... {w=.3}I guess Lucas never got out of here..."
     if insanity_level == 0:
         "Sorry for the intrusion..."
+    else:
+        show static_anim with Dissolve(0.2)
+        play audio "audio/sfx/static.ogg"
+        camera:
+            perspective True
+            easein_bounce 0.54 zpos -20
+        "Out of my way"
+        hide static_anim with Dissolve(0.2)
+        camera:
+            reset
     "...? {w=.3}On closer examination Lucas's corpse has a massive hole in it? If we thought he shot Luis... then did he shoot himself?"
     "if that's the case...{w=.3}where's his gun...?"
     n "IS EVERYTHING GOOD IN THERE [pov!u]!?!?"
@@ -772,19 +812,20 @@ label mechanical_floor_escape:
     label norman_gun_cant_find_fan:
             play sound "audio/sfx/short run.ogg"
             queue sound "audio/sfx/shoot.ogg"
+            with vpunch
             queue sound "audio/sfx/zombie attack.ogg"
-            $ ammo -= 1
+            $ addAmmo_level(-1) 
             "I hear a loud gunshot and an injured zombie!" with vpunch
             n "It wasn't there [pov]! {w=.3}Sorry,{w=.3} I wasted some ammo!"
             jump guide_norman 
 
     label norman_deactivates_fan:
     n "That was it!{w=.3} I'll meet you at the elevator now!"
-    scene vent with dissolve
+    scene vent with Dissolve(0.2)
     play sound "audio/sfx/vent.ogg"
     "I hear the fan stop whirring and I immediately make my exit!"
     scene mech room 2 with fade
-    show v 4 with dissolve
+    show v 4 with Dissolve(0.2)
     show bluzom at left with moveinleft
     show bluzom at shiver_loop_left
     show orangzom at right with moveinright
@@ -796,8 +837,9 @@ label mechanical_floor_escape:
 
     if vinnie_has_gun == True:
         play sound "audio/sfx/shoot.ogg"
+        with vpunch
         "Fortunately they fire the gun so they're perfectly safe!"
-        $ ammo -=1
+        $ addAmmo_level(-1)
         if rocky_dead == False:
             jump rocky_save_sequence
         else:
@@ -809,23 +851,40 @@ label mechanical_floor_escape:
                 if rocky_dead == False and rocky_has_gun == True:
                     $ addVinhealth(-1) 
                     $ addInsanity_level(1)
+                    show static_anim with Dissolve(0.2)
+                    play audio "audio/sfx/static.ogg"
+                    camera:
+                        perspective True
+                        easein_bounce 0.54 zpos -20
                     play sound "audio/sfx/zombie attack.ogg"
+                    hide static_anim with Dissolve(0.2)
+                    camera:
+                        reset
                     v "OH FUCK SOMEBODY HELP ME IT'S BITING MY ARM!!!"
                     if vinnie_health == 0:
                         $ vinnie_dead = True
                     else:
                         jump rocky_save_sequence  
                     play sound "audio/sfx/shoot.ogg"
+                    with vpunch
                     show orangzom at offscreen_bottom with move
                     hide orangzom
                     show r 2a at right with moveinright
-                    $ ammo -=1
+                    $ addAmmo_level(-1)
                     r 2"I got you Vinnie!"
                     v 18"THANK YOU THANK YOU ROCKY!!"
 
                 elif rocky_dead == False and expose_samsara_together == True:
                     $ addInsanity_level(1)
+                    show static_anim with Dissolve(0.2)
+                    play audio "audio/sfx/static.ogg"
+                    camera:
+                        perspective True
+                        easein_bounce 0.54 zpos -20
                     play sound "audio/sfx/zombie-22.ogg"
+                    hide static_anim with Dissolve(0.2)
+                    camera:
+                        reset
                     v "OH FUCK SOMEBODY HELP ME IT'S BITING MY ARM!!!"
                     play sound "audio/sfx/punch.ogg"
                     show r 1a with moveinright
@@ -840,7 +899,15 @@ label mechanical_floor_escape:
                     $ addVinhealth(-1) 
                     $ addRockyhealth(-2) 
                     $ addInsanity_level(1)
+                    show static_anim with Dissolve(0.2)
+                    play audio "audio/sfx/static.ogg"
+                    camera:
+                        perspective True
+                        easein_bounce 0.54 zpos -20
                     play sound "audio/sfx/zombie-22.ogg"
+                    hide static_anim with Dissolve(0.2)
+                    camera:
+                        reset                    
                     v "OH FUCK SOMEBODY HELP ME IT'S BITING MY ARM!!!"
                     if vinnie_health == 0:
                         $ vinnie_dead = True
@@ -863,6 +930,7 @@ label mechanical_floor_escape:
                     hide r 
                     hide v
                     $ crowbar_collected == False
+                    $ renpy.notify("Crowbar has been removed from your inventory!")
                     "The crowbar was lost in the chaos"
                     if vinnie_health == 0:
                         "And so was Vinnie.."
@@ -874,15 +942,23 @@ label mechanical_floor_escape:
                     $ addVinhealth(-5) 
                     $ vinnie_dead = True
                     $ addInsanity_level(1)
+                    show static_anim with Dissolve(0.2)
+                    play audio "audio/sfx/static.ogg"
+                    camera:
+                        perspective True
+                        easein_bounce 0.54 zpos -20
                     play sound "audio/sfx/zombie-22.ogg"
+                    hide static_anim with Dissolve(0.2)
+                    camera:
+                        reset                      
                     queue sound "audio/sfx/eat.ogg"
                     show orangzom at center with move
                     show bluzom at center with move
                     show v 2 3 at offscreen_bottom with move
                     hide v
                     v "SHITSHITSHIT SOMEBODY HELP ME!!{w=.3} THEY'RE ON ME!{w=.3} THEY'RE ON ME!!!!"
-                    hide orangzom with dissolve
-                    hide bluzom with dissolve
+                    hide orangzom with Dissolve(0.2)
+                    hide bluzom with Dissolve(0.2)
 
                     "I hear loud chewing noises and distant screaming as I run further away"
                     
@@ -896,10 +972,11 @@ label mechanical_floor_escape:
                 if sage_health == 0:
                     jump death_screen
 
-            "I shoot the zombies attacking Vinnie!" if sage_has_gun == True and ammo >= 1:
+            "I shoot the zombie attacking Vinnie!" if sage_has_gun == True and ammo >= 1:
                 play sound "audio/sfx/cock.ogg"
                 queue sound "audio/sfx/shoot.ogg"
-                $ ammo -= 1
+                with vpunch
+                $ addAmmo_level(-1)
                 show orangzom at offscreen_bottom with move
                 hide orangzom
                 "I successfully made an opening for Vinnie as they ran to the elevator!"
@@ -912,30 +989,32 @@ label mechanical_floor_escape:
                 queue sound "audio/sfx/zombie-19.ogg"
                 queue sound "audio/sfx/hit.ogg"
                 v 2 4"THANKS [pov!u]"
-                "I successfully made an opening for Vinnie as they run but lost the crowbar in the process!"
+                $ renpy.notify("Crowbar has been removed from your inventory!")
                 $ crowbar_collected = False
+                "I successfully made an opening for Vinnie as they run but lost the crowbar in the process!"
 
             "I tell Vinnie to stab the zombies with their knife!" if vinnies_knife == True:
-                $ addVinhealth(-1) 
-                $ vinnies_knife = False
                 play sound "audio/sfx/stab.ogg"
                 queue sound "audio/sfx/zombie huh.ogg"
-                v 2 1"Uh uhhh Ok!!{w=.3} OWWWW FUCK!!!!"
+                v 2 1"Uh uhhh Ok!!"
                 show orangzom at offscreen_bottom with move
                 hide orangzom
-                "Their knife gets stuck in the zombie's head, {w=.3}who slashed Vinnie's arm in turn!"
+                $ vinnies_knife = False
+                $ renpy.notify("Vinnie's Knife has been removed from your inventory!")
+                "Their knife gets stuck in the zombie's head!"
                 if vinnie_health == 0:
                     $ vinnie_dead = True
 
-            "I tell Rocky to shoot the zombies!" if rocky_dead == False and rocky_has_gun == True:
+            "I tell Rocky to shoot the zombies!" if rocky_dead == False and ammo >= 1 and rocky_has_gun == True:
                     play sound "audio/sfx/zombie-19.ogg"
                     queue sound "audio/sfx/shoot.ogg"
-                    $ ammo -=1
+                    with vpunch
+                    $ addAmmo_level(-1)
                     show orangzom at offscreen_bottom with move
                     hide orangzom
                     show r 2a at right with moveinright
                     r "I got you Vinnie!"
-                    v 2 1"THANK YOU THANK YOU ROCKY!!"
+                    v 2 1"NICE SHOT AND THANKS!"
                     jump rocky_save_sequence
 
             "I tell Rocky to save Vinnie!" if rocky_dead == False:
@@ -947,22 +1026,19 @@ label mechanical_floor_escape:
                     hide orangzom
                     "Rocky is able to take down EVERY zombie in his path without problem!"
                     r "I got you Vinnie!"
-                    v 2 1"THANK YOU THANK YOU ROCKY!!"
-                if expose_samsara_together == False:
+                    v 2 1"OH MY GOD YOU JUST KILLED THEM ALL IN ONE FELL SWOOP AWESOME!!!"
+                if expose_samsara_together == False and crowbar_collected == True:
                     play sound "audio/sfx/zombie-19.ogg"
                     queue sound "audio/sfx/punch.ogg"
                     show r 4a at right with moveinright
                     r "I got you Vinnie just get out of the way for crowbar!"
-                    $ crowbar_collected = False
                     v "OK!"
+                    $ renpy.notify("Crowbar has been removed from your inventory!")
+                    $ crowbar_collected = False
                     "Rocky lunges at the zombies and gets injured! It makes him lose the crowbar to the horde!"
-                    $ addRockyhealth(-1) 
-                    if rocky_health == 0:
-                        $ rocky_dead = True
                     show orangzom at offscreen_bottom with move
                     hide orangzom
-
-                else:
+                elif expose_samsara_together == False and crowbar_collected == False:
                     show r 4a at right with moveinright
                     show orangzom at offscreen_bottom with move
                     hide orangzom
@@ -970,7 +1046,7 @@ label mechanical_floor_escape:
                     queue sound "audio/sfx/punch.ogg"
                     $ addRockyhealth(-3) 
                     "Rocky punches his way through to save Vinnie but gets badly hurt in the process!"
-                    v "THANK YOU THANK YOU ROCKY!!"
+                    v "HOLY FUCK YOU JUST FALCON PUNCHED THEM ALL THANK YOU!"
                     if rocky_health == 0:
                         $ rocky_dead = True
                     r "D-{w=.3}don't mention it..."
@@ -980,18 +1056,19 @@ label mechanical_floor_escape:
             "I tell Norman to shoot the zombies!" if norman_has_gun == True and ammo >= 1:
                     play sound "audio/sfx/cock.ogg"
                     queue sound "audio/sfx/shoot.ogg"
+                    with vpunch
                     queue sound "audio/sfx/zombie attack.ogg"
                     show orangzom at offscreen_bottom with move
                     hide orangzom
-                    $ ammo -= 1
+                    $ addAmmo_level(-1)
                     show n 12 at right with moveinright
                     n "I'LL SAVE YOU VINNIE!"
                     "Norman was able to clear a path for Vinnie without a hitch!"
 
     label rocky_save_sequence:
     if rocky_dead == False:
-        scene mech room 2 with dissolve
-        show r 3a with dissolve
+        scene mech room 2 with Dissolve(0.2)
+        show r 3a with Dissolve(0.2)
         show dunce at right with moveinright
         show dunce at shiver_loop_right
         show breadly at left with moveinleft
@@ -1010,10 +1087,11 @@ label mechanical_floor_escape:
             jump office_floor_2
         elif rocky_has_gun == True:
             play sound "audio/sfx/shoot.ogg"
+            with vpunch
             queue sound "audio/sfx/Zombie_04.ogg"
 
             "They fire their gun and make it out safely!"
-            $ ammo -= 1
+            $ addAmmo_level(-1)
         else:
 
             menu:
@@ -1022,17 +1100,19 @@ label mechanical_floor_escape:
                     play sound "audio/sfx/zombie (2).ogg"
                     queue sound "audio/sfx/punch.ogg"
                     queue sound "audio/sfx/zombie huh.ogg"
-                    $ crowbar_collected = False
                     show r 3a at hop
                     r "EAT THIS YOU WALKING BAG OF SHIT!!!"
                     show dunce at offscreen_bottom with move
                     hide dunce
+                    $ renpy.notify("Crowbar has been removed from your inventory!")
+                    $ crowbar_collected = False
                     "Rocky is able to get away but loses the crowbar to the horde in the process!"   
 
                 "I tell Norman to shoot the zombies!" if norman_has_gun == True and ammo >= 1:
                     play sound "audio/sfx/zombie moan.ogg"
                     queue sound "audio/sfx/shoot.ogg"
-                    $ ammo -=1
+                    with vpunch
+                    $ addAmmo_level(-1)
                     show dunce at offscreen_bottom with move
                     hide dunce
                     show n 5 at right with moveinright
@@ -1040,16 +1120,21 @@ label mechanical_floor_escape:
                     n "No problem!"                    
 
                 "I tell Vinnie to save Rocky" if vinnie_dead == False and vinnies_knife == False:
-                    play sound "audio/sfx/zombie huh.ogg"
-                    queue sound "audio/sfx/shoot.ogg"
                     $ addVinhealth(-2) 
                     show v 2 at right with moveinright
+                    play sound "audio/sfx/punch.ogg"
+                    queue sound "audio/sfx/zombie huh.ogg"
                     show dunce at offscreen_bottom with move
+                    with vpunch
+                    show v 2 1 at hop
+                    $ addVinhealth(-2) 
                     hide dunce
+                    show v 2 1 at offscreen_bottom with move
+                    hide v 
                     "Vinnie charges forwards but gets their body ravaged by the zombies in return!"
-                    r "VINNIE NO!!!{w=.3} ARE YOU OK!"
+                    r 3"VINNIE NO!!!{w=.3} ARE YOU OK!"
                     if vinnie_health == 0:
-                        pass
+                        r 8"Vinnie! {w=.3}Vin! {w=.3}Speak to me!{w=.2} Dammit!{w=.3} DON'T YOU FUCKING DARE DIE ON ME! {w=.4}Vin?!?!?"
                     else:
                         show v 2 1 at right
                         v "C- {w=.3}carry me..."   
@@ -1058,21 +1143,22 @@ label mechanical_floor_escape:
                 "I tell Vinnie to stab the zombies" if vinnie_dead == False and vinnies_knife == True:
                     play sound "audio/sfx/stab.ogg"
                     queue sound "audio/sfx/zombie moan.ogg"
-                    $ vinnies_knife = False
                     show v 5 at right with moveinright
                     show dunce at offscreen_bottom with move
                     hide dunce
+                    $ renpy.notify("Vinnie's Knife has been removed from your inventory!")
+                    $ vinnies_knife = False
                     "Vinnie charges forwards and stabs the zombies! The knife is lost in the zombie's head!"
                     show r 2 at hop
                     r "NOW THAT'S WHAT I'M TALKING ABOUT VI!"
                     show v 5 at hop
                     v "WOOOOOO!!!!"   
 
-                "I tell Vinnie to shoot the zombies!" if vinnie_dead == False and vinnie_has_gun == True:
+                "I tell Vinnie to shoot the zombies!" if vinnie_dead == False and ammo >= 1 and vinnie_has_gun == True:
                     play sound "audio/sfx/shoot.ogg"
                     queue sound "audio/sfx/zombie moan.ogg"
 
-                    $ ammo -= 1
+                    $ addAmmo_level(-1)
                     show v 5 at left with moveinleft
                     show dunce at offscreen_bottom with move
                     hide dunce
@@ -1085,12 +1171,13 @@ label mechanical_floor_escape:
 
                     queue sound "audio/sfx/cock.ogg"
                     queue sound "audio/sfx/shoot.ogg"
+                    with vpunch
                     queue sound "audio/sfx/zombie attack.ogg"
                     show v 2 1 at right with moveinright
                     "Vinnie panics and shoots wildly, they don't hear the zombie behind them and get hurt in return!"
 
                     $ addVinhealth(-1) 
-                    $ ammo -= 1
+                    $ addAmmo_level(-1)
                     if vinnie_health == 0:
                         $ vinnie_dead = True
                     else:
@@ -1109,10 +1196,11 @@ label mechanical_floor_escape:
                     show r 10 at hop
                     r "Thanks [pov]!"
 
-                "I shoot the zombies!" if sage_has_gun == True and ammo >= 1:
+                "I shoot the zombie!" if sage_has_gun == True and ammo >= 1:
                     play sound "audio/sfx/shoot.ogg"
+                    with vpunch
                     queue sound "audio/sfx/zombie huh.ogg"
-                    $ ammo -= 1
+                    $ addAmmo_level(-1)
                     show dunce at offscreen_bottom with move
                     hide dunce
                     "I was able to save Rocky with no error!"
@@ -1123,18 +1211,30 @@ label mechanical_floor_escape:
                     if vinnie_dead == False and vinnie_has_gun == True:
                         play sound "audio/sfx/zombie moan.ogg"
                         queue sound "audio/sfx/shoot.ogg"
-                        $ ammo -= 1
+                        with vpunch
+                        $ addAmmo_level(-1)
                         show v 2 at left with moveinleft
                         show dunce at offscreen_bottom with move
                         hide dunce
                         $ addInsanity_level(1)
+                        show static_anim with Dissolve(0.2)
+                        play audio "audio/sfx/static.ogg"
+                        camera:
+                            perspective True
+                            easein_bounce 0.54 zpos -20
+                        play sound "audio/sfx/zombie-22.ogg"
+                        hide static_anim with Dissolve(0.2)
+                        camera:
+                            reset                          
                         v "Duck bitch!!!"
                         r "Huh?! HOLY FUCK!"
                         $ addVinhealth(-1) 
                         play sound "audio/sfx/shoot.ogg"
+                        with vpunch
                         queue sound "audio/sfx/shoot.ogg"
+                        with vpunch
                         queue sound "audio/sfx/zombie attack.ogg"
-                        $ ammo -= 2
+                        $ addAmmo_level(-1)
                         show z 1 at left with moveinleft
                         show z 3 at left with moveinright
                         show v 5 at right with move
@@ -1148,13 +1248,24 @@ label mechanical_floor_escape:
 
                     elif vinnie_dead == False and vinnies_knife == True:
                         play sound "audio/sfx/stab.ogg"
+                        with vpunch
                         queue sound "audio/sfx/zombie attack.ogg"
                         $ addInsanity_level(1)
+                        show static_anim with Dissolve(0.2)
+                        play audio "audio/sfx/static.ogg"
+                        camera:
+                            perspective True
+                            easein_bounce 0.54 zpos -20
+                        play sound "audio/sfx/zombie-22.ogg"
+                        hide static_anim with Dissolve(0.2)
+                        camera:
+                            reset                              
                         show v 2 at left with moveinleft
                         v "I'LL SAVE YOU ROCKY!!"
+                        $ renpy.notify("Vinnie's Knife has been removed from your inventory!")
+                        $ vinnies_knife = False
                         "Vinnie charges forwards and stabs the zombies!{w=.3} They get hurt in return and the knife is lost in the zombie's head!"
                         $ addVinhealth(-2)
-                        $ vinnies_knife = False
                         show v 2 1 at left
                         if vinnie_health == 0:
                             $ vinnie_dead = True
@@ -1166,7 +1277,15 @@ label mechanical_floor_escape:
                         $ addVinhealth(-4)
                         $ vinnie_dead = True
                         $ addInsanity_level(1)
+                        show static_anim with Dissolve(0.2)
+                        play audio "audio/sfx/static.ogg"
+                        camera:
+                            perspective True
+                            easein_bounce 0.54 zpos -20
                         play sound "audio/sfx/zombie talk.ogg"
+                        hide static_anim with Dissolve(0.2)
+                        camera:
+                            reset
                         show v 2 at left with moveinleft
                         show dunce at offscreen_bottom with move
                         hide dunce
@@ -1185,18 +1304,26 @@ label mechanical_floor_escape:
                         v "I... {w=.3}really.. {w=.3}l-{w=.3}l-{w=.3} liked our time together...{w=.3} please don- t be... {w=.3}worry ...{w=.3} haha...haaa {w=.3}*cough*"
                         v "D- {w=.3}don't push yourself... {w=.3}when you have people like... {w=.3}me... {w=.3}who do care..."
                         v "Don't... {w=.4}be... {w=.4}a... {w=.4}stranger... {w=.5}ha... {w=.5}haaaaa"
-                        show r 5 at shiver
+                        show r 7 at shiver
                         "Vinnie uses the last of their strength to shove Rocky away and gestures him to run to the elevator, Rocky hesistates but eventually does so"
-                        show r 5 at shiver
+                        show r 7 at shiver
                         pause 0.5
-                        show r 5 at offscreen_right with move
+                        show r 7 at offscreen_right with move
 
                     else:
                         play sound "audio/sfx/zombie talk.ogg"
                         queue sound "audio/sfx/eat.ogg"
                         $ addInsanity_level(1)
+                        show static_anim with Dissolve(0.2)
+                        play audio "audio/sfx/static.ogg"
+                        camera:
+                            perspective True
+                            easein_bounce 0.54 zpos -20
                         $ addRockyhealth(-5)
                         $ rocky_dead = True
+                        hide static_anim with Dissolve(0.2)
+                        camera:
+                            reset
                         r "OH YEAH?!?! I-{w=.1} I'LL BEAT YOU ALL TO DEATH JUST YOU WAT-{w=.2} ARGGGHHHHH!!!"
                         show z 3 at shiver_loop with moveinleft
                         show z 2 at shiver_loop with moveinleft
@@ -1206,10 +1333,10 @@ label mechanical_floor_escape:
                         "I hear chewing noises and the zombies moaning as I run further away..."
     else:
         pass
-    scene black with dissolve
+    scene black with Dissolve(0.2)
     if rocky_health == 0 and rocky_cafe_death == False:
         $ rocky_dead = True
-        "Rocky isn't moving anymore...{w=.4} or breathing..."
+        "Rocky isn't moving...{w=.4} or breathing..."
     if vinnie_health == 0:
         $ vinnie_dead = True
         "Vinnie is down and isn't getting up..."

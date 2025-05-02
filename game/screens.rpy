@@ -12,7 +12,7 @@ init offset = -1
 style default:
     properties gui.text_properties()
     language gui.language
-#mess with this
+    
 style input:
     properties gui.text_properties("input", accent=True)
     adjust_spacing False
@@ -210,17 +210,27 @@ style input:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#choice
 
+
+
+##https://lemmasoft.renai.us/forums/viewtopic.php?f=51&t=59486 for selected choice
+
+
 screen choice(items):
     style_prefix "choice"
 
     vbox:
         for i in items:
-            textbutton i.caption action i.action
-
+            textbutton i.caption action i.action: # edit this line
+                if i.chosen == True: # add this line
+                    style "choice_chosen_button" # add this line
 
 style choice_vbox is vbox
 style choice_button is button
 style choice_button_text is button_text
+
+style choice_chosen_button is choice_button # add this line
+style choice_chosen_button_text is choice_button_text # add this line
+
 
 style choice_vbox:
     xalign 0.5
@@ -236,6 +246,12 @@ style choice_button_text is default:
     properties gui.text_properties("choice_button")
 
 
+##https://lemmasoft.renai.us/forums/viewtopic.php?f=51&t=59486 for selected choice
+
+style choice_chosen_button_text: 
+    idle_color "#947383"
+
+
 ## Quick Menu screen ###########################################################
 ##
 ## The quick menu is displayed in-game to provide easy access to the out-of-game
@@ -245,24 +261,26 @@ screen quick_menu():
 
     ## Ensure this appears on top of other screens.
     zorder 100
+    if renpy.get_screen("say"):
+        if quick_menu:
 
-    if quick_menu:
+            hbox:
+                style_prefix "quick"
 
-        hbox:
-            style_prefix "quick"
+                xalign 0.5
+                yalign 0.96
 
-            xalign 0.5
-            yalign 0.96
-
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
-
+                textbutton _("Back") action Rollback() at buttonScale
+                textbutton _("History") action ShowMenu('history') at buttonScale
+                textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True) at buttonScale
+                textbutton _("Auto") action Preference("auto-forward", "toggle") at buttonScale
+                textbutton _("Save") action ShowMenu('save') at buttonScale
+                textbutton _("Q.Save") action QuickSave() at buttonScale
+                textbutton _("Q.Load") action QuickLoad() at buttonScale
+                textbutton _("Inventory") action ShowMenu('inventory_menu') at buttonScale
+                textbutton _("Sanity Check") action ShowMenu('sanity_menu') at buttonScale
+                textbutton _("Prefs") action ShowMenu('preferences') at buttonScale
+ 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
@@ -291,52 +309,63 @@ style quick_button_text:
 ## to other menus, and to start the game.
 
 screen navigation():
-
-    vbox:
-        style_prefix "navigation"
+    frame:
+        background Frame("gui/shadow.png", 30, 30, tile="integer")
+        padding (5,10)
 
         if renpy.get_screen("main_menu"):
             xalign 0.5
-            yalign 0.8
+            ypos 380
         else:
-            xoffset 60
-            yalign 0.5
+            xoffset 50
+            ypos 130
+            
+        vbox:
+            style_prefix "navigation"
 
-        spacing gui.navigation_spacing
+            spacing gui.navigation_spacing
+    
+            if main_menu:
 
-        if main_menu:
+                textbutton _("Start") action Start() at buttonScale
 
-            textbutton _("Start") action Start()
+            else:
+                textbutton _("Inventory") action ShowMenu("inventory_menu") at buttonScale
 
-        else:
-            textbutton _("History") action ShowMenu("history")
+                textbutton _("Sanity Check") action ShowMenu("sanity_menu") at buttonScale
 
-            textbutton _("Save") action ShowMenu("save")
+                textbutton _("Party Check") action ShowMenu("group_check") at buttonScale
 
-        textbutton _("Load") action ShowMenu("load")
+                textbutton _("History") action ShowMenu("history") at buttonScale
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+                textbutton _("Save") action ShowMenu("save") at buttonScale
 
-        if _in_replay:
+            textbutton _("Load") action ShowMenu("load") at buttonScale
 
-            textbutton _("End Replay") action EndReplay(confirm=True)
+            textbutton _("Achievements") action ShowMenu("achievements_menu") at buttonScale
 
-        elif not main_menu:
+            textbutton _("Preferences") action ShowMenu("preferences") at buttonScale
 
-            textbutton _("Main Menu") action MainMenu()
+            if _in_replay:
 
-        textbutton _("About") action ShowMenu("about")
+                textbutton _("End Replay") action EndReplay(confirm=True) at buttonScale
+    
+            elif not main_menu:
 
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+                textbutton _("Main Menu") action MainMenu() at buttonScale
 
-            ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
+            textbutton _("About") action ShowMenu("about") at buttonScale
 
-        if renpy.variant("pc"):
+            if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
-            ## The quit button is banned on iOS and unnecessary on Android and
-            ## Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+                ## Help isn't necessary or relevant to mobile devices.
+                textbutton _("Help") action ShowMenu("help") at buttonScale
+
+            if renpy.variant("pc"):
+
+                ## The quit button is banned on iOS and unnecessary on Android and
+                ## Web.
+                textbutton _("Quit") action Quit(confirm=not main_menu) at buttonScale
 
 
 style navigation_button is gui_button
@@ -357,12 +386,38 @@ style navigation_button_text:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
+screen main_menu_default():
+
+    imagemap:
+        ground 'gui/main_menu.png'
+
+screen main_menu_1():
+
+    imagemap:
+        ground "gui/main_menu_true.png"
+        
+screen main_menu_2():
+
+    imagemap:
+        ground 'gui/main_menu_hail.png'
+
 screen main_menu():
 
     ## This ensures that any other menu screen is replaced.
     tag menu
 
-    add gui.main_menu_background
+    if persistent.trueending == True:
+        use main_menu_1
+        add Snow("gui/snow1.png")
+        add Snow("gui/snow2.png")
+    elif persistent.hailending == True:
+        use main_menu_2
+        add Snow("gui/snow1.png")
+        add Snow("gui/snow2.png")
+    else:
+        use main_menu_default 
+
+    #add gui.main_menu_background
 
     ## This empty frame darkens the main menu.
     frame:
@@ -427,7 +482,7 @@ screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
     style_prefix "game_menu"
 
     if main_menu:
-        add gui.main_menu_background
+        add gui.game_menu_background
     else:
         add gui.game_menu_background
 
@@ -570,12 +625,14 @@ screen about():
             ## gui.about is usually set in options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
-                
+
             text "Music, GUI, Play Testing, Coding, Writing Help, and Concept Art by {a=https://x.com/B0redBradley}B0redBradley{/a}"
 
             text "Writing, Sprite Art, Background Art, Live or Die, Main Menu, and Death themes by {a=https://x.com/DunceCap0}Dunce Cap{/a}"
 
             text "Point and Click Code Framework by {a=https://devilspider.itch.io//a}Devil Spider"
+
+            text "Snowfall Code by {a=https://tofurocks.itch.io/}TofuRocks{/a}"
 
             text "SFX from {a=https://opengameart.org/}OpenGameArt{/a}, {a=https://freesound.org/}Freesound{/a}, {a=https://www.zapsplat.com/}ZapSplat{/a}, and {a=https://www.youtube.com/}Youtube Audio Library{/a} "
             
@@ -1306,6 +1363,7 @@ style notify_text is gui_text
 
 style notify_frame:
     ypos gui.notify_ypos
+    xpos 180
 
     background Frame("gui/notify.png", gui.notify_frame_borders, tile=gui.frame_tile)
     padding gui.notify_frame_borders.padding
@@ -1567,9 +1625,9 @@ style nvl_window:
     variant "small"
     background "gui/phone/nvl.png"
 
-style main_menu_frame:
-    variant "small"
-    background "gui/phone/overlay/main_menu.png"
+#style main_menu_frame:
+    #variant "small"
+    #background "gui/phone/overlay/main_menu.png"
 
 style game_menu_outer_frame:
     variant "small"

@@ -31,13 +31,12 @@ screen pnc_screen(room="left"):
 
     for i in eval(f"{room}_buttons"):
         if (i[3] is None) or (eval(i[3])):
-            imagebutton auto "point_and_click/image/" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2])
+            imagebutton auto "point_and_click/image/" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2]) at buttonScale
 
 style pnc_image_button:
     anchor (0.5, 0.5)
 
 define diss = {"screens" : Dissolve(0.15)} # this allows the textbox to be hidden and shown without any pause
-
 
 # This label handles showing the screen to the player.
 label pnc_loop:
@@ -201,7 +200,7 @@ define lab_radio_buttons = [
 # TANK ROOM BUTTONS
 
 define lab_tanks_room_buttons = [
-    (("look"),(800, 650), "bullets", "lab_ammo_2_collected == False"),
+    #(("look"),(800, 650), "bullets", "lab_ammo_2_collected == False"),
     (("look"),(700, 420), "keycard_slider", "keycard_accepted == False"),
     (("look"),(100, 350), "bioreactor", None),
 
@@ -211,7 +210,7 @@ define lab_tanks_room_buttons = [
 ]
 
 define lab_downstairs_hall_buttons= [
-
+    (("look"),(479, 470), "hakim_lab_go_away", "examined_hakim == False"),
     (("move"),(630, 400),"lab_puzzle_piece_a_collect_room", None), 
     (("move"),(650, 700),"lab_tanks_room", None), 
 ]
@@ -222,10 +221,15 @@ define lab_puzzle_piece_a_collect_room_buttons= [
     (("move"),(650, 700),"lab_downstairs_hall", None), 
 ]
 
+define hakim_lab_go_away_buttons= [
+]
+
 #LAB UPSTAIRS BUTTONS
 
 define lab_upstairs_buttons= [
     (("look"),(650, 400), "locked_master_door", None),
+
+    (("look"),(270, 470), "butt_puzzle_intro", "butt_puzzle_complete == False"),
 
     (("move"),(60, 430),"lab_upstairs_left_hall", None), 
     (("move"),(1200, 430),"lab_upstairs_right_hall", None), 
@@ -246,7 +250,7 @@ define lab_upstairs_left_hall_buttons= [
 
 define lab_puzzle_a_room_buttons= [
     (("look"),(650, 500),"piece_puzzle_a", None),
-    (("look"),(350, 650),"drawer_key", "drawer_key_collected == False"),
+    #(("look"),(350, 650),"drawer_key", "drawer_key_collected == False"),
 
     (("move"),(650, 700),"lab_upstairs_left_hall", None), 
 ]
@@ -288,7 +292,9 @@ define lab_desk_buttons = [
 
 define lab_upstairs_test_room_buttons = [
 
-    (("look"),(800, 620), "bullet", "lab_ammo_1_collected == False"),
+    #(("look"),(800, 620), "bullet", "lab_ammo_1_collected == False"),
+    
+    (("look"),(800, 620),"drawer_key", "drawer_key_collected == False"),
 
     (("move"),(650, 700),"lab_upstairs_right_hall", None), 
 ]

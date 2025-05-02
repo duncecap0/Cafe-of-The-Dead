@@ -24,18 +24,22 @@ init -2:
     style say_dialogue:
         line_spacing 10  
 
-
 define gui.dialogue_text_outlines = [ (3, "#300019", 0, 0) ]
 define gui.dialogue_outline_scaling = "linear"
 
 define gui.name_text_outlines = [ (3, "#300019", 0, 0) ]
 define gui.name_outline_scaling = "linear"
-define gui.name_text_italic = True
+define gui.name_text_italic = False
+
+style say_label:
+    outlines [ ( 3, "#300019", 0, 0) ]
+    outline_scaling "linear"
 
 ## Link to screen outline:
-# https://lemmasoft.renai.us/forums/viewtopic.php?t=32770
-## Link to line spacing:
 # https://www.reddit.com/r/RenPy/comments/130kxct/how_to_make_screen_text_be_outlined/
+
+## Link to line spacing:
+# https://lemmasoft.renai.us/forums/viewtopic.php?t=32770
 
 
 
@@ -48,21 +52,21 @@ define gui.name_text_italic = True
 define gui.accent_color = '#ff85b8'
 
 ## The color used for a text button when it is neither selected nor hovered.
-define gui.idle_color = '#9c9599'
+define gui.idle_color = '#f3dce9'
 
 ## The small color is used for small text, which needs to be brighter/darker to
 ## achieve the same effect.
 define gui.idle_small_color = '#9c9599'
 
 ## The color that is used for buttons and bars that are hovered.
-define gui.hover_color = '#e066a3'
+define gui.hover_color = '#ddb8cd'
 
 ## The color used for a text button when it is selected but not focused. A
 ## button is selected if it is the current screen or preference value.
 define gui.selected_color = '#ffffff'
 
 ## The color used for a text button when it cannot be selected.
-define gui.insensitive_color = '#9c9599'
+define gui.insensitive_color = '#695962'
 
 ## Colors used for the portions of bars that are not filled in. These are not
 ## used directly, but are used when re-generating bar image files.
@@ -77,13 +81,13 @@ define gui.interface_text_color = '#ffffff'
 ## Fonts and Font Sizes ########################################################
 
 ## The font used for in-game text.
-define gui.text_font = "fonts/VCR_OSD_MONO_1.001.ttf"
+define gui.text_font = "fonts/VCROSDMono.ttf"
 
 ## The font used for character names.
-define gui.name_text_font = "fonts/VCR_OSD_MONO_1.001.ttf"
+define gui.name_text_font = "fonts/VCROSDMono.ttf"
 
 ## The font used for out-of-game text.
-define gui.interface_text_font = "fonts/VCR_OSD_MONO_1.001.ttf"
+define gui.interface_text_font = "fonts/VCROSDMono.ttf"
 
 ## The size of normal dialogue text.
 define gui.text_size = 22
@@ -117,7 +121,7 @@ define gui.game_menu_background = "gui/game_menu.png"
 ## time.
 
 ## The height of the textbox containing dialogue.
-define gui.textbox_height = 185
+define gui.textbox_height = 190
 
 ## The placement of the textbox vertically on the screen. 0.0 is the top, 0.5 is
 ## center, and 1.0 is the bottom.
@@ -127,7 +131,7 @@ define gui.textbox_yalign = 1.0
 ## The placement of the speaking character's name, relative to the textbox.
 ## These can be a whole number of pixels from the left or top, or 0.5 to center.
 define gui.name_xpos = 140
-define gui.name_ypos = -105
+define gui.name_ypos = -103
 
 ## The horizontal alignment of the character's name. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
@@ -231,7 +235,7 @@ define gui.choice_button_borders = Borders(100, 5, 100, 5)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
 define gui.choice_button_text_xalign = 0.5
-define gui.choice_button_text_idle_color = '#888888'
+define gui.choice_button_text_idle_color = '#9e9d9d'
 define gui.choice_button_text_hover_color = "#ffffff"
 define gui.choice_button_text_insensitive_color = '#8888887f'
 
@@ -274,13 +278,13 @@ define gui.navigation_xpos = 60
 define gui.skip_ypos = 10
 
 ## The vertical position of the notify screen.
-define gui.notify_ypos = 45
+define gui.notify_ypos = 20
 
 ## The spacing between menu choices.
 define gui.choice_spacing = 10
 
 ## Buttons in the navigation section of the main and game menus.
-define gui.navigation_spacing = 8
+define gui.navigation_spacing = 10
 
 ## Controls the amount of spacing between preferences.
 define gui.pref_spacing = 10
@@ -368,15 +372,15 @@ define gui.history_spacing = 0
 
 ## The position, width, and alignment of the label giving the name of the
 ## speaking character.
-define gui.history_name_xpos = 155
+define gui.history_name_xpos = 100
 define gui.history_name_ypos = 0
 define gui.history_name_width = 155
 define gui.history_name_xalign = 1.0
 
 ## The position, width, and alignment of the dialogue text.
-define gui.history_text_xpos = 170
+define gui.history_text_xpos = 130
 define gui.history_text_ypos = 2
-define gui.history_text_width = 740
+define gui.history_text_width = 780
 define gui.history_text_xalign = 0.0
 
 

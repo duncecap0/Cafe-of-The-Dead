@@ -5,6 +5,24 @@ define left1 = Position(xalign=0.3)
 
 define right2 = Position(xalign=0.7)
 
+image static_anim:
+    "images/static1.webp"
+    alpha 0.2
+    pause 0.1
+    "images/static2.webp"
+    alpha 0.3
+    pause 0.1
+    "images/static3.webp"
+    alpha 0.4
+    pause 0.1
+    "images/static4.webp"
+    alpha 0.3
+    pause 0.1
+    "images/static5.webp"
+    alpha 0.2
+    pause 0.1
+    repeat
+
 image breadly:
     yalign 1.0
     "images/breadly.png"
@@ -34,12 +52,16 @@ image click_to_continue:
     "gui/click_to_continue0.png"
     0.5
     linear 0.5 alpha 0.5
-    "gui/click_to_continue1.png"
     0.5
     linear 0.5 alpha 1.0
     repeat
 
-
+## TormentedStudios button scale https://www.reddit.com/r/RenPy/comments/yvz8x8/increase_the_size_of_a_button_when_hovered_over/
+transform buttonScale: 
+    on hover:
+        linear 0.1 zoom 1.05
+    on idle:
+        linear 0.1 zoom 1.0
 
 transform sink:
         ypos 710 

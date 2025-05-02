@@ -188,5 +188,7 @@ cython_debug/
 #.idea/
 *.txt
 *.save
-Cafe-Of-The-Dead/game/saves/navigation.json
-Cafe-Of-The-Dead/game/saves/persistent
+Cafe-of-The-Dead/game/saves/navigation.json
+Cafe-of-The-Dead/game/saves/persistent
+Cafe of The Dead/game/saves/navigation.json
+Cafe of The Dead/game/saves/persistent

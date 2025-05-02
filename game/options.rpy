@@ -5,6 +5,16 @@
 ## may want to uncomment them when appropriate.
 
 
+define config.enter_yesno_transition = Dissolve(0.2)
+define config.exit_yesno_transition = Dissolve(0.2)
+
+
+define config.default_music_volume = 0.7
+define config.default_sfx_volume = 0.7
+define config.default_voice_volume = 0.6
+
+#define config.mouse = { 'default' : [ ('gui/mouse_cursor.png', 0, 0)]}
+
 ## Basics ######################################################################
 
 ## A human-readable name of the game. This is used to set the default window
@@ -23,7 +33,7 @@ define gui.show_name = False
 
 ## The version of the game.
 
-define config.version = "1.0"
+define config.version = "1.1"
 
 
 ## Text that is placed on the game's about screen. Place the text between the
@@ -55,7 +65,7 @@ define config.has_voice = True
 ## uncomment a line below and use it to set a sample sound to play.
 
 define config.sample_sound = "audio/sfx/zombie huh.ogg"
-define config.sample_voice = "audio/sfx/voice beep.ogg"
+define config.sample_voice = "audio/voices/sage beep.ogg"
 
 
 ## Uncomment the following line to set an audio file that will be played while
@@ -73,23 +83,23 @@ define config.main_menu_music = "audio/music/um frappe please.ogg"
 
 ## Entering or exiting the game menu.
 
-define config.enter_transition = dissolve
-define config.exit_transition = dissolve
+define config.enter_transition = Dissolve(0.2)
+define config.exit_transition = Dissolve(0.2)
 
 
 ## Between screens of the game menu.
 
-define config.intra_transition = dissolve
+define config.intra_transition = Dissolve(0.2)
 
 
 ## A transition that is used after a game has been loaded.
 
-define config.after_load_transition = None
+define config.after_load_transition = Dissolve(0.2)
 
 
 ## Used when entering the main menu after the game has ended.
 
-define config.end_game_transition = None
+define config.end_game_transition = Dissolve(0.2)
 
 
 ## A variable to set the transition used when the game starts does not exist.
@@ -111,8 +121,8 @@ define config.window = "auto"
 
 ## Transitions used to show and hide the dialogue window
 
-define config.window_show_transition = Dissolve(.2)
-define config.window_hide_transition = Dissolve(.2)
+define config.window_show_transition = Dissolve(.1)
+define config.window_hide_transition = Dissolve(.1)
 
 
 ## Preference defaults #########################################################
@@ -150,8 +160,9 @@ define config.save_directory = "CafeofTheDead-1740859614"
 ##
 ## The icon displayed on the taskbar or dock.
 
-define config.window_icon = "gui/window_icon.png"
+define config.windows_icon = "gui/window_icon.png"
 
+define config.window_icon = "gui/window_icon.png"
 
 ## Build configuration #########################################################
 ##
@@ -184,10 +195,15 @@ init python:
     build.classify('**/#**', None)
     build.classify('**/thumbs.db', None)
 
+    build.classify('.vscode', None)
+    build.classify('**.keystore', None)
+    
     ## To archive files, classify them as 'archive'.
 
     # build.classify('game/**.png', 'archive')
     # build.classify('game/**.jpg', 'archive')
+    build.classify('game/audio/music/hail.ogg', 'archive')
+    build.classify('game/gui/main_menu_hail.png', 'archive')
 
     ## Files matching documentation patterns are duplicated in a mac app build,
     ## so they appear in both the app and the zip file.

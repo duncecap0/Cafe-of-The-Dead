@@ -1,4 +1,21 @@
 
+
+## PROFANITY FILTER BY https://lemmasoft.renai.us/forums/viewtopic.php?t=47064
+#bad word list 1 by https://www.cs.cmu.edu/~biglou/resources/bad-words.txt
+#bad word list 2 by https://github.com/zacanger/profane-words
+#bad word list 2 by https://github.com/dsojevic/profanity-list
+init python:
+    import collections
+    
+    def ContainsBadWord(name):
+        #Get list of bad words from text file, each word on a separate line
+        rude_words_file = [line.rstrip('\n') for line in open(renpy.loader.transfn('rude_words.txt'), 'r')]
+        
+        #Check if the name contains a bad word
+        for badWord in rude_words_file:
+            if (badWord in name):
+                return True
+
 #CHARACTER DEATH STATUS
 default rocky_dead = False
 default vinnie_dead = False
@@ -9,7 +26,7 @@ default rocky_cafe_death = False
 #gun rounds aka bullets
 
 #should irl be 15 but lets just ignore that...
-
+default norman_has_gun = True
 default ammo = 3
 
 #CHARACTER HEALTH
@@ -17,7 +34,7 @@ default rocky_health = 4
 default vinnie_health = 3
 default norman_health = 4
 default sage_health = 3
-
+default pov = "Sage"
 
 #SAGE STATS
 
@@ -25,20 +42,15 @@ default norman_affection = 0
 
 default insanity_level = 0
 
-#doesnt work ;(
-label insanity_level_loop:
-    if insanity_level <= 0:
-        $ insanity_level = 0
-
-
 
 #Zombie lives
 default first_zombie_attacker_dead = False
 
 
-label cafe_floor_0:
-    $ pov = "Sage"
 
+
+label cafe_floor_0:
+    $ norman_has_gun = False
     play music "audio/music/Morning_Joe.mp3"
     scene cafe outer with dissolve
     
@@ -50,13 +62,13 @@ label cafe_floor_0:
     "I've never really gone in there before since it's always full of white collars and bigiwgs"
     "We came in from the subway transit, {w=.3}it was a nightmare trying to navigate our way through the swarm of civilians"
 
-    show v 1 with dissolve
+    show v 1 with Dissolve(0.2)
     show v at hop_loop
     v 1"HEY! GUYS OVER HERE!!!{w=.3} HAHA!!"
     v "HURRY UP!!! I {i}NEED{/i} TO SEE ROCKY AT HIS NEW STUPID LITTLE JOB HAHAHAHAHA!!!"
     "This was Vinnie,{w=.3} my gender diverse Opossum friend, being their boisterous self per usual"
     "They were the one who really pushed for us to visit Rocky after class, Vinnie was always the one who initiated the group hangouts"
-    show n 2 at right with dissolve
+    show n 2 at right with Dissolve(0.2)
     n "OK OK RELAX WE'RE ALMOST THERE!"
     n "You're really excited for this aren't you?"
     "Here's Norman,{w=.3} my compassionate Golden Retriever friend, as caring as ever trying to humor Vinnie"
@@ -89,24 +101,24 @@ label cafe_floor_0:
     v 3"{w=.3}Instead, I'll summon my attack dog! {w=.3}Rocky!{w=.3} who will beat him down for me!"
 
     "Geez why was that business guy in such a rush?{w=.3} Just another reason for why I never hung out around here..."
-    hide n with dissolve
-    hide v with dissolve
+    hide n with Dissolve(0.2)
+    hide v with Dissolve(0.2)
     pause 0.5
-    scene cafe with dissolve
+    scene cafe with Dissolve(0.2)
     play sound "audio/sfx/chime.ogg"
-    show r 2 with dissolve
+    show r 2 with Dissolve(0.2)
     r "Hello and welcome!{w=.3} What can I get you toda-"
     show r 8 at left1 with moveinleft
     r "Oh{w=.3}{i} oh no{w=.5} please god no...{/i}"
     show r at left with move 
-    show v 2 4 with dissolve
+    show v 2 4 with Dissolve(0.2)
     show v 2 4 at shiver_loop
     v "HAHAHAHAHAHAHAHAHAHAHA!!!!{w=.3} STOP!!!!{w=.3} STOP IT!!!!{w=.3} I- {w=.3}I CAN'T BELIEVE IT!!!" 
     v "HAHAHAHAHAHAHA!!!!!!!!"
     "We move past Vinnie who is currently laughing up a storm while leaning on a table for stability"
     show v at hop
-    hide v with dissolve
-    show n 1 with dissolve
+    hide v with Dissolve(0.2)
+    show n 1 with Dissolve(0.2)
     show n 1 at hop
     n "Hey Rocky nice to see you at your new post! {w=.3}Where's your co-workers?"
     r 1"She got a call from a family member, {w=.3}something about a medical emergency..."
@@ -117,8 +129,8 @@ label cafe_floor_0:
     "I recall Norman mentioning how Rocky doesn't have a place to call home so he bounces job to job to make ends meet"
     n 1"Well,{w=.3} we could cheer her up next time we visit you at work!{w=.3} We're gonna be regular customers so she's bound to get to know us eventually right?"
     r 2"Ugh,{w=.3} speaking of... {w=.3}You guys aren't gonna make this weird or anything? Remember I have to keep this job so don't scre-"
-    hide n with dissolve
-    show v 5 with dissolve
+    hide n with Dissolve(0.2)
+    show v 5 with Dissolve(0.2)
     v "Oh!{w=.3} We're definitely making things weird!"
     v 9"Hello sir!{size=*0.8} {w=.3}write this down because it's gonna be a long one{/size}{w=.3} I would like to order:"
     v "A half caffeine quad venti at 200 degrees with half soy, no foam with foam steamed with cinnamon, crosshatched caramel hazelnut swirl drizzling, pulled ristretto, sugar-free sugar, and a cherry on top please!"
@@ -131,47 +143,33 @@ label cafe_floor_0:
     show r at center with move
     show v at right with move
     "Rocky lunges forward to shut Vinnie's snout"
-    hide v with dissolve
-    hide r with dissolve
-    show n 2 with dissolve
+    hide v with Dissolve(0.2)
+    hide r with Dissolve(0.2)
+    show n 2 with Dissolve(0.2)
     show n 2 at hop
     n "Hey we had our fun how about we settle this down!"
     n "Why don't we get actual drinks here to relax?{w=.3} You go on ahead and order from Rocky since you two haven't had many chances to talk!"
-    hide n with dissolve
-    show v 15 at right with dissolve
-    show r 3a with dissolve 
+    hide n with Dissolve(0.2)
+    show v 15 at right with Dissolve(0.2)
+    show r 3a with Dissolve(0.2) 
     "I walk up to Rocky,{w=.3} currently holding Vinnie's snout closed while shaking them back and forth"
     "Rocky stops what he's doing when he sees me at the register"
-    hide v 15 with dissolve
+    hide v 15 with Dissolve(0.2)
     show r 10 at hop
+    $ rude_words_file = [line.rstrip('\n') for line in open(renpy.loader.transfn('rude_words.txt'), 'r')]
     r "Oh that's right...{w=.3} I'm so sorry,{w=.3} but I'm having trouble remembering your name..."
     $ renpy.notify("Use the keyboard to type...")
-
-    $ pov = renpy.input("It's fine, my name is", length=10).strip() or "Sage"    
+ 
+    $ pov = renpy.input("It's fine, my name is", length=10).strip().lower().title() or "Sage"    
 
     if pov == "Sage":
-        r "[pov]? You look like a [pov]... it fits..."
+        r "[pov]?{w=.3} You look like a [pov]... {w=.3}it fits..."
 
-    elif pov == "sage":
-        r "[pov]? You look like a [pov]... it fits..."
+    elif pov in ["Breadley", "Bradley", "B0redbradley", "Boredbradley", "Breadly"]:
+        "Huh?{w=.3}{w=.3} Shouldn't you be sleeping?"
 
-    elif pov == "Breadley":
-        "Huh?{w=.3} Shouldn't you be sleeping?"
-
-    elif pov == "Bradley":
-        "Huh?{w=.3} Shouldn't you be sleeping?"
-
-    elif pov == "B0red Bradley":
-        "Huh?{w=.3} Shouldn't you be sleeping?"
-
-    elif pov == "Bored Bradley":
-        "Huh?{w=.3} Shouldn't you be sleeping?"
-
-    elif pov == "Dunce Cap":
+    elif pov in ["Duncecap", "Dunce"]:
         "What the hell kind of name is that?{w=.3} GET A JOB BOZO! FATHERLESS BEHAVIOR!"
-
-    elif pov == "dunce cap":
-        "What the hell kind of name is that? {w=.3}GET A JOB BOZO! FATHERLESS BEHAVIOR!"
 
     elif pov == "Chris":
         "Shouldn't you be pushing boulders or something?"
@@ -188,198 +186,154 @@ label cafe_floor_0:
     elif pov == "Jill":
         "OMG NEMESIS IS BEHIND YOU!!!"
 
-    elif pov == "Ashley":
+    elif pov in ["Ashley", "Babyeagle"]:
         "Remember to stick with Leon babe..."
 
-    elif pov == "Baby Eagle":
-        "Remember to stick with Leon babe..." 
+    elif pov == "James":
+        "Where's Mary?"  
 
-    elif pov == "Dinnerbone":
+    elif pov == "Mary":
+        "{cps=*0.4}James...{w=.3} I'm in a beautiful place now...{/cps}"   
+
+    elif pov == "Heather":
+        "Hmm shouldn't you be avoiding a cult or something?"
+
+    elif pov == "Harry":
+        "When are you getting the remaster?{w=.5} (This dates this so horrible once it DOES come out...)"
+
+    elif pov in ["Dinnerbone", "Grumm"]:
         "WOAH YOU'RE UPSIDE DOWN NOW!!!"
 
-    elif pov == "Grumm":
-        "WOAH YOU'RE UPSIDE DOWN NOW!!!"
+    elif pov == "Egg":
+        "Be a good egg now!"
+
+    elif pov == "Yuri":
+        "I JUST WANT TO PULL YOUR SKIN OPEN AND CRAWL INSIDE OF YOU!!!"
+
+    elif pov == "Natsuki":
+        "Why don't you find some coins under the vending machine or something?"
+        
+    elif pov == "Monika":
+        play sound "audio/sfx/static.ogg"
+        "Just Monika."
+        menu:
+            "Just Monika."
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+            "Just Monika.":
+                pass
+        label monikaloop:
+        
+        play sound "audio/sfx/static.ogg"
+        call screen confirm(message=" Just Monika. ", yes_action=Return(), no_action=Jump("monikaloop"))
+    elif pov == "Sayori":
+        "I want breakfast."
+
+    elif pov == ["MC", "Protag", "Y/n", "Yn", "Pov", "Player", "P"]:
+        "Not very creative now...."
+
+    elif pov in ["Todd Howard", "Todd"]:
+        "Please release TES6..."
+
+    elif pov == ["William Afton", "William", "Afton", "Springtrap", "Will", "Scraptrap"]:
+        "The Man Behind The Slaughter"
 
     elif pov == "Chara":
         "the true name"
 
-    elif pov == "Todd":
+    elif pov in ["gaster", "Gaster", "WDGaster", "W.D.Gaster"]:
+        $ MainMenu(confirm=False)()
+        
+    elif pov in ["ToddHoward", "Todd"]:
         "Please release TES6..."
 
     elif pov == "Luke":
-        "You're Luke Skywalker, You're here to rescue me!"
+        "You're Luke Skywalker,{w=.3} you're here to rescue me!"
 
-    elif pov == "Cunt":
+    #elif pov in ["Cunt", "Whore", "Fuck", "Fucker", "Ass", "Thot","Fuckface", "Fart", "Poop", "Shit", "Penis", "Cock", "Titty", "Cock", "Damn", "Dammit", "Boobs", "Tit", "Boob", "damm", "d4mm", "dick", "bastard", "blowjob", "turd", "anus", "bitch", "hoe", "ho", "booty", "butt"]:
+        #"Very mature but I'll let it slide..."
+
+    elif (ContainsBadWord(pov)):
         "Very mature but I'll let it slide..."
 
-    elif pov == "Whore":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Fuck":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Fucker":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Ass":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Fuckface":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Fart":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Poop":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Shit":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Penis":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Cock":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Titty":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Penis":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Cock":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Titty":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Damn":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Dammit":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "God dammit":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Boobs":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Boob":
-        "Very mature but I'll let it slide..."
-
-    elif pov == "Vinny":
+    elif pov in ["Colburn", "Maizie", "Wren", "Xochi", "Gwen", "IO", "August", "Cole", "Colby"]:
         "What a strange coincidence..."
 
-    elif pov == "Vinnie":
-        "What a strange coincidence..."
+    elif pov in ["Rocko", "Rocky"]:
+        r "Woah that's crazy how we share the same name!"
 
-    elif pov == "Vivi":
-        "What a strange coincidence..."
+    elif pov in["Vinny", "Vinnie", "Vin", "Norm", "Norman"]:
+        r "Oh! I better make sure I don't confuse you with one of my friends then!"
 
-    elif pov == "Vincent":
-        "What a strange coincidence..."
-
-    elif pov == "Vin":
-        "What a strange coincidence..."
-
-    elif pov == "Rocko":
-        "What a strange coincidence..."
-
-    elif pov == "Rocky":
-        "What a strange coincidence..."
-
-    elif pov == "Norm":
-        "What a strange coincidence..."
-
-    elif pov == "Norman":
-        "What a strange coincidence..."
-
-    elif pov == "Colburn":
-        "What a strange coincidence..."
-
-    elif pov == "Maizie":
-        "What a strange coincidence..."
-
-    elif pov == "Wren":
-        "What a strange coincidence..."
-
-    elif pov == "Gwen":
-        "What a strange coincidence..."
-
-    elif pov == "Xochi":
-        "What a strange coincidence..."
-
-    elif pov == "IO":
-        "What a strange coincidence..."
-
-    elif pov == "August":
-        "What a strange coincidence..."
-
-    elif pov == "Cole":
-        "What a strange coincidence..."
-
-    elif pov == "Colby":
-        "What a strange coincidence..."
-
-    elif pov == "Mom":
-        show v 2 4 at right with dissolve
+    elif pov in ["Mom", "Mommy", "Mother", "Mama"]:
+        show v 2 4 at right with Dissolve(0.2)
         v "HAHAHAHA OK MOMMY HAHAHAHAHA"
-        v "GOOD ONE!{w=.3} I SHOULD HAVE THOUGHT OF THAT!"
-        hide v 2 4 at right with dissolve
+        v "GOOD ONE!{w=.3} I SHOULD HAVE THOUGHT OF THAT! YOU FETISHER!"
+        hide v 2 4 at right with Dissolve(0.2)
+        "I guess I'll let you get away with it..."
 
-    elif pov == "Mother":
-        show v 2 4 at right with dissolve
-        v "HAHAHAHA OK MOMMY HAHAHAHAHA"
-        v "GOOD ONE! {w=.3}I SHOULD HAVE THOUGHT OF THAT!"
-        hide v 2 4 at right with dissolve
-
-    elif pov == "Mommy":
-        show v 2 4 at right with dissolve
-        v "HAHAHAHA OK MOMMY HAHAHAHAHA"
-        v "GOOD ONE! {w=.3}I SHOULD HAVE THOUGHT OF THAT!"
-        hide v 2 4 at right with dissolve
-
-    elif pov == "Dad":
-        show v 2 4 at right with dissolve
+    elif pov in ["Dad", "Daddy", "Father", "Papa"]:
+        show v 2 4 at right with Dissolve(0.2)
         v "HAHAHAHA OK DADDY HAHAHAHAHA"
-        v "GOOD ONE! {w=.3}I SHOULD HAVE THOUGHT OF THAT!"
-        hide v 2 4 at right with dissolve
+        v "GOOD ONE! {w=.3}I SHOULD HAVE THOUGHT OF THAT! YOU THIRSTY THOT!"
+        hide v 2 4 at right with Dissolve(0.2)
+        "I guess I'll let you get away with it..."
 
-    elif pov == "Daddy":
-        show v 2 4 at right with dissolve
-        v "HAHAHAHA OK DADDY HAHAHAHAHA"
-        v "GOOD ONE!{w=.3} I SHOULD HAVE THOUGHT OF THAT!"
-        hide v 2 4 at right with dissolve
+    r 10"Oh duh!{w=.2} Of course I remember your name! {w=.3}Ok [pov], {w=.3}what would you like?"
 
-    elif pov == "Father":
-        show v 2 4 at right with dissolve
-        v "HAHAHAHA OK DADDY HAHAHAHAHA"
-        v "GOOD ONE!{w=.3} I SHOULD HAVE THOUGHT OF THAT!"
-        hide v 2 4 at right with dissolve
-
-    elif pov == "Papa":
-        show v 2 4 at right with dissolve
-        v "HAHAHAHA OK DADDY HAHAHAHAHA"
-        v "GOOD ONE!{w=.3} I SHOULD HAVE THOUGHT OF THAT!"
-        hide v 2 4 at right with dissolve
-
-    elif pov == "Mama":
-        show v 2 4 at right with dissolve
-        v "HAHAHAHA OK MOMMY HAHAHAHAHA"
-        v "GOOD ONE! {w=.3}I SHOULD HAVE THOUGHT OF THAT!"
-        hide v 2 4 at right with dissolve
-
-    r 10"Ok [pov], {w=.3}what would you like?"
-
-    hide r with dissolve
+    hide r with Dissolve(0.2)
     pause 0.5
-    scene black with dissolve
-    scene cafe with dissolve
-    show v 1 at right with dissolve
-    show n 1 with dissolve
-    show r 1 at left with dissolve
+    scene black with Dissolve(0.2)
+    scene cafe with Dissolve(0.2)
+    show v 1 at right with Dissolve(0.2)
+    show n 1 with Dissolve(0.2)
+    show r 1 at left with Dissolve(0.2)
     "Time passes,{w=.3} as we all take a seat and talk idly about what we've done recently"
     n 1"Ha, {w=.3}the professor really just threw that assignment out of nowhere right?"
     r 1"Real smart of him considering half the class wasn't even done with the last one yet..."
@@ -395,7 +349,6 @@ label cafe_floor_0:
     show v 9 at right
     "Vinnie pretends to bawl and stuffs their face in their hands"
     n 7"Hey! {w=.3}I didn't say any of that!"
-
     show black with Dissolve(1.):
         alpha.6
     "These were the people I chose to spend my time with, {w=.3}truthfully,{w=.3} I didn't have anyone else in my life"
@@ -405,26 +358,26 @@ label cafe_floor_0:
     "Rocky's dependable nature, {w=.3}always lending a hand when he can; {w=.3}Vinnie's good-nature and levity; {w=.3}They're always able to brighten a tough day"
     "And Norman, {w=.3}he's always there to cheer me on;{w=.3} I don't think he's ever rejected a chance to talk with me either so he must enjoy my presence as much as I enjoy his"
     "I suppose I never properly thanked him for this opportunity... {w=.3}I have to remember to do that soon..."
-    hide black with dissolve
-    hide r with dissolve
-    hide n with dissolve
+    hide black with Dissolve(0.2)
+    hide r with Dissolve(0.2)
+    hide n with Dissolve(0.2)
     show v at hop
     v 4"EARTH TO [pov!u] EARTH TO [pov!u], HEY SPACE CADET YA THERE!?!?" with hpunch
     p 1"Ah, {w=.3}I apologize I wasn't paying attention"
     play music "audio/sfx/crowd panic.ogg" fadein 1.0
     v "You see this shit?!?! {w=.3}There's people screaming like crazy!"
     v 10"I didn't know the pride parade was coming THIS early!"
-    show r 3 with dissolve
+    show r 3 with Dissolve(0.2)
     r 3"Vin, {w=.3}shut up now isn't the time for your stupid jokes it's serious"
     show v 11 at sink
     "Rocky snaps back at Vinnie who slumps back in their chair with a face I've never quite seen on them before"
-    hide v with dissolve
+    hide v with Dissolve(0.2)
     "I don't think Rocky has ever been this serious with Vinnie, {w=.3}sure he got annoyed,{w=.3} but never actually meant it until now"
     "I shoot my head towards the window and see Rocky with Norman standing up glued to the window"
-    show n 3a at right with dissolve
+    show n 3a at right with Dissolve(0.2)
     n "I'm trying to see what they're running from but no luck..."
     r 7"They just keep pouring out!{w=.3} What could have caused this?"
-    scene cafe window with dissolve
+    scene cafe window with Dissolve(0.2)
     show r 7 with moveinleft
     show n 8 at right with moveinright
     show v 11 at left with moveinleft
@@ -438,7 +391,7 @@ label cafe_floor_0:
     npc "Has anyone seen my husband?!?"
     npc "SAMANTHA WHERE ARE YOU!!!"
     npc "OH MY GOD THEY'RE COMING FOR US! RUN!!"
-    show v at left with dissolve
+    show v at left with Dissolve(0.2)
     v 12"This is almost too much to look at..."
     show v at sink
     r 1"I'm heading out shop, {w=.3}I need to see what's up..."
@@ -469,7 +422,7 @@ label cafe_floor_0:
 
     n "I-"
     show r at offscreen_right
-    hide v with dissolve
+    hide v with Dissolve(0.2)
     show n at center with move
     show n at center with move
     "Before Norman can say any more Rocky rushes out"
@@ -477,16 +430,16 @@ label cafe_floor_0:
     show n at hop
     n "Are you two serious?!?!"
     
-    scene cafe outer with dissolve
+    scene cafe outer with Dissolve(0.2)
     pause 0.5
-    show r 1 with dissolve
+    show r 1 with Dissolve(0.2)
     r 1"Oh you decided to come with,{w=.3} here follow me I just want a glance at the cause of this..."
     npc "GET AWAY FROM ME!!! {w=.3}GET AWAY!!!"
     p 4"Is someone being attacked?"
     r 4a"Let's take a closer look he could be in trouble!"
     show r at offscreen_right
     scene black with fade
-    scene cafe outer with dissolve
+    scene cafe outer with Dissolve(0.2)
     stop music fadeout 5.0
     play audio "audio/sfx/Wind.ogg"
     show r 1 with moveinleft
@@ -524,15 +477,15 @@ label cafe_floor_0:
     "His fur is dyed in blood, {w=.3}eyes are milky white, odor so pungent it stings my eyes..."
     r 2"[pov!u]!{w=.3} Check out the guy he jumped to see if he's ok!"
     p 4"Got it!"
-    hide r with dissolve
-    hide bigzom with dissolve
+    hide r with Dissolve(0.2)
+    hide bigzom with Dissolve(0.2)
     "I walk up ahead to see that the victim is laying motionless on the floor..."
     "Blood pools beneath him as I see gashes across his throat"
     p 7"Are you ok?!?!"
     "I check the pulse on his neck to see if he's still with us"
     "There's nothing"
     
-    show r 3 with dissolve
+    show r 3 with Dissolve(0.2)
     show r at hop
 
     r 3"Hey! {w=.3}[pov]!{w=.3} He alright!?!?"
@@ -553,7 +506,7 @@ label cafe_floor_0:
     show r at sink_rise
     show r at shiver_loop
 
-    show screen character_stats with dissolve
+    show screen character_stats with Dissolve(0.2)
 
     menu rocky_first_death_choice:
         "What do I do now?"
@@ -585,7 +538,7 @@ label cafe_floor_0:
 
             elif sage_health == 0:
                 label sage_first_death:
-                show black with dissolve:
+                show black with Dissolve(0.2):
                     alpha .7
                 play sound "audio/sfx/zombie attack.ogg"
                 queue sound "audio/sfx/eat.ogg"
@@ -627,17 +580,23 @@ label cafe_floor_0:
 
             if first_zombie_attacker_dead == True:
                 $ addInsanity_level(3)
+                show static_anim with Dissolve(0.2)
+                camera:
+                    perspective True
+                    easein_bounce 0.54 zpos -20
                 play sound "audio/sfx/short run.ogg"
                 queue sound "audio/sfx/zombie talk.ogg"
                 queue sound "audio/sfx/eat.ogg"
-                scene black with dissolve
+                camera:
+                    reset
+                scene black with Dissolve(0.2)
                 "I ran as fast as my legs could carry me all the way to the cafe, in the distance I could hear a shriek and chewing noises"
                 r "No! No! Get off me you fucks! AGH!!"
                 $ addRockyhealth(-6) 
                 pause 0.4
-                scene cafe with dissolve
-                show v 11 at right with dissolve
-                show n 6 with dissolve
+                scene cafe with Dissolve(0.2)
+                show v 11 at right with Dissolve(0.2)
+                show n 6 with Dissolve(0.2)
                 v 11"I don't know what the hell they were thinking going outside..."
                 n 1a"I'll take care of it don-"
                 show n 2 at hop
@@ -650,7 +609,7 @@ label cafe_floor_0:
                 show v 21 at offscreen_left with move
                 show n 8 at offscreen_right with move
                 "Vinnie shouts as we all run out the cafe"
-                scene cafe outer with dissolve
+                scene cafe outer with Dissolve(0.2)
                 "When we arrive outside we see two of those monsters on top of Rocky, must've gone after him after I ran off..."
                 jump rocky_dead_norman_rescue_sage
             else:
@@ -659,11 +618,12 @@ label cafe_floor_0:
     label rocky_dead_norman_rescue_sage:
     $ rocky_cafe_death = True
     $ rocky_dead = True
-    scene cafe outer with dissolve
+    scene cafe outer with Dissolve(0.2)
     stop music fadeout 1.0
     play sound "audio/sfx/cock.ogg"
     pause 0.5
     queue sound "audio/sfx/shoot.ogg"
+    $ norman_has_gun = True
     "Out of nowhere Norman pulls a gun from inside his jacket to fire at the creatures!"
     "They drop dead with a hard thud as the bullet meets their brain"
     "Except,{w=.5} Rocky still hasn't gotten up..."
@@ -678,7 +638,7 @@ label cafe_floor_0:
     show v 2 1 at hop
     v 2 1"SHUT UP! SHUT THE FUCK UP! HE'S FINE!"
     "Vinnie tries to put together Rocky's neck wound up as if it were that simple..."
-    show n 5 at left with dissolve
+    show n 5 at left with Dissolve(0.2)
     n 5"We have to get out of here! {w=.3}Look over there!{w=.3} More of them are coming!"
     "Norman seems to have snapped out of his trance to pull Vinnie away from Rocky,{w=.3} I help when I see Vinnie resist"
     show v 2 2 at shiver_loop
@@ -699,6 +659,7 @@ label cafe_floor_0:
     "The blood explodes from his face onto mine as he drops dead on the street"
     p 4"Who?"
     show n 14 at left with moveinleft
+    $ norman_has_gun = True
     n "I told you it wasn't safe out here..."
     r 8"Y{w=.3}-you...{w=.3} YOU JUST KILLED TWO PEOPLE!"
     "Norman points towards the chest of the person who attacked Rocky"
@@ -717,13 +678,13 @@ label cafe_floor_0:
     "Norman ushers a silent Rocky and panicked Vinnie back to the cafe"
 
     label cafe_aftermath:
-    hide screen character_stats with dissolve
-    scene cafe with dissolve
+    hide screen character_stats with Dissolve(0.2)
+    scene cafe with Dissolve(0.2)
     pause 1.0
-    show v 11 at right with dissolve
-    show n 8 with dissolve
+    show v 11 at right with Dissolve(0.2)
+    show n 8 with Dissolve(0.2)
     if rocky_dead == False:
-        show r 7 at left with dissolve
+        show r 7 at left with Dissolve(0.2)
     stop music fadeout 0.5
     play music "audio/sfx/EAS.ogg"
     tv "ALL CIVILIANS ARE TO TAKE COVER IN YOUR OWN HOMES, DO NOT EXIT UNDER ANY CIRCUMSTANCES, {w=.3}BARRICADE ANY OPENINGS AS MUCH AS POSSIBLE, {w=.3}AVOID THE INFECTED AT ALL COSTS"
@@ -736,11 +697,11 @@ label cafe_floor_0:
     play sound "audio/sfx/zap.ogg"
     stop music
     pause 1.0
-    show black with Dissolve(1.):
+    show black with Dissolve(0.2):
         alpha.6
-    hide n with dissolve
-    hide v with dissolve
-    hide r with dissolve
+    hide n with Dissolve(0.2)
+    hide v with Dissolve(0.2)
+    hide r with Dissolve(0.2)
     pause 1.0
     "The power goes out as we all sit in silence..."
     if rocky_dead == False:
@@ -753,13 +714,13 @@ label cafe_floor_0:
     "We could try hot-wiring one of the cars from outside but,{w=.3} what if we run into a huge horde of those things from outside?{w=.3} We'll be surrounded!"
     "We decided to just wait it out in here for the past hour... {w=.3}The broadcast advised us all to stay where we are... {w=.3}Someone's bound to rescue us right?"
     "There isn't much else for us to do so why eve-"
-    hide black with dissolve
-    show n 6 with dissolve
+    hide black with Dissolve(0.2)
+    show n 6 with Dissolve(0.2)
     n "We're gonna make it through this"
     "...?"
-    show v 11 at right with dissolve
+    show v 11 at right with Dissolve(0.2)
     if rocky_dead == False:
-        show r 7 at left with dissolve
+        show r 7 at left with Dissolve(0.2)
     "We perk up at Norman"
     n "We're gonna make it out of here I can assure you all"
     if rocky_dead == False:
@@ -795,7 +756,7 @@ label cafe_floor_0:
         "Vinnie speaks in a somber tone from the corner of the room for the first time in a while"
 
         label vinnie_reaction_rocky_death:
-        show v 2 2 with dissolve
+        show v 2 2 with Dissolve(0.2)
         v "If someone as capable of Rocky didn't make it then we're gonna die here just like him..."
         v "It doesn't matter if you wave that gun around,{w=.3} there's no chance in survival...{w=.3} might as well just point it at me..."
         v "Rocky's family is gonna be heartbroken,{w=.3} the son that took care of them...{w=.3} worked his ass of for their wellbeing gone,{w=.3} just like that"
@@ -829,11 +790,18 @@ label cafe_floor_0:
                 v 18"But... {w=.3}thanks...{w=.3} we appreciate that...{w=.3} truly...{w=.3} I'm sorry for making you think it was your fault when it's actually those FUCKING monsters outside!"
 
             "...":
+                show static_anim with Dissolve(0.2)
+                camera:
+                    perspective True
+                    easein_bounce 0.54 zpos -20
                 $ addInsanity_level(1)
                 pass
 
         if norman_dead == False:
             n 3a"It's going to be hard Vinnie...{w=.3} but you're a smart cookie!{w=.3} you know the government would set up safety perimeters somewhere,{w=.3} and that we need to make an effort to reach them..."
+            hide static_anim with Dissolve(0.2)
+            camera:
+                reset    
             n "It can be anything really!{w=.3} From a hospital they've safeguarded.{w=.3} Or a blocked off neighborhood....{w=.3} The problem right now is that the streets are just too crowded... {w=.3}Unless..?"
             n "There's someone in here that can help us?"
         if rocky_cafe_death == True:
@@ -857,7 +825,14 @@ label cafe_floor_0:
 
         "It's hopeless,{w=.3} might as well just wait for help":
             $ addInsanity_level(1)
+            show static_anim with Dissolve(0.2)
+            camera:
+                perspective True
+                easein_bounce 0.54 zpos -20
             n 8"[pov]..."
+            hide static_anim with Dissolve(0.2)
+            camera:
+                reset
             if rocky_dead == False:
                 r 1"I agree with [pov]... {w=.3}what's the point in trying? {w=.3}We'll just be getting ourselves killed"
                 r "I have firsthand experience with how strong those things are,{w=.3} It's a death sentence to even try..."
@@ -890,6 +865,14 @@ label cafe_floor_0:
     v "If the power is off and the people here are having trouble activating it...{w=.3} we could do it ourselves from here..."
 
     if insanity_level >= 1:
+        show static_anim with Dissolve(0.2)
+        camera:
+            perspective True
+            easein_bounce 0.54 zpos -20 
+        pause 0.3
+        hide static_anim with Dissolve(0.2)
+        camera:
+            reset
         "Is this even worth the effort?"
     else:
         p 1"Also, I doubt the zombies would have made it that far up,{w=.3} I mean it's a pretty closed off building how far could the plague have spread?"
@@ -903,7 +886,7 @@ label cafe_floor_0:
         n 2"You see?! {w=.3}We're real lucky to have you Vinnie!"
         
     n 2"That's the spirit we need to make it through this thing!"
-    "Norman motions for a group hug"
+    "Norman motions for a hug"
 
     if rocky_dead == True:
         "Vinnie drunkenly steps forwards before wrapping Norman in a tight embrace,{w=.3} lifting him off the ground with the sheer height difference"
@@ -914,10 +897,9 @@ label cafe_floor_0:
         if insanity_level == 0:
             p 13"Who can turn down a hug from NORMAN of all people!"
             "We all rush forwards to give Norman a hug!"
-        else:
-            "Rocky and Vinnie gingerly step forward before rushing in to give Norman a hug"
             "Rocky pretty much just lifted Norman and I off the ground from how strong he is...{w=.3} guess he really needed that hug...{w=.3}...{w=.3} I did too..."
-        
+        else:
+            "They rush forward to give Norman a hug"
         if insanity_level == 0:
             p "I feel invincible already!"
         else:
@@ -926,9 +908,12 @@ label cafe_floor_0:
     v 3"The power of friendship guides me!"
 
     if rocky_dead == False:
-        r 9"I'll kill you all if any of you die on me...{w=.3} also Vinnie were you caressing my hair?"
-        v 23"Wait, {w=.3}I only did that because I thought you were the one poking my stomach!"
-        p 3"Sorry, {w=.3}that was my horn..."
+        r 9"I'll kill you all if any of you die on me..."
+        if insanity_level == 0:
+            show r 2
+            extend " also Vinnie were you caressing my hair?"
+            v 23"Wait, {w=.3}I only did that because I thought you were the one poking my stomach!"
+            p 3"Sorry, {w=.3}that was my horn..."
 
     n 7"Hahahaha!"
 
@@ -973,7 +958,7 @@ label cafe_floor_0:
     else:
         "I think as we me make our to the staircase..."
     play sound "audio/sfx/short run.ogg"
-    scene black with dissolve
+    scene black with Dissolve(0.2)
     pause 0.5
 
     return

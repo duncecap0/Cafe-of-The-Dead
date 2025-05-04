@@ -50,7 +50,7 @@ label splashscreen:
 
    show text "{color=#f00}WARNING: THIS GAME CONTAINS: Zombies, Foul Language, Haunting Imagery, Jump scares, Knives, Guns, Violence, Mental illness, Corpses and Suicide{/color}" with dissolve
    with Pause(3)
-   show text "{color=#f00}DISCLAIMER: Characters will perform rudimentary medical practices; It is highly suggested to NOT COPY these character's actions as they are not medical professionals. It also suggested to now follow any extreme actions demonstrated by some characters as they can give bad advice.{/color}" with dissolve
+   show text "{color=#f00}DISCLAIMER: Characters will perform rudimentary medical practices; It is highly suggested to NOT COPY these character's actions as they are not medical professionals. It also suggested to not follow any extreme actions demonstrated by some characters as they can give bad advice.{/color}" with dissolve
    with Pause(3)
    hide text with dissolve
    with Pause(1)

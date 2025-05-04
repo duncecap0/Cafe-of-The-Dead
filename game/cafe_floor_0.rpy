@@ -156,13 +156,40 @@ label cafe_floor_0:
     "Rocky stops what he's doing when he sees me at the register"
     hide v 15 with Dissolve(0.2)
     show r 10 at hop
-    $ rude_words_file = [line.rstrip('\n') for line in open(renpy.loader.transfn('rude_words.txt'), 'r')]
+    if renpy.variant("pc"):
+        $ rude_words_file = [line.rstrip('\n') for line in open(renpy.loader.transfn('rude_words.txt'), 'r')]
     r "Oh that's right...{w=.3} I'm so sorry,{w=.3} but I'm having trouble remembering your name..."
-    $ renpy.notify("Use the keyboard to type...")
+    $ renpy.notify("Use the keyboard to type!")
  
     $ pov = renpy.input("It's fine, my name is", length=10).strip().lower().title() or "Sage"    
 
-    if pov == "Sage":
+    if pov == "Bigvin":
+        show v 2 4 at rightBIGG with Dissolve(0.2):
+            zoom 2.0
+        show r 2 at left with move:
+            linear 0.5 zoom 0.5           
+        "VINNIE HAS TRANSFORMED!!!!!!!!!!!!!!!"
+        r 3a"GODDAMMIT VIN!"
+        show v 2 4 at centerBIGG with move
+        v "RAAAAAAAWWRRRR!!!!!!"
+        with hpunch
+        r "JUST FUCKING RESET THE SCENE ALREADY I HATE THIS EASTER EGG!"
+        n "Ummm is everything alright?"
+        p 7"..."
+        scene meme
+        play sound "audio/sfx/mic.ogg"
+        queue sound "audio/sfx/wrong beep.ogg"
+        $ renpy.music.set_pause(True, channel="music")
+        show static_anim
+        centered "{size=+100}WE'LL BE BACK, RIGHT AFTER THESE MESSAGES{/size}"
+        play sound "audio/sfx/start.ogg"
+        scene cafe
+        $ renpy.music.set_pause(False, channel="music")
+        
+    elif pov == "Sage":
+        r "[pov]?{w=.3} You look like a [pov]... {w=.3}it fits..."
+
+    elif pov == "Sage":
         r "[pov]?{w=.3} You look like a [pov]... {w=.3}it fits..."
 
     elif pov in ["Breadley", "Bradley", "B0redbradley", "Boredbradley", "Breadly"]:
@@ -296,12 +323,6 @@ label cafe_floor_0:
     elif pov == "Luke":
         "You're Luke Skywalker,{w=.3} you're here to rescue me!"
 
-    #elif pov in ["Cunt", "Whore", "Fuck", "Fucker", "Ass", "Thot","Fuckface", "Fart", "Poop", "Shit", "Penis", "Cock", "Titty", "Cock", "Damn", "Dammit", "Boobs", "Tit", "Boob", "damm", "d4mm", "dick", "bastard", "blowjob", "turd", "anus", "bitch", "hoe", "ho", "booty", "butt"]:
-        #"Very mature but I'll let it slide..."
-
-    elif (ContainsBadWord(pov)):
-        "Very mature but I'll let it slide..."
-
     elif pov in ["Colburn", "Maizie", "Wren", "Xochi", "Gwen", "IO", "August", "Cole", "Colby"]:
         "What a strange coincidence..."
 
@@ -323,14 +344,22 @@ label cafe_floor_0:
         v "HAHAHAHA OK DADDY HAHAHAHAHA"
         v "GOOD ONE! {w=.3}I SHOULD HAVE THOUGHT OF THAT! YOU THIRSTY THOT!"
         hide v 2 4 at right with Dissolve(0.2)
-        "I guess I'll let you get away with it..."
+        "I guess I'll let you get away with it...
+        "
+    if renpy.variant("mobile"):
+        if pov in ["Cunt", "Whore", "Fuck", "Fucker", "Ass", "Thot","Fuckface", "Fart", "Poop", "Shit", "Penis", "Cock", "Titty", "Cock", "Damn", "Dammit", "Boobs", "Tit", "Boob", "damm", "d4mm", "dick", "bastard", "blowjob", "turd", "anus", "bitch", "hoe", "ho", "booty", "butt"]:
+            "Very mature but I'll let it slide..." 
+    else:
+        if (ContainsBadWord(pov)):
+            "Very mature but I'll let it slide..."
 
+    show r 10
     r 10"Oh duh!{w=.2} Of course I remember your name! {w=.3}Ok [pov], {w=.3}what would you like?"
 
     hide r with Dissolve(0.2)
     pause 0.5
-    scene black with Dissolve(0.2)
-    scene cafe with Dissolve(0.2)
+    scene black with dissolve
+    scene cafe with dissolve
     show v 1 at right with Dissolve(0.2)
     show n 1 with Dissolve(0.2)
     show r 1 at left with Dissolve(0.2)

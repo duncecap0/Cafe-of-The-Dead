@@ -82,7 +82,7 @@ label mechanical_floor_1:
     scene mech room 1 with Dissolve(0.2)
     show screen character_stats with Dissolve(0.2)
     show screen ammo_stats with Dissolve(0.2)
-    $ renpy.notify("Remember to save often...")
+    $ renpy.notify("Remember to save often!")
     "Here we are,{w=.3} the room is lined with pipes and exposed machinery, {w=.3}it feels humid and I can almost taste the dust in the air... {w=.3}why would they not have windows here?"
     show n 8 with Dissolve(0.2)
     n "It's hard to see..."
@@ -138,7 +138,7 @@ label gun_check:
     hide v with Dissolve(0.2)
     hide r with Dissolve(0.2)
     hide n with Dissolve(0.2)
-
+    $ renpy.notify("Press the buttons to examine or move around the floor!")
     $ current_room = "mech_floor_main_room_1" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
     
@@ -270,7 +270,7 @@ label mech_hallway_right:
     #toggable image button when you get worker key
     label mech_crowbar:
         
-        p "That crowbar up there would be great at smashing stuff in..."
+        p 1"That crowbar up there would be great at smashing stuff in..."
         if rocky_dead == False:
             show r 2 with Dissolve(0.2)
             r "Looks like they were installing a higher level here. {w=.3}They never got the chance to finish it..."
@@ -924,7 +924,7 @@ label mechanical_floor_escape:
                     v "AAAAAAAHHH!"
                     show orangzom at offscreen_bottom with move
                     hide orangzom
-                    play sound "audio/sfx/hit.ogg"
+                    play sound "audio/sfx/hit13.ogg"
                     show r 1a at offscreen_right with move
                     show v 2 3 at offscreen_right with move
                     hide r 
@@ -987,7 +987,7 @@ label mechanical_floor_escape:
                 show orangzom at offscreen_bottom with move
                 hide orangzom
                 queue sound "audio/sfx/zombie-19.ogg"
-                queue sound "audio/sfx/hit.ogg"
+                queue sound "audio/sfx/hit13.ogg"
                 v 2 4"THANKS [pov!u]"
                 $ renpy.notify("Crowbar has been removed from your inventory!")
                 $ crowbar_collected = False
@@ -1026,7 +1026,7 @@ label mechanical_floor_escape:
                     hide orangzom
                     "Rocky is able to take down EVERY zombie in his path without problem!"
                     r "I got you Vinnie!"
-                    v 2 1"OH MY GOD YOU JUST KILLED THEM ALL IN ONE FELL SWOOP AWESOME!!!"
+                    v "OH MY GOD YOU JUST KILLED THEM ALL IN ONE FELL SWOOP,{w=.3} AWESOME!!!"
                 if expose_samsara_together == False and crowbar_collected == True:
                     play sound "audio/sfx/zombie-19.ogg"
                     queue sound "audio/sfx/punch.ogg"
@@ -1098,7 +1098,7 @@ label mechanical_floor_escape:
 
                 "I tell Rocky to use his crowbar!" if crowbar_collected == True:
                     play sound "audio/sfx/zombie (2).ogg"
-                    queue sound "audio/sfx/punch.ogg"
+                    queue sound "audio/sfx/hit13.ogg"
                     queue sound "audio/sfx/zombie huh.ogg"
                     show r 3a at hop
                     r "EAT THIS YOU WALKING BAG OF SHIT!!!"
@@ -1210,6 +1210,7 @@ label mechanical_floor_escape:
                 "I run away and abandon Rocky!":
                     if vinnie_dead == False and vinnie_has_gun == True:
                         play sound "audio/sfx/zombie moan.ogg"
+                        queue sound "audio/sfx/cock.ogg"
                         queue sound "audio/sfx/shoot.ogg"
                         with vpunch
                         $ addAmmo_level(-1)
@@ -1231,10 +1232,8 @@ label mechanical_floor_escape:
                         $ addVinhealth(-1) 
                         play sound "audio/sfx/shoot.ogg"
                         with vpunch
-                        queue sound "audio/sfx/shoot.ogg"
-                        with vpunch
-                        queue sound "audio/sfx/zombie attack.ogg"
                         $ addAmmo_level(-1)
+                        queue sound "audio/sfx/zombie attack.ogg"
                         show z 1 at left with moveinleft
                         show z 3 at left with moveinright
                         show v 5 at right with move

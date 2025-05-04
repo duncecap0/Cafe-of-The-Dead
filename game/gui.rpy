@@ -52,11 +52,11 @@ style say_label:
 define gui.accent_color = '#ff85b8'
 
 ## The color used for a text button when it is neither selected nor hovered.
-define gui.idle_color = '#f3dce9'
+define gui.idle_color = '#f3b2d7'
 
 ## The small color is used for small text, which needs to be brighter/darker to
 ## achieve the same effect.
-define gui.idle_small_color = '#9c9599'
+define gui.idle_small_color = '#959c96'
 
 ## The color that is used for buttons and bars that are hovered.
 define gui.hover_color = '#ddb8cd'
@@ -70,7 +70,7 @@ define gui.insensitive_color = '#695962'
 
 ## Colors used for the portions of bars that are not filled in. These are not
 ## used directly, but are used when re-generating bar image files.
-define gui.muted_color = '#510028'
+define gui.muted_color = '#99004d'
 define gui.hover_muted_color = '#7a003d'
 
 ## The colors used for dialogue and menu choice text.
@@ -144,7 +144,7 @@ define gui.namebox_height = None
 
 ## The borders of the box containing the character's name, in left, top, right,
 ## bottom order.
-define gui.namebox_borders = Borders(35, 20, 35, 25)
+define gui.namebox_borders = Borders(30, 20, 30, 30)
 
 ## If True, the background of the namebox will be tiled, if False, the
 ## background of the namebox will be scaled.
@@ -465,26 +465,33 @@ init python:
 
         ## Adjust the location of the textbox.
         gui.textbox_height = 240
-        gui.name_xpos = 80
-        gui.dialogue_xpos = 90
-        gui.dialogue_width = 1100
-
+        gui.name_xpos = 30
+        gui.name_ypos = -90
+        gui.dialogue_xpos = 250
+        gui.dialogue_ypos = 30
+        gui.dialogue_width = 1000
+        
         ## Change the size and spacing of various things.
         gui.slider_size = 36
-
-        gui.choice_button_width = 1240
+        gui.choice_button_width = 1000
         gui.choice_button_text_size = 30
+        gui.navigation_xpos = 25
 
-        gui.navigation_spacing = 20
+        gui.navigation_spacing = 11
         gui.pref_button_spacing = 10
 
-        gui.history_height = 190
-        gui.history_text_width = 690
+        gui.history_name_xalign = 0.0
+        gui.history_name_xpos = 0
 
-        gui.quick_button_text_size = 20
+        gui.history_height = 190
+        gui.history_text_width = 600
+        gui.history_height = 190
+        gui.history_text_xpos = 190
+
+        gui.quick_button_text_size = 25
 
         ## File button layout.
-        gui.file_slot_cols = 2
+        gui.file_slot_cols = 3
         gui.file_slot_rows = 2
 
         ## NVL-mode.

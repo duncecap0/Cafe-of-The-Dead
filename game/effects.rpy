@@ -5,6 +5,9 @@ define left1 = Position(xalign=0.3)
 
 define right2 = Position(xalign=0.7)
 
+define rightBIGG = Position(xalign=2.0, yalign=0.5)
+define centerBIGG = Position(xalign=1.0, yalign=0.5)
+
 image static_anim:
     "images/static1.webp"
     alpha 0.2
@@ -57,11 +60,18 @@ image click_to_continue:
     repeat
 
 ## TormentedStudios button scale https://www.reddit.com/r/RenPy/comments/yvz8x8/increase_the_size_of_a_button_when_hovered_over/
+
 transform buttonScale: 
     on hover:
         linear 0.1 zoom 1.05
     on idle:
         linear 0.1 zoom 1.0
+
+transform buttonScale_sticker: 
+    on hover:
+        linear 0.1 zoom 1.0
+    on idle:
+        linear 0.1 zoom 0.9
 
 transform sink:
         ypos 710 

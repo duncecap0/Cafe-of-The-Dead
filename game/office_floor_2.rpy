@@ -184,7 +184,7 @@ label office_floor_2:
             v "TAKE THIS GUN AWAY FROM ME PLEASE NORM-NORM!!! {w=.3}I'm not a good shot at all..."
         elif sage_has_gun == True:
             p 1"Also,{w=.3} I believe this gun belongs to you?"
-            if insanity_level == 0 or norman_affection >= 2:
+            if insanity_level == 0 or norman_affection >= 1:
                 show n 1 with Dissolve(0.2)
                 n 1"Hmm how about you keep it from now on [pov]! {w=.3}You proved yourself capable today!"
                 p 4"You sure?{w=.3} I'm not a marksman or have the training that you do..."
@@ -195,6 +195,26 @@ label office_floor_2:
         n 2"Thanks! {w=.3}Good thing I never leave home without it!"
 
 label office_floor_2_survivor_banter:
+    hide n with Dissolve(0.2)
+    play sound "audio/sfx/explosion_somewhere_far.ogg"
+    with vpunch
+    queue sound "audio/sfx/earthquake.ogg"
+    pause 0.5
+    "What on earth was that? A huge explosion sounded like it came from outside and rumbled the entire elevator"
+    "It felt as if the whole building was about to come down"
+    if rocky_dead == False:
+        show r 3 with Dissolve(0.2)
+        r "Geez... what's going on outside?"
+        hide r with Dissolve(0.2)
+    if vinnie_dead == False:
+        show v 2 3  with Dissolve(0.2)
+        v "Holy crud! That scared me!"
+        hide v with Dissolve(0.2)
+    if norman_dead == False:
+        show n 8  with Dissolve(0.2)
+        n "I wonder if the military has something to do with that explosion..."
+        hide n with Dissolve(0.2)
+    pause 0.5        
     if rocky_dead == False and vinnie_dead == False:
         show r 11 at left with Dissolve(0.2)
         r 11"That battle was intense! {w=.3}Glad we made it through alright!"
@@ -349,6 +369,7 @@ label office_window:
     $ examined_window = True
     play sound "audio/sfx/Wind.ogg"
     "The city is set aflame and seemingly empty of life... with only hordes of zombies shambling together flooding the streets,{w=.3} the sky is burning as smoke fills the air"
+    "This napalm must be the sound we heard from earlier..."
 
     if vinnie_dead == False:
         v "Things got worse since we last saw outside..."
@@ -368,6 +389,7 @@ label office_window:
         "Don't get distracted":
             show static_anim with Dissolve(0.2)
             play audio "audio/sfx/static.ogg"
+            $ norman_affection -= 1
             camera:
                 perspective True
                 easein_bounce 0.54 zpos -20 
@@ -678,7 +700,7 @@ label saved_tara:
     w 8 "They shouted at us to line up until all of the sudden...{w=.3} The deceased rose back up again to attack us AND the armoured men!"
     w 15 "I started running when the men were distracted... {w=.3}It all happened so fast... {w=.3}I tried to call the others in here but they were... {w=.3}but they..."
     w 14 "..."        
-    w 11"And then I realized...{w=.3}I was bit...{w=.3} and thought... {w=.3}cutting off the bite from the source would solve it...?{w=.3} I... {w=.5}honestly don't know if it worked... {w=.3}I was so desperate..."
+    w 11"And then I realized...{w=.3}I was bit...{w=.3} and thought... {w=.3}blunt forcing off the bite from the source would solve it...?{w=.3} I... {w=.5}honestly don't know if it worked... {w=.3}I was so desperate..."
     w 12"If you see me trying to take a chomp out of any of you..."
     w 13 "Just kill me... {w=.3}I don't want anyone else being hurt today...{w=.3} there's been so much blood spilled...{w=.3} too much..."
     show w 1 at shiver
@@ -816,7 +838,7 @@ label word_puzzle:
         jump pnc_loop
 
     "\"Her eyes {color=#f00}_ _ _ _ _ {/color} at the sight of them,\""
-    "\"they ravage through the other researchers like {color=#f00}_ _ _ _{/color}s to a flame\""
+    "\"They ravage through the other researchers like {color=#f00}_ _ _ _{/color}s to a flame\""
     "The {color=#f00}_ _ _ _ _ _{/color} is bleak as I grow more weary"
     "Days scramble together the longer she stays"
     if examined_computer == True:
@@ -912,9 +934,10 @@ label worker_email:
         show black with Dissolve(1.):
                 alpha.8
         centered "{color=#f00}{u}TUE{/u}{/color}-{font=Dudu_Calligraphy.ttf} Daniel Walsh - Jesus, things have gotten brutal the past few months. Everything's shifted to pure medical research with just a skeleton crew managing the coffee side of their business{/font}"
-        centered "{font=Dudu_Calligraphy.ttf} Now there's a work quota we have to meet or else we get \"fired\". All of the sudden these riot gear guys started roaming around the halls like they're patrolling something{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}Now there's a work quota we have to meet or else we get \"fired\". All of the sudden these riot gear guys started roaming around the halls like they're patrolling something{/font}"
         centered "{font=Dudu_Calligraphy.ttf}They’re holding way too overkill of equipment for simple security so what are they here for? They seem particularly needed in the higher floors... {/font}"
         centered "{font=Dudu_Calligraphy.ttf}My buddy Charlie couldn't deal with all the changes so he quit last {/font}{color=#f00}{u}THU{/u}{/color}{font=Dudu_Calligraphy.ttf}. He never answer my calls anymore.{/font}"
+        centered "{font=Dudu_Calligraphy.ttf}I wish we never took this college internship... I just want to be with you again man... gaming all night and ruining our sleep schedule...{/font}"
         centered "{font=Dudu_Calligraphy.ttf}The CEO seemed so nice in passing... but how could he have let this happen? I don't want to work here anymore but I'm scared I'll find out what happened to Charlie if I do...{/font}"
         hide black with Dissolve(0.2)
         $ renpy.notify("Worker Email reminder has been added to inventory!")
@@ -1092,12 +1115,12 @@ label office_floor_ending:
     "Out of nowhere a booming voice echoes from the speakers in the ceilings"
     
     if tara == True:
-        w 9"F-{w=.3} Father?!?"
+        w 6"That-{w=.3} That voice!"
         
         if rocky_dead == False:
             "Rocky sets Tara behind a potted plant"
-            show w 9 at offscreen_left with move
-            hide w 9
+            show w 6 at offscreen_left with move
+            hide w
             show r 1 at left with move
             r "Here, {w=.3}don't come out no matter what..."
             if vinnie_dead == False:
@@ -1105,14 +1128,14 @@ label office_floor_ending:
 
         if rocky_dead == True and vinnie_dead == False:
             "Vinnie hides Tara behind a potted plant"
-            show w 9 at offscreen_left with move
-            hide w 9
+            show w 6 at offscreen_left with move
+            hide w
             show v 2 at left with move
             v "Here!{w=.3} Don't make a peep!"
 
         if rocky_dead and vinnie_dead == True:
-            show w 9 at offscreen_left with move
-            hide w 9
+            show w 6 at offscreen_left with move
+            hide w
             show n 6 at left with move
             "Norman and I set Tara down and hide her behind a potted plant"
             n "Don't make a sound Tara..."
@@ -1181,10 +1204,11 @@ label office_floor_ending:
                 $ norman_secret_death = True
                 $ norman_office_death = True
                 $ norman_dead = True
-                play sound "audio/sfx/hit.ogg"
+                play sound "audio/sfx/hit12.ogg"
                 queue sound "audio/sfx/monster-10.ogg"
                 n "Unf!!" with hpunch
-                "I shove Norman so he falters to the ground as the man beats him down, {w=.3}Norman is brought down to the floor from the stun baton and isn't getting up..."
+                "I shove Norman so hard he falters to the ground, {w=.3}The man wails on him with a stun baton"
+                "Norman hasn't gotten back up..."
                 hide static_anim with Dissolve(0.2)
                 camera:
                     reset
@@ -1248,7 +1272,7 @@ label office_floor_ending:
             "I tell Rocky to save Norman!" if rocky_dead == False:
                 play sound "audio/sfx/monster-10.ogg"
                 if expose_samsara_together:
-                    play sound "audio/sfx/punch.ogg"
+                    play sound "audio/sfx/hit12.ogg"
 
                     show r 3a at right with moveinright
                     $ addRockyhealth(-1)
@@ -1258,7 +1282,7 @@ label office_floor_ending:
                         $ rocky_office_death = True
                     jump vinnie_v_juggernaut
                 elif expose_samsara_together == False and crowbar_collected:
-                    play sound "audio/sfx/punch.ogg"
+                    play sound "audio/sfx/hit12.ogg"
                     show r 3a at right with moveinright
                     "Rocky tries to bear hug the man but gets punched in the chest and knocked to the floor, he looks hurt..."
                     r "*cough*{w=.3} *hack* {w=.3}*wheeze* *wheeze* {w=.3}*sputter*" with hpunch
@@ -1269,7 +1293,7 @@ label office_floor_ending:
 
                     jump vinnie_v_juggernaut
                 else:
-                    play sound "audio/sfx/hit.ogg"
+                    play sound "audio/sfx/hit12.ogg"
                     $ addRockyhealth(-3)
                     show r 3a at right with moveinright
                     "Rocky tries to bear hug the man but gets punched in the chest and knocked to the floor,{w=.3} he looks pretty hurt and even coughs up blood..."
@@ -1367,7 +1391,7 @@ label vinnie_v_juggernaut:
                 jump rocky_v_juggernaut
 
             "I crowbar the man!" if crowbar_collected and rocky_dead == True:
-                play sound "audio/sfx/hit.ogg"
+                play sound "audio/sfx/hit13.ogg"
                 queue sound "audio/sfx/monster-1.ogg"
 
                 $ crowbar_collected = False
@@ -1378,7 +1402,7 @@ label vinnie_v_juggernaut:
 
             "I tell Rocky to save Vinnie!" if rocky_dead == False:
                 if expose_samsara_together:
-                    play sound "audio/sfx/punch.ogg"
+                    play sound "audio/sfx/hit13.ogg"
                     queue sound "audio/sfx/monster-1.ogg"
                     $ addRockyhealth(-1)
                     show r 3a at right with moveinright
@@ -1461,7 +1485,7 @@ label rocky_v_juggernaut:
             
             "I tell Norman to save Rocky!" if norman_dead == False and norman_office_death == False:
                 $ addNormhealth(-1)
-                play sound "audio/sfx/hit.ogg"
+                play sound "audio/sfx/hit13.ogg"
 
                 queue sound "audio/sfx/Monster_00.ogg"
                 if norman_health == 0:
@@ -1548,6 +1572,7 @@ label juggernaut_zombie_aftermath:
         else:
             show r 2 at left with Dissolve(0.2)
             r "HOW MUCH MORE CAN HE POSSIBLY TAKE?"
+            "Rocky says as he tries to box in the man coming towards us"
             hide r with Dissolve(0.2)
         play sound "audio/sfx/short run.ogg"
         "I've had enough of this, I jump onto the man's back and straddle his back, I remove his helmet to reveal..."
@@ -1867,9 +1892,9 @@ label juggernaut_zombie_aftermath:
 
 label get_password:
     $ renpy.notify("Use the keyboard to type, make sure each word is spaced from one another and entered in the order they are read")
-    $ password_input = renpy.input("What's the password?", length = 25, allow = ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz).strip().lower().title()
+    $ password_input = renpy.input("What's the password?", length = 25).strip().lower()
 
-    if password in ["Widenmothfuture", "Widen moth future", "Widen and moth and future", 'Widen moth and future']:
+    if password_input in ["widenmothfuture", "widen moth future", "widen and moth and future", 'widen moth and future', 'widen, moth, and future']:
         jump correct_password
     else:
         jump wrong_password

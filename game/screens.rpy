@@ -29,7 +29,7 @@ style hyperlink_text:
 style gui_text:
     properties gui.text_properties("interface")
     outlines [ (1, "#300019", 0, 0) ]
-    outline_scaling "circ"
+    outline_scaling "linear"
 
 style button:
     properties gui.button_properties("button")
@@ -118,8 +118,10 @@ screen say(who, what):
 
     ## If there's a side image, display it above the text. Do not display on the
     ## phone variant - there's no room.
-    if not renpy.variant("small"):
+    if renpy.variant("small"):
         add SideImage() xalign -0.04 yalign 2.222
+    else:
+        add SideImage() xalign -0.01 yalign 2.222
 
 ## Make the namebox available for styling through the Character object.
 init python:
@@ -277,8 +279,6 @@ screen quick_menu():
                 textbutton _("Save") action ShowMenu('save') at buttonScale
                 textbutton _("Q.Save") action QuickSave() at buttonScale
                 textbutton _("Q.Load") action QuickLoad() at buttonScale
-                textbutton _("Inventory") action ShowMenu('inventory_menu') at buttonScale
-                textbutton _("Sanity Check") action ShowMenu('sanity_menu') at buttonScale
                 textbutton _("Prefs") action ShowMenu('preferences') at buttonScale
  
 
@@ -319,7 +319,16 @@ screen navigation():
         else:
             xoffset 50
             ypos 130
-            
+
+        if renpy.variant("small"):
+            if renpy.get_screen("main_menu"):
+                xalign 0.5
+                ypos 380
+            else:
+                xoffset 50
+                ypos 130
+                xpos -30
+
         vbox:
             style_prefix "navigation"
 
@@ -406,12 +415,11 @@ screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
 
-    if persistent.trueending == True:
-        use main_menu_1
-        add Snow("gui/snow1.png")
-        add Snow("gui/snow2.png")
-    elif persistent.hailending == True:
+    if persistent.hailending == True:
         use main_menu_2
+        add Snow("gui/snow2.png")
+    elif persistent.trueending == True:
+        use main_menu_1
         add Snow("gui/snow1.png")
         add Snow("gui/snow2.png")
     else:
@@ -562,7 +570,7 @@ style return_button is navigation_button
 style return_button_text is navigation_button_text
 
 style game_menu_outer_frame:
-    bottom_padding 30
+    bottom_padding 27
     top_padding 120
 
     background "gui/overlay/game_menu.png"
@@ -586,7 +594,8 @@ style game_menu_side:
     spacing 10
 
 style game_menu_label:
-    xpos 50
+    xpos 20
+    ypos -20
     ysize 120
 
 style game_menu_label_text:
@@ -628,7 +637,7 @@ screen about():
 
             text "Music, GUI, Play Testing, Coding, Writing Help, and Concept Art by {a=https://x.com/B0redBradley}B0redBradley{/a}"
 
-            text "Writing, Sprite Art, Background Art, Live or Die, Main Menu, and Death themes by {a=https://x.com/DunceCap0}Dunce Cap{/a}"
+            text "Writing, Sprite Art, Background Art, Live or Die, Main Menu, Tara and Taran's and Death themes by {a=https://x.com/DunceCap0}Dunce Cap{/a}"
 
             text "Point and Click Code Framework by {a=https://devilspider.itch.io//a}Devil Spider"
 
@@ -637,7 +646,9 @@ screen about():
             text "SFX from {a=https://opengameart.org/}OpenGameArt{/a}, {a=https://freesound.org/}Freesound{/a}, {a=https://www.zapsplat.com/}ZapSplat{/a}, and {a=https://www.youtube.com/}Youtube Audio Library{/a} "
             
             text "Font by {a=https://www.dafont.com/vcr-osd-mono.font}Riciery Leal{/a}"
-           
+
+            text "Handwriting Font by {a=https://www.dafont.com/dudu-calligraphy.font}Adderou{/a}"
+
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
@@ -1363,7 +1374,6 @@ style notify_text is gui_text
 
 style notify_frame:
     ypos gui.notify_ypos
-    xpos 180
 
     background Frame("gui/notify.png", gui.notify_frame_borders, tile=gui.frame_tile)
     padding gui.notify_frame_borders.padding
@@ -1601,13 +1611,16 @@ screen quick_menu():
             style_prefix "quick"
 
             xalign 0.5
-            yalign 1.0
+            ypos 660
 
-            textbutton _("Back") action Rollback()
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Menu") action ShowMenu()
+            textbutton _("Back") action Rollback() at buttonScale
+            textbutton _("History") action ShowMenu('history') at buttonScale
+            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True) at buttonScale
+            textbutton _("Auto") action Preference("auto-forward", "toggle") at buttonScale
+            textbutton _("Save") action ShowMenu('save') at buttonScale
 
+style pref_label_text:
+    yoffset -10
 
 style window:
     variant "small"
@@ -1635,11 +1648,12 @@ style game_menu_outer_frame:
 
 style game_menu_navigation_frame:
     variant "small"
-    xsize 340
+    xsize 280
 
 style game_menu_content_frame:
     variant "small"
     top_margin 0
+    bottom_margin 5
 
 style pref_vbox:
     variant "small"
@@ -1666,6 +1680,7 @@ style scrollbar:
 style vscrollbar:
     variant "small"
     xsize gui.scrollbar_size
+    ypos -5
     base_bar Frame("gui/phone/scrollbar/vertical_[prefix_]bar.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
     thumb Frame("gui/phone/scrollbar/vertical_[prefix_]thumb.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
 

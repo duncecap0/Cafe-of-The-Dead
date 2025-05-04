@@ -133,7 +133,10 @@ venv.bak/
 cache/
 saves/
 
+.vscode/
 
+vscode/
+*.keystore
 # Compiled source #
 ###################
 *.com
@@ -188,7 +191,7 @@ cython_debug/
 #.idea/
 *.txt
 *.save
+
 Cafe-of-The-Dead/game/saves/navigation.json
 Cafe-of-The-Dead/game/saves/persistent
-Cafe of The Dead/game/saves/navigation.json
-Cafe of The Dead/game/saves/persistent
+Cafe-of-The-Dead/game/saves/*.save

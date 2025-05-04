@@ -26,6 +26,8 @@ default n_pill_reject = False
 
 default butt_puzzle_complete = False
 
+default examined_interface = True
+
 #ITEMS
 default drawer_key_collected = False
 default keycard = False
@@ -131,8 +133,14 @@ label lab_tanks_room:
 
 label lab_downstairs_hall:
     window hide diss
-    scene lab hall with Dissolve(0.2)
+    scene lab keycard entrance with Dissolve(0.2)
     $ current_room = "lab_downstairs_hall" # this initializes the point'n'click segment to display the correct set of buttons.
+    jump pnc_loop
+
+label lab_hakim_room:
+    window hide diss
+    scene lab side room with Dissolve(0.2)
+    $ current_room = "lab_hakim_room" # this initializes the point'n'click segment to display the correct set of buttons.
     jump pnc_loop
 
 label lab_puzzle_piece_a_collect_room:
@@ -308,11 +316,18 @@ label locked_master_door:
         "This way is blocked off with a laser gate, it won't open unless I override it with some type of device around here..."
     jump pnc_loop
 
-default examined_interface = True
-
 label butt_puzzle_intro:
+    
     if butt_puzzle_complete == True:
+
         "This is complete"
+        jump pnc_loop
+
+    elif piece_puzzle_a == False or piece_puzzle_b == False and butt_puzzle_complete == False:
+
+        "This interface looks connected to the laser gate, hmm it's not working... I need to trigger something around here to turn this on"
+        jump pnc_loop 
+
     elif piece_puzzle_a == True and piece_puzzle_b == True and butt_puzzle_complete == False:
         if examined_interface == False:
             $ examined_interface = True
@@ -324,9 +339,6 @@ label butt_puzzle_intro:
         show black with Dissolve(.1):
             alpha.6
         call screen lab_minigame
-    else:
-        "This interface looks connected to the laser gate, hmm it's not working... I need to trigger something around here to turn this on"
-        jump pnc_loop
 
 label butt_puzzle_done:
     hide screen lab_minigame with Dissolve(0.2)
@@ -339,8 +351,8 @@ label butt_puzzle_done:
 
 label radio:
     
-    p 1"The telecommunications in this room seem to be malfunctioning,{w=.3} don't think we'll be able to contact anyone within here. {w=.3}We have to find someplace else"
-    "Huh? There's some text on the screen that says \"BIOREACTOR KEYCARD ENTRY HALL = SALVATION\""
+    p 1"The telecommunications in this room seem to be malfunctioning,{w=.3} don't think I'll be able to contact anyone within here. {w=.3}I have to find someplace else"
+    "Huh? There's some text on the screen that says \"BIOREACTOR KEYCARD ENTRY HALL SIDE ROOM = SALVATION\""
     "What does this mean?"
     jump pnc_loop
 
@@ -394,7 +406,7 @@ label hakim_lab_go_away:
     $ current_room = "hakim_lab_go_away"
     $ examined_hakim = True
     $ renpy.notify("Old Paper was added to your inventory!")
-    "A dead scientist... What's this paper in their hands?"
+    "A dead scientist with the nametag \"Hakim Lee\"... What's this paper in his hands?"
     window hide diss
     show paper at center with moveinbottom
     show screen exit_button
@@ -405,24 +417,29 @@ label paper_go_away:
     show paper at offscreen_bottom with move
     hide paper
     "How ominous... these shapes must be important for something around here..."
-    jump lab_downstairs_hall
+    jump lab_hakim_room
 
 label pills:
 
-        "There's some pill capsules here on the table"
+        "There's some pills here on the table"
         play sound "audio/sfx/use.ogg"
         if vinnie_dead == False:
             show v 2 3 with Dissolve(0.2)
             with vpunch
-            v "DON'T TOUCH THAT! Those look like Fentanyl Buccal Tablets!{w=.3} You can tell from the coloring and shape!" #it'd be funny it it was Sildenafil or something {w=.3}HA!"
+            v "DON'T TOUCH THAT!"
+            show v 4
+            extend "These pills are too nondescript for me to properly analyze! I really wouldn't trust it..."
+            v 8"My best guess is that it's some type of opioid, since we don't know the name, administering an inaccurate dosage could be fatal"
+            #v "DON'T TOUCH THAT! Those look like Fentanyl Buccal Tablets!{w=.3} You can tell from the coloring and shape!" #it'd be funny it it was Sildenafil or something {w=.3}HA!"
             if norman_dead == False:
                 show n 1 at left with Dissolve(0.2)
                 n "Woah close one... {w=.3}good thing we have you Vinnie!"
             if rocky_dead == False:
                 show r 1 at right with Dissolve(0.2)
-                r "Yikes imagine if we took that?{w=.3} Don't want that in your body..."
+                r "Yikes,{w=.3} imagine if we took that?{w=.3} Don't want that to happen to your body..."
             p 15"Ah,{w=.3} I see.{w=.3} Thank you.{w=.3} If you weren't here I would've downed the whole thing..."
             v 9"Hehe, no problemo~!"
+            v 2 4"It'd be funny if it was Sildenafil or something {w=.3}HA!"
             $ pills = True
 
         else:
@@ -573,7 +590,7 @@ label bullet:
 
 label keycard:
     play sound "audio/sfx/use.ogg"
-    "A small drawer..."
+    "A locked small drawer..."
     if keycard == True:
         "The drawer is empty..."
     elif drawer_key_collected == True:
@@ -697,7 +714,8 @@ label lab_note_1:
         $ rocky_tantrum = True
         $ renpy.music.set_pause(True, channel="music")
         show r 3a with moveinleft
-        play sound "audio/sfx/window smash.ogg"
+        play sound "audio/voices/rocky roar.ogg"
+        queue sound "audio/sfx/window smash.ogg"
         queue sound "audio/sfx/punch.ogg"
         queue sound "audio/sfx/zap.ogg"
         queue sound "audio/sfx/window smash.ogg"
@@ -881,6 +899,7 @@ label boss_battle:
     hide screen ammo_stats with dissolve
     play music "audio/music/stranger no more.ogg" fadein 1.0
     $ renpy.notify("All unnecessary items have been discarded from your inventory. This is the end.")
+    $ examined_hakim = False
     $ keycard = False
     $ drawer_key_collected = False
     "Here we are... {w=.3}it's taken so long but we're finally here..."
@@ -981,10 +1000,11 @@ label boss_battle:
     s 3"I tied the noose around all my researchers necks and let them go! {w=.3}Their sacrifices were not in vain look where they got me!"
     s 4"They wanted to use MY research for themselves and their families! {w=.3}Idiots! {w=.3}It was for MY immortality!{w=.3} My ascent to godhood!"
     s 10"My IQ is unmatched, I was put into this world to guide it, {w=.3}All I needed was the time which the project was meant to achieve"
-    s 6"When they wanted to use it for something else...{w=.3} I corrupted it into this zombie virus.{w=.3} I realized the world only cares about each other, so I need to remake it to care about ME and only ME as the one who guides them out of armageddon!"
+    s 6"When they wanted to use it for something else...{w=.3} I corrupted it into this zombie virus.{w=.3} I realized the world only cares about each other"
+    s "So I need to remake it to care about ME and only ME as the one who guides them out of armageddon!"
     s 3"I needed to tie up a few loose ends here,{w=.3} so I got this here private military force of mine to shoot up any survivors and blow up the building so none can tell what really happened here!"
     show c 3 at hop
-    play sound "audio/sfx/hit.ogg"
+    play sound "audio/sfx/hit13.ogg"
     "The CEO kicks one of the many armored men's corpses in the head"
     s 2"Of course,{w=.3} {i}they{/i} had to be dispatched too,{w=.3} so I ordered them all to kill one another!{w=.3} The were infected by a special form of the virus a long time ago and are completely bound to my will"
     s 6"Hmm if you're not up for jumping into this here pit of hydrofluoric acid, {w=.3}then there is an alternative..."
@@ -1054,9 +1074,10 @@ label save_norman_finale:
         menu boss_zombies_v_norman:
 
             "Shoot at the CEO" if sage_has_gun == True and ammo >= 1:
-                $ renpy.notify("Achievement Unlocked: Nice Try")
-                $ persistent.petty_sage = True
-                play audio "audio/sfx/achievement.ogg"
+                if persistent.petty_sage == False:
+                    $ renpy.notify("Achievement Unlocked: Nice Try")
+                    $ persistent.petty_sage = True
+                    play audio "audio/sfx/achievement.ogg"
                 $ addAmmo_level(-1)
                 play sound "audio/sfx/shoot.ogg"
                 with vpunch
@@ -1243,9 +1264,10 @@ label save_vinnie_finale:
         menu boss_zombies_v_vinnie:
 
             "Shoot at the CEO" if sage_has_gun == True and ammo >= 1:
-                $ renpy.notify("Achievement Unlocked: Nice Try")
-                $ persistent.petty_sage = True
-                play audio "audio/sfx/achievement.ogg"
+                if persistent.petty_sage == False:
+                    $ renpy.notify("Achievement Unlocked: Nice Try")
+                    $ persistent.petty_sage = True
+                    play audio "audio/sfx/achievement.ogg"
                 $ addAmmo_level(-1)
                 play sound "audio/sfx/shoot.ogg"
                 with vpunch
@@ -1254,10 +1276,11 @@ label save_vinnie_finale:
                 "I wasted a bullet for nothing!"
 
                 $ addVinhealth(-1)
-                play sound "audio/sfx/hit.ogg"
+                play sound "audio/sfx/hit12.ogg"
                 with hpunch
                 "Vinnie was hurt during our exchange..."
                 if vinnie_health == 0:
+                    hide v with Dissolve(0.2)
                     $ vinnie_lab_death = True
                     jump save_rocky_finale
                 else:
@@ -1329,7 +1352,7 @@ label save_vinnie_finale:
             "I tell Norman to save Vinnie!" if norman_dead == False:
                 if expose_samsara_together_3 == True:
                     show n 5 at left with moveinleft
-                    play sound "audio/sfx/punch.ogg"
+                    play sound "audio/sfx/hit12.ogg"
                     queue sound "audio/sfx/zombie-19.ogg"
                     n "YOU'RE NOT DYING ON MY WATCH!" with hpunch
                     "Norman does a high kick so hard it knocks a zombie's head off! Norman helps Vinnie with no issue"
@@ -1360,7 +1383,7 @@ label save_vinnie_finale:
                 "I shoot the zombie!"
 
             "I crowbar the zombies!" if crowbar_collected and rocky_dead == True:
-                play sound "audio/sfx/hit.ogg"
+                play sound "audio/sfx/hit13.ogg"
                 queue sound "audio/sfx/zombie-19.ogg"
                 $ crowbar_collected == False
                 $ renpy.notify("Crowbar has been removed from your inventory!")
@@ -1373,14 +1396,14 @@ label save_vinnie_finale:
                     queue sound "audio/sfx/zombie-19.ogg"
                     "Rocky sprints at full force while punching any zombie thats get in his way to the ground, he then pummels the zombie attacking Vinnie to ground" with hpunch
                 elif crowbar_collected == True and expose_samsara_together == False:
-                    play sound "audio/sfx/punch.ogg"
+                    play sound "audio/sfx/hit13.ogg"
                     queue sound "audio/sfx/zombie-19.ogg"
                     $ crowbar_collected = False
                     $ renpy.notify("Crowbar has been removed from your inventory!")
                     r "HUT!"
                     "Rocky uses the crowbar against the zombies but the horde yanks it out of his hand and it gets lost in the stampede" with hpunch
                 else:
-                    play sound "audio/sfx/punch.ogg"
+                    play sound "audio/sfx/hit12.ogg"
                     $ addRockyhealth(-1)
                     if rocky_health == 0:
                         $ rocky_lab_death = True
@@ -1395,6 +1418,7 @@ label save_rocky_finale:
         show r 3a at shiver_loop_center with Dissolve(0.2)
         r "AAGH!"
         if expose_samsara_together == True:
+            play sound "audio/voices/rocky roar.ogg"
             r "AAAAAAAAAAAAAAGHHHHHHHHH!!!"
             play sound "audio/sfx/zombie-22.ogg"
             "Rocky lifts a zombie over his head and throws it into the horde at full force!"
@@ -1407,9 +1431,10 @@ label save_rocky_finale:
         menu boss_zombies_v_rocky:
 
             "Shoot at the CEO" if sage_has_gun == True and ammo >= 1:
-                $ renpy.notify("Achievement Unlocked: Nice Try")
-                $ persistent.petty_sage = True
-                play audio "audio/sfx/achievement.ogg"
+                if persistent.petty_sage == False:
+                    $ renpy.notify("Achievement Unlocked: Nice Try")
+                    $ persistent.petty_sage = True
+                    play audio "audio/sfx/achievement.ogg"
                 $ addAmmo_level(-1)
                 play sound "audio/sfx/shoot.ogg"
                 with vpunch
@@ -1509,7 +1534,7 @@ label save_rocky_finale:
 
             "I skewer the zombies with my horns!":
                 $ sage_health -= 1
-                play sound "audio/sfx/punch.ogg"
+                play sound "audio/sfx/hit13.ogg"
                 queue sound "audio/sfx/Zombie_03.ogg"
                 "I take some damage in return..." with hpunch
                 if sage_health == 0:
@@ -1524,7 +1549,7 @@ label save_rocky_finale:
                 "I shoot the zombie attacking Rocky!"
             
             "I Tell Rocky to use the crowbar!" if crowbar_collected == True:
-                play sound "audio/sfx/hit.ogg"
+                play sound "audio/sfx/hit13.ogg"
                 queue sound "audio/sfx/Zombie_03.ogg"
                 $ crowbar_collected = False
                 $ renpy.notify("Crowbar has been removed from your inventory!")
@@ -1533,6 +1558,8 @@ label save_rocky_finale:
             "I tell Norman to save Rocky!" if norman_dead == False:
                 if expose_samsara_together_3 == True:
                     show n 5 at left with moveinleft
+                    play sound "audio/sfx/hit12.ogg"
+                    queue sound "audio/sfx/Zombie_03.ogg"
                     n "NO MORE DEATHS ON MY WATCH!"
                     r "WOW THAT WAS AMAZING!!!"
                 else:
@@ -1547,11 +1574,12 @@ label save_rocky_finale:
 
 label the_juggernaut:
         $ boss_juggernaut_zombie = False
-        play sound "audio/sfx/punch.ogg"
+        play sound "audio/sfx/hit12.ogg"
         show naut 2
         "I jump on top of the juggernaut zombie like before, as I'm riding its shoulders I rip off his helmet and throw it into the acid pit below!"
         queue sound "audio/sfx/Monster_00.ogg"
         queue sound "audio/sfx/monster-1.ogg"
+        queue sound "audio/sfx/hit13.ogg"
         queue sound "audio/sfx/monster-3.ogg"
         queue sound "audio/sfx/monster-10.ogg"
         if norman_lab_death == True:
@@ -1666,7 +1694,7 @@ label boss_aftermath:
     s 8"..."
     pause 1.0
     s 9"I-{w=.3} It's too late for me anyways... {w=.3}I... {w=.9}was bit..."
-    "He rolls up his sleeve and reveals a large bite on his arm"
+    "He rolls up his sleeve and shirt to reveal two bite marks"
     p 2"I see..{w=.3} that makes an escape for you unnecessary right?"
     s 5"Indeed,{w=.3} there is no cure... I... {w=.3}I... {w=.3} tried and failed...{w=.3} for the first time in my life.... {w=.3} I can't s-succeed..."
     if tara == True:
@@ -1679,7 +1707,7 @@ label boss_aftermath:
         w 7"You did such terrible things. Such disgusting things!{w=.3} Why!{w=.3} Why are you still trying to hurt me! Even now!"
         s 10"...{w=.3}Tara... {w=.3}I've never called you by your name to your face...{w=.9} Tara... {w=.5}your father can't provide the life you need..."
         s "I see it now, before when you were created. I deluded myself into thinking you were nothing but a clone of me.{w=.3} You aren't though... {w=.3}I see it now,{w=.3} especially with the attempts you've made against me"
-        show c 6
+        show c 6 at shiver
         "He shoots me a dirty look before looking back at Tara"
         s 5"You tried so hard to protect everyone here and expose me as the monster I am... {w=.3}Tara... {w=.3}There's something wrong with my brain... {w=.3}I can't think like you do..."
         s "I want to become god of this universe and guide the world into a new era of progression.{w=.3} I am aware that it's not something a typical person would think {w=.9}but I do..."
@@ -1812,11 +1840,15 @@ label boss_aftermath:
             v 12"Geez..."
             if rocky_dead == True:
                 v 2"Fucker deserved worse for what happened to Rocky..."
+            if norman_dead == True:
+                v 2"That rotten bastard killed Norman..."                
         if rocky_dead == False:
             show r 2 at left with Dissolve(0.2)
             r 2"Guess that's that taken care of..."
             if vinnie_dead == True:
                 r 2a"I wish I had the chance to rip his fucking throat out for what he caused happen to Vinnie..."
+            if norman_dead == True:
+                r 2a"No sympathies whatsoever, HE KILLED NORMAN!"
         if norman_dead == False:
             show n 8 at left1 with Dissolve(0.2) 
             n 8"Oh..."
@@ -1826,12 +1858,14 @@ label boss_aftermath:
             "...!"
             n 5"Hey!{w=.3} He set the neurotoxin gas defenses level to ON for the elevator systems here!"    
             n "Better switch that off!{w=.3} I'm sure the ventilation system will get rid of it in due time!"                    
-        if rocky_dead == False and tara == False:
-            r 2"...I REALLY wish he was still here so I could kill him..."
-        if vinnie_dead == False and tara == False and norman_dead == False:
-            v 2"Wow! {w=.3}Even after death he's still just as vindictive!"
+            if rocky_dead == False and tara == False:
+                r 2"...I REALLY wish he was still here so I could kill him..."
+            if vinnie_dead == False and tara == False and norman_dead == False:
+                v 2"Wow! {w=.3}Even after death he's still just as vindictive!"
         if vinnie_dead == False and tara == False:
             v 2 "Let's just get out of here... the acid fumes burn my eyes..."
+        #if norman_dead == False:
+            #n "So much death, so much pain. Finally over..."
         
 
     pause 0.5

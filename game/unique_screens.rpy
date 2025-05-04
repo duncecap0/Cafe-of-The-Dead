@@ -7,6 +7,11 @@ style status_text is text:
     outlines [ (3, "#300019", 0, 0) ]
     outline_scaling "linear"
 
+style partycheck_text is text:
+    outlines [ (3, "#300019", 0, 0) ]
+    outline_scaling "linear"
+    line_spacing 7
+        
 # Icons for each party member
 # Replace gui/___.png with the character specific one
 
@@ -108,7 +113,9 @@ image vin hurt = "gui/vin hurt.png"
 image rocky healthy = "gui/rocky healthy.png"
 image rocky hurt = "gui/rocky hurt.png"
 
-image grave = "gui/dead.png"
+image grave:
+    "gui/dead.png"
+    xpos -8
 
 image paper_inventory:
     "images/paper.png"
@@ -130,7 +137,7 @@ screen character_stats():
                     xpos 10
                     idle "grave"
                     hover "grave"
-                    at buttonScale   
+                    at buttonScale_sticker   
                     action Play("sound", "audio/voices/sage beep.ogg")
                 text "[sage_health] |"
 
@@ -138,7 +145,7 @@ screen character_stats():
                 imagebutton:
                     idle "sage healthy"
                     hover "sage healthy"
-                    at buttonScale
+                    at buttonScale_sticker
                     action Play("sound", "audio/voices/sage beep.ogg")
                 text "[sage_health] |"    
 
@@ -146,7 +153,7 @@ screen character_stats():
                 imagebutton:
                     idle "sage hurt"
                     hover "sage hurt"
-                    at buttonScale
+                    at buttonScale_sticker
                     action Play("sound", "audio/voices/sage beep.ogg")
                 text "[sage_health] |"
 
@@ -158,7 +165,7 @@ screen character_stats():
                     xpos 10
                     idle "grave"
                     hover "grave"
-                    at buttonScale   
+                    at buttonScale_sticker   
                     action Play("sound", "audio/sfx/stab beep.ogg")
                 text "[norman_health] | "
 
@@ -166,7 +173,7 @@ screen character_stats():
                 imagebutton:
                     idle "norman healthy"
                     hover "norman healthy"
-                    at buttonScale
+                    at buttonScale_sticker
                     action Play("sound", "audio/voices/norman beep.ogg")
                 text "[norman_health] |"
 
@@ -174,7 +181,7 @@ screen character_stats():
                 imagebutton:
                     idle "norman hurt"
                     hover "norman hurt"
-                    at buttonScale
+                    at buttonScale_sticker
                     action Play("sound", "audio/voices/norman beep.ogg")
                 text "[norman_health] |"    
 
@@ -185,7 +192,7 @@ screen character_stats():
                     xpos 10
                     idle "grave"
                     hover "grave"
-                    at buttonScale   
+                    at buttonScale_sticker
                     action Play("sound", "audio/sfx/stab beep.ogg")
                 text "[vinnie_health] |"
 
@@ -193,7 +200,7 @@ screen character_stats():
                 imagebutton:
                     idle "vin healthy"
                     hover "vin healthy"
-                    at buttonScale
+                    at buttonScale_sticker
                     action Play("sound", "audio/voices/vin beep.ogg")
                 text "[vinnie_health] |"
 
@@ -201,7 +208,7 @@ screen character_stats():
                 imagebutton:
                     idle "vin hurt"
                     hover "vin hurt"
-                    at buttonScale
+                    at buttonScale_sticker
                     action Play("sound", "audio/voices/vin beep.ogg")
                 text "[vinnie_health] |"    
 
@@ -212,7 +219,7 @@ screen character_stats():
                     xpos 10
                     idle "grave"
                     hover "grave"
-                    at buttonScale   
+                    at buttonScale_sticker
                     action Play("sound", "audio/sfx/stab beep.ogg")
                 text "[rocky_health] |"
 
@@ -220,7 +227,7 @@ screen character_stats():
                 imagebutton:
                     idle "rocky healthy"
                     hover "rocky healthy"
-                    at buttonScale
+                    at buttonScale_sticker
                     action Play("sound", "audio/voices/rocky beep.ogg")
                 text "[rocky_health] |"    
 
@@ -228,7 +235,7 @@ screen character_stats():
                 imagebutton:
                     idle "rocky hurt"
                     hover "rocky hurt"
-                    at buttonScale
+                    at buttonScale_sticker
                     action Play("sound", "audio/voices/rocky beep.ogg")
                 text "[rocky_health] |"    
 
@@ -248,14 +255,14 @@ screen ammo_stats():
             imagebutton:
                 idle "bullets"
                 hover "bullets"
-                at buttonScale
+                at buttonScale_sticker
                 action Play("sound", "audio/sfx/cock.ogg")
             text "{size=*0.9}Ammo:[ammo]{/size}"
 
             imagebutton:
                 idle "inventory"
                 hover "inventory"
-                at buttonScale   
+                at buttonScale_sticker
                 action [Play("sound", "audio/sfx/use.ogg"), ShowMenu("inventory_menu")]
             text "{size=*0.9}Inventory{/size}"
 
@@ -266,13 +273,13 @@ screen ammo_stats():
 screen sanity_menu():
 
         tag menu
-
+        style_prefix "game_menu_content_frame"
         use game_menu(_("Sanity Check"), scroll="viewport"):
 
             hbox:
                 style_prefix "status"
                 add "sanitystatus":
-                    ypos 35
+                    ypos 40
                 text "{size=*2.5}Insanity Level: [insanity_level]{/size}":
                     ypos 90
 
@@ -280,48 +287,67 @@ image sagestick = "gui/sage sticker.png"
 image normstick = "gui/norm sticker.png"
 image vinstick = "gui/vin sticker.png"
 image rockstick = "gui/rocky sticker.png"
+image tarastick = "gui/tara sticker.png"
 
 screen group_check():
-
-        tag menu 
-
-        use game_menu(_("Party Check"), scroll="viewport"):
-
+      
+    tag menu 
+    style_prefix "partycheck"  
+    use game_menu(_("Party Check")):
             hbox:
+                ypos 40
+                spacing 10
+                xpos -3
                 ## TormentedStudios button scale https://www.reddit.com/r/RenPy/comments/yvz8x8/increase_the_size_of_a_button_when_hovered_over/
                 imagebutton:
-                    xalign 0.01
-                    ypos 100
                     idle "sagestick"
                     hover "sagestick"
-                    at buttonScale
+                    at buttonScale_sticker
                     action [Play("sound", "audio/voices/sage beep.ogg")]
                 if norman_dead == False:
                     imagebutton:
-
-                        xalign 0.5
-                        ypos 100
                         idle "normstick"
                         hover "normstick"
-                        at buttonScale
+                        at buttonScale_sticker
                         action [Play("sound", "audio/voices/norman beep.ogg")]
                 if vinnie_dead == False:
                     imagebutton:
-                        xalign 0.8
-                        ypos 100
+                        ypos -20
                         idle "vinstick"
                         hover "vinstick"
-                        at buttonScale
+                        at buttonScale_sticker
                         action [Play("sound", "audio/voices/vin beep.ogg")]
                 if rocky_dead == False:
                     imagebutton:
-                        xalign 0.9
-                        ypos 100
+                        ypos -5
                         idle "rockstick"
                         hover "rockstick"
-                        at buttonScale
+                        at buttonScale_sticker
                         action [Play("sound", "audio/voices/rocky beep.ogg")]
-                    
+                if tara == True:
+                    imagebutton:
+                        idle "tarastick"
+                        hover "tarastick"
+                        at buttonScale_sticker
+                        action [Play("sound", "audio/voices/tara beep.ogg")]
+            hbox:
+                ypos 350
+                spacing 60
+                xsize -0.1
+                text "Health: [sage_health] Insanity: [insanity_level]"
+                if norman_dead == False and norman_affection <= 4:
+                    text "Health: [norman_health] Motivated: [expose_samsara_together_3] Interest: [norman_affection]"
+                elif norman_dead == False and norman_affection >= 5:
+                    text "Health: [norman_health] Motivated: [expose_samsara_together_3] BOYFRIEND UNLOCKED: [norman_affection]"
+                if vinnie_dead == False:
+                    text "Health: [vinnie_health] Motivated: [expose_samsara_together_2]"
+                if rocky_dead == False:
+                    text "Health: [rocky_health] Motivated: [expose_samsara_together]":
+                        xpos 30
+                if tara == True:
+                    text "Motivated: [tara_against_dad]":
+                        xpos 30
+
 screen achievements_menu():
 
     tag menu 
@@ -431,6 +457,15 @@ screen achievements_menu():
                 text "Beat the game with Norman romanced"
                 text "-----"
 
+            if persistent.petty_sage == True:
+                text "Achievement Unlocked: Nice Try"
+                text "Shoot at the CEO"
+                text "-----"
+            else:
+                text "Achievement Locked: Nice Try"
+                text "Shoot at the CEO"
+                text "-----"
+
             if persistent.motivatefriends == True:
                 text "Achievement Unlocked: Samsara's End"
                 text "Beat the game with all friends motivated"
@@ -445,13 +480,13 @@ screen achievements_menu():
                 text "Hail."
                 text "-----"
             else:
-                text "                                                                                                  "
-                text "                                                                                                  "
-                text "                                                                                                  "
-                text "                                                                                                  "
-                text "                                                                                                  "
-                text "                                                                                                  "
-                text "                                                                                                  "
+                text "                                  "
+                text "                                  "
+                text "                                  "
+                text "                                  "
+                text "                                  "
+                text "                                  "
+                text "                                  "
 
                 text "Achievement Locked: ???"
                 text "Beat game while in possession of Norman's gun while high insanity and push Norman into danger in office confrontation with all others dead beforehand and secret character never obtained"
@@ -566,7 +601,7 @@ screen death_nav():
             yalign 0.6
             spacing 25
             textbutton _("Load") action ShowMenu("load"):
-                xpos 35
+                xalign 0.5
             textbutton _("Main Menu") action MainMenu()
 
 label death_screen:
@@ -597,7 +632,7 @@ label insane_screen:
     play sound "audio/sfx/stinger.ogg"
     play music "audio/sfx/Wind.ogg" fadein 1.0
     scene black with dissolve
-    show text "{size=+90}{b}{color=#f00}Hail.{/color}{/b}{/size}":
+    show text "{size=+90}{b}{color=#f00}{k=+10}Hail.{/k}{/color}{/b}{/size}":
         yalign 0.3    
 
     call screen death_nav    
@@ -607,7 +642,7 @@ label sad_screen:
     play sound "audio/sfx/stinger.ogg"
     play music "audio/sfx/Wind.ogg" fadein 1.0
     scene black with dissolve
-    show text "{size=+90}{b}{color=#f00}Sad Ending{/color}{/b}{/size}":
+    show text "{size=+90}{b}{color=#f00}{k=+10}Sad Ending{/k}{/color}{/b}{/size}":
         yalign 0.3    
 
     call screen death_nav  
@@ -726,12 +761,11 @@ label butt_puzzle_exit:
     jump pnc_loop
 
     screen lab_minigame():
-            text "complete: [butt_puzzle_complete], yellow count: [yellow_selected_count], yellow: [yellow_butt_correct], red count: [red_selected_count], red: [red_butt_correct]":
-                xpos 80
-                ypos 100
+            #text "complete: [butt_puzzle_complete], yellow count: [yellow_selected_count], yellow: [yellow_butt_correct], red count: [red_selected_count], red: [red_butt_correct]":
+                #xpos 80
+                #ypos 100
             grid 4 1:
-                xpos -70
-                yalign 0.5
+                yalign 0.4
                 imagebutton:
                     xpos 100
                     idle "red_butt"
@@ -809,25 +843,25 @@ label butt_puzzle_exit:
                 imagebutton:
                     xpos -270
                     ypos 100
-                    idle "yellow_butt"
-                    hover "yellow_butt"
+                    idle "yellow_butt_down"
+                    hover "yellow_butt_down"
                     selected_idle "yellow_butt_right"
                     selected_hover "yellow_butt_right"
                     action [Play("sound", "audio/sfx/butt_touch.ogg"), SetVariable("yellow_selected_count", yellow_selected_count +1), ToggleVariable("yellow_butt_correct", False, False)]
                     selected (yellow_selected_count)
 
                     if yellow_selected_count == 2:
-                        action [ToggleVariable("yellow_butt_correct", False, False), SetVariable("yellow_selected_count", yellow_selected_count +1), Play("sound", "audio/sfx/butt_touch.ogg")]
+                        action [ToggleVariable("yellow_butt_correct", True, False), SetVariable("yellow_selected_count", yellow_selected_count +1), Play("sound", "audio/sfx/correct beep.ogg")]
                         selected_idle "yellow_butt_up"
                         selected_hover "yellow_butt_up"
 
                     elif yellow_selected_count == 3:
                         action [ToggleVariable("yellow_butt_correct", False, False), SetVariable("yellow_selected_count", yellow_selected_count +1), Play("sound", "audio/sfx/butt_touch.ogg")]
-                        selected_idle "yellow_butt_down"
-                        selected_hover "yellow_butt_down"
+                        selected_idle "yellow_butt"
+                        selected_hover "yellow_butt"
 
                     elif yellow_selected_count == 4:
-                        action [ToggleVariable("yellow_butt_correct", True, False), SetVariable("yellow_selected_count", yellow_selected_count == 0), Play("sound", "audio/sfx/correct beep.ogg")]
+                        action [ToggleVariable("yellow_butt_correct", False, False), SetVariable("yellow_selected_count", yellow_selected_count == 0), Play("sound", "audio/sfx/butt_touch.ogg")]
                         selected_idle "yellow_butt_left"
                         selected_hover "yellow_butt_left"
 

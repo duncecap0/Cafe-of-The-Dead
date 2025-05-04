@@ -2,8 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/unique_screens.rpy", line 820: is not terminated with a newline. (Check strings and parenthesis.)
-                        action [Play("sound", "audio/sfx/butt_touch.ogg"), SetVariable("yellow_selected_count", yellow_selected_count +1, ToggleVariable("yellow_butt_correct", False, False)]
+File "game/cafe_floor_0.rpy", line 350: expected statement.
+    elif pov in ["Cunt", "Whore", "Fuck", "Fucker", "Ass", "Thot","Fuckface", "Fart", "Poop", "Shit", "Penis", "Cock", "Titty", "Cock", "Damn", "Dammit", "Boobs", "Tit", "Boob", "damm", "d4mm", "dick", "bastard", "blowjob", "turd", "anus", "bitch", "hoe", "ho", "booty", "butt"]:
+             ^
+
+File "game/cafe_floor_0.rpy", line 353: expected statement.
+    elif (ContainsBadWord(pov)):
+                               ^
 
 Ren'Py Version: Ren'Py 8.3.7.25031702
-Wed Apr 30 19:02:14 2025
+Sat May  3 10:17:37 2025

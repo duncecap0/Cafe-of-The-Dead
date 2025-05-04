@@ -31,7 +31,7 @@ screen pnc_screen(room="left"):
 
     for i in eval(f"{room}_buttons"):
         if (i[3] is None) or (eval(i[3])):
-            imagebutton auto "point_and_click/image/" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2]) at buttonScale
+            imagebutton auto "point_and_click/image/" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2]) at buttonScale_sticker
 
 style pnc_image_button:
     anchor (0.5, 0.5)
@@ -185,14 +185,14 @@ define lab_start_buttons = [
 ]
 
 define lab_puzzle_b_room_buttons = [
-    (("look"),(650, 500),"piece_puzzle_b", None),
+    (("look"),(650, 500),"piece_puzzle_b", "piece_puzzle_b == False"),
     
     (("move"),(650, 700),"lab_start", None), 
 ]
 
 define lab_radio_buttons = [
     (("look"),(300, 510), "radio", None),
-    (("look"),(1100, 600), "pills", "pills == False"),
+    (("look"),(980, 640), "pills", "pills == False"),
 
     (("move"),(650, 700),"lab_start", None), 
 ]
@@ -210,9 +210,14 @@ define lab_tanks_room_buttons = [
 ]
 
 define lab_downstairs_hall_buttons= [
-    (("look"),(479, 470), "hakim_lab_go_away", "examined_hakim == False"),
+    (("move"),(300, 470), "lab_hakim_room", None),
     (("move"),(630, 400),"lab_puzzle_piece_a_collect_room", None), 
     (("move"),(650, 700),"lab_tanks_room", None), 
+]
+
+define lab_hakim_room_buttons= [
+    (("look"),(280, 600), "hakim_lab_go_away", "examined_hakim == False"),
+    (("move"),(650, 700),"lab_downstairs_hall", None), 
 ]
 
 define lab_puzzle_piece_a_collect_room_buttons= [
@@ -249,7 +254,7 @@ define lab_upstairs_left_hall_buttons= [
 
 
 define lab_puzzle_a_room_buttons= [
-    (("look"),(650, 500),"piece_puzzle_a", None),
+    (("look"),(650, 500),"piece_puzzle_a", "piece_puzzle_a == False"),
     #(("look"),(350, 650),"drawer_key", "drawer_key_collected == False"),
 
     (("move"),(650, 700),"lab_upstairs_left_hall", None), 

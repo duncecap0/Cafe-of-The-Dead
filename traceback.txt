@@ -1,88 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/lab_floor_3.rpy", line 326, in script
-    call screen lab_minigame
-  File "renpy/common/000statements.rpy", line 671, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "game/unique_screens.rpy", line 732, in execute
-    screen lab_minigame():
-  File "game/unique_screens.rpy", line 732, in execute
-    screen lab_minigame():
-  File "game/unique_screens.rpy", line 736, in execute
-    grid 4 1:
-  File "game/unique_screens.rpy", line 813, in execute
-    imagebutton:
-  File "game/unique_screens.rpy", line 813, in keywords
-    imagebutton:
-  File "game/unique_screens.rpy", line 820, in <module>
-    action [Play("sound", "audio/sfx/butt_touch.ogg"), SetVariable("yellow_selected_count", yellow_selected_count == 1, ToggleVariable("yellow_butt_correct", False, False))]
-  File "renpy/common/00action_data.rpy", line 89, in __init__
-    super(Variable, self).__init__(store, name, *args, **kwargs)
-  File "renpy/common/00action_data.rpy", line 70, in __init__
-    super(Field, self).__init__(*args, **kwargs)
-  File "renpy/common/00action_data.rpy", line 174, in __init__
-    super(Set, self).__init__(*args, **kwargs)
-TypeError: object() takes no parameters.
+  File "game/script.rpy", line 62, in script call
+    call cafe_floor_0 from _call_cafe_floor_0
+  File "game/cafe_floor_0.rpy", line 179, in script
+    text "WE'LL BE BACK, RIGHT AFTER THESE MESSAGES"
+Exception: Sayer 'text' is not defined.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/lab_floor_3.rpy", line 326, in script
-    call screen lab_minigame
-  File "C:\Games\Renpy SDK\renpy\ast.py", line 1987, in execute
-    self.call("execute")
-  File "C:\Games\Renpy SDK\renpy\ast.py", line 1966, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "C:\Games\Renpy SDK\renpy\statements.py", line 374, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 671, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "C:\Games\Renpy SDK\renpy\exports\statementexports.py", line 345, in call_screen
-    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
-  File "C:\Games\Renpy SDK\renpy\ui.py", line 301, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Games\Renpy SDK\renpy\display\core.py", line 2218, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "C:\Games\Renpy SDK\renpy\display\core.py", line 2748, in interact_core
-    root_widget.visit_all(lambda d : d.per_interact())
-  File "C:\Games\Renpy SDK\renpy\display\displayable.py", line 434, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Games\Renpy SDK\renpy\display\displayable.py", line 434, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Games\Renpy SDK\renpy\display\displayable.py", line 434, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Games\Renpy SDK\renpy\display\screen.py", line 480, in visit_all
-    callback(self)
-  File "C:\Games\Renpy SDK\renpy\display\core.py", line 2748, in <lambda>
-    root_widget.visit_all(lambda d : d.per_interact())
-  File "C:\Games\Renpy SDK\renpy\display\screen.py", line 491, in per_interact
-    self.update()
-  File "C:\Games\Renpy SDK\renpy\display\screen.py", line 700, in update
-    self.screen.function(**self.scope)
-  File "game/unique_screens.rpy", line 732, in execute
-    screen lab_minigame():
-  File "game/unique_screens.rpy", line 732, in execute
-    screen lab_minigame():
-  File "game/unique_screens.rpy", line 736, in execute
-    grid 4 1:
-  File "game/unique_screens.rpy", line 813, in execute
-    imagebutton:
-  File "game/unique_screens.rpy", line 813, in keywords
-    imagebutton:
-  File "game/unique_screens.rpy", line 820, in <module>
-    action [Play("sound", "audio/sfx/butt_touch.ogg"), SetVariable("yellow_selected_count", yellow_selected_count == 1, ToggleVariable("yellow_butt_correct", False, False))]
-  File "renpy/common/00action_data.rpy", line 89, in __init__
-    super(Variable, self).__init__(store, name, *args, **kwargs)
-  File "renpy/common/00action_data.rpy", line 70, in __init__
-    super(Field, self).__init__(*args, **kwargs)
-  File "renpy/common/00action_data.rpy", line 174, in __init__
-    super(Set, self).__init__(*args, **kwargs)
-  File "C:\Games\Renpy SDK\renpy\revertable.py", line 484, in __init__
-    raise TypeError("object() takes no parameters.")
-TypeError: object() takes no parameters.
+  File "game/script.rpy", line 62, in script call
+    call cafe_floor_0 from _call_cafe_floor_0
+  File "game/cafe_floor_0.rpy", line 179, in script
+    text "WE'LL BE BACK, RIGHT AFTER THESE MESSAGES"
+  File "C:\Games\Renpy SDK\renpy\ast.py", line 2586, in execute
+    Say.execute(self)
+  File "C:\Games\Renpy SDK\renpy\ast.py", line 583, in execute
+    who = eval_who(self.who, self.who_fast)
+  File "C:\Games\Renpy SDK\renpy\ast.py", line 472, in eval_who
+    raise Exception("Sayer '%s' is not defined." % who)
+Exception: Sayer 'text' is not defined.
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.7.25031702
 Cafe of The Dead 1.1
-Wed Apr 30 19:00:51 2025
+Sat May  3 08:01:54 2025

@@ -138,7 +138,7 @@ screen character_stats():
                     idle "grave"
                     hover "grave"
                     at buttonScale_sticker   
-                    action Play("sound", "audio/voices/sage beep.ogg")
+                    action [Play("sound", "audio/voices/sage beep.ogg"), ShowMenu("group_check")]
                 text "[sage_health] |"
 
             elif sage_health >=3:
@@ -146,7 +146,7 @@ screen character_stats():
                     idle "sage healthy"
                     hover "sage healthy"
                     at buttonScale_sticker
-                    action Play("sound", "audio/voices/sage beep.ogg")
+                    action [Play("sound", "audio/voices/sage beep.ogg"), ShowMenu("group_check")]
                 text "[sage_health] |"    
 
             elif sage_health <=2:
@@ -154,7 +154,7 @@ screen character_stats():
                     idle "sage hurt"
                     hover "sage hurt"
                     at buttonScale_sticker
-                    action Play("sound", "audio/voices/sage beep.ogg")
+                    action [Play("sound", "audio/voices/sage beep.ogg"), ShowMenu("group_check")]
                 text "[sage_health] |"
 
 
@@ -166,7 +166,7 @@ screen character_stats():
                     idle "grave"
                     hover "grave"
                     at buttonScale_sticker   
-                    action Play("sound", "audio/sfx/stab beep.ogg")
+                    action [Play("sound", "audio/voices/norman beep.ogg"), ShowMenu("group_check")]
                 text "[norman_health] | "
 
             elif norman_health >=3:
@@ -174,7 +174,7 @@ screen character_stats():
                     idle "norman healthy"
                     hover "norman healthy"
                     at buttonScale_sticker
-                    action Play("sound", "audio/voices/norman beep.ogg")
+                    action [Play("sound", "audio/voices/norman beep.ogg"), ShowMenu("group_check")]
                 text "[norman_health] |"
 
             elif norman_health <=2:
@@ -182,7 +182,7 @@ screen character_stats():
                     idle "norman hurt"
                     hover "norman hurt"
                     at buttonScale_sticker
-                    action Play("sound", "audio/voices/norman beep.ogg")
+                    action [Play("sound", "audio/voices/norman beep.ogg"), ShowMenu("group_check")]
                 text "[norman_health] |"    
 
         ### VINNIE 
@@ -193,7 +193,7 @@ screen character_stats():
                     idle "grave"
                     hover "grave"
                     at buttonScale_sticker
-                    action Play("sound", "audio/sfx/stab beep.ogg")
+                    action [Play("sound", "audio/voices/vin beep.ogg"), ShowMenu("group_check")]
                 text "[vinnie_health] |"
 
             elif vinnie_health >=3:
@@ -201,7 +201,7 @@ screen character_stats():
                     idle "vin healthy"
                     hover "vin healthy"
                     at buttonScale_sticker
-                    action Play("sound", "audio/voices/vin beep.ogg")
+                    action [Play("sound", "audio/voices/vin beep.ogg"), ShowMenu("group_check")]
                 text "[vinnie_health] |"
 
             elif vinnie_health <=2:
@@ -209,7 +209,7 @@ screen character_stats():
                     idle "vin hurt"
                     hover "vin hurt"
                     at buttonScale_sticker
-                    action Play("sound", "audio/voices/vin beep.ogg")
+                    action [Play("sound", "audio/voices/stab.ogg"), ShowMenu("group_check")]
                 text "[vinnie_health] |"    
 
         ### ROCKY 
@@ -220,7 +220,7 @@ screen character_stats():
                     idle "grave"
                     hover "grave"
                     at buttonScale_sticker
-                    action Play("sound", "audio/sfx/stab beep.ogg")
+                    action [Play("sound", "audio/voices/stab.ogg"), ShowMenu("group_check")]
                 text "[rocky_health] |"
 
             elif rocky_health >=3:
@@ -228,7 +228,7 @@ screen character_stats():
                     idle "rocky healthy"
                     hover "rocky healthy"
                     at buttonScale_sticker
-                    action Play("sound", "audio/voices/rocky beep.ogg")
+                    action [Play("sound", "audio/voices/rocky beep.ogg"), ShowMenu("group_check")]
                 text "[rocky_health] |"    
 
             elif rocky_health <=2:
@@ -236,35 +236,63 @@ screen character_stats():
                     idle "rocky hurt"
                     hover "rocky hurt"
                     at buttonScale_sticker
-                    action Play("sound", "audio/voices/rocky beep.ogg")
+                    action [Play("sound", "audio/voices/rocky beep.ogg"), ShowMenu("group_check")]
                 text "[rocky_health] |"    
 
 
 image inventory = "gui/inventory.png"
+image inventoryphone = "gui/phone/inventory.png"
 
 image bullets = "gui/ammo.png"
+image bulletsphone = "gui/phone/ammo.png"
 
 screen ammo_stats():
-    zorder 3
-    frame:
-        background Frame("gui/shadow.png", 1, 1, tile="integer")
-        padding (5,10)
-        style_prefix "status"    
-        vbox:
-            spacing 5
-            imagebutton:
-                idle "bullets"
-                hover "bullets"
-                at buttonScale_sticker
-                action Play("sound", "audio/sfx/cock.ogg")
-            text "{size=*0.9}Ammo:[ammo]{/size}"
 
-            imagebutton:
-                idle "inventory"
-                hover "inventory"
-                at buttonScale_sticker
-                action [Play("sound", "audio/sfx/use.ogg"), ShowMenu("inventory_menu")]
-            text "{size=*0.9}Inventory{/size}"
+    zorder 3
+
+    frame:
+
+        background Frame("gui/shadow.png", 1, 1, tile="integer")
+
+        padding (5,10)
+
+        style_prefix "status"  
+
+        vbox:
+
+            spacing 5
+
+            if renpy.variant("small"):
+
+                imagebutton:
+                    idle "bulletsphone"
+                    hover "bulletsphone"
+                    at buttonScale_sticker
+                    action Play("sound", "audio/sfx/cock.ogg")
+                text "{size=*0.9}Ammo:[ammo]{/size}"
+
+                imagebutton:
+                    idle "inventoryphone"
+                    hover "inventoryphone"
+                    at buttonScale_sticker
+                    action [Play("sound", "audio/sfx/use.ogg"), ShowMenu("inventory_menu")]
+                text "{size=*0.9}Inventory{/size}"
+
+            else:
+
+                imagebutton:
+                    idle "bullets"
+                    hover "bullets"
+                    at buttonScale_sticker
+                    action Play("sound", "audio/sfx/cock.ogg")
+                text "{size=*0.9}Ammo:[ammo]{/size}"   
+
+                imagebutton:
+                    idle "inventory"
+                    hover "inventory"
+                    at buttonScale_sticker
+                    action [Play("sound", "audio/sfx/use.ogg"), ShowMenu("inventory_menu")]
+                text "{size=*0.9}Inventory{/size}"
 
 ################################################################################
 ## MENU ITEMS
@@ -273,7 +301,7 @@ screen ammo_stats():
 screen sanity_menu():
 
         tag menu
-        style_prefix "game_menu_content_frame"
+        
         use game_menu(_("Sanity Check"), scroll="viewport"):
 
             hbox:
@@ -332,7 +360,7 @@ screen group_check():
                         action [Play("sound", "audio/voices/tara beep.ogg")]
             hbox:
                 ypos 350
-                spacing 60
+                spacing 10
                 xsize -0.1
                 text "Health: [sage_health] Insanity: [insanity_level]"
                 if norman_dead == False and norman_affection <= 4:
@@ -342,11 +370,9 @@ screen group_check():
                 if vinnie_dead == False:
                     text "Health: [vinnie_health] Motivated: [expose_samsara_together_2]"
                 if rocky_dead == False:
-                    text "Health: [rocky_health] Motivated: [expose_samsara_together]":
-                        xpos 30
+                    text "Health: [rocky_health] Motivated: [expose_samsara_together]"
                 if tara == True:
-                    text "Motivated: [tara_against_dad]":
-                        xpos 30
+                    text "Motivated: [tara_against_dad]"
 
 screen achievements_menu():
 
@@ -504,51 +530,51 @@ screen inventory_menu():
                 spacing 20
 
                 if sage_has_gun or norman_has_gun or vinnie_has_gun or rocky_has_gun:
-                    text "Gun: It's a S&W 5946 9mm handgun, I wonder when did Norman have to use it?"
+                    text "Gun: It's a S&W 5946 9mm handgun, I wonder when Norman had to use it?"
                     text "-----"
                 if vinnies_knife == True and vinnie_dead == False:
                     text "Vinnie's Knife: An iridescent butterfly knife Vinnie stole from some gas station, doubt it would last long in an actual fight..."
                     text "-----"
                 if worker_key_collect == True:
-                    text "Padlock Key: A small key used for some type of padlock"
+                    text "Padlock Key: A small key used for some type of padlock."
                     text "-----"
                 if crowbar_collected == True:
-                    text "Crowbar: This crowbar has seen better days... it will most likely break soon"
+                    text "Crowbar: This crowbar has seen better days... it will most likely break soon."
                     text "-----"
                 #if medkit_used == True:
                 #    text "Medkit: It's a surprisingly advanced medical kit, it has intense antiseptics and bandages"
                 #if morphine_used == True:
                 #    text "Morphine: A syringe containing a clear liquid, hope the needle is clean..."
                 if examined_hakim == True:
-                    text "Old Paper: This paper was found on a scientist named \"Hakim Lee\"; it contains a peculiar shape pattern. It has various handwritings on it which means more than one person wrote on it. I can only imagine how crazed they became here..."
+                    text "Old Paper: This paper was found on a scientist named \"Hakim Lee\"; it contains a peculiar shape pattern. It has various handwritings on it, implying more than one person wrote on it. I can only imagine how crazed they became here..."
                     add "paper_inventory"
                     text "-----"                
                 if monday == True and word_puzzle_completed == False:
-                    text "Diary entry that contains the letters \"MON\""
+                    text "Diary entry that contains the letters \"MON\"."
                     text "-----"
 
                 if tuesday_and_thursday == True and word_puzzle_completed == False:
-                    text "Computer email that contains the letters \"TUE\" and \"THU\""
+                    text "Computer email that contains the letters \"TUE\" and \"THU\"."
                     text "-----"
 
                 if wednesday_and_friday == True and word_puzzle_completed == False:
-                    text "Worker memo that contains the letters \"WED\" and \"FRI\""
+                    text "Worker memo that contains the letters \"WED\" and \"FRI\"."
                     text "-----"
 
                 if puzzle_piece_a_collect == True:
-                    text "USB Drive A: Looks like a USB marked with the letter \"A\" in marker"
+                    text "USB Drive A: Looks like a USB marked with the letter \"A\" in marker."
                     text "-----"
 
                 if puzzle_piece_b_collect == True:
-                    text "USB Drive B: Looks like a USB marked with the letter \"B\" in marker"
+                    text "USB Drive B: Looks like a USB marked with the letter \"B\" in marker."
                     text "-----"
 
                 if drawer_key_collected == True:
-                    text "Drawer Key: A very VERY small key, it must be used on some type of drawer around here"
+                    text "Drawer Key: A very VERY small key, it must be used on some type of drawer around here."
                     text "-----"
 
                 if keycard == True:
-                    text "Employee Keycard: A keycard belonging to a Head Senior Researcher employee named \"Hakim Lee\", it has high level access"
+                    text "Employee Keycard: A keycard belonging to a Head Senior Researcher employee named \"Hakim Lee\", it has a very high level of access."
                     text "-----"
 
                 #if crowbar_collected == True:

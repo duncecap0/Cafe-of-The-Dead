@@ -29,9 +29,16 @@ screen pnc_screen(room="left"):
 
     style_prefix "pnc"
 
-    for i in eval(f"{room}_buttons"):
-        if (i[3] is None) or (eval(i[3])):
-            imagebutton auto "point_and_click/image/" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2]) at buttonScale_sticker
+    if renpy.variant("small"):
+
+        for i in eval(f"{room}_buttons"):
+            if (i[3] is None) or (eval(i[3])):
+                imagebutton auto "point_and_click/image/phone/" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2]) at buttonScale_sticker
+    else:
+
+        for i in eval(f"{room}_buttons"):
+            if (i[3] is None) or (eval(i[3])):
+                imagebutton auto "point_and_click/image/" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2]) at buttonScale_sticker
 
 style pnc_image_button:
     anchor (0.5, 0.5)

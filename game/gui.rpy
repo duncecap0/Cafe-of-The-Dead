@@ -467,7 +467,7 @@ init python:
         gui.textbox_height = 240
         gui.name_xpos = 30
         gui.name_ypos = -90
-        gui.dialogue_xpos = 250
+        gui.dialogue_xpos = 220
         gui.dialogue_ypos = 30
         gui.dialogue_width = 1000
         
@@ -484,7 +484,7 @@ init python:
         gui.history_name_xpos = 0
 
         gui.history_height = 190
-        gui.history_text_width = 600
+        gui.history_text_width = 700
         gui.history_height = 190
         gui.history_text_xpos = 190
 

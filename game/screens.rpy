@@ -119,7 +119,7 @@ screen say(who, what):
     ## If there's a side image, display it above the text. Do not display on the
     ## phone variant - there's no room.
     if renpy.variant("small"):
-        add SideImage() xalign -0.04 yalign 2.222
+        add SideImage() xalign -0.06 yalign 2.222
     else:
         add SideImage() xalign -0.01 yalign 2.222
 
@@ -277,11 +277,11 @@ screen quick_menu():
                 textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True) at buttonScale
                 textbutton _("Auto") action Preference("auto-forward", "toggle") at buttonScale
                 textbutton _("Save") action ShowMenu('save') at buttonScale
+                textbutton _("Load") action ShowMenu('load') at buttonScale
                 textbutton _("Q.Save") action QuickSave() at buttonScale
                 textbutton _("Q.Load") action QuickLoad() at buttonScale
                 textbutton _("Prefs") action ShowMenu('preferences') at buttonScale
  
-
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
 init python:
@@ -326,7 +326,7 @@ screen navigation():
                 ypos 380
             else:
                 xoffset 50
-                ypos 130
+                ypos 100
                 xpos -30
 
         vbox:
@@ -570,7 +570,7 @@ style return_button is navigation_button
 style return_button_text is navigation_button_text
 
 style game_menu_outer_frame:
-    bottom_padding 27
+    bottom_padding 31
     top_padding 120
 
     background "gui/overlay/game_menu.png"
@@ -628,7 +628,7 @@ screen about():
         style_prefix "about"
 
         vbox:
-
+            spacing 20
             label "[config.name!t]"
             text _("Version [config.version!t]\n")
             ## gui.about is usually set in options.rpy.
@@ -639,9 +639,9 @@ screen about():
 
             text "Writing, Sprite Art, Background Art, Live or Die, Main Menu, Tara and Taran's and Death themes by {a=https://x.com/DunceCap0}Dunce Cap{/a}"
 
-            text "Point and Click Code Framework by {a=https://devilspider.itch.io//a}Devil Spider"
+            text "Point and Click Code Framework by {a=https://devilspider.itch.io/pointnclick-plug-in-for-renpy}Devil Spider"
 
-            text "Snowfall Code by {a=https://tofurocks.itch.io/}TofuRocks{/a}"
+            text "Snowfall Code by {a=https://tofurocks.itch.io/snowfall-gui}TofuRocks{/a}"
 
             text "SFX from {a=https://opengameart.org/}OpenGameArt{/a}, {a=https://freesound.org/}Freesound{/a}, {a=https://www.zapsplat.com/}ZapSplat{/a}, and {a=https://www.youtube.com/}Youtube Audio Library{/a} "
             
@@ -818,7 +818,7 @@ screen preferences():
     tag menu
 
     use game_menu(_("Preferences"), scroll="viewport"):
-
+        
         vbox:
 
             hbox:
@@ -979,7 +979,7 @@ screen history():
 
     ## Avoid predicting this screen, as it can be very large.
     predict False
-
+    
     use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0, spacing=gui.history_spacing):
 
         style_prefix "history"
@@ -1618,6 +1618,7 @@ screen quick_menu():
             textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True) at buttonScale
             textbutton _("Auto") action Preference("auto-forward", "toggle") at buttonScale
             textbutton _("Save") action ShowMenu('save') at buttonScale
+            textbutton _("Load") action ShowMenu('load') at buttonScale
 
 style pref_label_text:
     yoffset -10

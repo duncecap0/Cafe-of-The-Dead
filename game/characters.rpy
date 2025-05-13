@@ -2,6 +2,12 @@ init python:
     renpy.music.register_channel("beepy_voice", "voice")
 
 
+
+# how to stop beep voice playing in game menu by henne-n https://www.reddit.com/r/RenPy/comments/1adb02j/dialogue_noise_still_playing_on_pause_menu/
+label enter_game_menu:
+    $ renpy.music.stop(channel="beepy_voice") 
+    return
+
 #VOICES 
 init python:
 

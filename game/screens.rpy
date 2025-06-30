@@ -570,7 +570,7 @@ style return_button is navigation_button
 style return_button_text is navigation_button_text
 
 style game_menu_outer_frame:
-    bottom_padding 31
+    bottom_padding 26
     top_padding 120
 
     background "gui/overlay/game_menu.png"
@@ -659,6 +659,15 @@ style about_text is gui_text
 style about_label_text:
     size gui.label_text_size
 
+style about_label_text:
+    outlines [ ( 3, "#300019", 0, 0) ]
+    outline_scaling "linear"
+    line_spacing 10
+
+style about_text:
+    outlines [ ( 3, "#300019", 0, 0) ]
+    outline_scaling "linear"
+    line_spacing 10
 
 ## Load and Save screens #######################################################
 ##
@@ -744,6 +753,7 @@ screen file_slots(title):
 
                 hbox:
                     xalign 0.5
+                    ypos -30
 
                     spacing gui.page_spacing
 
@@ -768,10 +778,12 @@ screen file_slots(title):
                         textbutton _("Upload Sync"):
                             action UploadSync()
                             xalign 0.5
+                            ypos -15
                     else:
                         textbutton _("Download Sync"):
                             action DownloadSync()
                             xalign 0.5
+                            ypos -15
 
 
 style page_label is gui_label
@@ -860,6 +872,13 @@ screen preferences():
 
                 vbox:
 
+                    if config.has_music or config.has_sound or config.has_voice:
+                        null height gui.pref_spacing
+
+                        textbutton _("Mute All"):
+                            action Preference("all mute", "toggle")
+                            style "mute_all_button"
+                            
                     if config.has_music:
                         label _("Music Volume")
 
@@ -886,12 +905,7 @@ screen preferences():
                             if config.sample_voice:
                                 textbutton _("Test") action Play("voice", config.sample_voice)
 
-                    if config.has_music or config.has_sound or config.has_voice:
-                        null height gui.pref_spacing
 
-                        textbutton _("Mute All"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
 
 
 style pref_label is gui_label
@@ -920,13 +934,20 @@ style slider_pref_vbox is pref_vbox
 style mute_all_button is check_button
 style mute_all_button_text is check_button_text
 
+style mute_all_button_text:
+    outlines [ (3, "#300019", 0, 0) ]
+    outline_scaling "linear"
+    xpos -15
+
 style pref_label:
     top_margin gui.pref_spacing
     bottom_margin 2
 
 style pref_label_text:
     yalign 1.0
-
+    outlines [ (3, "#300019", 0, 0) ]
+    outline_scaling "linear"
+    line_spacing 10  
 style pref_vbox:
     xsize 225
 
@@ -1038,7 +1059,7 @@ style history_name:
 style history_name_text:
     min_width gui.history_name_width
     textalign gui.history_name_xalign
-
+    
 style history_text:
     xpos gui.history_text_xpos
     ypos gui.history_text_ypos
@@ -1611,7 +1632,7 @@ screen quick_menu():
             style_prefix "quick"
 
             xalign 0.5
-            ypos 660
+            ypos 657
 
             textbutton _("Back") action Rollback() at buttonScale
             textbutton _("History") action ShowMenu('history') at buttonScale
@@ -1654,7 +1675,7 @@ style game_menu_navigation_frame:
 style game_menu_content_frame:
     variant "small"
     top_margin 0
-    bottom_margin 5
+    bottom_margin 10
 
 style pref_vbox:
     variant "small"

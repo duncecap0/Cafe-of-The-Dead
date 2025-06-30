@@ -54,8 +54,8 @@ label cafe_floor_0:
     play music "audio/music/Morning_Joe.mp3"
     scene cafe outer with dissolve
     
-    "It's October and college was finally almost over for my new group of friends, so it's about time to wind back and enjoy ourselves!"
-    "We decided after class we should visit our friend at his new job as a barista."
+    "It's October and college was finally almost over for me and my new group of friends, so it's about time to wind back and enjoy ourselves!"
+    "We decided after classes we should visit our friend at his new job as a barista."
     "He's employed in the lobby café of a skyscraper belonging to a massive company called \"Samsara Enterprises\"."
     "Although the first floor is much more of a recreational area for the general public to show off the other businesses sponsoring them."
     "There's even an indoor park and shopping district! The other floors were locked to business associates and office workers."
@@ -69,7 +69,7 @@ label cafe_floor_0:
     "Here comes Vinnie,{w=.3} being their boisterous self as usual."
     "They were the one who really pushed for us to visit Rocky after class, {w=.3}Now that I think about it... Vinnie was {w=.3}{i}always{/i}{w=.3} the one who initiated the group hangouts."
     show n 2 at right with moveinright
-    n "OK OK RELAX WE'RE ALMOST THERE!"
+    n "OK! OK! SLOW DOWN WE'RE ALMOST THERE!"
     n "You're really excited for this aren't you?"
     "Oh,{w=.3} hey Norman, {w=.3}He's being as patient as usual trying to humor Vinnie."
     "He was seen as the \"mom\" friend in the group,{w=.3} always responsible with keeping us from killing ourselves with our antics,{w=.3} well, {w=.3}mainly just Vinnie to be honest..."
@@ -330,13 +330,13 @@ label cafe_floor_0:
     elif pov == "Sayori":
         "I want breakfast."
 
-    elif pov == ["MC", "Protag", "Y/n", "Yn", "Pov", "Player", "P", 'Your Name', 'Mc', '']:
+    elif pov == ["MC", "Protag", "Y/n", "Yn", "Pov", "Player", "P", 'Your Name', 'Mc']:
         "Not very creative now...."
 
     elif pov in ["Todd Howard", "Todd"]:
         "Please release TES6..."
 
-    elif pov == ["William Afton", "William", "Afton", "Springtrap", "Will", "Scraptrap"]:
+    elif pov == ["William Afton", "Williamafton", "WilliamAfton", "William", "Afton", "Springtrap", "Will", "Scraptrap"]:
         "The Man Behind The Slaughter"
 
     elif pov == "Chara":
@@ -351,13 +351,13 @@ label cafe_floor_0:
     elif pov == "Luke":
         "You're Luke Skywalker,{w=.3} you're here to rescue me!"
 
-    elif pov in ["Colburn", "Maizie", "Wren", "Xochi", "Gwen", "IO", "August", "Cole", "Colby"]:
+    elif pov in ["Colburn", "Maizie", "Wren", "Xochi", "Gwen", "IO", "August", "Cole", "Colby", "Coburn"]:
         "What a strange coincidence..."
 
     elif pov in ["Rocko", "Rocky"]:
         r "Woah that's crazy how we share the same name!"
 
-    elif pov in["Vinny", "Vinnie", "Vin", "Norm", "Norman"]:
+    elif pov in ["Vinny", "Vinnie", "Vin", "Norm", "Norman"]:
         r "Oh! I better make sure I don't confuse you with one of my friends then!"
 
     elif pov in ["Mom", "Mommy", "Mother", "Mama"]:
@@ -373,12 +373,13 @@ label cafe_floor_0:
         v "GOOD ONE! {w=.3}I SHOULD HAVE THOUGHT OF THAT! YOU THIRSTY THOT!"
         hide v 2 4 at right with Dissolve(0.2)
         "I guess I'll let you get away with it..."
+
     if renpy.variant("mobile"):
         if pov in ["Cunt", "Whore", "Fuck", "Fucker", "Ass", "Thot","Fuckface", "Fart", "Poop", "Shit", "Penis", "Cock", "Titty", "Cock", "Damn", "Dammit", "Boobs", "Tit", "Boob", "damm", "d4mm", "dick", "bastard", "blowjob", "turd", "anus", "bitch", "hoe", "ho", "booty", "butt"]:
-            "Very mature but I'll let it slide..." 
+            "I'll let it slide..." 
     else:
         if (ContainsBadWord(pov)):
-            "Very mature but I'll let it slide..."
+            "I'll let it slide..." 
 
     show r 10
     r 10"Duh!{w=.2} Of course, I remember your name! {w=.3}Ok [pov], {w=.3}what would you like?"
@@ -392,7 +393,49 @@ label cafe_floor_0:
     r 1"Well, {w=.3}{i}SOME{/i} {w=.3}people change and actually {w=.3}{i}MATURE{/i}{w=.3} overtime."
     r "{i}Something you'll never do apparently...{/i}"
     pause 0.5
-    scene cafe with dissolve
+    show r 11 at hop
+    pause 0.5
+    show r 11 at right with move
+    play audio "audio/sfx/step_lth2.ogg"
+    queue audio "audio/sfx/punch_4.ogg"
+    pause 0.7
+    show r 10 at hop
+    pause 0.1
+    show v 2 3 at shiver_loop_right
+    pause 0.5
+    show v 2 3 at hop_loop
+    pause 0.5
+    show r 11 at center with move
+    v 2 3"YEOWCH!!! DID YOU JUST YANK MY TAIL ASSHOLE!"
+    show v at hop
+    r "Hmmmm must've been the wind..."
+    show v 5 at hop
+    pause 0.4
+    show v 5 at center with move
+    play audio "audio/sfx/step_lth2.ogg"
+    pause 0.2
+    show v at hop
+    play audio "audio/sfx/punch_4.ogg"
+    show r 9 at shiver_loop
+    pause 0.3
+    show v 5 at right with move
+    show r 9 at shiver_loop
+    pause 0.3
+    v 5 "GOTCHA!"
+    show r 9 at hop_loop
+    r "Asshat!{w=.3} I'll get you back!"
+    show v at hop_loop
+    v 6"You're gonna have to chase me hehehehe!!!!"
+    play audio "audio/sfx/step_lth2.ogg"
+    show v at offscreen_left with move
+    show r at offscreen_left with move
+    play audio "audio/sfx/step_lth2.ogg"
+    "Rocky chases Vinnie around the cafe for a bit...{w=.4} Norman laughs hysterically at their antics..."
+    play audio "audio/sfx/step_lth2.ogg"
+    pause 0.3
+    "Wow, {w=.3}They're really booking it huh?{w=.3} I always forget just {w=.3}{i}how{/i}{w=.3} fast Vinnie is at running!"
+    pause 0.5
+    scene cafe with fade
     show v 1 at right with Dissolve(0.2)
     show n 1 with Dissolve(0.2)
     show r 1 at left with Dissolve(0.2)
@@ -459,7 +502,7 @@ label cafe_floor_0:
     v "You see this shit?!?! {w=.3}There're people screaming like crazy!"
     v 10"I didn't know the pride parade was coming THIS early!"
     show r 3 with Dissolve(0.2)
-    r 3"Vin, {w=.3}shut up. Now isn't the time for your stupid jokes, it's serious."
+    r 3"Vin, {w=.3}stop. Now isn't the time for your stupid jokes, it's serious."
     show v 11 at sink
     "Rocky snaps back at Vinnie who slumps back in their chair with a face I've never quite seen on them before."
     hide v with Dissolve(0.2)
@@ -755,10 +798,11 @@ label cafe_floor_0:
     "Another bullet flies right by me into the zombie near me."
     "The blood explodes from his face onto mine as he drops dead on the street."
     p 4"Who?"
-    show n 14 at left with moveinleft
+    show n 2a at left with moveinleft
     $ norman_has_gun = True
     n "I told you it wasn't safe out here..."
     r 8"Y{w=.3}-you...{w=.3} YOU JUST KILLED TWO PEOPLE!"
+    show n 14 at left with moveinleft
     "Norman points towards the chest of the person who attacked Rocky"
     n "No, {w=.3}look at this injury of this one...{w=.3} I only fired once so why does he already have another gunshot wound?"
     r "I- {w=.3}I-..."

@@ -510,7 +510,7 @@ label blocked_closet:
                     if vinnie_dead == False:
                         v 2 "What if it had to be inputted in a certain way to match the context of the sentence?"
                     if rocky_dead == False:
-                        r 11 "Try unscrambling letters from highlighted words." 
+                        r 11 "Try unscrambling letters from highlighted words of interest." 
                     menu:
                         "Help me more":
                                 w 1 "A note fell from one of the higher up's pockets... {w=.3}It had the word {color=#f00}{u}_OTH{/u}{/color} on it... {w=.3}It's missing a letter..."
@@ -692,7 +692,7 @@ label injured_woman_closet:
     jump pnc_loop
 
 label saved_tara:
-    "She's better now!"
+    "She seems better now!"
     $ tara = True
     $ w_name = "Tara"
     w 16 "T-{w=.3}thank you... {w=.3}I won't forget this, {w=.5}truly. {w=.3}My name is Tara;{w=.3} I'm an employee here... {w=.3}when I heard you bust through the door...{w=.3} I really thought it was over for me...{w=.3} We were all called here today for an \"important\" meeting."
@@ -703,12 +703,13 @@ label saved_tara:
     w 11"And then I realized...{w=.3}I was bit...{w=.3} and thought... {w=.3}blunt forcing off the bite from the source would solve it...?{w=.3} I... {w=.5}honestly don't know if it worked... {w=.3}I was so desperate..."
     w 12"If you see me trying to take a chomp out of any of you..."
     w 13 "Just kill me... {w=.3}I don't want anyone else being hurt today...{w=.3} there's been so much blood spilled...{w=.3} too much..."
+    w 13"I had...{w=.5} friends here...{w=.3} I... {w=.3}don't think they made it consideri-"
+    w 13"..."
     show w 1 at shiver
     "Tara shudders for a bit before recomposing herself"
     if vinnie_dead == False:
         show v 4 at right with Dissolve(0.2)
         v "Sounds like you've been through a lot"
-
     if rocky_dead == False:
         show r 1 at left with Dissolve(0.2)
         r "I'm sorry to hear that"
@@ -716,7 +717,7 @@ label saved_tara:
         show n 5 at right2 with Dissolve(0.2)
         n "I...{w=.5} I feel awful you had to experience that.{w=.3} We'll protect you from now on! {w=.3}Alright?!"
         n "We didn't see any of the armored people outside so they must have gotten away!{w=.3} We'll be on guard for them!"
-    p 1 "Yikes, {w=.3}they just started shooting for no reason? {w=.3}Sounds like the company planned for you all to die here... {w=.3}why is that?"
+    p 1 "Yikes, {w=.3}they just started shooting for no reason? {w=.3}Sounds like the company planned for you all to die here... {w=.3}Why is that?"
     w 2"I've noticed that Samsara has been heading towards a dark path, {w=.3}so I investigated the company's records and found shady dealings with the local medical facilities around here."
     w 1"The upper floors MUST be involved,{w=.3} all of us on the lower floors wanted to leave when when they started cracking things down, {w=.3}they usually go through the express elevator right outside this room."
     w 8"It's locked up tight,{w=.3} you need to crack the code to be able to enter. {w=.3}I found out that the password input is hidden behind a false wall in the boardroom. {w=.3}We need to solve it!"
@@ -837,8 +838,8 @@ label word_puzzle:
         scene office computer with Dissolve(0.2)
         jump pnc_loop
 
-    "\"Her eyes {color=#f00}_ _ _ _ _ {/color} at the sight of them,\""
-    "\"They ravage through the other researchers like {color=#f00}_ _ _ _{/color}s to a flame\""
+    "\"Her eyes {color=#f00}_ _ _ _ _{/color} ed at the sight of them,\""
+    "\"They ravage through the other researchers like {color=#f00}_ _ _ _{/color} s to a flame\""
     "The {color=#f00}_ _ _ _ _ _{/color} is bleak as I grow more weary."
     "Days scramble together the longer she stays."
     if examined_computer == True:
@@ -1211,9 +1212,9 @@ label office_floor_ending:
                 $ norman_office_death = True
                 $ norman_dead = True
                 play sound "audio/sfx/hit12.ogg"
-                queue sound "audio/sfx/monster-10.ogg"
                 n "Unf!!" with hpunch
                 "I shove Norman so hard he falters to the ground; {w=.3}The man wails on him with a stun baton."
+                play sound "audio/sfx/monster-10.ogg"
                 "Norman hasn't gotten back up..."
                 hide static_anim with Dissolve(0.2)
                 camera:
@@ -1636,8 +1637,8 @@ label juggernaut_zombie_aftermath:
                 "Norman, my Norman... {w=.3}no... {w=.3}I will avenge you..."
                 "...{w=.3}I loved you..."
             elif insanity_level >= 2:
-                "Oh well,{w=.3} no skin off my nose/"
-
+                "Oh well,{w=.3} no skin off my nose."
+            
             if norman_has_gun:
                 "I quickly snatch the gun he had on him while on my way."
 
@@ -1657,7 +1658,8 @@ label juggernaut_zombie_aftermath:
         "The elevator rumbles for a bit from the explosion.. {w=.3}I wonder if it took out the whole floor or not?" with vpunch
         stop music fadeout 1.0
         "..."
-        play music "audio/music/Going_Up.mp3"
+        if norman_secret_death == False:
+            play music "audio/music/Going_Up.mp3"
 
         if insanity_level >= 1:
             show static_anim with Dissolve(0.2)
@@ -1670,8 +1672,21 @@ label juggernaut_zombie_aftermath:
                 reset
             p 4"What a pathetic creature..."
         else:
-            p 1"That was certainly quite the experience"
+            p 1"That was certainly quite the experience."
 
+        if norman_secret_death == True:
+            "...."
+            "I feel... {w=.3}lonely...."
+            "I feel empty..."
+            "I feel... {w=.3}cold."
+            "...."
+            "Everyone?{w=.3} Wher-"
+            "No.{w=.5} Focus on the mission. {w=.3}I didn't even know them for that long."
+            "Frivilous friends from college. {w=.3}Nothing more..."
+            "..."
+            "My head.... {w=.3}It burns..."
+            "..."
+        pause 1.0
         "It's deadly quiet for a while..."
         label rocky_vinnie_death_reaction:
         if vinnie_office_death == True and rocky_dead == False:
@@ -1686,7 +1701,7 @@ label juggernaut_zombie_aftermath:
                 n "It's ok...{w=.3} It's ok... {w=.3}I miss them too... {w=.3}It's ok to cry..."
                 "..."
             r "Vinnie I..."
-            "Rocky's voice breaks before they quit their attempt at speaking and remain silent"
+            "Rocky's voice breaks before they quit their attempt at speaking and remain silent."
             if insanity_level >= 1:
                 show static_anim with Dissolve(0.2)
                 play audio "audio/sfx/static.ogg"
@@ -1784,6 +1799,7 @@ label juggernaut_zombie_aftermath:
             w 1"The child has no comprehension of the significance of ending one's life.{w=.3} He sees the world revolving around him,{w=.5} and only him,{w=.3} everything else is a prop or asset."
             w "The ants are his playthings, and no one can convince him otherwise because ants {i}ARE{/i} meaningless in the eyes of others."
             w "There was never anyone to stop him...{w=.3} Those that could took advantage of the status he could give them, {w=.3}so they chose to ignore it..."
+            w "Superficially charming and highly persuasive. Picked his \"friends\" {i}very{/i} wisely...{w=.3} I wonder how they're doing now? {w=.3}Hmm..."
             w "I suppose I was treated well enough, {w=.3}never directly hurt,{w=.3} just sort of...{w=.3} cast to the side.{w=.3} As if I was yet another prop that adds a nice \"family\" man flavor to his public persona."
             w 14"I noticed cracks in his fake personality as I got older, {w=.3}it was only recently that I discovered the full extent.{w=.3} When I confronted him about it,{w=.3} he put me on house arrest, so I escaped and infiltrated my way here as an employee."
             w "My plan was to personally confront him in his office while working undercover but, {w=.3}I had no idea he had this plague in mind...{w=.3} I'm sorry for not being truthful, {w=.3}I was trying to figure out the right time to tell you."
@@ -1828,8 +1844,8 @@ label juggernaut_zombie_aftermath:
             w 12"T- {w=.3}thank you...,{w=.3} the top floor should have access to the rooftop, and we could flag a helicopter from there."
         p 4"Hmm the floor this elevator leads to is labelled as a \"laboratory\", well this should be fun..."
         scene elevator with Dissolve(0.2)
-        "Time passes"
-        pause 0.9
+        "Time passes."
+        pause 1.0
         if norman_dead == False and norman_affection >= 2:
             show n 3a with Dissolve(0.2)
             "Norman scoots very close next to me, almost leaning against my shoulder."
@@ -1897,7 +1913,7 @@ label juggernaut_zombie_aftermath:
 
 
 label get_password:
-    $ renpy.notify("Use the keyboard to type, make sure each word is spaced from one another and entered in the order they are read")
+    $ renpy.notify("Use the keyboard to type, make sure each word is spaced from one another and entered in the order they are read in one complete line")
     $ password_input = renpy.input("What's the password?", length = 25).strip().lower()
 
     if password_input in ["widenmothfuture", "widen moth future", "widen and moth and future", 'widen moth and future', 'widen, moth, and future', '11037']:
@@ -1948,6 +1964,7 @@ label wrong_password:
         "I SMASH THE COMPUTER KEYS OVER AND OVER AGAIN UNTIL EVENTUALLY I GET THE CORRECT ANSWER." with hpunch
         jump correct_password
     else:
+        $ renpy.notify("Make sure words aren't being put one at a time but all at once in sentence-like format")
         play sound "audio/sfx/wrong beep.ogg"
         "{size=*1}{color=#f00}PASSWORD INCORRECT{/color}{/size}"
         "{size=*1}{color=#f00}ONE WORD HINT: Unscramble{/color}{/size}"

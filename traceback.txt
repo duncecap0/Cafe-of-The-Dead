@@ -3,81 +3,30 @@
 While running game code:
   File "game/script.rpy", line 64, in script call
     call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/point_and_click/point_and_click.rpy", line 52, in script
-    call screen pnc_screen(current_room)
-  File "renpy/common/000statements.rpy", line 671, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "game/point_and_click/point_and_click.rpy", line 28, in execute
-    screen pnc_screen(room="left"):
-  File "game/point_and_click/point_and_click.rpy", line 28, in execute
-    screen pnc_screen(room="left"):
-  File "game/point_and_click/point_and_click.rpy", line 32, in execute
-    if renpy.variant("small"):
-  File "game/point_and_click/point_and_click.rpy", line 34, in execute
-    for i in eval(f"{room}_buttons"):
-  File "game/point_and_click/point_and_click.rpy", line 35, in execute
-    if (i[3] is None) or (eval(i[3])):
-  File "game/point_and_click/point_and_click.rpy", line 36, in execute
-    imagebutton auto "point_and_click/image/phone" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2]) at buttonScale_sticker
-Exception: Imagebutton does not have a idle image. (auto='point_and_click/image/phonelook_%s.png').
+  File "game/endings.rpy", line 259, in script
+    if insanity_level >= 1:
+  File "game/endings.rpy", line 261, in <module>
+    elif insanity >= 2:
+NameError: name 'insanity' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/script.rpy", line 64, in script call
     call mechanical_floor_1 from _call_mechanical_floor_1
-  File "game/point_and_click/point_and_click.rpy", line 52, in script
-    call screen pnc_screen(current_room)
-  File "C:\Games\Renpy SDK\renpy\ast.py", line 1987, in execute
-    self.call("execute")
-  File "C:\Games\Renpy SDK\renpy\ast.py", line 1966, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "C:\Games\Renpy SDK\renpy\statements.py", line 374, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 671, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "C:\Games\Renpy SDK\renpy\exports\statementexports.py", line 345, in call_screen
-    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
-  File "C:\Games\Renpy SDK\renpy\ui.py", line 301, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Games\Renpy SDK\renpy\display\core.py", line 2218, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "C:\Games\Renpy SDK\renpy\display\core.py", line 2748, in interact_core
-    root_widget.visit_all(lambda d : d.per_interact())
-  File "C:\Games\Renpy SDK\renpy\display\displayable.py", line 434, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Games\Renpy SDK\renpy\display\displayable.py", line 434, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Games\Renpy SDK\renpy\display\displayable.py", line 434, in visit_all
-    d.visit_all(callback, seen)
-  [Previous line repeated 1 more time]
-  File "C:\Games\Renpy SDK\renpy\display\screen.py", line 480, in visit_all
-    callback(self)
-  File "C:\Games\Renpy SDK\renpy\display\core.py", line 2748, in <lambda>
-    root_widget.visit_all(lambda d : d.per_interact())
-  File "C:\Games\Renpy SDK\renpy\display\screen.py", line 491, in per_interact
-    self.update()
-  File "C:\Games\Renpy SDK\renpy\display\screen.py", line 700, in update
-    self.screen.function(**self.scope)
-  File "game/point_and_click/point_and_click.rpy", line 28, in execute
-    screen pnc_screen(room="left"):
-  File "game/point_and_click/point_and_click.rpy", line 28, in execute
-    screen pnc_screen(room="left"):
-  File "game/point_and_click/point_and_click.rpy", line 32, in execute
-    if renpy.variant("small"):
-  File "game/point_and_click/point_and_click.rpy", line 34, in execute
-    for i in eval(f"{room}_buttons"):
-  File "game/point_and_click/point_and_click.rpy", line 35, in execute
-    if (i[3] is None) or (eval(i[3])):
-  File "game/point_and_click/point_and_click.rpy", line 36, in execute
-    imagebutton auto "point_and_click/image/phone" + str(i[0]) + "_%s.png" pos i[1] action Return(i[2]) at buttonScale_sticker
-  File "C:\Games\Renpy SDK\renpy\ui.py", line 975, in _imagebutton
-    idle = choice(idle, idle_image, "idle", required=True)
-  File "C:\Games\Renpy SDK\renpy\ui.py", line 969, in choice
-    raise Exception("Imagebutton does not have a %s image. (auto=%r)." % (name, auto))
-Exception: Imagebutton does not have a idle image. (auto='point_and_click/image/phonelook_%s.png').
+  File "game/endings.rpy", line 259, in script
+    if insanity_level >= 1:
+  File "C:\Games\Renpy SDK\renpy\ast.py", line 1856, in execute
+    if renpy.python.py_eval(condition):
+  File "C:\Games\Renpy SDK\renpy\python.py", line 1218, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "C:\Games\Renpy SDK\renpy\python.py", line 1211, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/endings.rpy", line 261, in <module>
+    elif insanity >= 2:
+NameError: name 'insanity' is not defined
 
 Windows-10-10.0.26100 AMD64
 Ren'Py 8.3.7.25031702
 Cafe of The Dead 1.1
-Sun May 11 05:28:45 2025
+Sun Jun 29 16:22:52 2025

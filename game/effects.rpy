@@ -28,24 +28,24 @@ image static_anim:
 
 image breadly:
     yalign 1.0
-    "images/breadly.png"
+    "images/breadly.webp"
 
 image dunce:
-    "images/dunce.png"
+    "images/dunce.webp"
 
 image bigzom:
-    "images/z 1.png"
+    "images/z 1.webp"
 
 image bluzom:
     xalign 0.0
-    "images/z 2.png"
+    "images/z 2.webp"
 
 image orangzom:
     yalign 1.0
-    "images/z 3.png"
+    "images/z 3.webp"
 
-image jug = "images/naut.png"
-image jug2 = "images/naut 2.png"
+image jug = "images/naut.webp"
+image jug2 = "images/naut 2.webp"
 
 image black ="#000000"
 

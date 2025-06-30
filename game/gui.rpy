@@ -35,6 +35,7 @@ style say_label:
     outlines [ ( 3, "#300019", 0, 0) ]
     outline_scaling "linear"
 
+
 ## Link to screen outline:
 # https://www.reddit.com/r/RenPy/comments/130kxct/how_to_make_screen_text_be_outlined/
 
@@ -131,11 +132,12 @@ define gui.textbox_yalign = 1.0
 ## The placement of the speaking character's name, relative to the textbox.
 ## These can be a whole number of pixels from the left or top, or 0.5 to center.
 define gui.name_xpos = 140
-define gui.name_ypos = -103
+define gui.name_ypos = -99
 
 ## The horizontal alignment of the character's name. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
 define gui.name_xalign = 0.0
+define gui.name_yalign = 1.0
 
 ## The width, height, and borders of the box containing the character's name, or
 ## None to automatically size it.
@@ -144,7 +146,7 @@ define gui.namebox_height = None
 
 ## The borders of the box containing the character's name, in left, top, right,
 ## bottom order.
-define gui.namebox_borders = Borders(30, 20, 30, 30)
+define gui.namebox_borders = Borders(30, 20, 30, 33)
 
 ## If True, the background of the namebox will be tiled, if False, the
 ## background of the namebox will be scaled.
@@ -235,6 +237,7 @@ define gui.choice_button_borders = Borders(100, 5, 100, 5)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
 define gui.choice_button_text_xalign = 0.5
+define gui.choice_button_text_ypos = -5
 define gui.choice_button_text_idle_color = '#9e9d9d'
 define gui.choice_button_text_hover_color = "#ffffff"
 define gui.choice_button_text_insensitive_color = '#8888887f'
@@ -369,13 +372,23 @@ define gui.history_height = 140
 
 ## Additional space to add between history screen entries.
 define gui.history_spacing = 0
-
 ## The position, width, and alignment of the label giving the name of the
 ## speaking character.
-define gui.history_name_xpos = 100
+
+style history_text:
+    outlines [ ( 3, "#300019", 0, 0) ]
+    outline_scaling "linear"
+    line_spacing 10  
+
+style history_name_text:
+    outlines [ ( 3, "#300019", 0, 0) ]
+    outline_scaling "linear"
+    line_spacing 10  
+
+define gui.history_name_xpos = 0
 define gui.history_name_ypos = 0
 define gui.history_name_width = 155
-define gui.history_name_xalign = 1.0
+define gui.history_name_xalign = 0.0
 
 ## The position, width, and alignment of the dialogue text.
 define gui.history_text_xpos = 130

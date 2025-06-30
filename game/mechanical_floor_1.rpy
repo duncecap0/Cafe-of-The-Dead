@@ -408,7 +408,18 @@ label mech_hallway_right:
             n 8"They worked so well together... {w=.3}I'm glad Rocky at least got to meet them before this all happened... {w=.3}they belonged together..."
             
         menu:
-            "I'm glad I have you like they have each other":
+
+            "I'm glad I have you like they have each other" if rocky_dead == False:
+                $ norman_affection += 1
+                show n 9 at hop
+                n 9"...!"
+                n "[pov]... {w=.3}I'm glad to have you too..."
+                n "You're a good... friend [pov],{w=.3} that means something...{w=.3} remember?"
+                p 3"I never forgot."
+                show n 3 with Dissolve(0.2)
+                n "..."
+
+            "I'm glad I have you like they had each other" if rocky_dead == True:
                 $ norman_affection += 1
                 show n 9 at hop
                 n 9"...!"
@@ -422,6 +433,7 @@ label mech_hallway_right:
                 n 2"Awww don't forget you're my friend too!"
                 p 2"Thank you.{w=.3} Sometimes I'ts just that I feel like an outsider here..."
                 n "You're no outsider... {w=.5}to me..."
+                
         hide n with Dissolve(0.2)
         jump pnc_loop
     
@@ -798,7 +810,7 @@ label mechanical_floor_escape:
             "Maybe in the room we started in!?" if examined_HVAC_machine == False:
                 jump norman_deactivates_fan
 
-            "FOR A FACT IN THE STARTING ROOM BECAUSE I CHECKED IT!!!" if examined_HVAC_machine == True:
+            "The starting room..." if examined_HVAC_machine == True:
                 jump norman_deactivates_fan
 
             "Maybe near the elevator!?" if checked_elevator == False:

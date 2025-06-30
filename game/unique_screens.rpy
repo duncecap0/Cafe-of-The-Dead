@@ -6,12 +6,13 @@
 style status_text is text:
     outlines [ (3, "#300019", 0, 0) ]
     outline_scaling "linear"
+    line_spacing 10  
 
 style partycheck_text is text:
     outlines [ (3, "#300019", 0, 0) ]
     outline_scaling "linear"
-    line_spacing 7
-        
+    line_spacing 15
+    
 # Icons for each party member
 # Replace gui/___.png with the character specific one
 
@@ -65,10 +66,10 @@ image ammostatus:
     )
 image sanitystatus:
     ConditionSwitch(
-        "insanity_level >= 3", "images/sprites/sage/side p 16.png",
-        "insanity_level == 2", "images/sprites/sage/side p 17.png",
-        "insanity_level == 1", "images/sprites/sage/side p 7.png",
-        "insanity_level <= 0", "images/sprites/sage/side p 1.png",
+        "insanity_level >= 3", "images/sprites/sage/side p 16.webp",
+        "insanity_level == 2", "images/sprites/sage/side p 17.webp",
+        "insanity_level == 1", "images/sprites/sage/side p 7.webp",
+        "insanity_level <= 0", "images/sprites/sage/side p 1.webp",
     )
 
 screen old_character_stats():
@@ -311,11 +312,11 @@ screen sanity_menu():
                 text "{size=*2.5}Insanity Level: [insanity_level]{/size}":
                     ypos 90
 
-image sagestick = "gui/sage sticker.png"
-image normstick = "gui/norm sticker.png"
-image vinstick = "gui/vin sticker.png"
-image rockstick = "gui/rocky sticker.png"
-image tarastick = "gui/tara sticker.png"
+image sagestick = "gui/sage sticker.webp"
+image normstick = "gui/norm sticker.webp"
+image vinstick = "gui/vin sticker.webp"
+image rockstick = "gui/rocky sticker.webp"
+image tarastick = "gui/tara sticker.webp"
 
 screen group_check():
       
@@ -359,20 +360,20 @@ screen group_check():
                         at buttonScale_sticker
                         action [Play("sound", "audio/voices/tara beep.ogg")]
             hbox:
-                ypos 350
-                spacing 10
+                ypos 345
+                xpos 200
+                spacing 60
                 xsize -0.1
-                text "Health: [sage_health] Insanity: [insanity_level]"
                 if norman_dead == False and norman_affection <= 4:
-                    text "Health: [norman_health] Motivated: [expose_samsara_together_3] Interest: [norman_affection]"
+                    text "NORMAN Motivated: [expose_samsara_together_3] Interest: [norman_affection]"
                 elif norman_dead == False and norman_affection >= 5:
-                    text "Health: [norman_health] Motivated: [expose_samsara_together_3] BOYFRIEND UNLOCKED: [norman_affection]"
+                    text "NORMAN Motivated: [expose_samsara_together_3] BOYFRIEND UNLOCKED: [norman_affection]"
                 if vinnie_dead == False:
-                    text "Health: [vinnie_health] Motivated: [expose_samsara_together_2]"
+                    text "VINNIE Motivated: [expose_samsara_together_2]"
                 if rocky_dead == False:
-                    text "Health: [rocky_health] Motivated: [expose_samsara_together]"
+                    text "ROCKY  Motivated: [expose_samsara_together]"
                 if tara == True:
-                    text "Motivated: [tara_against_dad]"
+                    text "TARA Motivated: [tara_against_dad]"
 
 screen achievements_menu():
 
@@ -401,14 +402,14 @@ screen achievements_menu():
                 text "Inspect the toilet 5 times"
                 text "-----"
 
-            if persistent.dontuseitems == True:
-                text "Achievement Unlocked: Bad MotherFucker!"
-                text "Beat the game without using health items on party, any bullets, crowbar, and vinnie's knife!"
-                text "-----"
-            else:
-                text "Achievement Locked: Bad MotherFucker!"
-                text "Beat the game without using health items on party, any bullets, crowbar, and vinnie's knife!"
-                text "-----"
+            #if persistent.dontuseitems == True:
+                #text "Achievement Unlocked: Bad MotherFucker!"
+                #text "Beat the game without using health items on party, any bullets, crowbar, and vinnie's knife!"
+                #text "-----"
+            #else:
+                #text "Achievement Locked: Bad MotherFucker!"
+                #text "Beat the game without using health items on party, any bullets, crowbar, and vinnie's knife!"
+                #text "-----"
 
             if persistent.killnorman == True:
                 text "Achievement Unlocked: Taking The Dog Out Back"
@@ -513,7 +514,13 @@ screen achievements_menu():
                 text "                                  "
                 text "                                  "
                 text "                                  "
-
+                text "                                  "
+                text "                                  "
+                text "                                  "
+                text "                                  "
+                text "                                  "
+                text "                                  "
+                
                 text "Achievement Locked: ???"
                 text "Beat game while in possession of Norman's gun while high insanity and push Norman into danger in office confrontation with all others dead beforehand and secret character never obtained"
                 text "-----"

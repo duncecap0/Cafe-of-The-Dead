@@ -69,7 +69,8 @@ label lab_floor_3:
             show n 1 with Dissolve(0.2)
             n "We'll use diplomacy to solve our problems!"
         w "He also has a certain.... {w=.5}associate...{w=.3} but I don't know if he's here or not..."
-        w "Sorry,{w=.3} ignore that. {w=.3}The associate shouldn't be a problem, for us anyways."
+        pause 1.0
+        w "Sorry,{w=.3} ignore that. {w=.3}The associate shouldn't be a problem,{w=.5} for us anyways..."
         w "Shouldn't be at least..."
         "She mutters that last part under her breath."
         if insanity_level >=1:
@@ -93,7 +94,7 @@ label lab_floor_3:
     if norman_dead == False:
         show n 2 with Dissolve(0.2)
         n "We can do this!"
-    p 1"This place is huge, {w=.3}gonna be a hard time navigating"
+    p 1"This place is huge, {w=.3}gonna be a hard time navigating."
     if vinnie_dead == False and rocky_dead == False and norman_dead == False:
         p "It shouldn't be a problem for us!"
  
@@ -454,7 +455,8 @@ label pills:
                     $ pills = True
                     "I stay in place for a good while to see if the pills will have any negative effects."
                     "..."
-                    "I lean onto the table as my head and stomach start pounding in pain."
+                    pause 1.0
+                    "I lean onto the table as my head and stomach start pounding in pain." with hpunch
                     p 7"Ohh I don't feel so good... {w=.3}maybe I shouldn't have taken them..."
                     if norman_dead == False:
                         n "[pov!u] [pov!u]! {w=.3}ARE YOU OK!?!{w=.3} SPEAK TO ME!{w=.3} TRY TO MAKE YOURSELF THROW UP!"
@@ -465,7 +467,7 @@ label pills:
                         jump death_screen
                     else:
                         pause 0.5
-                        p "Don't worry... {w=.3}I'll get over it...{w=.3} I just need to... {w=.3}walk it off..."
+                        p "I'll get over it...{w=.3} I just need to... {w=.3}walk it off..."
                         if norman_dead == False:
                             n "[pov]!{w=.3} Feel free to lean on me! {w=.3}It's gonna be ok!"
                         if rocky_dead == False:
@@ -918,7 +920,7 @@ label boss_battle:
     show c 15 with dissolve
     s "..."
     show c 14 with dissolve
-    s "...Ah,{w=.3} you're here.{w=.3} I have to say I'm impressed with how far you've progressed.{w=.3} I figured the juggernaut would dispose of you."
+    s "...Ah,{w=.3} you're here.{w=.3} I have to say I'm impressed with how far you've progressed.{w=.3} I figured the juggernaut would have dispose of you."
     s 1"I've been watching you, you know. {w=.3}There are cameras all over this building. {w=.3}I've been with you ever since you stepped foot here.."
     "The CEO is on an elevated platform with a control panel."
     if norman_dead == False:
@@ -939,7 +941,7 @@ label boss_battle:
             if rocky_cafe_death == True:
                 s 2"He died so quickly!{w=.3} I never saw him on camera!{w=.3} He must have gone when all this first started!"
         if norman_dead == True:
-            s 1"That Golden Retriever came from a higher echelon than the rest of you,{w=.3} I personally met his family in a business dealing with me. {w=.3}He would have agreed with me."   
+            s 1"That Golden Retriever came from a higher echelon than the rest of you,{w=.3} I personally met his family in a business dealing with me. {w=.3}He would have agreed with me..."   
         hide v 2 with Dissolve(0.2)
 
     if rocky_dead == False:
@@ -952,7 +954,14 @@ label boss_battle:
         if norman_dead == True:
             s 12"The Golden Retriever wouldn't be a fan of your lack of compassion,{w=.3} good thing they're not here {w=.5}right?"   
         hide r 4a with Dissolve(0.2)
-
+    #s 1"Your antics are giving me a headache...."
+    s 12"I'll make everything go away as I usually do... {w=.3}Riches. {w=.3}Fame. {w=.3}Self-worth.{w=.3} Name it and you could have it." 
+    show c 1
+    extend "{w=.3} Just quit pestering me already..."
+    s 10"Power...{w=.3} power... {w=.3}It's all about taking control of the situation at hand no matter the cost... {w=.9}What {w=.3}{i}madness{/i}..."
+    s 7"Haha..."
+    #s "To bend the will of others as you see fit and crawl your way from the grave they dug for you."
+    s 9"{cps=*0.5}{size=*0.8}*mumbles* {w=.5}Mala- {w=.7}*mumbles* Eeji- *mumbles*{/size}{/cps}"
     if tara == True:
         show w 6 at right with Dissolve(0.2)
         w "Father!{w=.3} How could you! {w=.3}You betrayed me and the people that trusted you with your actions! {w=.3}I- {w=.3}I don't know you anymore, {w=.3}you've broken my heart!"
@@ -961,7 +970,7 @@ label boss_battle:
         hide w 6 with Dissolve(0.2)
     p 4"Just radio in a helicopter and make a cure or something! It's not too late to stop this!"
     if closet_broken == True and tara == False:
-        s 6"{cps=*2.0}{b}{size=*1.3}YOU PRETEND TO BE BETTER THAN ME BUT YOU LEFT THAT GIRL BEHIND KNOWING FULL WELL YOU COULD HAVE FUCKING SAVED HER YOU PIECE OF SHIT!{/size}{/b}{/cps}"
+        s 6"{cps=*2.0}{b}{size=*1.3}YOU PRETEND TO BE BETTER THAN ME BUT YOU LEFT THAT GIRL BEHIND KNOWING FULL WELL YOU COULD HAVE FUCKING SAVED HER YOU ROTTEN PIECE OF SHIT!{/size}{/b}{/cps}"
         s "{b}{size=*1.3}DON'T EVEN TRY TO PRETEND YOU DID ALL YOU COULD. I SEE EVERYTHING. I KNOW EVERYTHING.{/size}{/b}"
         s "{b}{size=*1.3}IF I WANTED TO, I COULD REWIRE EVERY BLOOD VESSEL IN YOUR BODY TO RUN ACID AND BURN YOU FROM THE INSIDE OUT!{/size}{/b}"
         s "{b}{size=*1.3}YOU LEFT HER THERE,{w=.3} JUST LEFT HER TO HER OWN FATE WHILE YOU RAN AWAY! GOOD THING I-{w=.4} SHE-{/size}{/b}"
@@ -979,7 +988,7 @@ label boss_battle:
             if norman_dead == True:
                 s 2"Too bad you couldn't protect them!{w=.3} I'm sure their last thoughts were of pretending they were in your arms instead of the monsters'."
     if norman_dead == True:
-        s 3 "Bye bye Golden Retriever! I'm afraid your little crush didn't reciprocate your feelings...{w=.3} Why yes, I DO know about them...{w=.3} their parents have been quite useful to me!"
+        s 3 "Bye bye Golden Retriever! I'm afraid your little crush didn't reciprocate your feelings...{w=.3} Why yes, I DO know of them...{w=.3} their parents have been quite useful to me!"
         s 7 "It's funny how hundreds of thousands of dollars make people think you're in debt to them. {w=.3}HA!{w=.3} Did they think of me as a family friend or something?{w=.3} IDIOTS!!!"
     if rocky_dead == True:
         s 9"Poor Maned Wolf..." 
@@ -987,7 +996,7 @@ label boss_battle:
         extend "I'm afraid your mother will die sad, lonely, and pathetic just like you!{w=.3}  Eh,{w=.3} that's probably what he really wanted deep down...{w=.3} Why keep that financial drain you call a parent alive anyways?"
         s 10"Oh, my apologies that was rude of me..."
         show c 12
-        extend "is his genus more related to a fox? If only I cared enough to find out..."
+        extend " is his genus more related to a fox? If only I cared enough to find out..."
     if vinnie_dead == True:
         s 9"And erm...{w=.3} Excuse me... {w=.3}I can't seem to remember your Opossum friend too well..."
         show c 3
@@ -996,7 +1005,7 @@ label boss_battle:
     if vinnie_dead == True and rocky_dead == True:
         s 5"Oh nooo, both the poor clueless lovers are dead..."
         show c 6
-        extend "they're fornicating whilst burning in hell...{w=.3} does hearing that make you feel better?"
+        extend "They're fornicating whilst burning in hell...{w=.6} Does hearing that make you feel better?"
     if vinnie_dead == True and rocky_dead == True and norman_dead == True:
         s 3"Wow, nice job leading the team champ! {w=.3}Be honest,{w=.3} it was satisfying to watch them die,{w=.3} no?"
         if insanity_level >= 1:
@@ -1013,12 +1022,14 @@ label boss_battle:
     s "Hail."
     s 4"They wanted to use MY research for themselves and their families! {w=.3}Idiots! {w=.3}It was for MY immortality!{w=.3} My ascent to godhood!"
     s 10"My IQ is unmatched, I was put into this world to guide it, {w=.3}All I needed was the time which the project was meant to achieve."
-    s 6"When they wanted to use it for something else...{w=.3} I corrupted it into this virus.{w=.3} I realized that the world only cares about each other..."
-    s "So, I need to remake it to care about {i}ME{/i} and only {i}ME{/i} as the one who guides them out of Armageddon!"
+    s 6"When they wanted to use it for something else...{w=.3} I corrupted it into this virus.{w=.3} I realized that the world only cares about each other..." 
+    show c 5
+    extend " At the cost of hurting mere strangers..."
+    s 6"So, I need to remake it to care about {i}ME{/i} and only {i}ME{/i} as the one who guides them out of Armageddon!"
     s 3"I needed to tie up a few loose ends here,{w=.3} so I got this here private military force of mine to shoot up any survivors and blow up the building so no one can tell what really happened here!"
     show c 3 at hop
     play sound "audio/sfx/hit13.ogg"
-    "The CEO kicks one of the many armored men's corpses in the head"
+    "The CEO kicks one of the many armored men's corpses in the head."
     s 2"Of course,{w=.3} {i}they{/i} had to be dispatched too,{w=.3} so I ordered them all to kill one another!{w=.3} They were infected by a special form of the virus long ago and are completely bound to my will."
     s 6"Hmm if you're not up for jumping into this here pit of hydrofluoric acid, {w=.3}then there is an alternative..."
     if norman_secret_death == True and ammo >= 1:
@@ -1029,6 +1040,7 @@ label boss_battle:
         show c 9 at shiver
         s "Ough!"
         p 16"Whoops."
+        show c 9 at sink
         jump shut_the_fuck_up
     hide c 7 with Dissolve(0.2)
     play music "audio/music/live or die intro.ogg"
@@ -1793,11 +1805,12 @@ label boss_aftermath:
     else:
         label shut_the_fuck_up:
             if norman_secret_death == True and ammo >= 1:
-                s "Agh... {w=.3}so that's how far you've fallen... {w=.3}How much further will you go I wonder?"
+                s "Agh... {w=.9}so that's how far you've fallen... {w=.8}How much further will you go I wonder? {w=.8}Or rather...{w=.9} {i}Can{/i} you?"
         if norman_dead and rocky_dead and vinnie_dead and tara == False:
             p 17"Let me go then.{w=.5}{b} Now.{/b}"
             if norman_secret_death == True and ammo >= 1:
                 s 8"..."
+                show c 8 at sink_rise
                 "He slowly rises and clutches his wounded chest.{w=.3} He nearly tumbles over."
                 "He's lucky I didn't shoot him in the head, {w=.3}oh, {w=.3}I guess rather {i}unlucky{/i} because I'm not giving him a quick fate..."
         else:

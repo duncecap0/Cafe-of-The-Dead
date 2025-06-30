@@ -110,10 +110,10 @@ label endings:
                 $ notices.append("Achievement Unlocked: I Don't Need No Dang Gun!")
                 play audio "audio/sfx/achievement.ogg"
                 $ persistent.dontusebullets = True
-            if medkit_used == False and morphine_used == False and crowbar_collected == True and vinnies_knife == True and ammo == 3 and pills == False:
-                $ notices.append("Achievement Unlocked: Bad MotherFucker!")
-                play audio "audio/sfx/achievement.ogg"
-                $ persistent.dontuseitems = True
+            #if medkit_used == False and morphine_used == False and crowbar_collected == True and vinnies_knife == True and ammo == 3 and pills == False:
+                #$ notices.append("Achievement Unlocked: Bad MotherFucker!")
+                #play audio "audio/sfx/achievement.ogg"
+                #$ persistent.dontuseitems = True
             if insanity_level == 0:
                 $ notices.append("Achievement Unlocked: Coffee AU")
                 play audio "audio/sfx/achievement.ogg"
@@ -138,7 +138,7 @@ label endings:
                 play audio "audio/sfx/achievement.ogg"
                 $ persistent.killvin = True
             if rocky_dead == True:
-                $ notices.append("Achievement Unlocked: Wolf or Fox? Now we will never know...")
+                $ notices.append("Achievement Unlocked: Wolf or Fox? Now We Will Never Know...")
                 play audio "audio/sfx/achievement.ogg"
                 $ persistent.killrocky = True
             if tara == True:
@@ -152,10 +152,10 @@ label endings:
                 $ notices.append("Achievement Unlocked: I don't need no dang gun!")
                 play audio "audio/sfx/achievement.ogg"
                 $ persistent.dontusebullets = True
-            if medkit_used == False and morphine_used == False and crowbar_collected == True and vinnies_knife == True and ammo == 3 and pills == False:
-                $ notices.append("Achievement Unlocked: Bad MotherFucker!")
-                play audio "audio/sfx/achievement.ogg"
-                $ persistent.dontuseitems = True
+            #if medkit_used == False and morphine_used == False and crowbar_collected == True and vinnies_knife == True and ammo == 3 and pills == False:
+                #$ notices.append("Achievement Unlocked: Bad MotherFucker!")
+                #play audio "audio/sfx/achievement.ogg"
+                #$ persistent.dontuseitems = True
             if insanity_level == 0:
                 $ notices.append("Achievement Unlocked: Coffee AU")
                 play audio "audio/sfx/achievement.ogg"
@@ -258,7 +258,7 @@ label endings:
             "She sends letters saying how grateful she is and that she'll visit as soon as possible."
         if insanity_level >= 1:
             "Something inside me changed too... {w=.3}I don't feel the same anymore..."
-        elif insanity >= 2:
+        elif insanity_level >= 2:
             "I've definitely noticed a gear shift inside my brain.{w=.3} I can't understand emotions as well...{w=.5} I feel broken..."
         if norman_affection >= 4 and insanity_level >= 1 and norman_dead == False:
             "I feel like Norman wanted to start something with me, but I can't reciprocate... {w=.3}I'm different now...{w=.5} empty..."
@@ -289,10 +289,10 @@ label endings:
         $ notices.append("Achievement Unlocked: I don't need no dang gun!")
         play audio "audio/sfx/achievement.ogg"
         $ persistent.dontusebullets = True
-    if medkit_used == False and morphine_used == False and crowbar_collected == True and vinnies_knife == True and ammo == 3 and pills == False:
-        $ notices.append("Achievement Unlocked: Bad MotherFucker!")
-        play audio "audio/sfx/achievement.ogg"
-        $ persistent.dontuseitems = True
+    #if medkit_used == False and morphine_used == False and crowbar_collected == True and vinnies_knife == True and ammo == 3 and pills == False:
+        #$ notices.append("Achievement Unlocked: Bad MotherFucker!")
+        #play audio "audio/sfx/achievement.ogg"
+        #$ persistent.dontuseitems = True
     if insanity_level == 0:
         $ notices.append("Achievement Unlocked: Coffee AU")
         play audio "audio/sfx/achievement.ogg"

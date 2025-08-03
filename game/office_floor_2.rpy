@@ -900,7 +900,7 @@ label worker_diary:
         centered "{font=Dudu_Calligraphy.ttf}I'm talking to Ashley about this later and we're gonna have a word with the higher ups about this crazy talk!{/font}"
         hide black with Dissolve(0.2)
         play sound "audio/sfx/page turn.ogg"
-        $ renpy.notify("Worker Diary reminder has been added to inventory!")
+        $ renpy.notify("Worker Diary Reminder has been added to inventory!")
         p 4"Guess not even THESE employees knew what was going on"
 
         if rocky_dead == False:
@@ -945,7 +945,7 @@ label worker_email:
         centered "{font=Dudu_Calligraphy.ttf}I wish we never took this college internship... I just want to be with you again man... gaming all night and ruining our sleep schedule...{/font}"
         centered "{font=Dudu_Calligraphy.ttf}The CEO seemed so nice in passing... but how could he have let this happen? I don't want to work here anymore but I'm scared I'll find out what happened to Charlie if I do...{/font}"
         hide black with Dissolve(0.2)
-        $ renpy.notify("Worker Email reminder has been added to inventory!")
+        $ renpy.notify("Worker Email Reminder has been added to inventory!")
         p 1"Armored men? {w=.3}Disappearances?{w=.3} Work quota?{w=.3} Sounds like they didn't have much agency..."
         
         if vinnie_dead == False:
@@ -995,7 +995,7 @@ label worker_memo:
         centered "{font=Dudu_Calligraphy.ttf}: Failure to be appear will result in appropriate action:{/font}"
         hide black with Dissolve(0.2)
         play sound "audio/sfx/page turn.ogg"
-        $ renpy.notify("Worker Memo reminder has been added to inventory!")
+        $ renpy.notify("Worker Memo Reminder has been added to inventory!")
 
         if vinnie_dead == False:
             show v 4 with Dissolve(0.2)
@@ -1927,7 +1927,7 @@ label correct_password:
     $ word_puzzle_completed = True
     play sound "audio/sfx/correct beep.ogg"
     "{size=*1}{color=#15ff00}EXPRESS ELEVATOR ACCESS GRANTED{/color}{/size}"
-    $ renpy.notify("All worker notes reminders have been removed from inventory!")
+    $ renpy.notify("All worker notes have been removed from inventory!")
     p 15"That was it! That opened another way for us to go! I should check the elevator here now!"
 
     if norman_dead == False:

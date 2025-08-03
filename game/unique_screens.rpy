@@ -102,21 +102,44 @@ screen old_character_stats():
 
 ## TormentedStudios button scale https://www.reddit.com/r/RenPy/comments/yvz8x8/increase_the_size_of_a_button_when_hovered_over/
 ## at buttonScale
-image sage healthy = "gui/sage healthy.png"
-image sage hurt = "gui/sage hurt.png"
 
-image norman healthy = "gui/norm healthy.png"
-image norman hurt = "gui/norm hurt.png"
+image sage healthy:
+    "gui/sage healthy.png"
+    zoom 0.45
 
-image vin healthy = "gui/vin healthy.png"
-image vin hurt = "gui/vin hurt.png"
+image sage hurt:
+    "gui/sage hurt.png"
+    zoom 0.45
 
-image rocky healthy = "gui/rocky healthy.png"
-image rocky hurt = "gui/rocky hurt.png"
+image norman healthy:
+    "gui/norm healthy.png"
+    zoom 0.5
 
+image norman hurt:
+    "gui/norm hurt.png"
+    zoom 0.5
+
+image vin healthy:
+    "gui/vin healthy.png"
+    zoom 0.44
+
+image vin hurt:
+    "gui/vin hurt.png"
+    zoom 0.43
+
+image rocky healthy:
+    "gui/rocky healthy.png"
+    zoom 0.48
+    ypos 8
+
+image rocky hurt:
+    "gui/rocky hurt.png"
+    zoom 0.48
+    
 image grave:
     "gui/dead.png"
     xpos -8
+    zoom 0.65
 
 image paper_inventory:
     "images/paper.png"
@@ -324,9 +347,8 @@ screen group_check():
     style_prefix "partycheck"  
     use game_menu(_("Party Check")):
             hbox:
-                ypos 40
-                spacing 10
-                xpos -3
+                spacing -40
+                xpos -60
                 ## TormentedStudios button scale https://www.reddit.com/r/RenPy/comments/yvz8x8/increase_the_size_of_a_button_when_hovered_over/
                 imagebutton:
                     idle "sagestick"
@@ -361,8 +383,8 @@ screen group_check():
                         action [Play("sound", "audio/voices/tara beep.ogg")]
             hbox:
                 ypos 345
-                xpos 200
-                spacing 60
+                xpos 180
+                spacing 70
                 xsize -0.1
                 if norman_dead == False and norman_affection <= 4:
                     text "NORMAN Motivated: [expose_samsara_together_3] Interest: [norman_affection]"

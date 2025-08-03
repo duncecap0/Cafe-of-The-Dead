@@ -74,6 +74,7 @@ label cafe_floor_0:
     "Oh,{w=.3} hey Norman, {w=.3}He's being as patient as usual trying to humor Vinnie."
     "He was seen as the \"mom\" friend in the group,{w=.3} always responsible with keeping us from killing ourselves with our antics,{w=.3} well, {w=.3}mainly just Vinnie to be honest..."
     show c 13 at right with moveinright
+    with vpunch
     play sound "audio/sfx/short run.ogg"
     show v 4 at hop
     show n 6 at hop
@@ -433,7 +434,7 @@ label cafe_floor_0:
     "Rocky chases Vinnie around the cafe for a bit...{w=.4} Norman laughs hysterically at their antics..."
     play audio "audio/sfx/step_lth2.ogg"
     pause 0.3
-    "Wow, {w=.3}They're really booking it huh?{w=.3} I always forget just {w=.3}{i}how{/i}{w=.3} fast Vinnie is at running!"
+    "Wow, {w=.3}they're really booking it huh?{w=.3} I always forget just {w=.3}{i}how{/i}{w=.3} fast Vinnie is at running!"
     pause 0.5
     scene cafe with fade
     show v 1 at right with Dissolve(0.2)

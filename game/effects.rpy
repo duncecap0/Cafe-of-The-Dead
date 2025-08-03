@@ -6,6 +6,7 @@ define left1 = Position(xalign=0.3)
 define right2 = Position(xalign=0.7)
 
 define rightBIGG = Position(xalign=2.0, yalign=0.5)
+
 define centerBIGG = Position(xalign=1.0, yalign=0.5)
 
 image static_anim:

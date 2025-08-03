@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/gui.rpy", line 136: expected 'word' not found.
-    style.window.bottom_padding = 6
-         ^
+File "game/cafe_floor_0.rpy", line 76: end of line expected.
+    show c 13 at right with moveinright, Shake(None, 1.0, dist=5)
+                                       ^
 
 Ren'Py Version: Ren'Py 8.3.7.25031702
-Fri Jun 27 21:49:59 2025
+Sun Jun 29 20:57:20 2025

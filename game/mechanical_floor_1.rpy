@@ -182,7 +182,7 @@ label mech_hallway_right:
         if  worker_key_collect == True:
 
             play sound "audio/sfx/door open.ogg"
-            $ renpy.notify("Padlock key was removed from your inventory!")
+            $ renpy.notify("Padlock key has been removed from your inventory!")
             $ worker_key_collect = False 
             "The key fits perfectly as the padlock falls off."
             p 1"Hmm {w=.3}I'm the smallest so my weight shouldn't mess with the under constructed platform as much."
@@ -195,7 +195,7 @@ label mech_hallway_right:
                 hide r 11 with Dissolve(0.2)
             play sound "audio/sfx/metal run.ogg"
             "I steady myself on top of the elevated platform and reach out for the crowbar."
-            $ renpy.notify("Crowbar was added to your inventory!")
+            $ renpy.notify("Crowbar has been added to your inventory!")
             $ crowbar_collected = True
             p 13"Got it!"
             show n 2 with Dissolve(0.2)

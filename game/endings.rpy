@@ -62,6 +62,7 @@ label endings:
             "As he was catching his breath,{w=.3} I charged into him with my arms pushed outwards."
             "He was sent over.{w=.3} But grabbed onto the ledge,{w=.3} I started stomping out his fingers."
             n "I. {w=.3}KNOW.{w=.3} WHAT.{w=.3} YOU. {w=.5}DID!"
+            p 17"Until you meet the pavement."
             show n at offscreen_bottom with move
             show black with Dissolve(1.):
                 alpha.6

@@ -410,7 +410,7 @@ label keycard_slider:
 label hakim_lab_go_away:
     $ current_room = "hakim_lab_go_away"
     $ examined_hakim = True
-    $ renpy.notify("Old Paper was added to your inventory!")
+    $ renpy.notify("Old Paper has been added to your inventory!")
     "A dead scientist with the name tag \"Hakim Lee\"...{w=.3} What's this paper in his hands?"
     window hide diss
     show paper at center with moveinbottom
@@ -603,7 +603,7 @@ label keycard:
         "The drawer is empty..."
     elif drawer_key_collected == True:
         $ keycard = True
-        $ renpy.notify("Employee Keycard was added to your inventory!")
+        $ renpy.notify("Employee Keycard has been added to your inventory!")
         "I use the key I found to unlock it! {w=.3}I look around the drawer and find an employee keycard!"
     else:
         "It needs a key to open"
@@ -1014,7 +1014,7 @@ label boss_battle:
         s "Were you saving all those bullets for something important? {w=.3}Jeez, we got a bit of a hoarder here..."
         if vinnie_dead == True or rocky_dead == True or norman_dead == True:
             s "Good thing you used them wisely to save that one friend of yours!{w=.5} {i}Oh wait...{/i}" 
-    s 7"Eons worths of research was conducted here,{w=.3} the little lambs baptized in rotten flesh and putrid blood were guided into the mouth of God."
+    s 7"Eons worth of research was conducted here,{w=.3} the little lambs baptized in rotten flesh and putrid blood were guided into the mouth of God."
     s 2"In other words,{w=.9} me."
     s 3"I tied the noose around all my researchers' necks and let them go! {w=.3}Their sacrifices were not in vain, look where they got me!"
     s "I am the living reincarnation of every and all deities the world worships. {w=.3}They unknowingly pray to false idols.{w=.3} While I stand unbesmirched and holy."

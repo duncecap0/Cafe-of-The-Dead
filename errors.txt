@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/cafe_floor_0.rpy", line 76: end of line expected.
-    show c 13 at right with moveinright, Shake(None, 1.0, dist=5)
-                                       ^
+File "game/mechanical_floor_1.rpy", line 665: choice menuitem expects a non-empty block.
+    "Motivate Rocky to break it open" if expose_samsara_together == True:
+                                                                         ^
 
-Ren'Py Version: Ren'Py 8.3.7.25031702
-Sun Jun 29 20:57:20 2025
+Ren'Py Version: Ren'Py 8.4.1.25072401
+Wed Sep 24 09:18:13 2025

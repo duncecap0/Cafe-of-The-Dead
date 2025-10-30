@@ -18,12 +18,12 @@ style partycheck_text is text:
 
 image sagestatus: 
     ConditionSwitch(
-        "sage_health >= 5", 'sage_healthy',
-        "sage_health == 4", 'sage_healthy',
-        "sage_health == 3", 'sage_healthy',
-        "sage_health == 2", 'sage_hurt',
-        "sage_health == 1", 'sage_hurt',
-        "sage_health <= 0", 'sage_hurt',
+        "sage_health >= 5", 'sage healthy',
+        "sage_health == 4", 'sage healthy',
+        "sage_health == 3", 'sage healthy',
+        "sage_health == 2", 'sage hurt',
+        "sage_health == 1", 'sage hurt',
+        "sage_health <= 0", 'sage hurt',
     )
 
 image rockstatus:
@@ -453,11 +453,11 @@ screen achievements_menu():
                 text "-----"
 
             if persistent.killrocky == True:
-                text "Achievement Unlocked: Wolf or Fox? Now we will never know..."
+                text "Achievement Unlocked: Wolf or Fox? Now We Will Never Know..."
                 text "Beat the game with Rocky dead"
                 text "-----"
             else:
-                text "Achievement Locked: Wolf or Fox? Now we will never know..."
+                text "Achievement Locked: Wolf or Fox? Now We Will Never Know..."
                 text "Beat the game with Rocky dead"
                 text "-----"
 
@@ -471,11 +471,11 @@ screen achievements_menu():
                 text "-----"
 
             if persistent.tara_against_dad == True:
-                text "Achievement Unlocked: Mad Father"
+                text "Achievement Unlocked: Escaping the Mad House"
                 text "Beat the game with secret character motivated"
                 text "-----"
             else:
-                text "Achievement Locked: Mad Father"
+                text "Achievement Locked: Escaping the Mad House"
                 text "Beat the game with secret character motivated"
                 text "-----"
 
@@ -559,7 +559,7 @@ screen inventory_menu():
                 spacing 20
 
                 if sage_has_gun or norman_has_gun or vinnie_has_gun or rocky_has_gun:
-                    text "Gun: It's a S&W 5946 9mm handgun, I wonder when Norman had to use it?"
+                    text "Gun: An S&W 5946 9mm handgun. I wonder when Norman had to use it?"
                     text "-----"
                 if vinnies_knife == True and vinnie_dead == False:
                     text "Vinnie's Knife: An iridescent butterfly knife Vinnie stole from some gas station, doubt it would last long in an actual fight..."
@@ -811,8 +811,8 @@ default yellow_butt_correct = False
 label butt_puzzle_exit:
     show screen character_stats with Dissolve(0.2)
     show screen ammo_stats with Dissolve(0.2)
-    hide black with Dissolve(0.2)        
-    "I wonder if the correct shape pattern appears anywhere else in this lab?" with Dissolve(0.2)
+    hide black with Dissolve(0.2)    
+    "I wonder if the correct shape pattern appears anywhere in the lab?" with Dissolve(0.2)
     jump pnc_loop
 
     screen lab_minigame():

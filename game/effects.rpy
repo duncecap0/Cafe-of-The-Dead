@@ -74,6 +74,12 @@ transform buttonScale_sticker:
     on idle:
         linear 0.1 zoom 0.9
 
+transform choiceScale: 
+    on hover:
+        linear 0.1 zoom 1.0
+    on idle:
+        linear 0.1 zoom 0.99
+
 transform sink:
         ypos 710 
         linear 0.43 ypos 822 

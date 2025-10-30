@@ -107,7 +107,7 @@ define mech_hallway_buttons= [
 ]
 
 define mech_hallway_left_buttons= [
-    (("look"),(330, 430), "mech_left_hall_jacket", "worker_key_collect == False"),
+    (("look"),(330, 430), "mech_left_hall_jacket", "worker_key_CHAIR_ICON == False"),
     (("move"),(650, 700),"mech_hallway", None), #this will return you the hallway loop
 ]
 

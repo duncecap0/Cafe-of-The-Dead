@@ -218,11 +218,12 @@ style input:
 
 
 screen choice(items):
+
     style_prefix "choice"
 
     vbox:
         for i in items:
-            textbutton i.caption action i.action: # edit this line
+            textbutton i.caption action i.action at choiceScale: # edit this line
                 if i.chosen == True: # add this line
                     style "choice_chosen_button" # add this line
 
@@ -637,7 +638,7 @@ screen about():
 
             text "Music, GUI, Play Testing, Coding, Writing Help, and Concept Art by {a=https://x.com/B0redBradley}B0redBradley{/a}"
 
-            text "Writing, Sprite Art, Background Art, Live or Die, Main Menu, Tara and Taran's and Death themes by {a=https://x.com/DunceCap0}Dunce Cap{/a}"
+            text "Writing, Sprite Art, Background Art, Live or Die, Main Menu, Death, and Tara and Taran's themes by {a=https://x.com/DunceCap0}Dunce Cap{/a}"
 
             text "Point and Click Code Framework by {a=https://devilspider.itch.io/pointnclick-plug-in-for-renpy}Devil Spider"
 
@@ -645,9 +646,11 @@ screen about():
 
             text "SFX from {a=https://opengameart.org/}OpenGameArt{/a}, {a=https://freesound.org/}Freesound{/a}, {a=https://www.zapsplat.com/}ZapSplat{/a}, and {a=https://www.youtube.com/}Youtube Audio Library{/a} "
             
-            text "Font by {a=https://www.dafont.com/vcr-osd-mono.font}Riciery Leal{/a}"
+            text "VCR OSD Mono Font by {a=https://www.dafont.com/vcr-osd-mono.font}Riciery Leal{/a}"
 
-            text "Handwriting Font by {a=https://www.dafont.com/dudu-calligraphy.font}Adderou{/a}"
+            text "Dudu Calligraphy Font by {a=https://www.dafont.com/dudu-calligraphy.font}Adderou{/a}"
+
+            text "Terminal F4 Font by {a=https://www.dafont.com/terminal-f4.font}Daymarius{/a}"
 
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
@@ -721,7 +724,8 @@ screen file_slots(title):
                 style_prefix "slot"
 
                 xalign 0.5
-                yalign 0.5
+                ypos 50
+                
 
                 spacing gui.slot_spacing
 
@@ -937,7 +941,7 @@ style mute_all_button_text is check_button_text
 style mute_all_button_text:
     outlines [ (3, "#300019", 0, 0) ]
     outline_scaling "linear"
-    xpos -15
+    yoffset -4
 
 style pref_label:
     top_margin gui.pref_spacing

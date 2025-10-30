@@ -132,7 +132,7 @@ define gui.textbox_yalign = 1.0
 ## The placement of the speaking character's name, relative to the textbox.
 ## These can be a whole number of pixels from the left or top, or 0.5 to center.
 define gui.name_xpos = 140
-define gui.name_ypos = -99
+define gui.name_ypos = -105
 
 ## The horizontal alignment of the character's name. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
@@ -496,9 +496,8 @@ init python:
         gui.history_name_xalign = 0.0
         gui.history_name_xpos = 0
 
-        gui.history_height = 190
         gui.history_text_width = 700
-        gui.history_height = 190
+        gui.history_height = 250
         gui.history_text_xpos = 190
 
         gui.quick_button_text_size = 25

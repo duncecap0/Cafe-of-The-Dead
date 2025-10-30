@@ -91,9 +91,10 @@ define v = Character("Vinnie", color= "#64ffcbf3",image='v', ctc="click_to_conti
 define n = Character("Norman", color= "#ecd75e",image='n', ctc="click_to_continue", ctc_pause="click_to_continue", ctc_timedpause="click_to_continue", callback=norman_voice)
 
 #side charas            
+define t = Character("Taran", color= "#c1ffbf",image="c", ctc="click_to_continue", ctc_pause="click_to_continue", ctc_timedpause="click_to_continue", callback=taran_voice)
 
 define s = Character("The Stranger", color= "#ffffff",image="c", ctc="click_to_continue", ctc_pause="click_to_continue", ctc_timedpause="click_to_continue", callback=taran_voice)
-define w = DynamicCharacter("[w_name]", color= "#e4d1f7",image="w", ctc="click_to_continue", ctc_pause="click_to_continue", ctc_timedpause="click_to_continue", callback=tara_voice)
+define w = DynamicCharacter("[w_name]", color= "#f0c0ff",image="w", ctc="click_to_continue", ctc_pause="click_to_continue", ctc_timedpause="click_to_continue", callback=tara_voice)
 
 #npcs     
 define omg = Character("???", color= "#ffffff", callback=taran_voice, ctc_pause="click_to_continue", ctc_timedpause="click_to_continue", ctc="click_to_continue")

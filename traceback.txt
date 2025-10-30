@@ -1,54 +1,37 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <renpy.display.im.Image object ('gui/mouse_cursor.png') at 0x0000000005dafd90>:
-  File "renpy/common/00start.rpy", line 214, in script call
-    call _gl_test
-  File "renpy/common/00gltest.rpy", line 390, in script
-    $ __gl_test()
-  File "renpy/common/00gltest.rpy", line 390, in <module>
-    $ __gl_test()
-  File "renpy/common/00gltest.rpy", line 319, in _m1_00gltest__gl_test
-    _gl_performance_test()
-  File "renpy/common/00gltest.rpy", line 342, in _gl_performance_test
-    ui.interact(suppress_underlay=True, suppress_overlay=True)
-OSError: Couldn't find file 'gui/mouse_cursor.png'.
+While running game code:
+  File "game/script.rpy", line 74, in script call
+    call secret_tara_end_scene from _call_secret_tara_end_scene
+  File "game/endings.rpy", line 339, in script
+    if seen_tara_ending == False:
+  File "game/endings.rpy", line 339, in <module>
+    if seen_tara_ending == False:
+       ^^^^^^^^^^^^^^^^          
+NameError: name 'seen_tara_ending' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
-Full traceback:
-  File "renpy/common/00start.rpy", line 214, in script call
-    call _gl_test
-  File "renpy/common/00gltest.rpy", line 390, in script
-    $ __gl_test()
-  File "C:\Games\Renpy SDK\renpy\ast.py", line 834, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\Games\Renpy SDK\renpy\python.py", line 1187, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "renpy/common/00gltest.rpy", line 390, in <module>
-    $ __gl_test()
-  File "renpy/common/00gltest.rpy", line 319, in _m1_00gltest__gl_test
-    _gl_performance_test()
-  File "renpy/common/00gltest.rpy", line 342, in _gl_performance_test
-    ui.interact(suppress_underlay=True, suppress_overlay=True)
-  File "C:\Games\Renpy SDK\renpy\ui.py", line 301, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Games\Renpy SDK\renpy\display\core.py", line 2175, in interact
-    self.start()
-  File "C:\Games\Renpy SDK\renpy\display\core.py", line 1064, in start
-    surf = renpy.display.im.load_surface(fn)
-  File "C:\Games\Renpy SDK\renpy\display\im.py", line 2111, in load_surface
-    return cache.get(image(im))
-  File "C:\Games\Renpy SDK\renpy\display\im.py", line 304, in get
-    surf = image.load()
-  File "C:\Games\Renpy SDK\renpy\display\im.py", line 788, in load
-    raise e
-  File "C:\Games\Renpy SDK\renpy\display\im.py", line 738, in load
-    filelike = renpy.loader.load(self.filename, directory="images")
-  File "C:\Games\Renpy SDK\renpy\loader.py", line 690, in load
-    raise IOError("Couldn't find file '%s'." % name)
-OSError: Couldn't find file 'gui/mouse_cursor.png'.
+Traceback (most recent call last):
+  File "game/script.rpy", line 74, in script call
+    call secret_tara_end_scene from _call_secret_tara_end_scene
+  File "game/endings.rpy", line 339, in script
+    if seen_tara_ending == False:
+  File "renpy/ast.py", line 2079, in execute
+    if renpy.python.py_eval(condition):
+       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^ 
+  File "renpy/python.py", line 1292, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1285, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/endings.rpy", line 339, in <module>
+    if seen_tara_ending == False:
+       ^^^^^^^^^^^^^^^^          
+NameError: name 'seen_tara_ending' is not defined
 
-Windows-10-10.0.26100 AMD64
-Ren'Py 8.3.7.25031702
+Windows-11-10.0.26100-SP0 AMD64
+Ren'Py 8.4.1.25072401
 Cafe of The Dead 1.1
-Wed Jul 23 05:24:32 2025
+Wed Sep 24 10:56:58 2025

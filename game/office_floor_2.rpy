@@ -1169,7 +1169,7 @@ label office_floor_ending:
         show n 2 at right2 with Dissolve(0.2)
         n 2"Don't worry!{w=.3} Tara, we're all in this together!" 
     if insanity_level == 0:
-        p 13"I can't believe we've made it this for guys! {w=.3}We got this!"       
+        p 13"I can't believe we've made it this far guys! {w=.3}We got this!"       
     if closet_broken == True and tara == False:
         show n 8 with Dissolve(0.2)
         n 8"I feel bad for that girl in the closet,{w=.3} but she'll most likely bleed out if we stand her up right now..."

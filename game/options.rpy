@@ -4,7 +4,7 @@
 ## them. Lines beginning with a single '#' mark are commented-out code, and you
 ## may want to uncomment them when appropriate.
 
-define config.developer = False
+define config.developer = True
 
 define config.enter_yesno_transition = Dissolve(0.2)
 define config.exit_yesno_transition = Dissolve(0.2)
@@ -162,8 +162,6 @@ define config.save_directory = "CafeofTheDead-1740859614"
 ## The icon displayed on the taskbar or dock.
 
 define config.windows_icon = "gui/window_icon.png"
-
-define config.window_icon = "gui/window_icon.png"
 
 ## Build configuration #########################################################
 ##

@@ -1,28 +1,29 @@
-2025-10-21 00:35:39 UTC
+2026-04-26 03:14:19 UTC
 Windows-11-10.0.26100-SP0
-Ren'Py 8.4.1.25072401
+Ren'Py 8.5.0.25111603
 
 Early init took 28 ms
-Loading error handling took 16 ms
-Loading script took 101 ms
-Loading save slot metadata took 30 ms
+Loading error handling took 74 ms
+Loading script took 1335 ms
+Loading save slot metadata took 33 ms
 Loading persistent took 0 ms
-Running init code took 26 ms
-Loading analysis data took 3 ms
-Analyze and compile ATL took 3 ms
-Reloading save slot metadata took 14 ms
+Running init code took 71 ms
+Loading analysis data took 0 ms
+Analyze and compile ATL took 11 ms
+Reloading save slot metadata took 13 ms
+Backing up script files to 'C:\\Users\\frain\\AppData\\Roaming/RenPy/backups\\Cafe of The Dead':
 Dump and make backups took 26 ms
 Cleaning cache took 0 ms
-Making clean stores took 0 ms
-Initial gc took 20 ms
+Making clean stores took 2 ms
+Initial gc took 31 ms
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 176 ms
+Creating interface object took 151 ms
 Init translation took 0 ms
 Cleaning stores took 0 ms
-Load screen analysis took 9 ms
-Analyze screens took 0 ms
-Save screen analysis took 0 ms
-Save pyanalysis took 0 ms
+Load screen analysis took 0 ms
+Analyze screens took 16 ms
+Save screen analysis took 9 ms
+Save pyanalysis took 3 ms
 Save bytecode took 0 ms

@@ -1,42 +1,16 @@
-## Snow Blossom Code
-## https://www.renpy.org/doc/html/sprites.html#sprite-examples
-
-############################################
-#             USAGE DIRECTIONS             #
-############################################
-
-## For use in your script, first define the images you want to have used for the particles, like below:
 image snow1 = Fixed(SnowBlossom("gui/snow1.png", 50, xspeed=(20, 50), yspeed=(-100, -200), start=50))
 image snow2 = Fixed(SnowBlossom("gui/snow2.png", 50, xspeed=(20, 50), yspeed=(-100, -200), start=50))
 image powder = Fixed(SnowBlossom("gui/powder.png", 50, xspeed=(20, 50), yspeed=(300, 400), start=50))
 
-## Then you can use them like any other image in your script as needed!
-##
-## # label start:
-## 
-## #     scene park_winter
-## #     show eileen winter neutral at center:
-## #         yoffset 250
-## #     show snow1
-## #     show snow2
-## #     with fade
-## 
-## #     e "You've created a new Ren'Py game."
-## 
-## #     e "Once you add a story, pictures, and music, you can release it to the world!"
-
-## For use in the game menus use 'add Snow ("snow_image.png")' where desired, like below:
-## add Snow("gui/snow1.png")
-## add Snow("gui/snow2.png")
-
-## Enjoy!
-
-###### vvv Actual SnowBlossom code vvv ######
 
 init python:
     
+    #################################################################
+    # Here we use random module for some random stuffs (since we don't
+    # want Ren'Py saving the random number's we'll generate.
     import random
     
+    # initialize random numbers
     random.seed()
     
     #################################################################
@@ -80,17 +54,25 @@ init python:
             """
             Initialize the factory. Parameters are the same as the Snow function.
             """            
+            # the maximum number of particles we can have on screen at once
             self.max_particles = max_particles
             
+            # the particle's speed
             self.speed = speed
             
+            # the wind's speed
             self.wind = wind
             
+            # the horizontal/vertical range to create particles
             self.xborder = xborder
             self.yborder = yborder
             
+            # the maximum depth of the screen. Higher values lead to more varying particles size,
+            # but it also uses more memory. Default value is 10 and it should be okay for most
+            # games, since particles sizes are calculated as percentage of this value.
             self.depth = kwargs.get("depth", 10)
             
+            # initialize the images
             self.image = self.image_init(image)
             
 
@@ -100,10 +82,15 @@ init python:
             We'll just create new particles if the number of particles on the screen is
             lower than the max number of particles we can have.
             """
+            # if we can create a new particle...
             if particles is None or len(particles) < self.max_particles:
                 
+                # generate a random depth for the particle
                 depth = random.randint(1, self.depth)
                 
+                # We expect that particles falling far from the screen will move slowly than those
+                # that are falling near the screen. So we change the speed of particles based on
+                # its depth =D
                 depth_speed = 1.5-depth/(self.depth+0.0)
                 
                 return [ SnowParticle(self.image[depth-1],      # the image used by the particle 
@@ -122,7 +109,9 @@ init python:
             """
             rv = [ ]
             
+            # generate the array of images for each possible depth value.
             for depth in range(self.depth):
+                # Resize and adjust the alpha value based on the depth of the image
                 p = 1.1 - depth/(self.depth+0.0)
                 if p > 1:
                     p = 1.0
@@ -149,17 +138,26 @@ init python:
             Initializes the snow particle. This is called automatically when the object is created.
             """
             
+            # The image used by this particle
             self.image = image
             
+            # For safety (and since we don't have snow going from the floor to the sky o.o)
+            # if the vertical speed of the particle is lower than 1, we use 1.
+            # This prevents the particles of being stuck in the screen forever and not falling at all.
             if speed <= 0:
                 speed = 1
                 
+            # wind's speed
             self.wind = wind
             
+            # particle's speed
             self.speed = speed
 
+            # The last time when this particle was updated (used to calculate the unexpected delay
+            # between updates, aka lag)
             self.oldst = None
-                      
+            
+            # the horizontal/vertical positions of this particle            
             self.xpos = random.uniform(0-xborder, renpy.config.screen_width+xborder)
             self.ypos = -yborder
             
@@ -176,11 +174,17 @@ init python:
             lag = st - self.oldst
             self.oldst = st
             
+            # update the position
             self.xpos += lag * self.wind
             self.ypos += lag * self.speed
                
+            # verify if the particle went out of the screen so we can destroy it.
             if self.ypos > renpy.config.screen_height or\
                (self.wind< 0 and self.xpos < 0) or (self.wind > 0 and self.xpos > renpy.config.screen_width):
+                ##  print "Dead"
                 return None
                 
+            # returns the particle as a Tuple (xpos, ypos, time, image)
+            # since it expects horizontal and vertical positions to be integers, we have to convert
+            # it (internal positions use float for smooth movements =D)
             return int(self.xpos), int(self.ypos), st, self.image

@@ -774,7 +774,7 @@ label cafe_floor_0:
     show v 2 1 with moveinleft
     v 2 1"Rocky!{w=.3} Get up!{w=.3} Wake up!"
     "I've never seen Vinnie so distraught before..."
-    v "Nonono...{w=.3} NO!!! NOOOO!!! GET UP YOU TOUGH SUNUVA BITCH!"
+    v "Nonono...{w=.3} NO!!! NOOOO!!! GET UP YOU TOUGH SUNUVA GUN!"
     v "GET UP!{w=.3} STOP JUST LAYING THERE!"
     "Vinnie kneels as they cradle Rocky's lifeless body. His neck and stomach have been completely torn open..."
     "Norman's paralyzed; as pale as a ghost."

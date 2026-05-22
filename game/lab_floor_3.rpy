@@ -1556,7 +1556,7 @@ label save_vinnie_finale:
                 $ renpy.notify("Vinnie's Knife has been removed from your inventory!")
                 play sound "audio/sfx/stab.ogg"
                 queue sound "audio/sfx/zombie-19.ogg"
-                v "EAT IT YOU LIMP DICK SON OF A BITCH!!!" with hpunch
+                v "EAT IT YOU LIMP DICK SON OF A DILF!!!" with hpunch
                 "The knife was lost in the process..."
            
             "I tell Norman to save Vinnie!" if norman_dead == False:

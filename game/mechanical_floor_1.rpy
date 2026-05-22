@@ -1223,7 +1223,7 @@ label mechanical_floor_escape:
                     show v 5 at left with moveinleft
                     show dunce at offscreen_bottom with move
                     hide dunce
-                    v "Duck bitch!!!"
+                    v "Duck hoe!!!"
                     r "Huh?! HOLY FUCK!"
                     show z 3 at left with moveinright
                     show v 5 at right with move
@@ -1288,7 +1288,7 @@ label mechanical_floor_escape:
                         hide static_anim with Dissolve(0.2)
                         camera:
                             reset                          
-                        v "Duck bitch!!!"
+                        v "Duck slut!!!"
                         r "Huh?! HOLY FUCK!"
                         $ addVinhealth(-1) 
                         play sound "audio/sfx/shoot.ogg"

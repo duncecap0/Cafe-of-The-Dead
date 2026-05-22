@@ -1047,7 +1047,7 @@ label worker_memo:
 
         if rocky_dead == False:
             show r 2a at left with Dissolve(0.2)
-            r "Honeyed words from a seasoned liar!{w=.3} That bitch!" with vpunch
+            r "Honeyed words from a seasoned liar!{w=.3} That asshole!" with vpunch
 
         if vinnie_dead == False:
             v 4"Ah yes, the classic ol'{w=.3} \"we love you!\"{w=.3} manipulation tactic B.S."
@@ -1886,7 +1886,7 @@ label juggernaut_zombie_aftermath:
                 hide static_anim with Dissolve(0.2)
                 camera:
                     reset
-                "This bitch is hiding things from me.{w=.3} She can't be trusted."
+                "This piece of shit is hiding things from me.{w=.3} She can't be trusted."
             else:
                 p 4"It's ok,{w=.3} I understand.{w=.3} What's important is that you're telling now." 
             if vinnie_dead == False:

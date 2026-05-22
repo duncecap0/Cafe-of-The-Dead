@@ -25,7 +25,6 @@ style hyperlink_text:
     properties gui.text_properties("hyperlink", accent=True)
     hover_underline True
 
-    
 style gui_text:
     properties gui.text_properties("interface")
     outlines [ (1, "#300019", 0, 0) ]
@@ -199,6 +198,7 @@ style input_prompt:
     properties gui.text_properties("input_prompt")
     outlines [ (3, "#300019", 0, 0) ]
     outline_scaling "linear"
+    
 style input:
     xalign gui.dialogue_text_xalign
     xmaximum gui.dialogue_width
@@ -249,7 +249,7 @@ style choice_button_text is default:
     properties gui.text_properties("choice_button")
 
 
-##https://lemmasoft.renai.us/forums/viewtopic.php?f=51&t=59486 for selected choice
+##https://lemmasoft.renai.us/forums/viewtopic.php?f=51&t=59486 for selected choice - DC change
 
 style choice_chosen_button_text: 
     idle_color "#947383"
@@ -310,6 +310,7 @@ style quick_button_text:
 ## to other menus, and to start the game.
 
 screen navigation():
+    
     frame:
         background Frame("gui/shadow.png", 30, 30, tile="integer")
         padding (5,10)

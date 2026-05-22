@@ -10,7 +10,6 @@ init python:
 
 define config.audio_filename_callback = replace_music
 
-
 ## endings
 default persistent.trueending = False
 

@@ -96,7 +96,6 @@ define mech_floor_main_room_2_buttons = [
     (("look"),(1170, 390),"mech_elevator", None),
     (("move"),(150, 600),"mech_vent", "pnc_flags.get('vent_unlocked') == True"), # Condition. The way it's written ensures that the game doesn't throw an error if the "door_unlocked" key isn't in the dictionary
     (("move"),(650, 700),"mech_floor_main_room_1", None),
-
 ]
 
 define mech_hallway_buttons= [

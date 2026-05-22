@@ -34,7 +34,7 @@ label cafe_floor_0:
     
     "It's October and college was finally almost over for me and my group of friends.{w=.3} It's about time we wind back and enjoy ourselves!"
     "We decided after class we should visit our friend at his new job as a barista."
-    "He's employed in the lobby café of a skyscraper belonging to a massive company called{w=.3} \"Samsara Enterprises\"."
+    "He's employed in the lobby café of a skyscraper belonging to a massive company called{w=.3} \"Samsara\"."
     "The higher floors are for... {w=.3}whatever it is that business people do I guess?"
     "However, the first floor is much more of a recreational area for the general public."
     "There's even an indoor park and shopping district!"
@@ -54,7 +54,8 @@ label cafe_floor_0:
     n "OK! {w=.3}OK!{w=.3} SLOW DOWN WE'RE ALMOST THERE!"
     n "You're really excited for this aren't you?"
     "Oh,{w=.3} hey Norman. {w=.3}He's being as warmhearted as usual. Trying his best to keep up with Vinnie."
-    "He was seen as the \"mom\" friend in the group.{w=.3} Always responsible with keeping us from killing ourselves with our antics,{w=.3} well, {w=.3}mainly just Vinnie to be honest..."
+    "He was seen as the \"mom\" friend in the group.{w=.3} Always responsible with keeping us from killing ourselves with our antics."
+    "Well, {w=.3}mainly just Vinnie to be honest..."
     show c 13 at right with moveinright
     with vpunch
     play sound "audio/sfx/short run.ogg"
@@ -119,12 +120,14 @@ label cafe_floor_0:
     r "Honestly, {w=.3}I'm not sure.{w=.3} She sounded real rattled when she heard the news, {w=.3}must've been serious."
     "Rocky,{w=.3} being the eldest of the group, {w=.3}always seemed like he had an mountain of responsibilities to attend to."
     "I suppose Vinnie is only a year younger than him, but still,{w=.3} that's just how Vinnie is."
-    "I'm somewhat new to the friend group, {w=.3}I think? {w=.3}Yet, I still know the others more than Rocky since he often misses our hangouts."
+    "I'm somewhat new to the friend group, {w=.3}I think? {w=.3}"
+    "Yet, I still know the others more than Rocky since his schedule prevents frequent hangouts."
     "I recall Norman mentioning how Rocky doesn't have a place to call home, so he bounces job to job to make ends meet."
-    n 1"Well,{w=.3} we could cheer her up next time we visit you at work!{w=.3} We're gonna be regular customers so she's bound to get to know us eventually, right?"
+    n 1"Well,{w=.3} we could cheer her up next time we visit you at work!"
+    n "We're gonna be regular customers so she's bound to get to know us eventually, right?"
     r 6"You'd really be willing to sacrifice so much of your time for {w=.4}{i}me?{/i}"
-    "He suddenly shakes his head, as if to swat the thought away."    
-    r 2"Ugh,{w=.3} speaking of... {w=.3}You guys aren't gonna make this weird or anything? Remember I have to keep this job so don't scre-"
+    "He shakes his head, as if to swat the thought away."    
+    r 2"Ugh,{w=.3} speaking of... {w=.3}You guys aren't gonna make this weird or anything? Remember I have to keep this job so don't screw-"
     hide n with Dissolve(0.2)
     show v 5 with Dissolve(0.2)
     v "Oh!{w=.3} We're definitely making things weird!"
@@ -156,7 +159,7 @@ label cafe_floor_0:
     hide v 15 with Dissolve(0.2)
     show r 10 at hop
 
-    r "Oh, that's right...{w=.3} I'm so sorry,{w=.3} but I'm having trouble remembering your name..."
+    r "Oh, that's right...{w=.3} I'm so sorry,{w=.3} but I'm having trouble remembering how to spell your name..."
     $ renpy.notify("Use the keyboard to type!")
  
     $ pov = renpy.input("It's fine, my name is", length=10).strip().lower().title() or "Sage"    
@@ -193,7 +196,7 @@ label cafe_floor_0:
     elif pov in ["Duncecap", "Dunce", "Dunce cap"]:
         "What the hell kind of name is that? Idiot!"
 
-    elif pov in ["Bix", "Bixxare"]:
+    elif pov in ["Bix", "Bixarre"]:
         "Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. Dolion. Gabriel. "
 
     elif pov == "Chris":
@@ -234,9 +237,6 @@ label cafe_floor_0:
 
     elif pov in ["Dinnerbone", "Grumm"]:
         "WOAH! YOU'RE UPSIDE DOWN NOW!!!"
-
-    elif pov == "James":
-        "Where's Mary?" 
 
     elif pov == "11037":
         "The sixteenth student, lying hidden somewhere in this school. The one they call the Ultimate Despair. Watch out for her." 
@@ -313,8 +313,8 @@ label cafe_floor_0:
                 pass
         label monikaloop:
         
-        play sound "audio/sfx/static.ogg"
-        call screen confirm(message=" Just Monika. ", yes_action=Return(), no_action=Jump("monikaloop"))
+            play sound "audio/sfx/static.ogg"
+            call screen confirm(message=" Just Monika. ", yes_action=Return(), no_action=Jump("monikaloop"))
 
     elif pov == "Sayori":
         "I want breakfast."
@@ -383,7 +383,7 @@ label cafe_floor_0:
     show v 5 at right with Dissolve(0.2)
     show r at hop
     v "Awwwww, c'mon man you used to do that for me all the time! {w=.3}You used to be cool Rocko! {w=.3}What happened?!?!"
-    r 1"Well, {w=.3}{i}SOME{/i} {w=.3}people change and actually {w=.3}{i}MATURE{/i}{w=.3} overtime."
+    r 1"Well, {w=.3}{i}SOME{/i}{w=.3} people change and actually {w=.3}{i}MATURE{/i}{w=.3} overtime."
     r "{i}Something you'll never do apparently...{/i}"
     pause 0.5
     show r 11 at hop
@@ -441,14 +441,20 @@ label cafe_floor_0:
     v 3"Awww, don't be jealous I have perfect straight A's!"
     r 4a"I have nothing to worry about considering you're late all the time and gonna get DROPPED if you don't shape up!"
     v 5"Shut it dropout! {w=.3}You only just started school!"
-    r 2"Are you kidding?!?!{w=.3} We started a year apart! I was at least working! {w=.3}You were busy getting arrested or whatever the hell street rats like you do!"    
-    n 2"Hmmm, Vinnie's sort of right though!{w=.3} They have pretty consistent marks!"
+    r 2"Are you kidding?!?!{w=.3} We started a year apart! I was at least working!!" 
+    # r "You were busy getting arrested or whatever the hell street rats like you do."   
+    n 2"Hmmm, Vinnie's sort of right !{w=.3} They have pretty consistent marks!"
     p 15"\"Have to admit?\",{w=.3} as in, {w=.3}you didn't expect Vinnie to be this smart?"
     r 10"Hahaha! {w=.3}Serves you right if {i}Norman{/i} of all people thinks that less of you!"
     v 2 3"Norman! H-{w=.3}how could y-{w=.3}you... {w=.3}I THOUGHT WE WERE FRIENDS!!!"
     show v 9 at right
     "Vinnie pretends to bawl as they stuff their face into their hands."
     n 7"Hey! {w=.3}I never said that!"
+
+    #########################################################################################
+    ################################ WORKSHOP THIS MONOLOGUE ################################
+    #########################################################################################
+
     show black with Dissolve(0.5):
         alpha.5
     "These are the people I choose to spend my time with,{w=.3} truthfully,{w=.3} I didn't have anyone else in my life."
@@ -487,9 +493,13 @@ label cafe_floor_0:
     "Norman offered to join him at the park."
     "He slowly introduced me to the rest of the circle. {w=.3}I'm very grateful to have people I can talk to and actually listen to me."
     "Rocky's dependable nature; always lending a hand when he can.{w=.3} Vinnie's good-nature and levity. {w=.3}They're always able to brighten up a tough day."
-    "And Norman,{w=.3} he's always there to cheer me on. {w=.3}I don't think he's ever rejected a chance to talk with me either,{w=.3} so he must enjoy my presence as much as I enjoy his."
+    "And Norman,{w=.3} he's always there to cheer me on. {w=.3}I don't think he's ever rejected a chance to talk with me either"
+    "So he must enjoy my presence as much as I enjoy his..."
     "I suppose I never properly thanked him for this opportunity... {w=.3}I have to remember to do that soon..."
     hide black with Dissolve(0.2)
+    
+    #########################################################################################
+
     show v 4 at right with Dissolve(0.2)
     show v at hop
     v 4"EARTH TO [pov!u] EARTH TO [pov!u], HEY SPACE CADET YA THERE!?!?" with hpunch
@@ -502,10 +512,11 @@ label cafe_floor_0:
     show v 11 at sink
     "Rocky snaps back at Vinnie who slumped back in their chair with a defeated expression."
     hide v with Dissolve(0.2)
-    "I don't think I've ever seen Rocky be this fed up with Vinnie, {w=.3}sure he got annoyed,{w=.3} but never actually meant it until now..."
-    "I shoot my head upwards and see Rocky with Norman; both glued to the window."
+    "I've never heard Rocky's voice in that tone before with Vinnie"
+    "Sure he got annoyed,{w=.3} but never actually meant it."
+    "I shoot my head upwards and see Rocky with Norman; glued to the window."
     show n 3a at right with Dissolve(0.2)
-    n "I'm trying to see what they're running from but no luck..."
+    n "I'm trying to see what they're running from, but no luck..."
     r 7"They just keep pouring out!{w=.3} What could have caused this?"
     scene cafe window with Dissolve(0.2)
     show r 7 with moveinleft
@@ -520,7 +531,7 @@ label cafe_floor_0:
     npc "JUST KEEP RUNNING!!!"
     npc "Get away from me,{w=.3} this is mine!!!"
     npc "Has anyone seen my husband?!?"
-    npc "HONEY, WHERE ARE YOU!?!?"
+    # npc "HONEY, WHERE ARE YOU!?!?"
     npc "OH MY GOD! THEY'RE COMING FOR US! {w=.3}RUN!!"
     show v at left with Dissolve(0.2)
     v 12"This is too much to look at... {w=.3}I-{w=.3}I don't want to watch anymore..."
@@ -564,7 +575,15 @@ label cafe_floor_0:
     show r 1 at right with Dissolve(0.2)
     pause 1.0
     show r 1 at center with move
-    r 1"Oh,{w=.3} Hey [pov]!{w=.3} You followed me?{w=.3} Stay close ok? I just wanna make out what's happening..."
+    r 1"Oh,{w=.3} Hey [pov]!{w=.3} You followed me?{w=.3} Stay close, ok? I just wanna make out what's happening..."
+    "Rocky and I crane our heads, trying to peek over the crowd."
+    npc "Move it!"
+    with hpunch
+    p "Ough!"
+    "A civilian shoulders me out of the way."
+    r "HEY! Why don't you watch it, dick!"
+    r "Sorry [pov], I dunno what's gotten into them! I'll have your back though!"
+    "Before I can open my mouth, distant shrieking turns our heads."
     pause 0.5
     npc "GET AWAY FROM ME!!! {w=.3}GET AWAAAAAAY!!!"
     with hpunch
@@ -633,12 +652,15 @@ label cafe_floor_0:
     play sound "audio/sfx/Zombie_03.ogg"
     show bluzom at left with move
     "I turn one-eighty and see the previously motionless man lurch at me!"
+    "I try to hold his wrists in place when he grabs at me. I don't think I can fend him off for much longer!"
     with hpunch
     show bluzom at shiver_loop_left
     p 7"How are you alive!?" with vpunch
     r 3a"[pov!u]! Don't worry! I'll get to you!"
     show r at sink
-    "Rocky sprints towards me, but his foot gets grabbed by the person he was constraining. {w=.3}He face-plants into the curb."
+    play sound "audio/sfx/hit13.ogg"
+    queue sound "audio/sfx/zombie-22.ogg"
+    "Rocky sprints towards me, but his foot gets grabbed by the person he was confining. {w=.3}He face-plants into the curb with a hard thud."
     with vpunch
     show bigzom at right with moveinright
     show bigzom at shiver_loop_right
@@ -945,10 +967,15 @@ label cafe_floor_0:
             "It's my fault he's dead...":
                 $ addInsanity_level(-1)
                 v 2"Oh!{w=.3} Don't you start now!{w=.3} Rocky would beat the shit out of you if he heard that!"
-                v 12"Listen,{w=.3} I would have pussied out way worse than you did. And taken out,{w=.3} like,{w=.3} you two. {w=.5}PLUS the whole city if put in that position."
-                v "It's not something we really control...{w=.3} Just sort of a flight or fight moment where we let our nerves get the better of us... {w=.3}Guess we both need to work on that..."
+                v 12"Listen,{w=.3} I would have wimped out way worse than you did."
+                v "And taken out,{w=.3} like,{w=.3} you two. {w=.5}PLUS the whole city if put in that position."
+                v "It's not something we really control...{w=.3} Just sort of a flight or fight moment where we let our nerves get the better of us..."
+                v "Guess we both need to work on that..."
                 v "So don't beat yourself up...{w=.5} Or else I will! {w=.3}In Rocky's spirit!"
-                v 18"But... {w=.3}thanks...{w=.3} We appreciate it...{w=.3} Truly...{w=.3} I'm sorry for making you think it was your fault.{w=.3} When it's actually those FUCKING monsters outside!"
+                v 18"But... {w=.3}thanks...{w=.3} We appreciate it...{w=.3} Truly...{w=.3} I'm sorry for making you think it was your fault."
+                v "When it's actually those FUCKING monsters outside!"
+                n "Everything will be ok. Learn from past mistakes and take the steps for a better future..."
+                "I see Norman wipe a tear from his eye. Vinnie gently pats his back..."
 
             "...":
                 show static_anim with Dissolve(0.2)
@@ -962,9 +989,11 @@ label cafe_floor_0:
                 pass
 
         if norman_dead == False and rocky_cafe_death == True:
-            n 3a"It's going to be hard Vinnie...{w=.3} But you're a smart cookie!{w=.3} You know the government would set up safety perimeters somewhere,{w=.3} and that we need to make an effort to reach them..."
-            n "It can be anything really!{w=.3} From a hospital they've safeguarded.{w=.3} Or a blocked off neighborhood....{w=.3} The problem right now is that the streets are just too crowded... {w=.3}Unless...?"
-            n "There's something or someone in here that can help us?"
+            n 3a"It's going to be hard Vinnie...{w=.3} But you're a smart cookie!"
+            n "You know the government would set up safety perimeters somewhere. All we need to do is make an effort to reach them..."
+            n "It can be anything really!{w=.3} From a hospital they've safeguarded.{w=.3} Or a blocked off neighborhood..."
+            n "The problem right now is that the streets are just too crowded... {w=.3}Unless...?"
+            n "There's something or, someone, in here that can help us?"
 
         if rocky_cafe_death == True:
             jump cafe_aftermath_2_electric_boogaloo
@@ -974,7 +1003,7 @@ label cafe_floor_0:
     label cafe_aftermath_2_electric_boogaloo:
     menu:
         
-        "I can't just stay silent.{w=.3} I need to let Norman know where I stand."
+        "I can't just stay silent.{w=.3} I need to let them know where I stand."
 
         "We can do this guys!":
             $ norman_affection += 1
@@ -986,7 +1015,7 @@ label cafe_floor_0:
             p 14"Think about it! This building is huge!{w=.3} There are definitely more survivors out there!{w=.3} The bigger the group, the stronger we are!"
             n "[pov] is so right!{w=.3} Hear me out on this!"
 
-        "It's hopeless,{w=.3} might as well just wait for help":
+        "It's hopeless...":
             $ addInsanity_level(1)
             show static_anim with Dissolve(0.2)
             camera:
@@ -996,11 +1025,13 @@ label cafe_floor_0:
             hide static_anim with Dissolve(0.2)
             camera:
                 reset
+            "I release the breath I didn't know I was holding. I think I felt a blood vessel pop?"
             if rocky_dead == False:
                 r 1"I agree with [pov]... {w=.3}What's the point in trying? {w=.3}We'll just be getting ourselves killed."
                 r "I have firsthand experience with how strong those things are,{w=.3} It's a death sentence to even try..."
             v 10"Yeah... {w=.3}I want to get out of here as much as the next guy, but it is pretty dangerous..."
             n 6"...I know it's scary guys, {w=.3}but we could do it!{w=.3} I think I have a plan..."
+
     play music "audio/music/Morning_Joe.mp3"
     n 2"We're already in a pretty big building right? {w=.3}That means it's an easy to find land marker for any nearby helicopters!"
     n "Skyscrapers like this usually have their own comms system! {w=.3}We could use it to contact someone!"
@@ -1016,11 +1047,12 @@ label cafe_floor_0:
         r 1"Here it is..."
     else:
         v 2"Corporate usually give employees safety plans maps... {w=.3}Let me look in the backroom for it..."
+        v "Rocky gave me an extra key if I ever needed a safe place to bum off in..."
         show v 2 at offscreen_left with move
         pause 0.5
         "Vinnie goes to the backroom and retrieves a hefty binder."
         show v 2 2 at right with move
-        v 2 2"Oh Rocky...{w=.3} You're still helping us out even when you're gone..."
+        v 2 2"Oh...{w=.3} You're still helping us out even when you're gone..."
 
     n 2"Yeah... {w=.3}Yeah!{w=.3} This is a great start!"
     "We all gather around the skyscraper map."
@@ -1050,7 +1082,7 @@ label cafe_floor_0:
         
     n 2"That's the spirit we need to make it through this thing!"
     "Norman motions for a hug."
-    
+    # PENIS
     if rocky_dead == True:
         "Vinnie drunkenly steps forwards before wrapping Norman in a tight embrace.{w=.3} Lifting him off the ground with the sheer height difference."
         v 2 2"I can't believe he's dead man!"
